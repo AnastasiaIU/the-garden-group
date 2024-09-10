@@ -1,4 +1,4 @@
-﻿namespace the_garden_group
+﻿namespace UI
 {
     partial class Form1
     {

@@ -3,10 +3,18 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <RootNamespace>the_garden_group</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
 
 </Project>
