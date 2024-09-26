@@ -22,30 +22,7 @@ namespace DAL
         {
             // TEST
             var database = client.GetDatabase("NoSQLCluster");
-            var userCollection = database.GetCollection<User>("users");
-
-            // CREATE (Insert a new user)
-            User testUser = new User("joe", "smith10");
-            await userCollection.InsertOneAsync(testUser);
-        }
-
-        // Define the User class for the MongoDB documents
-        internal class User
-        {
-            [BsonId]
-            public ObjectId Id { get; set; }
-
-            [BsonElement("FirstName")]
-            public string FirstName { get; set; }
-
-            [BsonElement("LastName")]
-            public string LastName { get; set; }
-
-            public User(string firstName, string lastName)
-            {
-                FirstName = firstName;
-                LastName = lastName;
-            }
+            
         }
     }
 }
