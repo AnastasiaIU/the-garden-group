@@ -35,22 +35,24 @@
             menuItemDashboard = new ToolStripMenuItem();
             menuItemIncedents = new ToolStripMenuItem();
             menuItemUsers = new ToolStripMenuItem();
-            toolStripMenuItem1 = new ToolStripMenuItem();
             pnlLogin = new Panel();
-            splitter1 = new Splitter();
+            lblLogin = new Label();
             pnlDashboard = new Panel();
             lblDashboard = new Label();
-            splitter2 = new Splitter();
-            lblLogin = new Label();
+            splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
             lblTicketsOverview = new Label();
-            splitter3 = new Splitter();
+            splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
             lblUsers = new Label();
-            splitter4 = new Splitter();
+            splitterUsers = new Splitter();
             pnlAddEditTicket = new Panel();
             lblAddEditTicket = new Label();
-            splitter5 = new Splitter();
+            splitterAddEditTicket = new Splitter();
+            menuStripBackground = new PictureBox();
+            pnlAddEditUser = new Panel();
+            lblAddEditUser = new Label();
+            splitterAddEditUser = new Splitter();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -58,6 +60,8 @@
             pnlTicketsOverview.SuspendLayout();
             pnlUsers.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
+            pnlAddEditUser.SuspendLayout();
             SuspendLayout();
             // 
             // logo
@@ -100,7 +104,7 @@
             menuStrip.BackColor = Color.White;
             menuStrip.Dock = DockStyle.None;
             menuStrip.ImageScalingSize = new Size(32, 32);
-            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, menuItemIncedents, menuItemUsers, toolStripMenuItem1 });
+            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, menuItemIncedents, menuItemUsers });
             menuStrip.Location = new Point(0, 80);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(3, 1, 0, 1);
@@ -129,39 +133,33 @@
             menuItemUsers.Size = new Size(210, 30);
             menuItemUsers.Text = "User Managment";
             // 
-            // toolStripMenuItem1
-            // 
-            toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(12, 30);
-            // 
             // pnlLogin
             // 
             pnlLogin.BackColor = Color.White;
             pnlLogin.Controls.Add(lblLogin);
-            pnlLogin.Controls.Add(splitter1);
             pnlLogin.Location = new Point(0, 112);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(634, 699);
+            pnlLogin.Size = new Size(634, 599);
             pnlLogin.TabIndex = 4;
             // 
-            // splitter1
+            // lblLogin
             // 
-            splitter1.BackColor = Color.Black;
-            splitter1.Dock = DockStyle.Top;
-            splitter1.Location = new Point(0, 0);
-            splitter1.Name = "splitter1";
-            splitter1.Size = new Size(634, 1);
-            splitter1.TabIndex = 0;
-            splitter1.TabStop = false;
+            lblLogin.AutoSize = true;
+            lblLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLogin.Location = new Point(263, 17);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(95, 37);
+            lblLogin.TabIndex = 1;
+            lblLogin.Text = "LOGIN";
             // 
             // pnlDashboard
             // 
             pnlDashboard.BackColor = Color.White;
             pnlDashboard.Controls.Add(lblDashboard);
-            pnlDashboard.Controls.Add(splitter2);
+            pnlDashboard.Controls.Add(splitterDashboard);
             pnlDashboard.Location = new Point(0, 112);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new Size(634, 699);
+            pnlDashboard.Size = new Size(634, 599);
             pnlDashboard.TabIndex = 5;
             // 
             // lblDashboard
@@ -174,34 +172,24 @@
             lblDashboard.TabIndex = 1;
             lblDashboard.Text = "DASHBOARD";
             // 
-            // splitter2
+            // splitterDashboard
             // 
-            splitter2.BackColor = Color.Black;
-            splitter2.Dock = DockStyle.Top;
-            splitter2.Location = new Point(0, 0);
-            splitter2.Name = "splitter2";
-            splitter2.Size = new Size(634, 1);
-            splitter2.TabIndex = 0;
-            splitter2.TabStop = false;
-            // 
-            // lblLogin
-            // 
-            lblLogin.AutoSize = true;
-            lblLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLogin.Location = new Point(263, 17);
-            lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(95, 37);
-            lblLogin.TabIndex = 1;
-            lblLogin.Text = "LOGIN";
+            splitterDashboard.BackColor = Color.Black;
+            splitterDashboard.Dock = DockStyle.Top;
+            splitterDashboard.Location = new Point(0, 0);
+            splitterDashboard.Name = "splitterDashboard";
+            splitterDashboard.Size = new Size(634, 1);
+            splitterDashboard.TabIndex = 0;
+            splitterDashboard.TabStop = false;
             // 
             // pnlTicketsOverview
             // 
             pnlTicketsOverview.BackColor = Color.White;
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
-            pnlTicketsOverview.Controls.Add(splitter3);
+            pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
             pnlTicketsOverview.Location = new Point(0, 112);
             pnlTicketsOverview.Name = "pnlTicketsOverview";
-            pnlTicketsOverview.Size = new Size(634, 699);
+            pnlTicketsOverview.Size = new Size(634, 599);
             pnlTicketsOverview.TabIndex = 6;
             // 
             // lblTicketsOverview
@@ -214,24 +202,24 @@
             lblTicketsOverview.TabIndex = 1;
             lblTicketsOverview.Text = "Tickets Overview";
             // 
-            // splitter3
+            // splitterTicketsOverview
             // 
-            splitter3.BackColor = Color.Black;
-            splitter3.Dock = DockStyle.Top;
-            splitter3.Location = new Point(0, 0);
-            splitter3.Name = "splitter3";
-            splitter3.Size = new Size(634, 1);
-            splitter3.TabIndex = 0;
-            splitter3.TabStop = false;
+            splitterTicketsOverview.BackColor = Color.Black;
+            splitterTicketsOverview.Dock = DockStyle.Top;
+            splitterTicketsOverview.Location = new Point(0, 0);
+            splitterTicketsOverview.Name = "splitterTicketsOverview";
+            splitterTicketsOverview.Size = new Size(634, 1);
+            splitterTicketsOverview.TabIndex = 0;
+            splitterTicketsOverview.TabStop = false;
             // 
             // pnlUsers
             // 
             pnlUsers.BackColor = Color.White;
             pnlUsers.Controls.Add(lblUsers);
-            pnlUsers.Controls.Add(splitter4);
+            pnlUsers.Controls.Add(splitterUsers);
             pnlUsers.Location = new Point(0, 112);
             pnlUsers.Name = "pnlUsers";
-            pnlUsers.Size = new Size(634, 699);
+            pnlUsers.Size = new Size(634, 599);
             pnlUsers.TabIndex = 7;
             // 
             // lblUsers
@@ -244,24 +232,24 @@
             lblUsers.TabIndex = 1;
             lblUsers.Text = "USERS";
             // 
-            // splitter4
+            // splitterUsers
             // 
-            splitter4.BackColor = Color.Black;
-            splitter4.Dock = DockStyle.Top;
-            splitter4.Location = new Point(0, 0);
-            splitter4.Name = "splitter4";
-            splitter4.Size = new Size(634, 1);
-            splitter4.TabIndex = 0;
-            splitter4.TabStop = false;
+            splitterUsers.BackColor = Color.Black;
+            splitterUsers.Dock = DockStyle.Top;
+            splitterUsers.Location = new Point(0, 0);
+            splitterUsers.Name = "splitterUsers";
+            splitterUsers.Size = new Size(634, 1);
+            splitterUsers.TabIndex = 0;
+            splitterUsers.TabStop = false;
             // 
             // pnlAddEditTicket
             // 
             pnlAddEditTicket.BackColor = Color.White;
             pnlAddEditTicket.Controls.Add(lblAddEditTicket);
-            pnlAddEditTicket.Controls.Add(splitter5);
+            pnlAddEditTicket.Controls.Add(splitterAddEditTicket);
             pnlAddEditTicket.Location = new Point(0, 112);
             pnlAddEditTicket.Name = "pnlAddEditTicket";
-            pnlAddEditTicket.Size = new Size(634, 699);
+            pnlAddEditTicket.Size = new Size(634, 599);
             pnlAddEditTicket.TabIndex = 8;
             // 
             // lblAddEditTicket
@@ -274,30 +262,71 @@
             lblAddEditTicket.TabIndex = 1;
             lblAddEditTicket.Text = "Add/Edit Ticket";
             // 
-            // splitter5
+            // splitterAddEditTicket
             // 
-            splitter5.BackColor = Color.Black;
-            splitter5.Dock = DockStyle.Top;
-            splitter5.Location = new Point(0, 0);
-            splitter5.Name = "splitter5";
-            splitter5.Size = new Size(634, 1);
-            splitter5.TabIndex = 0;
-            splitter5.TabStop = false;
+            splitterAddEditTicket.BackColor = Color.Black;
+            splitterAddEditTicket.Dock = DockStyle.Top;
+            splitterAddEditTicket.Location = new Point(0, 0);
+            splitterAddEditTicket.Name = "splitterAddEditTicket";
+            splitterAddEditTicket.Size = new Size(634, 1);
+            splitterAddEditTicket.TabIndex = 0;
+            splitterAddEditTicket.TabStop = false;
+            // 
+            // menuStripBackground
+            // 
+            menuStripBackground.BackColor = Color.White;
+            menuStripBackground.Location = new Point(0, 80);
+            menuStripBackground.Name = "menuStripBackground";
+            menuStripBackground.Size = new Size(634, 32);
+            menuStripBackground.TabIndex = 9;
+            menuStripBackground.TabStop = false;
+            // 
+            // pnlAddEditUser
+            // 
+            pnlAddEditUser.BackColor = Color.White;
+            pnlAddEditUser.Controls.Add(lblAddEditUser);
+            pnlAddEditUser.Controls.Add(splitterAddEditUser);
+            pnlAddEditUser.Location = new Point(0, 112);
+            pnlAddEditUser.Name = "pnlAddEditUser";
+            pnlAddEditUser.Size = new Size(634, 599);
+            pnlAddEditUser.TabIndex = 10;
+            // 
+            // lblAddEditUser
+            // 
+            lblAddEditUser.AutoSize = true;
+            lblAddEditUser.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAddEditUser.Location = new Point(228, 17);
+            lblAddEditUser.Name = "lblAddEditUser";
+            lblAddEditUser.Size = new Size(160, 32);
+            lblAddEditUser.TabIndex = 1;
+            lblAddEditUser.Text = "Add/Edit User";
+            // 
+            // splitterAddEditUser
+            // 
+            splitterAddEditUser.BackColor = Color.Black;
+            splitterAddEditUser.Dock = DockStyle.Top;
+            splitterAddEditUser.Location = new Point(0, 0);
+            splitterAddEditUser.Name = "splitterAddEditUser";
+            splitterAddEditUser.Size = new Size(634, 1);
+            splitterAddEditUser.TabIndex = 0;
+            splitterAddEditUser.TabStop = false;
             // 
             // GardenDeskForm
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 711);
+            Controls.Add(pnlLogin);
+            Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlUsers);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
             Controls.Add(menuStrip);
+            Controls.Add(menuStripBackground);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip;
             Margin = new Padding(2, 1, 2, 1);
@@ -316,6 +345,9 @@
             pnlUsers.PerformLayout();
             pnlAddEditTicket.ResumeLayout(false);
             pnlAddEditTicket.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
+            pnlAddEditUser.ResumeLayout(false);
+            pnlAddEditUser.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -329,20 +361,22 @@
         private ToolStripMenuItem menuItemIncedents;
         private ToolStripMenuItem menuItemUsers;
         private Panel pnlLogin;
-        private Splitter splitter1;
-        private ToolStripMenuItem toolStripMenuItem1;
         private Panel pnlDashboard;
-        private Splitter splitter2;
+        private Splitter splitterDashboard;
         private Label lblDashboard;
         private Label lblLogin;
         private Panel pnlTicketsOverview;
         private Label lblTicketsOverview;
-        private Splitter splitter3;
+        private Splitter splitterTicketsOverview;
         private Panel pnlUsers;
         private Label lblUsers;
-        private Splitter splitter4;
+        private Splitter splitterUsers;
         private Panel pnlAddEditTicket;
         private Label lblAddEditTicket;
-        private Splitter splitter5;
+        private Splitter splitterAddEditTicket;
+        private PictureBox menuStripBackground;
+        private Panel pnlAddEditUser;
+        private Label lblAddEditUser;
+        private Splitter splitterAddEditUser;
     }
 }

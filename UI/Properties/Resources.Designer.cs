@@ -61,12 +61,30 @@ namespace UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pnlLogin.
+        /// </summary>
+        internal static string LoginPanel {
+            get {
+                return ResourceManager.GetString("LoginPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pnl.
+        /// </summary>
+        internal static string PanelPrefix {
+            get {
+                return ResourceManager.GetString("PanelPrefix", resourceCulture);
             }
         }
     }
