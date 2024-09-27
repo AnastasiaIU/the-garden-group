@@ -36,7 +36,14 @@
             menuItemIncedents = new ToolStripMenuItem();
             menuItemUsers = new ToolStripMenuItem();
             pnlLogin = new Panel();
-            lblLogin = new Label();
+            btnLogin = new Button();
+            lblLoginWrongCredentials = new Label();
+            txtBoxLoginPassword = new TextBox();
+            txtBoxLoginUsername = new TextBox();
+            lblLoginPassword = new Label();
+            lblLoginUsername = new Label();
+            lblLoginPrompt = new Label();
+            lblLoginGardenDesk = new Label();
             pnlDashboard = new Panel();
             lblDashboard = new Label();
             splitterDashboard = new Splitter();
@@ -136,21 +143,103 @@
             // pnlLogin
             // 
             pnlLogin.BackColor = Color.White;
-            pnlLogin.Controls.Add(lblLogin);
+            pnlLogin.Controls.Add(btnLogin);
+            pnlLogin.Controls.Add(lblLoginWrongCredentials);
+            pnlLogin.Controls.Add(txtBoxLoginPassword);
+            pnlLogin.Controls.Add(txtBoxLoginUsername);
+            pnlLogin.Controls.Add(lblLoginPassword);
+            pnlLogin.Controls.Add(lblLoginUsername);
+            pnlLogin.Controls.Add(lblLoginPrompt);
+            pnlLogin.Controls.Add(lblLoginGardenDesk);
             pnlLogin.Location = new Point(0, 112);
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(634, 599);
             pnlLogin.TabIndex = 4;
             // 
-            // lblLogin
+            // btnLogin
             // 
-            lblLogin.AutoSize = true;
-            lblLogin.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLogin.Location = new Point(263, 17);
-            lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(95, 37);
-            lblLogin.TabIndex = 1;
-            lblLogin.Text = "LOGIN";
+            btnLogin.BackColor = Color.OliveDrab;
+            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(242, 380);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(150, 45);
+            btnLogin.TabIndex = 3;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // lblLoginWrongCredentials
+            // 
+            lblLoginWrongCredentials.AutoSize = true;
+            lblLoginWrongCredentials.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginWrongCredentials.ForeColor = Color.Red;
+            lblLoginWrongCredentials.Location = new Point(167, 330);
+            lblLoginWrongCredentials.Name = "lblLoginWrongCredentials";
+            lblLoginWrongCredentials.Size = new Size(294, 21);
+            lblLoginWrongCredentials.TabIndex = 0;
+            lblLoginWrongCredentials.Text = "Wrong username or password. Try again.";
+            lblLoginWrongCredentials.Visible = false;
+            // 
+            // txtBoxLoginPassword
+            // 
+            txtBoxLoginPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtBoxLoginPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBoxLoginPassword.Location = new Point(167, 280);
+            txtBoxLoginPassword.Name = "txtBoxLoginPassword";
+            txtBoxLoginPassword.PasswordChar = '•';
+            txtBoxLoginPassword.PlaceholderText = " Enter password";
+            txtBoxLoginPassword.Size = new Size(300, 29);
+            txtBoxLoginPassword.TabIndex = 2;
+            // 
+            // txtBoxLoginUsername
+            // 
+            txtBoxLoginUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtBoxLoginUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBoxLoginUsername.Location = new Point(167, 200);
+            txtBoxLoginUsername.Name = "txtBoxLoginUsername";
+            txtBoxLoginUsername.PlaceholderText = " Enter username";
+            txtBoxLoginUsername.Size = new Size(300, 29);
+            txtBoxLoginUsername.TabIndex = 1;
+            // 
+            // lblLoginPassword
+            // 
+            lblLoginPassword.AutoSize = true;
+            lblLoginPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginPassword.Location = new Point(167, 250);
+            lblLoginPassword.Name = "lblLoginPassword";
+            lblLoginPassword.Size = new Size(79, 21);
+            lblLoginPassword.TabIndex = 0;
+            lblLoginPassword.Text = "Password:";
+            // 
+            // lblLoginUsername
+            // 
+            lblLoginUsername.AutoSize = true;
+            lblLoginUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginUsername.Location = new Point(167, 170);
+            lblLoginUsername.Name = "lblLoginUsername";
+            lblLoginUsername.Size = new Size(84, 21);
+            lblLoginUsername.TabIndex = 0;
+            lblLoginUsername.Text = "Username:";
+            // 
+            // lblLoginPrompt
+            // 
+            lblLoginPrompt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginPrompt.Location = new Point(150, 70);
+            lblLoginPrompt.Name = "lblLoginPrompt";
+            lblLoginPrompt.Size = new Size(334, 56);
+            lblLoginPrompt.TabIndex = 0;
+            lblLoginPrompt.Text = "Please provide login credentials to log in to GardenDesk for The Garden Group.";
+            lblLoginPrompt.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblLoginGardenDesk
+            // 
+            lblLoginGardenDesk.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLoginGardenDesk.Location = new Point(0, 0);
+            lblLoginGardenDesk.Name = "lblLoginGardenDesk";
+            lblLoginGardenDesk.Size = new Size(634, 37);
+            lblLoginGardenDesk.TabIndex = 0;
+            lblLoginGardenDesk.Text = "GardenDesk: TGG";
+            lblLoginGardenDesk.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlDashboard
             // 
@@ -364,7 +453,7 @@
         private Panel pnlDashboard;
         private Splitter splitterDashboard;
         private Label lblDashboard;
-        private Label lblLogin;
+        private Label lblLoginGardenDesk;
         private Panel pnlTicketsOverview;
         private Label lblTicketsOverview;
         private Splitter splitterTicketsOverview;
@@ -378,5 +467,12 @@
         private Panel pnlAddEditUser;
         private Label lblAddEditUser;
         private Splitter splitterAddEditUser;
+        private Button btnLogin;
+        private Label lblLoginWrongCredentials;
+        private TextBox txtBoxLoginPassword;
+        private TextBox txtBoxLoginUsername;
+        private Label lblLoginPassword;
+        private Label lblLoginUsername;
+        private Label lblLoginPrompt;
     }
 }
