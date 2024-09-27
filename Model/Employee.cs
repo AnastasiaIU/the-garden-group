@@ -1,18 +1,29 @@
-﻿namespace Model
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace Model
 {
+    [BsonIgnoreExtraElements]
     public class Employee
     {
-        public int Id { get; private set; }
+        [BsonId]
+        public ObjectId EmployeeId { get; private set; }
+        [BsonElement("first_name")]
         public string FirstName { get; private set; }
+        [BsonElement("last_name")]
         public string LastName { get; private set; }
+        [BsonElement("email")]
         public string Email { get; private set; }
+        [BsonElement("phone_number")]
         public string PhoneNumber { get; private set; }
+        [BsonElement("role")]
         public EmployeeRole Role { get; private set; }
+        [BsonElement("branch")]
         public Branch Branch { get; private set; }
 
-        public Employee(int id, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, Branch branch)
+        public Employee(ObjectId employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, Branch branch)
         {
-            Id = id;
+            EmployeeId = employeeId;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
