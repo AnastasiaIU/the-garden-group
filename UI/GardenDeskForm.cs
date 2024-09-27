@@ -1,3 +1,6 @@
+using Model;
+using Service;
+
 namespace UI
 {
     public partial class GardenDeskForm : Form
@@ -25,7 +28,46 @@ namespace UI
             panel.Show();
         }
 
+        private async Task LoadEmployeesAsync()
+        {
+            EmployeeService employeeService = new();
+            List<Employee> employees = await employeeService.GetAllEmployeesAsync();
+
+            await DisplayEmployees(employees);
+        }
+
+        private async Task DisplayEmployees(List<Employee> employees)
+        {
+            usersList.Items.Clear();
+            TicketService ticketService = new();
+
+            foreach (var employee in employees)
+            {
+                int ticketsPerEmployee = await ticketService.CountTicketsForEmployeeAsync(employee.EmployeeId);
+
+                ListViewItem item = new();
+
+                item.SubItems.Add(employee.EmployeeId.ToString());
+                item.SubItems.Add(employee.Email);
+                item.SubItems.Add(employee.FirstName);
+                item.SubItems.Add(employee.LastName);
+                item.SubItems.Add(ticketsPerEmployee.ToString());
+                item.Tag = employee;
+
+                usersList.Items.Add(item);
+            }
+        }
+
         #endregion
 
+        #region Event Handlers
+
+        private async void menuItemUsers_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlUsers);
+            await LoadEmployeesAsync();
+        }
+
+        #endregion
     }
 }
