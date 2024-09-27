@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            ListViewItem listViewItem1 = new ListViewItem("");
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
@@ -51,6 +52,7 @@
             lblTicketsOverview = new Label();
             splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
+            usersList = new ListView();
             lblUsers = new Label();
             splitterUsers = new Splitter();
             pnlAddEditTicket = new Panel();
@@ -60,6 +62,12 @@
             pnlAddEditUser = new Panel();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
+            leftColumn = new ColumnHeader();
+            userId = new ColumnHeader();
+            userEmail = new ColumnHeader();
+            userFirstName = new ColumnHeader();
+            userLastName = new ColumnHeader();
+            userTicketCount = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -304,6 +312,7 @@
             // pnlUsers
             // 
             pnlUsers.BackColor = Color.White;
+            pnlUsers.Controls.Add(usersList);
             pnlUsers.Controls.Add(lblUsers);
             pnlUsers.Controls.Add(splitterUsers);
             pnlUsers.Location = new Point(0, 112);
@@ -311,15 +320,28 @@
             pnlUsers.Size = new Size(634, 599);
             pnlUsers.TabIndex = 7;
             // 
+            // usersList
+            // 
+            usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userId, userEmail, userFirstName, userLastName, userTicketCount });
+            listViewItem1.Tag = "ID";
+            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            usersList.Location = new Point(12, 94);
+            usersList.Name = "usersList";
+            usersList.Size = new Size(610, 493);
+            usersList.TabIndex = 2;
+            usersList.UseCompatibleStateImageBehavior = false;
+            usersList.View = View.Details;
+            // 
             // lblUsers
             // 
             lblUsers.AutoSize = true;
-            lblUsers.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblUsers.Location = new Point(228, 17);
+            lblUsers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblUsers.ForeColor = SystemColors.WindowFrame;
+            lblUsers.Location = new Point(12, 37);
             lblUsers.Name = "lblUsers";
-            lblUsers.Size = new Size(82, 32);
+            lblUsers.Size = new Size(222, 32);
             lblUsers.TabIndex = 1;
-            lblUsers.Text = "USERS";
+            lblUsers.Text = "User management";
             // 
             // splitterUsers
             // 
@@ -400,16 +422,50 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
+            // leftColumn
+            // 
+            leftColumn.Text = "";
+            leftColumn.Width = 0;
+            // 
+            // userId
+            // 
+            userId.Text = "ID";
+            userId.TextAlign = HorizontalAlignment.Center;
+            userId.Width = 46;
+            // 
+            // userEmail
+            // 
+            userEmail.Text = "Email";
+            userEmail.TextAlign = HorizontalAlignment.Center;
+            userEmail.Width = 200;
+            // 
+            // userFirstName
+            // 
+            userFirstName.Text = "First Name";
+            userFirstName.TextAlign = HorizontalAlignment.Center;
+            userFirstName.Width = 150;
+            // 
+            // userLastName
+            // 
+            userLastName.Text = "Last Name";
+            userLastName.TextAlign = HorizontalAlignment.Center;
+            userLastName.Width = 150;
+            // 
+            // userTicketCount
+            // 
+            userTicketCount.Text = "#tickets";
+            userTicketCount.TextAlign = HorizontalAlignment.Center;
+            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 711);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlLogin);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(lblLicense);
@@ -475,5 +531,12 @@
         private Label lblLoginPassword;
         private Label lblLoginUsername;
         private Label lblLoginPrompt;
+        private ListView usersList;
+        private ColumnHeader leftColumn;
+        private ColumnHeader userId;
+        private ColumnHeader userEmail;
+        private ColumnHeader userFirstName;
+        private ColumnHeader userLastName;
+        private ColumnHeader userTicketCount;
     }
 }

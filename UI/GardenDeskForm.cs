@@ -1,5 +1,3 @@
-using DAL;
-
 namespace UI
 {
     public partial class GardenDeskForm : Form
@@ -28,5 +26,6 @@ namespace UI
         }
 
         #endregion
+
     }
 }
