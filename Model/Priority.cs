@@ -4,7 +4,6 @@
     {
         Low,
         Medium,
-        High,
-        Critical
+        High
     }
 }

@@ -4,7 +4,6 @@
     {
         Pending,
         InProgress,
-        Resolved,
         Open,
         Closed
     }
