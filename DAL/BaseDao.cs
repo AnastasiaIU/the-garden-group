@@ -4,7 +4,7 @@ using MongoDB.Driver;
 
 namespace DAL
 {
-    public class BaseDao
+    public abstract class BaseDao
     {
         private static string _connectionString;
         private static IMongoClient _mongoClient;
@@ -16,8 +16,7 @@ namespace DAL
 
         public BaseDao()
         {
-            _connectionString = ConfigurationManager.AppSettings["MongoDB"];
-
+            _connectionString ??= ConfigurationManager.AppSettings["MongoDB"];
             _mongoClient ??= new MongoClient(_connectionString);
             _database ??= _mongoClient.GetDatabase("NoSQLCluster");
             _employeeCollection ??= _database.GetCollection<Employee>("Employee");
