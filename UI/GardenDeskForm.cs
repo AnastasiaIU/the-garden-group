@@ -5,11 +5,13 @@ namespace UI
 {
     public partial class GardenDeskForm : Form
     {
+        private readonly EmployeeService _employeeService = new();
+        private readonly TicketService _ticketService = new();
+
         public GardenDeskForm()
         {
             InitializeComponent();
-            //ShowPanel(pnlLogin);
-            ShowPanel(pnlUsers);
+            ShowPanel(pnlLogin);
         }
 
         #region UI Logic
@@ -29,22 +31,14 @@ namespace UI
             panel.Show();
         }
 
-        private async Task LoadEmployeesAsync()
-        {
-            EmployeeService employeeService = new();
-            List<Employee> employees = await employeeService.GetAllEmployeesAsync();
-
-            await DisplayEmployees(employees);
-        }
-
-        private async Task DisplayEmployees(List<Employee> employees)
+        private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
-            TicketService ticketService = new();
+            List<Employee> employees = await _employeeService.GetAllEmployeesAsync();
 
             foreach (var employee in employees)
             {
-                int ticketsPerEmployee = await ticketService.CountTicketsForEmployeeAsync(employee.EmployeeId);
+                int ticketsPerEmployee = await _ticketService.CountTicketsForEmployeeAsync(employee.EmployeeId);
 
                 ListViewItem item = new();
 
@@ -66,7 +60,7 @@ namespace UI
         private async void menuItemUsers_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlUsers);
-            await LoadEmployeesAsync();
+            await DisplayEmployeesAsync();
         }
 
         #endregion
