@@ -6,7 +6,7 @@ namespace DAL
 {
     public class BaseDao
     {
-        private static readonly string _connectionString = ConfigurationManager.AppSettings["MongoDB"];
+        private static string _connectionString;
         private static IMongoClient _mongoClient;
         private static IMongoDatabase _database;
 
@@ -16,6 +16,8 @@ namespace DAL
 
         public BaseDao()
         {
+            _connectionString = ConfigurationManager.AppSettings["MongoDB"];
+
             _mongoClient ??= new MongoClient(_connectionString);
             _database ??= _mongoClient.GetDatabase("NoSQLCluster");
             _employeeCollection ??= _database.GetCollection<Employee>("Employee");
