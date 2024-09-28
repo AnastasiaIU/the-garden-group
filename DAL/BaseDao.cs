@@ -6,16 +6,20 @@ namespace DAL
 {
     public class BaseDao
     {
-        protected readonly IMongoCollection<Employee> _employeeCollection;
-        protected readonly IMongoCollection<Ticket> _ticketCollection;
+        private static readonly string _connectionString = ConfigurationManager.AppSettings["MongoDB"];
+        private static IMongoClient _mongoClient;
+        private static IMongoDatabase _database;
+
+        // References to the collections in the MongoDB instance.
+        protected static IMongoCollection<Employee> _employeeCollection;
+        protected static IMongoCollection<Ticket> _ticketCollection;
 
         public BaseDao()
         {
-            var connectionString = ConfigurationManager.AppSettings["MongoDB"];
-            var client = new MongoClient(connectionString);
-            IMongoDatabase database = client.GetDatabase("NoSQLCluster");
-            _employeeCollection = database.GetCollection<Employee>("Employee");
-            _ticketCollection = database.GetCollection<Ticket>("Ticket");
+            _mongoClient ??= new MongoClient(_connectionString);
+            _database ??= _mongoClient.GetDatabase("NoSQLCluster");
+            _employeeCollection ??= _database.GetCollection<Employee>("Employee");
+            _ticketCollection ??= _database.GetCollection<Ticket>("Ticket");
         }
     }
 }

@@ -8,7 +8,8 @@ namespace UI
         public GardenDeskForm()
         {
             InitializeComponent();
-            ShowPanel(pnlLogin);
+            //ShowPanel(pnlLogin);
+            ShowPanel(pnlUsers);
         }
 
         #region UI Logic
