@@ -1,28 +1,26 @@
 ﻿using System.Configuration;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+using Model;
 using MongoDB.Driver;
 
 namespace DAL
 {
-    public class BaseDao
+    public abstract class BaseDao
     {
-        string connectionString;
-        MongoClient client;
+        private static string _connectionString;
+        private static IMongoClient _mongoClient;
+        private static IMongoDatabase _database;
+
+        // References to the collections in the MongoDB instance.
+        protected static IMongoCollection<Employee> _employeeCollection;
+        protected static IMongoCollection<Ticket> _ticketCollection;
 
         public BaseDao()
         {
-            connectionString = ConfigurationManager.AppSettings["MongoDB"];
-            client = new MongoClient(connectionString);
-            
-            Test(client);
-        }
-
-        static async Task Test(MongoClient client)
-        {
-            // TEST
-            var database = client.GetDatabase("NoSQLCluster");
-            
+            _connectionString ??= ConfigurationManager.AppSettings["MongoDB"];
+            _mongoClient ??= new MongoClient(_connectionString);
+            _database ??= _mongoClient.GetDatabase("NoSQLCluster");
+            _employeeCollection ??= _database.GetCollection<Employee>("Employee");
+            _ticketCollection ??= _database.GetCollection<Ticket>("Ticket");
         }
     }
 }
