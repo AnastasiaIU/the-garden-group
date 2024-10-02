@@ -6,6 +6,12 @@ namespace DAL
 {
     public class TicketDao : BaseDao
     {
+        public async Task<List<Ticket>> GetAllTicketsAsync()
+        {
+            var filter = Builders<Ticket>.Filter.Empty;
+            return await _ticketCollection.Find(filter).ToListAsync();
+        }
+
         public async Task<int> CountTicketsForEmployeeAsync(ObjectId employeeId)
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);

@@ -5,11 +5,13 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{6F94CEAF-E863-4C80-BEC7-B08F1EE65810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F560A3EC-C4AF-4C71-9200-27CEA4A13595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{F560A3EC-C4AF-4C71-9200-27CEA4A13595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{CB9C4FAA-1EFB-48FA-8967-5372D5304CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{CB9C4FAA-1EFB-48FA-8967-5372D5304CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{BE8C3E74-53A8-4DD7-99DD-3827EEA1BFC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{BE8C3E74-53A8-4DD7-99DD-3827EEA1BFC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GardenGroupAPI", "GardenGroupAPI\GardenGroupAPI.csproj", "{8E96D634-6FE7-44B8-A91B-3EA8AD450CF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BE8C3E74-53A8-4DD7-99DD-3827EEA1BFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE8C3E74-53A8-4DD7-99DD-3827EEA1BFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE8C3E74-53A8-4DD7-99DD-3827EEA1BFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E96D634-6FE7-44B8-A91B-3EA8AD450CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E96D634-6FE7-44B8-A91B-3EA8AD450CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E96D634-6FE7-44B8-A91B-3EA8AD450CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E96D634-6FE7-44B8-A91B-3EA8AD450CF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
