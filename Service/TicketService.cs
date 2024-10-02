@@ -7,7 +7,7 @@ namespace Service
     {
         private readonly TicketDao _ticketDao = new();
 
-        public async Task<int> CountTicketsForEmployeeAsync(ObjectId employeeId)
+        public async Task<int> CountTicketsForEmployeeAsync(string employeeId)
         {
             return await _ticketDao.CountTicketsForEmployeeAsync(employeeId);
         }
