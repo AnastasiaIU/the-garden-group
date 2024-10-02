@@ -5,7 +5,7 @@ using Model;
 namespace GardenGroupAPI.Controllers
 {
     [Controller]
-    [Route("api/[controller]")]
+    [Route("api/employee")]
     public class EmployeeController : Controller
     {
         private readonly EmployeeDao _employeeDao;

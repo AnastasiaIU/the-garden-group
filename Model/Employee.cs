@@ -7,7 +7,8 @@ namespace Model
     public class Employee
     {
         [BsonId]
-        public ObjectId EmployeeId { get; private set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string EmployeeId { get; private set; }
         [BsonElement("first_name")]
         public string FirstName { get; private set; }
         [BsonElement("last_name")]
@@ -21,7 +22,7 @@ namespace Model
         [BsonElement("branch")]
         public Branch Branch { get; private set; }
 
-        public Employee(ObjectId employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, Branch branch)
+        public Employee(string employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, Branch branch)
         {
             EmployeeId = employeeId;
             FirstName = firstName;
