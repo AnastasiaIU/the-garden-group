@@ -13,18 +13,11 @@ namespace DAL
 
         public async Task<Employee?> GetEmployeeByUsernameAndPasswordAsync(string username, string password)
         {
-            try
-            {
-                var filter = Builders<Employee>.Filter.And(
-                Builders<Employee>.Filter.Eq("username", username),
-                Builders<Employee>.Filter.Eq("password", password)
-                );
-                return await employeeCollection.Find(filter).SingleAsync();
-            }
-            catch (InvalidOperationException e)
-            {
-                return null;
-            }
+            var filter = Builders<Employee>.Filter.And(
+            Builders<Employee>.Filter.Eq("username", username),
+            Builders<Employee>.Filter.Eq("password", password)
+            );
+            return await employeeCollection.Find(filter).FirstOrDefaultAsync();
         }
     }
 }

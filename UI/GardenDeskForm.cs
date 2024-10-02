@@ -71,7 +71,6 @@ namespace UI
             }
             else
             {
-                lblLoginWrongCredentials.Visible = false;
                 currentEmployee = employee;
                 ShowPanel(pnlDashboard);
             }
