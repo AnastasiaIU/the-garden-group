@@ -5,8 +5,9 @@ namespace UI
 {
     public partial class GardenDeskForm : Form
     {
-        private readonly EmployeeService _employeeService = new();
-        private readonly TicketService _ticketService = new();
+        private readonly EmployeeService employeeService = new();
+        private readonly TicketService ticketService = new();
+        private Employee? currentEmployee = null;
 
         public GardenDeskForm()
         {
@@ -34,11 +35,11 @@ namespace UI
         private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
-            List<Employee> employees = await _employeeService.GetAllEmployeesAsync();
+            List<Employee> employees = await employeeService.GetAllEmployeesAsync();
 
             foreach (var employee in employees)
             {
-                int ticketsPerEmployee = await _ticketService.CountTicketsForEmployeeAsync(employee.EmployeeId);
+                int ticketsPerEmployee = await ticketService.CountTicketsForEmployeeAsync(employee.EmployeeId);
 
                 ListViewItem item = new();
 
@@ -50,6 +51,29 @@ namespace UI
                 item.Tag = employee;
 
                 usersList.Items.Add(item);
+            }
+        }
+
+        #endregion
+
+        #region Login Logic
+
+        private async void BtnLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtBoxLoginUsername.Text;
+            string password = txtBoxLoginPassword.Text;
+
+            Employee? employee = await employeeService.GetEmployeeByUsernameAndPasswordAsync(username, password);
+
+            if (employee == null)
+            {
+                lblLoginWrongCredentials.Visible = true;
+            }
+            else
+            {
+                lblLoginWrongCredentials.Visible = false;
+                currentEmployee = employee;
+                ShowPanel(pnlDashboard);
             }
         }
 
