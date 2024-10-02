@@ -20,9 +20,9 @@ namespace Model
         [BsonElement("role")]
         public EmployeeRole Role { get; private set; }
         [BsonElement("branch")]
-        public Branch Branch { get; private set; }
+        public string Branch { get; private set; }
 
-        public Employee(string employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, Branch branch)
+        public Employee(string employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
         {
             EmployeeId = employeeId;
             FirstName = firstName;
