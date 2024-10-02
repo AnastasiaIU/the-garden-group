@@ -5,7 +5,7 @@ using Model;
 namespace GardenGroupAPI.Controllers
 {
     [Controller]
-    [Route("api/[controller]")]
+    [Route("api/ticket")]
     public class TicketController : Controller
     {
         private readonly TicketDao _ticketDao;

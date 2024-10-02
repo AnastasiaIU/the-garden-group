@@ -6,11 +6,14 @@ namespace Model
     public class Ticket
     {
         [BsonId]
-        public ObjectId TicketId { get; private set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string TicketId { get; private set; }
         [BsonElement("reporting_user")]
-        public ObjectId ReportingUser { get; private set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ReportingUser { get; private set; }
         [BsonElement("service_desk_user")]
-        public ObjectId ServiceDeskUser { get; private set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ServiceDeskUser { get; private set; }
         [BsonElement("title")]
         public string Title { get; private set; }
         [BsonElement("description")]
@@ -30,7 +33,7 @@ namespace Model
         [BsonElement("creation_date")]
         public DateTime CreationDate { get; private set; }
 
-        public Ticket(ObjectId ticketId, ObjectId reportingUser, ObjectId serviceDeskUser, string title, string description, Status status, Priority priority, bool isResolved, bool isEscalated, DateTime deadline, IncidentType incidentType, DateTime creationDate)
+        public Ticket(string ticketId, string reportingUser, string serviceDeskUser, string title, string description, Status status, Priority priority, bool isResolved, bool isEscalated, DateTime deadline, IncidentType incidentType, DateTime creationDate)
         {
             TicketId = ticketId;
             ReportingUser = reportingUser;

@@ -12,7 +12,7 @@ namespace DAL
             return await _ticketCollection.Find(filter).ToListAsync();
         }
 
-        public async Task<int> CountTicketsForEmployeeAsync(ObjectId employeeId)
+        public async Task<int> CountTicketsForEmployeeAsync(string employeeId)
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
             return (int)await _ticketCollection.CountDocumentsAsync(filter);
