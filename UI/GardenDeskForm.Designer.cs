@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem2 = new ListViewItem("");
+            ListViewItem listViewItem1 = new ListViewItem("");
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
@@ -52,6 +52,7 @@
             lblTicketsOverview = new Label();
             splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
+            btnAddUser = new Button();
             usersList = new ListView();
             leftColumn = new ColumnHeader();
             userId = new ColumnHeader();
@@ -314,6 +315,7 @@
             // pnlUsers
             // 
             pnlUsers.BackColor = Color.White;
+            pnlUsers.Controls.Add(btnAddUser);
             pnlUsers.Controls.Add(usersList);
             pnlUsers.Controls.Add(lblUsers);
             pnlUsers.Controls.Add(splitterUsers);
@@ -322,14 +324,27 @@
             pnlUsers.Size = new Size(634, 599);
             pnlUsers.TabIndex = 7;
             // 
+            // btnAddUser
+            // 
+            btnAddUser.BackColor = Color.YellowGreen;
+            btnAddUser.FlatStyle = FlatStyle.Flat;
+            btnAddUser.Location = new Point(479, 17);
+            btnAddUser.Margin = new Padding(2);
+            btnAddUser.Name = "btnAddUser";
+            btnAddUser.Size = new Size(127, 32);
+            btnAddUser.TabIndex = 3;
+            btnAddUser.Text = "+ADD NEW USER";
+            btnAddUser.UseVisualStyleBackColor = false;
+            btnAddUser.Click += btnAddUser_Click;
+            // 
             // usersList
             // 
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userId, userEmail, userFirstName, userLastName, userTicketCount });
-            listViewItem2.Tag = "ID";
-            usersList.Items.AddRange(new ListViewItem[] { listViewItem2 });
-            usersList.Location = new Point(12, 94);
+            listViewItem1.Tag = "ID";
+            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            usersList.Location = new Point(10, 61);
             usersList.Name = "usersList";
-            usersList.Size = new Size(610, 493);
+            usersList.Size = new Size(610, 397);
             usersList.TabIndex = 2;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
@@ -343,38 +358,37 @@
             // 
             userId.Text = "ID";
             userId.TextAlign = HorizontalAlignment.Center;
-            userId.Width = 250;
+            userId.Width = 135;
             // 
             // userEmail
             // 
             userEmail.Text = "Email";
             userEmail.TextAlign = HorizontalAlignment.Center;
-            userEmail.Width = 250;
+            userEmail.Width = 135;
             // 
             // userFirstName
             // 
             userFirstName.Text = "First Name";
             userFirstName.TextAlign = HorizontalAlignment.Center;
-            userFirstName.Width = 135;
+            userFirstName.Width = 130;
             // 
             // userLastName
             // 
             userLastName.Text = "Last Name";
             userLastName.TextAlign = HorizontalAlignment.Center;
-            userLastName.Width = 135;
+            userLastName.Width = 130;
             // 
             // userTicketCount
             // 
             userTicketCount.Text = "#tickets";
             userTicketCount.TextAlign = HorizontalAlignment.Center;
-            userTicketCount.Width = 110;
             // 
             // lblUsers
             // 
             lblUsers.AutoSize = true;
             lblUsers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblUsers.ForeColor = SystemColors.WindowFrame;
-            lblUsers.Location = new Point(12, 37);
+            lblUsers.ForeColor = Color.FromArgb(64, 64, 64);
+            lblUsers.Location = new Point(12, 13);
             lblUsers.Name = "lblUsers";
             lblUsers.Size = new Size(222, 32);
             lblUsers.TabIndex = 1;
@@ -466,8 +480,8 @@
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
             Controls.Add(pnlLogin);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlTicketsOverview);
@@ -541,5 +555,6 @@
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
         private ColumnHeader userTicketCount;
+        private Button btnAddUser;
     }
 }

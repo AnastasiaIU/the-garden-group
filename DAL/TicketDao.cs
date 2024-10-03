@@ -11,10 +11,10 @@ namespace DAL
             return await ticketCollection.Find(filter).ToListAsync();
         }
 
-        public async Task<int> CountTicketsForEmployeeAsync(string employeeId)
+        public async Task<List<Ticket>> GetOpenTicketsForEmployeeAsync()
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
-            return (int)await ticketCollection.CountDocumentsAsync(filter);
+            var filter = Builders<Ticket>.Filter.Ne(t => t.Status, Status.Closed);
+            return await ticketCollection.Find(filter).ToListAsync();
         }
     }
 }
