@@ -54,6 +54,34 @@ namespace UI
             }
         }
 
+        private async Task DisplayTicketsAsync(Employee employee)
+        {
+            List<Ticket> tickets;
+
+            if (employee.Role == EmployeeRole.RegularEmployee)
+            {
+                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee.EmployeeId);
+            }
+            else
+            {
+                tickets = await ticketService.GetAllTicketsForServiceDeskEmployeeAsync();
+            }
+            ticketsListView.Items.Clear();
+
+            foreach (var ticket in tickets)
+            {
+
+                ListViewItem item = new ListViewItem(ticket.Title);
+                item.SubItems.Add(ticket.ReportingEmployeeFirstName);
+                item.SubItems.Add(ticket.ReportingEmployeeLastName);
+                item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
+                item.SubItems.Add(ticket.Status.ToString());
+
+                ticketsListView.Items.Add(item);
+            }
+        }
+
+
         #endregion
 
         #region Login Logic
@@ -87,5 +115,12 @@ namespace UI
         }
 
         #endregion
+
+        private async void menuItemIncedents_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlTicketsOverview);
+            await DisplayTicketsAsync(currentEmployee);
+
+        }
     }
 }
