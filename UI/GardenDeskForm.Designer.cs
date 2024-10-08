@@ -51,8 +51,7 @@
             pnlTicketsOverview = new Panel();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
-            ticketReportingUserFirstName = new ColumnHeader();
-            ticketReportingUserLastName = new ColumnHeader();
+            ticketReportingUser = new ColumnHeader();
             ticketCreationDate = new ColumnHeader();
             ticketStatus = new ColumnHeader();
             lblTicketsOverview = new Label();
@@ -313,7 +312,7 @@
             // ticketsListView
             // 
             ticketsListView.BackColor = SystemColors.InactiveCaption;
-            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketReportingUserFirstName, ticketReportingUserLastName, ticketCreationDate, ticketStatus });
+            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketReportingUser, ticketCreationDate, ticketStatus });
             ticketsListView.Location = new Point(43, 95);
             ticketsListView.Name = "ticketsListView";
             ticketsListView.Size = new Size(871, 573);
@@ -324,22 +323,17 @@
             // ticketTitle
             // 
             ticketTitle.Text = "Title";
-            ticketTitle.Width = 340;
+            ticketTitle.Width = 370;
             // 
-            // ticketReportingUserFirstName
+            // ticketReportingUser
             // 
-            ticketReportingUserFirstName.Text = "Reported By";
-            ticketReportingUserFirstName.Width = 120;
-            // 
-            // ticketReportingUserLastName
-            // 
-            ticketReportingUserLastName.Text = "";
-            ticketReportingUserLastName.Width = 100;
+            ticketReportingUser.Text = "Reported By";
+            ticketReportingUser.Width = 130;
             // 
             // ticketCreationDate
             // 
-            ticketCreationDate.Text = "Creation Date";
-            ticketCreationDate.Width = 180;
+            ticketCreationDate.Text = "Deadline";
+            ticketCreationDate.Width = 190;
             // 
             // ticketStatus
             // 
@@ -349,11 +343,11 @@
             // lblTicketsOverview
             // 
             lblTicketsOverview.AutoSize = true;
-            lblTicketsOverview.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTicketsOverview.Location = new Point(342, 20);
+            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTicketsOverview.Location = new Point(29, 20);
             lblTicketsOverview.Margin = new Padding(4, 0, 4, 0);
             lblTicketsOverview.Name = "lblTicketsOverview";
-            lblTicketsOverview.Size = new Size(324, 55);
+            lblTicketsOverview.Size = new Size(257, 45);
             lblTicketsOverview.TabIndex = 1;
             lblTicketsOverview.Text = "Tickets Overview";
             // 
@@ -611,8 +605,7 @@
         private ColumnHeader userTicketCount;
         private ListView ticketsListView;
         private ColumnHeader ticketTitle;
-        private ColumnHeader ticketReportingUserFirstName;
-        private ColumnHeader ticketReportingUserLastName;
+        private ColumnHeader ticketReportingUser;
         private ColumnHeader ticketCreationDate;
         private ColumnHeader ticketStatus;
     }

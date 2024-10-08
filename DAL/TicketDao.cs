@@ -30,7 +30,7 @@ namespace DAL
                     "reporting_employee"
                 )
                 .Unwind("reporting_employee")
-                .Sort(Builders<BsonDocument>.Sort.Descending("creation_date"))
+                .Sort(Builders<BsonDocument>.Sort.Descending("deadline"))
                 .ToListAsync();
 
             return MapToTickets(tickets);
@@ -51,7 +51,7 @@ namespace DAL
                     "reporting_employee"
                 )
                 .Unwind("reporting_employee")
-                .Sort(Builders<BsonDocument>.Sort.Descending("creation_date"))
+                .Sort(Builders<BsonDocument>.Sort.Descending("deadline"))
                 .ToListAsync();
 
             return MapToTickets(tickets);

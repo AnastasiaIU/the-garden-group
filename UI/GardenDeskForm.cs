@@ -72,9 +72,8 @@ namespace UI
             {
 
                 ListViewItem item = new ListViewItem(ticket.Title);
-                item.SubItems.Add(ticket.ReportingEmployeeFirstName);
-                item.SubItems.Add(ticket.ReportingEmployeeLastName);
-                item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
+                item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+                item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Status.ToString());
 
                 ticketsListView.Items.Add(item);
