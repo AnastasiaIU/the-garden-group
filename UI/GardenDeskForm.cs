@@ -58,6 +58,7 @@ namespace UI
         {
             List<Ticket> tickets;
 
+            // Check the role of the employee to determine which tickets to get
             if (employee.Role == EmployeeRole.RegularEmployee)
             {
                 tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee.EmployeeId);
@@ -66,6 +67,7 @@ namespace UI
             {
                 tickets = await ticketService.GetAllTicketsForServiceDeskEmployeeAsync();
             }
+
             ticketsListView.Items.Clear();
 
             foreach (var ticket in tickets)
@@ -113,13 +115,13 @@ namespace UI
             await DisplayEmployeesAsync();
         }
 
-        #endregion
-
         private async void menuItemIncedents_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlTicketsOverview);
             await DisplayTicketsAsync(currentEmployee);
 
         }
+
+        #endregion
     }
 }
