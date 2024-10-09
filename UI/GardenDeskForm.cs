@@ -74,26 +74,22 @@ namespace UI
         {
             usersList.Items.Clear();
             List<Employee> employees = await employeeService.GetAllEmployeesAsync();
-            List<Ticket> openTickets = await ticketService.GetOpenTicketsForEmployeeAsync();
             List<ListViewItem> items = new();
-            Dictionary<string, int> ticketCounts = ticketService.CountTickets(openTickets);
-            FillListView(ticketCounts, employees, items);
+            FillListView(employees, items);
             usersList.Items.AddRange(items.ToArray());
         }
 
-        private void FillListView(Dictionary<string, int> ticketCounts, List<Employee> employees, List<ListViewItem> items)
+        private void FillListView(List<Employee> employees, List<ListViewItem> items)
         {
             foreach (var employee in employees)
             {
-                int ticketsPerEmployee = ticketCounts.ContainsKey(employee.EmployeeId) ? ticketCounts[employee.EmployeeId] : 0;
-
                 ListViewItem item = new();
 
                 item.SubItems.Add(employee.EmployeeId.ToString());
                 item.SubItems.Add(employee.Email);
                 item.SubItems.Add(employee.FirstName);
                 item.SubItems.Add(employee.LastName);
-                item.SubItems.Add(ticketsPerEmployee.ToString());
+                item.SubItems.Add(employee.OpenTickets.ToString());
                 item.Tag = employee;
 
                 items.Add(item);

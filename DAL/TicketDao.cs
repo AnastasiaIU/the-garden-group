@@ -10,11 +10,5 @@ namespace DAL
             var filter = Builders<Ticket>.Filter.Empty;
             return await ticketCollection.Find(filter).ToListAsync();
         }
-
-        public async Task<List<Ticket>> GetOpenTicketsForEmployeeAsync()
-        {
-            var filter = Builders<Ticket>.Filter.Ne(t => t.Status, Status.Closed);
-            return await ticketCollection.Find(filter).ToListAsync();
-        }
     }
 }
