@@ -32,6 +32,41 @@ namespace UI
             panel.Show();
         }
 
+        private async Task DisplayTicketsAsync(Employee employee)
+        {
+            List<Ticket> tickets;
+
+            // Check the role of the employee to determine which tickets to get
+            if (employee.Role == EmployeeRole.RegularEmployee)
+            {
+                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee.EmployeeId);
+            }
+            else
+            {
+                tickets = await ticketService.GetAllTicketsForServiceDeskEmployeeAsync();
+            }
+
+            ticketsListView.Items.Clear();
+
+            foreach (var ticket in tickets)
+            {
+
+                ListViewItem item = new ListViewItem(ticket.Title);
+                item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+                item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
+                item.SubItems.Add(ticket.Status.ToString());
+
+                ticketsListView.Items.Add(item);
+            }
+        }
+
+        private async void menuItemIncedents_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlTicketsOverview);
+            await DisplayTicketsAsync(currentEmployee);
+
+        }
+
         #endregion
 
         #region Login Logic

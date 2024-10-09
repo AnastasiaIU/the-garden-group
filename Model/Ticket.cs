@@ -32,6 +32,8 @@ namespace Model
         public IncidentType IncidentType { get; private set; }
         [BsonElement("creation_date")]
         public DateTime CreationDate { get; private set; }
+        public string ReportingEmployeeFirstName { get; set; }
+        public string ReportingEmployeeLastName { get; set; }
 
         public Ticket(string ticketId, string reportingUser, string serviceDeskUser, string title, string description, Status status, Priority priority, bool isResolved, bool isEscalated, DateTime deadline, IncidentType incidentType, DateTime creationDate)
         {

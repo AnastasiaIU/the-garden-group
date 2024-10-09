@@ -50,6 +50,11 @@
             splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
             lblTicketsOverview = new Label();
+            ticketsListView = new ListView();
+            ticketTitle = new ColumnHeader();
+            ticketReportingUser = new ColumnHeader();
+            ticketCreationDate = new ColumnHeader();
+            ticketStatus = new ColumnHeader();
             splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
             btnAddUser = new Button();
@@ -141,6 +146,7 @@
             menuItemIncedents.Name = "menuItemIncedents";
             menuItemIncedents.Size = new Size(210, 30);
             menuItemIncedents.Text = "Incedent Management";
+            menuItemIncedents.Click += menuItemIncedents_Click;
             // 
             // menuItemUsers
             // 
@@ -286,6 +292,7 @@
             // 
             pnlTicketsOverview.BackColor = Color.White;
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
+            pnlTicketsOverview.Controls.Add(ticketsListView);
             pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
             pnlTicketsOverview.Location = new Point(0, 112);
             pnlTicketsOverview.Name = "pnlTicketsOverview";
@@ -295,12 +302,44 @@
             // lblTicketsOverview
             // 
             lblTicketsOverview.AutoSize = true;
-            lblTicketsOverview.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTicketsOverview.Location = new Point(228, 13);
+            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTicketsOverview.Location = new Point(19, 13);
             lblTicketsOverview.Name = "lblTicketsOverview";
-            lblTicketsOverview.Size = new Size(214, 37);
+            lblTicketsOverview.Size = new Size(177, 30);
             lblTicketsOverview.TabIndex = 1;
             lblTicketsOverview.Text = "Tickets Overview";
+            // 
+            // ticketsListView
+            // 
+            ticketsListView.BackColor = SystemColors.InactiveCaption;
+            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketReportingUser, ticketCreationDate, ticketStatus });
+            ticketsListView.Location = new Point(29, 63);
+            ticketsListView.Margin = new Padding(2);
+            ticketsListView.Name = "ticketsListView";
+            ticketsListView.Size = new Size(582, 383);
+            ticketsListView.TabIndex = 2;
+            ticketsListView.UseCompatibleStateImageBehavior = false;
+            ticketsListView.View = View.Details;
+            // 
+            // ticketTitle
+            // 
+            ticketTitle.Text = "Title";
+            ticketTitle.Width = 370;
+            // 
+            // ticketReportingUser
+            // 
+            ticketReportingUser.Text = "Reported By";
+            ticketReportingUser.Width = 130;
+            // 
+            // ticketCreationDate
+            // 
+            ticketCreationDate.Text = "Deadline";
+            ticketCreationDate.Width = 190;
+            // 
+            // ticketStatus
+            // 
+            ticketStatus.Text = "Status";
+            ticketStatus.Width = 100;
             // 
             // splitterTicketsOverview
             // 
@@ -328,10 +367,10 @@
             // 
             btnAddUser.BackColor = Color.YellowGreen;
             btnAddUser.FlatStyle = FlatStyle.Flat;
-            btnAddUser.Location = new Point(479, 17);
-            btnAddUser.Margin = new Padding(2);
+            btnAddUser.Location = new Point(507, 11);
+            btnAddUser.Margin = new Padding(1);
             btnAddUser.Name = "btnAddUser";
-            btnAddUser.Size = new Size(127, 32);
+            btnAddUser.Size = new Size(116, 38);
             btnAddUser.TabIndex = 3;
             btnAddUser.Text = "+ADD NEW USER";
             btnAddUser.UseVisualStyleBackColor = false;
@@ -339,12 +378,15 @@
             // 
             // usersList
             // 
+            usersList.BackColor = SystemColors.InactiveCaption;
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userId, userEmail, userFirstName, userLastName, userTicketCount });
+            usersList.FullRowSelect = true;
             listViewItem1.Tag = "ID";
             usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            usersList.Location = new Point(10, 61);
+            usersList.Location = new Point(7, 63);
+            usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
-            usersList.Size = new Size(610, 397);
+            usersList.Size = new Size(616, 401);
             usersList.TabIndex = 2;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
@@ -388,7 +430,8 @@
             lblUsers.AutoSize = true;
             lblUsers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             lblUsers.ForeColor = Color.FromArgb(64, 64, 64);
-            lblUsers.Location = new Point(12, 13);
+            lblUsers.Location = new Point(8, 9);
+            lblUsers.Margin = new Padding(2, 0, 2, 0);
             lblUsers.Name = "lblUsers";
             lblUsers.Size = new Size(222, 32);
             lblUsers.TabIndex = 1;
@@ -479,12 +522,12 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlUsers);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
@@ -555,6 +598,11 @@
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
         private ColumnHeader userTicketCount;
+        private ListView ticketsListView;
+        private ColumnHeader ticketTitle;
+        private ColumnHeader ticketReportingUser;
+        private ColumnHeader ticketCreationDate;
+        private ColumnHeader ticketStatus;
         private Button btnAddUser;
     }
 }
