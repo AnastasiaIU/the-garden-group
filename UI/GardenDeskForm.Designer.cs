@@ -342,7 +342,7 @@
             btnEscalate.Text = "ESCALATE";
             btnEscalate.UseVisualStyleBackColor = false;
             btnEscalate.Visible = false;
-            //btnEscalate.Click += btnEscalate_Click;
+            btnEscalate.Click += btnEscalate_Click;
             // 
             // lblTicketsOverview
             // 
@@ -378,8 +378,7 @@
             ticketsListView.TabIndex = 2;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
-            // Tina
-            //ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
+            ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
             // 
             // ticketTitle
             // 
@@ -452,7 +451,6 @@
             usersList.TabIndex = 2;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
-            // Tina
             usersList.SelectedIndexChanged += usersList_SelectedIndexChanged;
             // 
             // leftColumn
@@ -612,6 +610,7 @@
             // 
             // comboBoxTypeUser
             // 
+            comboBoxTypeUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTypeUser.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxTypeUser.FormattingEnabled = true;
             comboBoxTypeUser.Items.AddRange(new object[] { "RegularEmployee", "ServiceDeskEmployee" });
@@ -765,12 +764,12 @@
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlTicketsOverview);
-            Controls.Add(pnlLogin);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlDashboard);
+            Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlLogin);
+            Controls.Add(pnlUsers);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip;
             Margin = new Padding(4, 2, 4, 2);
