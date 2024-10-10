@@ -61,6 +61,8 @@ namespace UI
                 item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Status.ToString());
 
+                item.Tag = ticket;
+
                 ticketsListView.Items.Add(item);
             }
         }
@@ -167,10 +169,10 @@ namespace UI
                 string firstName = TextBoxEmpty(textBoxFirstName.Text, "The first name cannot be empty");
                 string lastName = TextBoxEmpty(textBoxLastName.Text, "The last name cannot be empty");
                 string email = TextBoxEmpty(textBoxEmailAddress.Text, "The e-mail address cannot be empty");
-                string phoneNumber = TextBoxEmpty(textBoxFirstName.Text, "The phone number cannot be empty");
+                string phoneNumber = TextBoxEmpty(textBoxPhoneNumber.Text, "The phone number cannot be empty");
                 if (!Enum.TryParse(comboBoxTypeUser.Text, out EmployeeRole employeeRole))
                     throw new Exception("Parsing the employee role failed.");
-                string branch = TextBoxEmpty(textBoxBranch.Text, "The brnach cannot be empty");
+                string branch = TextBoxEmpty(textBoxBranch.Text, "The branch cannot be empty");
                 return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch);
             }
             catch (Exception exception)
@@ -294,23 +296,24 @@ namespace UI
         #endregion
 
         #region Tina Escalate Ticket
-        //private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (ticketsListView.SelectedItems.Count > 0)
-        //    {
-        //        btnEscalate.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        btnEscalate.Visible = false;
-        //    }
-        //}
-        //private async void btnEscalate_Click(object sender, EventArgs e)
-        //{
-        //    selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
-        //    await ticketService.EscalateTicket(selectedTicket.TicketId);
-        //    await DisplayTicketsAsync(currentEmployee);
-        //}
+        private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ticketsListView.SelectedItems.Count > 0)
+            {
+                btnEscalate.Visible = true;
+            }
+            else
+            {
+                btnEscalate.Visible = false;
+            }
+        }
+        private async void btnEscalate_Click(object sender, EventArgs e)
+        {
+            selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
+            await ticketService.EscalateTicket(selectedTicket.TicketId);
+            MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
+            await DisplayTicketsAsync(currentEmployee);
+        }
         #endregion
     }
 }
