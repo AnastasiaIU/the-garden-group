@@ -1,5 +1,7 @@
 using Model;
 using Service;
+using System.Media;
+using System.Numerics;
 
 namespace UI
 {
@@ -120,6 +122,7 @@ namespace UI
             ShowUsersView();
         }
 
+        #endregion
         private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
@@ -235,7 +238,66 @@ namespace UI
             PrefillEditInputs();
 
             ShowPanel(pnlAddEditUser);
+            FillTexbox();
         }
+        private async void btnUpdateEmployee_Click(object sender, EventArgs e)
+        {
+            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployee());
+            MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+            UsersView();
+        }
+        // prefill the textboxes
+        private void FillTexbox()
+        {
+            textBoxFirstName.Text = selectedEmployee.FirstName;
+            textBoxLastName.Text = selectedEmployee.LastName;
+            comboBoxTypeUser.SelectedItem = selectedEmployee.Role.ToString();
+            textBoxEmailAddress.Text = selectedEmployee.Email;
+            textBoxPhoneNumber.Text = selectedEmployee.PhoneNumber;
+            textBoxBranch.Text = selectedEmployee.Branch;
+        }
+        #endregion
+        #region Delete employee logic
+        // method to delete the employee (my poor amigo)
+        private async void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            if (ConfirmDelete() == DialogResult.Yes)
+            {
+                await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
+                ConfirmDeleted();
+                UsersView();
+            }
+        }
+        // ask the user if they really wanna do this
+        private DialogResult ConfirmDelete()
+        {
+            // add a message box to get confirmation for deleting them
+            string messageTop = "Confirmation";
+            string messageText = "Are you sure you wish to delete this employee?";
+            return MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo);
+        }
+        // confirm message that the employee was deleted
+        private void ConfirmDeleted()
+        {
+            MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} will be missed...");
+            // I want it to play a sad song when an employee is deleted 
+            //SoundPlayer player = new SoundPlayer(@"sad-trumpet.wav");
+            //player.Play();
+        }
+        #endregion
+        private void btnCancelEdit_Click(object sender, EventArgs e)
+        {
+            UsersView();
+        }
+        // method to show the panel, refresh the employees list and the buttons
+        private async void UsersView()
+        {
+            ShowPanel(pnlUsers);
+            btnEditEmployee.Visible = false;
+            btnAddEmployee.Visible = true;
+            await DisplayEmployeesAsync();
+        }
+        #endregion
 
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
