@@ -6,14 +6,16 @@ namespace DAL
 {
     public class EmployeeDao : BaseDao
     {
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        //Orest
+        //This method returns a list of all employees with the number of open tickets they have
+        public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
         {
             var employeeDocument = await employeeCollection.Aggregate()
                 .Lookup<Ticket, BsonDocument>(
-                    "Ticket",
+                    "Ticket", //Join Employee with Ticket collection
                     "_id",
                     "service_desk_user",
-                    @as: "Tickets"
+                    @as: "Tickets" //Field name for the joined data
                 )
                 .Project<BsonDocument>(new BsonDocument
                 {
@@ -29,17 +31,21 @@ namespace DAL
                         {
                             { "input", "$Tickets" },
                             { "as", "ticket" },
-                            { "cond", new BsonDocument("$ne", new BsonArray { "$$ticket.Status", Status.Closed }) }
+                            { "cond", new BsonDocument("$ne", new BsonArray { "$$ticket.Status", Status.Closed }) } //Count only open or in progress tickets
                         }))
                     }
                 })
                 .ToListAsync();
 
+            // Map the BSON documents to Employee objects
             return MapToEmployee(employeeDocument);
         }
 
+        //Orest
+        // Method to map a list of BSON documents to a list of Employee objects
         private List<Employee> MapToEmployee(List<BsonDocument> employeeDocument)
         {
+            // Select and turn each BSON document to a Employee object
             return employeeDocument.Select(doc => new Employee(
                 doc["EmployeeId"].AsObjectId.ToString(),
                 doc["FirstName"].AsString,

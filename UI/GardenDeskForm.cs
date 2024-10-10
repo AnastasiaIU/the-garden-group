@@ -108,7 +108,7 @@ namespace UI
         private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
-            List<Employee> employees = await employeeService.GetAllEmployeesAsync();
+            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTicketsAsync();
             List<ListViewItem> items = new();
             FillListView(employees, items);
             usersList.Items.AddRange(items.ToArray());
@@ -120,7 +120,6 @@ namespace UI
             {
                 ListViewItem item = new();
 
-                item.SubItems.Add(employee.EmployeeId.ToString());
                 item.SubItems.Add(employee.Email);
                 item.SubItems.Add(employee.FirstName);
                 item.SubItems.Add(employee.LastName);

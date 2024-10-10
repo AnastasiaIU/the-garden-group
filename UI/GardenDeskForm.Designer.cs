@@ -60,7 +60,6 @@
             btnAddUser = new Button();
             usersList = new ListView();
             leftColumn = new ColumnHeader();
-            userId = new ColumnHeader();
             userEmail = new ColumnHeader();
             userFirstName = new ColumnHeader();
             userLastName = new ColumnHeader();
@@ -367,7 +366,7 @@
             // 
             btnAddUser.BackColor = Color.YellowGreen;
             btnAddUser.FlatStyle = FlatStyle.Flat;
-            btnAddUser.Location = new Point(507, 11);
+            btnAddUser.Location = new Point(495, 11);
             btnAddUser.Margin = new Padding(1);
             btnAddUser.Name = "btnAddUser";
             btnAddUser.Size = new Size(116, 38);
@@ -379,14 +378,14 @@
             // usersList
             // 
             usersList.BackColor = SystemColors.InactiveCaption;
-            usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userId, userEmail, userFirstName, userLastName, userTicketCount });
+            usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
             listViewItem1.Tag = "ID";
             usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
-            usersList.Location = new Point(7, 63);
+            usersList.Location = new Point(29, 63);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
-            usersList.Size = new Size(616, 401);
+            usersList.Size = new Size(582, 383);
             usersList.TabIndex = 2;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
@@ -396,44 +395,35 @@
             leftColumn.Text = "";
             leftColumn.Width = 0;
             // 
-            // userId
-            // 
-            userId.Text = "ID";
-            userId.TextAlign = HorizontalAlignment.Center;
-            userId.Width = 135;
-            // 
             // userEmail
             // 
             userEmail.Text = "Email";
-            userEmail.TextAlign = HorizontalAlignment.Center;
-            userEmail.Width = 135;
+            userEmail.Width = 200;
             // 
             // userFirstName
             // 
             userFirstName.Text = "First Name";
-            userFirstName.TextAlign = HorizontalAlignment.Center;
-            userFirstName.Width = 130;
+            userFirstName.Width = 150;
             // 
             // userLastName
             // 
             userLastName.Text = "Last Name";
-            userLastName.TextAlign = HorizontalAlignment.Center;
-            userLastName.Width = 130;
+            userLastName.Width = 150;
             // 
             // userTicketCount
             // 
             userTicketCount.Text = "#tickets";
-            userTicketCount.TextAlign = HorizontalAlignment.Center;
+            userTicketCount.Width = 100;
             // 
             // lblUsers
             // 
             lblUsers.AutoSize = true;
-            lblUsers.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lblUsers.ForeColor = Color.FromArgb(64, 64, 64);
-            lblUsers.Location = new Point(8, 9);
+            lblUsers.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            lblUsers.ForeColor = SystemColors.ControlText;
+            lblUsers.Location = new Point(19, 13);
             lblUsers.Margin = new Padding(2, 0, 2, 0);
             lblUsers.Name = "lblUsers";
-            lblUsers.Size = new Size(222, 32);
+            lblUsers.Size = new Size(191, 30);
             lblUsers.TabIndex = 1;
             lblUsers.Text = "User management";
             // 
@@ -593,7 +583,6 @@
         private Label lblLoginPrompt;
         private ListView usersList;
         private ColumnHeader leftColumn;
-        private ColumnHeader userId;
         private ColumnHeader userEmail;
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
