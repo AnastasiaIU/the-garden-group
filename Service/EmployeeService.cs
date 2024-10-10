@@ -9,9 +9,9 @@ namespace Service
     {
         private readonly EmployeeDao employeeDao = new();
 
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
         {
-            return await employeeDao.GetAllEmployeesAsync();
+            return await employeeDao.GetAllEmployeesWithCountedTicketsAsync();
         }
 
         public async Task<Employee?> GetEmployeeByUsernameAndPasswordAsync(string username, string password)
