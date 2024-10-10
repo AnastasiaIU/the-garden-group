@@ -1,6 +1,8 @@
 ﻿using Model;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace DAL
 {
@@ -50,6 +52,37 @@ namespace DAL
         public async Task CreateEmployeeAsync(Employee newEmployee)
         {
             await employeeCollection.InsertOneAsync(newEmployee);
+
+            // add the username and password to the employee
+            // the filters to find the student 
+            var filter = Builders<Employee>.Filter.And(
+            Builders<Employee>.Filter.Eq("first_name", newEmployee.FirstName),
+            Builders<Employee>.Filter.Eq("last_name", newEmployee.LastName)
+            );
+            // set the new username and password and fix the role
+            var update = Builders<Employee>.Update
+                .Set("username", $"{newEmployee.FirstName.ToLower()}.{newEmployee.LastName.ToLower()}")
+                .Set("password", HashPassword($"{newEmployee.FirstName.ToLower()}.{newEmployee.LastName.ToLower()}"))
+                .Set("role", newEmployee.Role.ToString());
+
+            // the actual update
+            await employeeCollection.UpdateOneAsync(filter, update);
+        }
+
+        // this is just the method to hash password from the service layer
+        // it needs to be used here but I think there must be a better way to do this
+        private string HashPassword(string password)
+        {
+            using SHA256 sha256 = SHA256.Create();
+            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            StringBuilder builder = new();
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+
+            return builder.ToString();
         }
     }
 }
