@@ -34,5 +34,15 @@ namespace Model
             Branch = branch;
             OpenTickets = openTickets;
         }
+        //Tina
+        public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
+        {
+                FirstName = firstName;
+                LastName = lastName;
+                Email = email;
+                PhoneNumber = phoneNumber;
+                Role = role;
+                Branch = branch;
+        }
     }
 }

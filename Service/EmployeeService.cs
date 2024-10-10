@@ -20,6 +20,22 @@ namespace Service
             return await employeeDao.GetEmployeeByUsernameAndPasswordAsync(username, hashedPassword);
         }
 
+        //Tina
+        public async Task DeleteEmployeeByID(string employeeId)
+        {
+            await employeeDao.DeleteEmployeeByID(employeeId);
+        }
+        //Tina
+        public async Task UpdateEmployeeAsync(string employeeId, Employee employee)
+        {
+            await employeeDao.UpdateEmployeeAsync(employeeId, employee);
+        }
+        //Tina
+        public async Task CreateEmployeeAsync(Employee employee)
+        {
+            await employeeDao.CreateEmployeeAsync(employee);
+        } 
+
         private string HashPassword(string password)
         {
             using SHA256 sha256 = SHA256.Create();
