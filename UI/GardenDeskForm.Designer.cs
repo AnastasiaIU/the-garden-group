@@ -143,7 +143,7 @@
             menuStrip.BackColor = Color.White;
             menuStrip.Dock = DockStyle.None;
             menuStrip.ImageScalingSize = new Size(32, 32);
-            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, menuItemIncedents, menuItemUsers });
+            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, menuItemIncidents, menuItemUsers });
             menuStrip.Location = new Point(0, 80);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(3, 1, 0, 1);
