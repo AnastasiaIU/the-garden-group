@@ -1,5 +1,3 @@
-using DAL;
-
 namespace GardenGroupAPI
 {
     public class Program

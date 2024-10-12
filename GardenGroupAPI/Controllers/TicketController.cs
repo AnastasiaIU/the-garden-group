@@ -1,8 +1,4 @@
-﻿using DAL;
-using Microsoft.AspNetCore.Mvc;
-using Model;
-
-namespace GardenGroupAPI.Controllers
+﻿namespace GardenGroupAPI.Controllers
 {
     [Controller]
     [Route("api/ticket")]
