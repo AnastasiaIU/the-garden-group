@@ -82,6 +82,7 @@ namespace DAL
         {
             // create the filter to find the employee by thier Id
             var updateFilter = Builders<Employee>.Filter.Eq("_id", new ObjectId(employeeId));
+
             // defining everything that needs to be updated
             var update = Builders<Employee>.Update
                 .Set("first_name", updatedEmployee.FirstName)
@@ -90,45 +91,28 @@ namespace DAL
                 .Set("phone_number", updatedEmployee.PhoneNumber)
                 .Set("role", updatedEmployee.Role.ToString())
                 .Set("branch", updatedEmployee.Branch);
+
             // the actual update
             await employeeCollection.UpdateOneAsync(updateFilter, update);
         }
 
         //Tina
-        public async Task CreateEmployeeAsync(Employee newEmployee)
+        public async Task CreateEmployeeAsync(Employee newEmployee, string username, string password)
         {
+            // insert the employee object into db
             await employeeCollection.InsertOneAsync(newEmployee);
 
-            // add the username and password to the employee
-            // the filters to find the student 
-            var filter = Builders<Employee>.Filter.And(
-            Builders<Employee>.Filter.Eq("first_name", newEmployee.FirstName),
-            Builders<Employee>.Filter.Eq("last_name", newEmployee.LastName)
-            );
-            // set the new username and password and fix the role
+            // update the document with the username and password
+            // filter based on the Id of the newly created employee
+            var filter = Builders<Employee>.Filter.Eq("_id", newEmployee.EmployeeId);
+
+            // define the password and username update
             var update = Builders<Employee>.Update
-                .Set("username", $"{newEmployee.FirstName.ToLower()}.{newEmployee.LastName.ToLower()}")
-                .Set("password", HashPassword($"{newEmployee.FirstName.ToLower()}.{newEmployee.LastName.ToLower()}"))
-                .Set("role", newEmployee.Role.ToString());
+                .Set("username", username)
+                .Set("password", password);
 
             // the actual update
             await employeeCollection.UpdateOneAsync(filter, update);
-        }
-
-        // this is just the method to hash password from the service layer
-        // it needs to be used here but I think there must be a better way to do this
-        private string HashPassword(string password)
-        {
-            using SHA256 sha256 = SHA256.Create();
-            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-            StringBuilder builder = new();
-
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                builder.Append(bytes[i].ToString("x2"));
-            }
-
-            return builder.ToString();
         }
     }
 }

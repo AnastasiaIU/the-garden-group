@@ -33,8 +33,10 @@ namespace Service
         //Tina
         public async Task CreateEmployeeAsync(Employee employee)
         {
-            await employeeDao.CreateEmployeeAsync(employee);
-        } 
+            string username = $"{employee.FirstName}.{employee.LastName}";
+            string password = HashPassword(username);
+            await employeeDao.CreateEmployeeAsync(employee, username, password);
+        }
 
         private string HashPassword(string password)
         {

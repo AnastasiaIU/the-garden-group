@@ -18,6 +18,7 @@ namespace Model
         [BsonElement("phone_number")]
         public string PhoneNumber { get; private set; }
         [BsonElement("role")]
+        [BsonRepresentation(BsonType.String)] // making sure that the role is in text in db and not just the numerical value of enum
         public EmployeeRole Role { get; private set; }
         [BsonElement("branch")]
         public string Branch { get; private set; }
