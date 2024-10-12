@@ -270,7 +270,7 @@
             // 
             lblLoginGardenDesk.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblLoginGardenDesk.Location = new Point(0, 0);
-            lblLoginGardenDesk.Margin = new Padding(4, 0, 4, 0);
+            lblLoginGardenDesk.Margin = new Padding(5, 0, 5, 0);
             lblLoginGardenDesk.Name = "lblLoginGardenDesk";
             lblLoginGardenDesk.Size = new Size(634, 37);
             lblLoginGardenDesk.TabIndex = 0;
@@ -302,7 +302,7 @@
             splitterDashboard.BackColor = Color.Black;
             splitterDashboard.Dock = DockStyle.Top;
             splitterDashboard.Location = new Point(0, 0);
-            splitterDashboard.Margin = new Padding(4);
+            splitterDashboard.Margin = new Padding(5);
             splitterDashboard.Name = "splitterDashboard";
             splitterDashboard.Size = new Size(634, 1);
             splitterDashboard.TabIndex = 0;
@@ -485,7 +485,7 @@
             splitterUsers.BackColor = Color.Black;
             splitterUsers.Dock = DockStyle.Top;
             splitterUsers.Location = new Point(0, 0);
-            splitterUsers.Margin = new Padding(4);
+            splitterUsers.Margin = new Padding(5);
             splitterUsers.Name = "splitterUsers";
             splitterUsers.Size = new Size(634, 1);
             splitterUsers.TabIndex = 0;
