@@ -1,8 +1,6 @@
 ﻿using Model;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Text;
-using System.Security.Cryptography;
 
 namespace DAL
 {

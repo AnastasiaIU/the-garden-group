@@ -38,22 +38,22 @@ namespace Model
         //Tina
         public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
         {
-                FirstName = firstName;
-                LastName = lastName;
-                Email = email;
-                PhoneNumber = phoneNumber;
-                Role = role;
-                Branch = branch;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Role = role;
+            Branch = branch;
         }
         //Tina
         public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
         {
-                FirstName = firstName;
-                LastName = lastName;
-                Email = email;
-                PhoneNumber = phoneNumber;
-                Role = role;
-                Branch = branch;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Role = role;
+            Branch = branch;
         }
     }
 }

@@ -1,8 +1,5 @@
 using Model;
 using Service;
-using System.Drawing;
-using System.Media;
-using System.Numerics;
 
 namespace UI
 {

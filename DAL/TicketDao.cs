@@ -101,6 +101,5 @@ namespace DAL
             // the actual update
             await ticketCollection.UpdateOneAsync(updateFilter, update);
         }
-        
     }
 }
