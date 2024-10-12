@@ -1,5 +1,6 @@
 using Model;
 using Service;
+using System.Drawing;
 using System.Media;
 using System.Numerics;
 
@@ -123,6 +124,8 @@ namespace UI
         }
 
         #endregion
+
+        // Tina's comment: are these two methods not supposed to be inside a region?
         private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
@@ -149,6 +152,7 @@ namespace UI
         }
         #endregion
 
+
         #region Tina Create/Update/Delete User Logic
 
         #region Create Employee
@@ -157,7 +161,11 @@ namespace UI
         {
             // Set up the Add/Edit panel for adding a new employee
             lblAddEditUser.Text = "Create new employee";
+
+            // button for creating an employee becomes visible
             btnCreateEmployee.Visible = true;
+
+            // buttons for editting an employee becomes invisible
             btnDeleteEmployee.Visible = false;
             btnUpdateEmployee.Visible = false;
 
@@ -230,7 +238,12 @@ namespace UI
 
             // Set up the Add/Edit panel for editing the employee's info
             lblAddEditUser.Text = "Edit employee information";
+
+            // make the button for creating an employee invisible
             btnCreateEmployee.Visible = false;
+
+            // the buttons and textboxes are changed before the panel is loaded to prevent them flickering after the panel loads
+            // make the buttons for editting an employee visible
             btnDeleteEmployee.Visible = true;
             btnUpdateEmployee.Visible = true;
 
@@ -238,16 +251,16 @@ namespace UI
             PrefillEditInputs();
 
             ShowPanel(pnlAddEditUser);
-            FillTexbox();
         }
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
             await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployee());
+            // confirm that the employee's info has been updated
             MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
-            UsersView();
+            ShowUsersView();
         }
-        // prefill the textboxes
-        private void FillTexbox()
+        // prefill the textboxes and combobox
+        private void PrefillTextbox()
         {
             textBoxFirstName.Text = selectedEmployee.FirstName;
             textBoxLastName.Text = selectedEmployee.LastName;
@@ -261,40 +274,34 @@ namespace UI
         // method to delete the employee (my poor amigo)
         private async void btnDeleteEmployee_Click(object sender, EventArgs e)
         {
-            if (ConfirmDelete() == DialogResult.Yes)
+            if (ConfirmDelete())
             {
                 await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
-                ConfirmDeleted();
-                UsersView();
+                // confirm that the employee was deleted
+                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} will be missed...");
+                ShowUsersView();
             }
         }
-        // ask the user if they really wanna do this
-        private DialogResult ConfirmDelete()
+        // ask the user to confirm deleting the employee
+        private bool ConfirmDelete()
         {
             // add a message box to get confirmation for deleting them
             string messageTop = "Confirmation";
             string messageText = "Are you sure you wish to delete this employee?";
-            return MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo);
-        }
-        // confirm message that the employee was deleted
-        private void ConfirmDeleted()
-        {
-            MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} will be missed...");
-            // I want it to play a sad song when an employee is deleted 
-            //SoundPlayer player = new SoundPlayer(@"sad-trumpet.wav");
-            //player.Play();
+            return MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
         #endregion
-        private void btnCancelEdit_Click(object sender, EventArgs e)
+        private void btnCancelChangesEmployee_Click(object sender, EventArgs e)
         {
-            UsersView();
+            ShowUsersView();
         }
+        #region Users view and buttons control
         // method to show the panel, refresh the employees list and the buttons
-        private async void UsersView()
+        private async void ShowUsersView()
         {
             ShowPanel(pnlUsers);
-            btnEditEmployee.Visible = false;
-            btnAddEmployee.Visible = true;
+            ChangeButtonState(btnEditEmployee, Color.LightGray, false);
+            ChangeButtonState(btnAddEmployee, Color.LightGreen, true);
             await DisplayEmployeesAsync();
         }
         #endregion
@@ -383,7 +390,7 @@ namespace UI
         #endregion
 
         #endregion
-
+        #endregion
         #region Tina Escalate Ticket
 
         // Enable the escalate button if a non-closed and non-escalated ticket is selected
@@ -414,6 +421,7 @@ namespace UI
             ChangeButtonState(btnEscalate, Color.LightGray, false);
 
             await DisplayTicketsAsync(currentEmployee);
+            ChangeButtonState(btnEscalate, Color.LightGray, false);
         }
 
         #endregion
