@@ -118,6 +118,7 @@ namespace UI
                 btnEditEmployee.Visible = false;
                 btnAddEmployee.Visible = false;
                 btnEscalate.Visible = false;
+                menuItemUsers.Visible = false;
                 usersList.FullRowSelect = false;
                 ticketsListView.FullRowSelect = false;
             }
