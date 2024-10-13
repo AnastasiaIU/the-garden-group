@@ -1,5 +1,8 @@
 using Model;
 using Service;
+using System.Drawing;
+using System.Media;
+using System.Numerics;
 
 namespace UI
 {
@@ -101,7 +104,7 @@ namespace UI
         #region User Management Logic
 
         // Tina 
-        // method to disable/enable buttons based on the employee role
+        // method to disable/enable buttons and selection based on the employee role
         private void SetUserRoleAccess()
         {
             if (currentEmployee.Role == EmployeeRole.ServiceDeskEmployee)
@@ -340,6 +343,7 @@ namespace UI
         }
         #endregion
         #endregion
+
         #region Tina Escalate Ticket
         // if a ticket is selected the escalate button gets enabled, if not it becomes disabled
         private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
