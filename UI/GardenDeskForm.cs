@@ -110,11 +110,13 @@ namespace UI
             if (currentEmployee.Role == EmployeeRole.ServiceDeskEmployee)
             {
                 btnEditEmployee.Visible = true;
+                btnAddEmployee.Visible = true;
                 btnEscalate.Visible = true;
             }
             else
             {
                 btnEditEmployee.Visible = false;
+                btnAddEmployee.Visible = false;
                 btnEscalate.Visible = false;
                 usersList.FullRowSelect = false;
                 ticketsListView.FullRowSelect = false;

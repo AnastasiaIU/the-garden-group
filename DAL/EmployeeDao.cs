@@ -102,7 +102,7 @@ namespace DAL
 
             // update the document with the username and password
             // filter based on the Id of the newly created employee
-            var filter = Builders<Employee>.Filter.Eq("_id", newEmployee.EmployeeId);
+            var filter = Builders<Employee>.Filter.Eq("_id", new ObjectId(newEmployee.EmployeeId));
 
             // define the password and username update
             var update = Builders<Employee>.Update

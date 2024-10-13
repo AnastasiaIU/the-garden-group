@@ -22,6 +22,7 @@ namespace Model
         public EmployeeRole Role { get; private set; }
         [BsonElement("branch")]
         public string Branch { get; private set; }
+        [BsonIgnore]
         public int? OpenTickets { get; set; }
 
         public Employee(string employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch, int? openTickets = null)
