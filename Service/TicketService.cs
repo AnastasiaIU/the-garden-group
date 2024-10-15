@@ -1,6 +1,5 @@
 ﻿using DAL;
 using Model;
-using MongoDB.Driver;
 
 namespace Service
 {
@@ -29,6 +28,7 @@ namespace Service
             await ticketDao.EscalateTicket(ticketId);
         }
 
+        //Vladyslav
         public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
         {
             return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employeeId);
@@ -68,6 +68,7 @@ namespace Service
             return await ticketDao.GetAmountOfAllClosedTicketsForServiceDeskUserAsync(employeeId);
         }
 
+        //Danylo
         public async Task UpdateTicketAsync(Ticket updatedTicket)
         { 
             ticketDao.UpdateTicketAsync(updatedTicket);

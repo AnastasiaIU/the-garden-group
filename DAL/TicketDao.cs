@@ -158,21 +158,7 @@ namespace DAL
         public async Task UpdateTicketAsync(Ticket updatedTicket)
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
-
-            var update = Builders<Ticket>.Update
-                .Set(t => t.ReportingUser, updatedTicket.ReportingUser)
-                .Set(t => t.ServiceDeskUser, updatedTicket.ServiceDeskUser)
-                .Set(t => t.Title, updatedTicket.Title)
-                .Set(t => t.Description, updatedTicket.Description)
-                .Set(t => t.Status, updatedTicket.Status)
-                .Set(t => t.Priority, updatedTicket.Priority)
-                .Set(t => t.IsResolved, updatedTicket.IsResolved)
-                .Set(t => t.IsEscalated, updatedTicket.IsEscalated)
-                .Set(t => t.Deadline, updatedTicket.Deadline)
-                .Set(t => t.IncidentType, updatedTicket.IncidentType)
-                .Set(t => t.CreationDate, updatedTicket.CreationDate);
-
-            await ticketCollection.UpdateOneAsync(filter, update);
+            await ticketCollection.ReplaceOneAsync(filter, updatedTicket);
         }
     }
 }
