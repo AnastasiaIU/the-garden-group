@@ -1,8 +1,5 @@
 using Model;
 using Service;
-using System.Drawing;
-using System.Media;
-using System.Numerics;
 
 namespace UI
 {
@@ -92,6 +89,7 @@ namespace UI
             else
             {
                 currentEmployee = employee;
+
                 //Tina
                 SetUserRoleAccess();
 
@@ -104,48 +102,24 @@ namespace UI
         #region User Management Logic
 
         // Tina 
-        // method to disable/enable buttons and selection based on the employee role
+        // Set access to user and ticket management based on current employee's role
         private void SetUserRoleAccess()
         {
-            if (currentEmployee.Role == EmployeeRole.ServiceDeskEmployee)
+            if (currentEmployee.Role == EmployeeRole.RegularEmployee)
             {
-                btnEditEmployee.Visible = true;
-                btnAddEmployee.Visible = true;
-                btnEscalate.Visible = true;
-            }
-            else
-            {
-                btnEditEmployee.Visible = false;
-                btnAddEmployee.Visible = false;
-                btnEscalate.Visible = false;
+                // Regular employee is not authorised for any user management
                 menuItemUsers.Visible = false;
-                usersList.FullRowSelect = false;
-                ticketsListView.FullRowSelect = false;
+
+                // Regular employee is not authorised for escalating a ticket
+                btnEscalate.Visible = false;
             }
         }
+
         private async void menuItemUsers_Click(object sender, EventArgs e)
         {
             ShowUsersView();
-            // Tina
-            // this code kept being repeated in multiple other functions so I just made it its own method
-            // check the new method out cause it has multiple other functions
-            // the original code is below
-            //ShowPanel(pnlUsers);
-            //await DisplayEmployeesAsync();
         }
 
-        //Tina's comment
-        //this method was repeated twice
-        //private async void menuItemIncidents_Click(object sender, EventArgs e)
-        //{
-        //    ShowPanel(pnlTicketsOverview);
-        //    await DisplayTicketsAsync(currentEmployee);
-        //}
-
-
-        #endregion
-
-        // Tina's comment: are these two methods not supposed to be inside a region?
         private async Task DisplayEmployeesAsync()
         {
             usersList.Items.Clear();
@@ -170,34 +144,35 @@ namespace UI
                 items.Add(item);
             }
         }
-
+        #endregion
 
         #region Tina Create/Update/Delete User Logic
-        #region Create employee
+
+        #region Create Employee
+
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
+            // Set up the Add/Edit panel for adding a new employee
             lblAddEditUser.Text = "Create new employee";
-
-            // button for creating an employee becomes visible
             btnCreateEmployee.Visible = true;
-
-            // buttons for editting an employee becomes invisible
             btnDeleteEmployee.Visible = false;
             btnUpdateEmployee.Visible = false;
 
-            // make sure all text boxes are empty from previous edits
-            EmptyAllTextBox();
+            ClearEdittedInputs(); // in the case of a previous edit operation
+
             ShowPanel(pnlAddEditUser);
         }
+
         private async void btnCreateEmployee_Click(object sender, EventArgs e)
         {
             try
             {
-                Employee newEmployee = CreateEmployee();
+                Employee newEmployee = CreateEmployeeObject();
                 await employeeService.CreateEmployeeAsync(newEmployee);
-                // create a method 
+
+                // Show confirmation message
                 MessageBox.Show($"Warm welcome to {newEmployee.FirstName} {newEmployee.LastName}!");
-                // go back to the user view
+
                 ShowUsersView();
             }
             catch (Exception exception)
@@ -206,25 +181,22 @@ namespace UI
             }
         }
 
-        // method to create an employee object based on the user inputs
-        private Employee CreateEmployee()
+        // Creates an employee object based on the user inputs
+        private Employee CreateEmployeeObject()
         {
-            // check for each input if they're empty
-            string firstName = IsInputBoxEmpty(textBoxFirstName.Text, "The first name cannot be empty");
-            string lastName = IsInputBoxEmpty(textBoxLastName.Text, "The last name cannot be empty");
-            string email = IsInputBoxEmpty(textBoxEmailAddress.Text, "The e-mail address cannot be empty");
-            string phoneNumber = IsInputBoxEmpty(textBoxPhoneNumber.Text, "The phone number cannot be empty");
-            // first making sure the combo box is not empty then parsing it
-            // I could put a default selected text for combo box so you wouldn't have to check if it's empty
-            // but then the user could not notice that something is already selected and they could make a mistake
-            // and I'm designing for forgiveness here. I care about the user :(
-            string employeeRoleInput = IsInputBoxEmpty(comboBoxTypeUser.Text, "The employee role cannot be empty");
+            // Check if each input field is empty
+            string firstName = IsInputBoxEmpty(textBoxFirstName.Text, Properties.Resources.EmployeeFirstNameError);
+            string lastName = IsInputBoxEmpty(textBoxLastName.Text, Properties.Resources.EmployeeLastNameError);
+            string email = IsInputBoxEmpty(textBoxEmailAddress.Text, Properties.Resources.EmployeeEmailError);
+            string phoneNumber = IsInputBoxEmpty(textBoxPhoneNumber.Text, Properties.Resources.EmployeePhoneError);
+            string employeeRoleInput = IsInputBoxEmpty(comboBoxTypeUser.Text, Properties.Resources.EmployeeRoleError);
             EmployeeRole employeeRole = (EmployeeRole)Enum.Parse(typeof(EmployeeRole), employeeRoleInput);
-            string branch = IsInputBoxEmpty(textBoxBranch.Text, "The branch cannot be empty");
+            string branch = IsInputBoxEmpty(textBoxBranch.Text, Properties.Resources.EmployeeBranchError);
+
             return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch);
         }
 
-        //  a method to make sure the textbox is not empty, if yes then throw an exception
+        // Checks if an input box is empty
         private string IsInputBoxEmpty(string inputBoxString, string errorMessage)
         {
             if (inputBoxString == string.Empty || inputBoxString == null)
@@ -233,8 +205,8 @@ namespace UI
             return inputBoxString;
         }
 
-        // making sure that all text boxes are empty for a new employee
-        private void EmptyAllTextBox()
+        // Clear all input fields in the Add/Edit panel
+        private void ClearEdittedInputs()
         {
             textBoxFirstName.Text = "";
             textBoxLastName.Text = "";
@@ -243,38 +215,40 @@ namespace UI
             textBoxPhoneNumber.Text = "";
             textBoxBranch.Text = "";
         }
+
         #endregion
-        #region Edit employee
+
+        #region Edit Employee
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            // set the selected employee to the current selected item in the list view
+            // Get the selected employee from the list view's selected item
             selectedEmployee = (Employee)usersList.SelectedItems[0].Tag;
 
-            // refresh the students panel so new information shows up
+            // Set up the Add/Edit panel for editing the employee's info
             lblAddEditUser.Text = "Edit employee information";
-
-            // make the button for creating an employee invisible
             btnCreateEmployee.Visible = false;
-
-            // the buttons and textboxes are changed before the panel is loaded to prevent them flickering after the panel loads
-            // make the buttons for editting an employee visible
             btnDeleteEmployee.Visible = true;
             btnUpdateEmployee.Visible = true;
-            // Prefill the text boxes with selected users' info
-            PrefillTextbox();
+
+            // Prefill input fields with selected employee's info
+            PrefillEditInputs();
 
             ShowPanel(pnlAddEditUser);
         }
+
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployee());
-            // confirm that the employee's info has been updated
+            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployeeObject());
+
+            // Show confirmation message
             MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+
             ShowUsersView();
         }
-        // prefill the textboxes and combobox
-        private void PrefillTextbox()
+
+        // Prefill the inputs with the selected employee's existing data to edit
+        private void PrefillEditInputs()
         {
             textBoxFirstName.Text = selectedEmployee.FirstName;
             textBoxLastName.Text = selectedEmployee.LastName;
@@ -283,102 +257,103 @@ namespace UI
             textBoxPhoneNumber.Text = selectedEmployee.PhoneNumber;
             textBoxBranch.Text = selectedEmployee.Branch;
         }
+
         #endregion
-        #region Delete employee logic
-        // method to delete the employee (my poor amigo)
+
+        #region Delete Employee/Cancel Changes
+
         private async void btnDeleteEmployee_Click(object sender, EventArgs e)
         {
             if (ConfirmDelete())
             {
                 await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
-                // confirm that the employee was deleted
-                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} will be missed...");
+
+                // Show confirmation message
+                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
+
                 ShowUsersView();
             }
         }
-        // ask the user to confirm deleting the employee
+
+        // Prompts user to confirm if they want to delete the employee
         private bool ConfirmDelete()
         {
-            // add a message box to get confirmation for deleting them
-            string messageTop = "Confirmation";
-            string messageText = "Are you sure you wish to delete this employee?";
-            return MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes;
+            string messageTop = Properties.Resources.ConfirmDeleteMessageTop;
+            string messageText = Properties.Resources.ConfirmDeleteMessageText;
+            bool answer = MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes ? true : false;
+            return answer;
         }
-        #endregion
+
+        // Cancels any changes and return to the user list view without saving
         private void btnCancelChangesEmployee_Click(object sender, EventArgs e)
         {
             ShowUsersView();
         }
-        #region Users view and buttons control
-        // method to show the panel, refresh the employees list and the buttons
+
+        #endregion
+
+        #region Users view control
+
+        // Set up the Users panel
         private async void ShowUsersView()
         {
-            ShowPanel(pnlUsers);
             ChangeButtonState(btnEditEmployee, Color.LightGray, false);
-            ChangeButtonState(btnAddEmployee, Color.LightGreen, true);
             await DisplayEmployeesAsync();
+            ShowPanel(pnlUsers);
         }
 
-        // method to make the edit employee button enabled once the user has selected an employee
-        // and make the add user btn disabled
+        // Enable the edit button once an employee is selected
         private void usersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (usersList.SelectedItems.Count > 0)
-            {
                 ChangeButtonState(btnEditEmployee, Color.Orange, true);
-                ChangeButtonState(btnAddEmployee, Color.LightGray, false);
-            }
-            // the add button becomes enabled once you have unselected
             else
-            {
                 ChangeButtonState(btnEditEmployee, Color.LightGray, false);
-                ChangeButtonState(btnAddEmployee, Color.LightGreen, true);
-            }
         }
 
-        // method to change the enablement and coloration of the buttons
-        // Do you want this method to be outside of this region if others' also need to change a button or something?
+        // Changes the enablement and color of a button
         private void ChangeButtonState(Button button, Color color, bool enablement)
         {
-            // Tina
             button.Enabled = enablement;
             button.BackColor = color;
         }
+
         #endregion
+
         #endregion
 
         #region Tina Escalate Ticket
-        // if a ticket is selected the escalate button gets enabled, if not it becomes disabled
+
+        // Enable the escalate button if a non-closed and non-escalated ticket is selected
         private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ticketsListView.SelectedItems.Count > 0)
             {
-                // set the global variable selectedTicket to the first thing that is selected
                 selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
-                // making sure that the selected ticket is not already escalated or closed
+
                 if (selectedTicket.IsEscalated == false && selectedTicket.Status != Status.Closed)
                 {
                     ChangeButtonState(btnEscalate, Color.Tomato, true);
                 }
             }
+
             else
-            {
                 ChangeButtonState(btnEscalate, Color.LightGray, false); ;
-            }
         }
+
         private async void btnEscalate_Click(object sender, EventArgs e)
         {
-            // escalate the ticket using the method from the service and dal layer
             await ticketService.EscalateTicket(selectedTicket.TicketId);
 
-            // confirm that this ticket has been escalated
+            // Show confirmation message
             MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
 
-            // refresh the list of tickets again
-            // I suggest making a method like ShowUsersView for Tickets as well
-            await DisplayTicketsAsync(currentEmployee);
+            // Disable escalate button after the operation
             ChangeButtonState(btnEscalate, Color.LightGray, false);
+
+            await DisplayTicketsAsync(currentEmployee);
         }
+
         #endregion
     }
 }

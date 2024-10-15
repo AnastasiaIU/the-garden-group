@@ -9,6 +9,11 @@ namespace Service
     {
         private readonly EmployeeDao employeeDao = new();
 
+        public async Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            return await employeeDao.GetAllEmployeesAsync();
+        }
+
         public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
         {
             return await employeeDao.GetAllEmployeesWithCountedTicketsAsync();

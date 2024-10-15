@@ -21,8 +21,8 @@ namespace Service
             return await ticketDao.GetTicketsForRegularEmployeeAsync(employeeId);
         }
 
-        //Tina
-        //Escalate a ticket
+        // Tina
+        // Escalate a ticket
         public async Task EscalateTicket(string ticketId)
         {
             await ticketDao.EscalateTicket(ticketId);

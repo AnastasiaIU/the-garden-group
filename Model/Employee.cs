@@ -36,7 +36,8 @@ namespace Model
             Branch = branch;
             OpenTickets = openTickets;
         }
-        //Tina
+
+        // Tina
         public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
         {
             FirstName = firstName;
@@ -45,6 +46,12 @@ namespace Model
             PhoneNumber = phoneNumber;
             Role = role;
             Branch = branch;
+        }
+
+        // Tina 
+        public void ChangeEmployeeId(string employeeId)
+        {
+            EmployeeId = employeeId;
         }
     }
 }

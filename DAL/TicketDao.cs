@@ -89,17 +89,12 @@ namespace DAL
         }
 
         // Tina
-        // Escalate a ticket
+        // Sets the isEscalated field in a ticket to true in the database
         public async Task EscalateTicket(string ticketId)
         {
-            // create the filter to find the ticket by the Id
-            var updateFilter = Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
-
-            // defining what needs to be updated
+            var filter = Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
             var update = Builders<Ticket>.Update.Set("is_escalated", true);
-
-            // the actual update
-            await ticketCollection.UpdateOneAsync(updateFilter, update);
+            await ticketCollection.UpdateOneAsync(filter, update);
         }
     }
 }

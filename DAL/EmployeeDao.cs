@@ -6,6 +6,12 @@ namespace DAL
 {
     public class EmployeeDao : BaseDao
     {
+        public async Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            var filter = Builders<Employee>.Filter.Empty;
+            return await employeeCollection.Find(filter).ToListAsync();
+        }
+
         //Orest
         //This method returns a list of all employees with the number of open tickets they have
         public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
@@ -67,50 +73,43 @@ namespace DAL
             return await employeeCollection.Find(filter).FirstOrDefaultAsync();
         }
 
-        //Tina 
+        // Tina 
+        // Deletes an employee from the databsae by their unique Id
         public async Task DeleteEmployeeByID(string employeeId)
         {
-            // create the filter to find the employee by thier Id
-            var deleteFilter = Builders<Employee>.Filter.Eq("_id", new ObjectId(employeeId));
-            await employeeCollection.DeleteOneAsync(deleteFilter);
+            await employeeCollection.DeleteOneAsync(SetFilterById(employeeId));
         }
 
-        //Tina
+        // Tina
+        // Updates an employee's information by their unique Id
         public async Task UpdateEmployeeAsync(string employeeId, Employee updatedEmployee)
         {
-            // create the filter to find the employee by thier Id
-            var updateFilter = Builders<Employee>.Filter.Eq("_id", new ObjectId(employeeId));
+            // Ensure the updated employee object keeps the original employee's Id
+            updatedEmployee.ChangeEmployeeId(employeeId);
 
-            // defining everything that needs to be updated
-            var update = Builders<Employee>.Update
-                .Set("first_name", updatedEmployee.FirstName)
-                .Set("last_name", updatedEmployee.LastName)
-                .Set("email", updatedEmployee.Email)
-                .Set("phone_number", updatedEmployee.PhoneNumber)
-                .Set("role", updatedEmployee.Role.ToString())
-                .Set("branch", updatedEmployee.Branch);
-
-            // the actual update
-            await employeeCollection.UpdateOneAsync(updateFilter, update);
+            // Replace the existing document with the updated employee object
+            await employeeCollection.ReplaceOneAsync(SetFilterById(employeeId), updatedEmployee);
         }
 
-        //Tina
+        // Tina
+        // Adds a new employee to the database
         public async Task CreateEmployeeAsync(Employee newEmployee, string username, string password)
         {
-            // insert the employee object into db
+            // Insert the employee object into db
             await employeeCollection.InsertOneAsync(newEmployee);
 
-            // update the document with the username and password
-            // filter based on the Id of the newly created employee
-            var filter = Builders<Employee>.Filter.Eq("_id", new ObjectId(newEmployee.EmployeeId));
-
-            // define the password and username update
+            // Update the document with login credentials
             var update = Builders<Employee>.Update
                 .Set("username", username)
                 .Set("password", password);
+            await employeeCollection.UpdateOneAsync(SetFilterById(newEmployee.EmployeeId), update);
+        }
 
-            // the actual update
-            await employeeCollection.UpdateOneAsync(filter, update);
+        // Tina
+        // Generates a filter to find an employee by their ID
+        private FilterDefinition<Employee> SetFilterById(string employeeId)
+        {
+            return Builders<Employee>.Filter.Eq("_id", new ObjectId(employeeId));
         }
     }
 }
