@@ -6,6 +6,12 @@ namespace DAL
 {
     public class EmployeeDao : BaseDao
     {
+        public async Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            var filter = Builders<Employee>.Filter.Empty;
+            return await employeeCollection.Find(filter).ToListAsync();
+        }
+
         //Orest
         //This method returns a list of all employees with the number of open tickets they have
         public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
@@ -65,6 +71,45 @@ namespace DAL
             Builders<Employee>.Filter.Eq("password", password)
             );
             return await employeeCollection.Find(filter).FirstOrDefaultAsync();
+        }
+
+        // Tina 
+        // Deletes an employee from the databsae by their unique Id
+        public async Task DeleteEmployeeByID(string employeeId)
+        {
+            await employeeCollection.DeleteOneAsync(SetFilterById(employeeId));
+        }
+
+        // Tina
+        // Updates an employee's information by their unique Id
+        public async Task UpdateEmployeeAsync(string employeeId, Employee updatedEmployee)
+        {
+            // Ensure the updated employee object keeps the original employee's Id
+            updatedEmployee.ChangeEmployeeId(employeeId);
+
+            // Replace the existing document with the updated employee object
+            await employeeCollection.ReplaceOneAsync(SetFilterById(employeeId), updatedEmployee);
+        }
+
+        // Tina
+        // Adds a new employee to the database
+        public async Task CreateEmployeeAsync(Employee newEmployee, string username, string password)
+        {
+            // Insert the employee object into db
+            await employeeCollection.InsertOneAsync(newEmployee);
+
+            // Update the document with login credentials
+            var update = Builders<Employee>.Update
+                .Set("username", username)
+                .Set("password", password);
+            await employeeCollection.UpdateOneAsync(SetFilterById(newEmployee.EmployeeId), update);
+        }
+
+        // Tina
+        // Generates a filter to find an employee by their ID
+        private FilterDefinition<Employee> SetFilterById(string employeeId)
+        {
+            return Builders<Employee>.Filter.Eq("_id", new ObjectId(employeeId));
         }
     }
 }

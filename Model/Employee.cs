@@ -18,9 +18,11 @@ namespace Model
         [BsonElement("phone_number")]
         public string PhoneNumber { get; private set; }
         [BsonElement("role")]
+        [BsonRepresentation(BsonType.String)] // making sure that the role is in text in db and not just the numerical value of enum
         public EmployeeRole Role { get; private set; }
         [BsonElement("branch")]
         public string Branch { get; private set; }
+        [BsonIgnore]
         public int? OpenTickets { get; set; }
 
         public Employee(string employeeId, string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch, int? openTickets = null)
@@ -33,6 +35,23 @@ namespace Model
             Role = role;
             Branch = branch;
             OpenTickets = openTickets;
+        }
+
+        // Tina
+        public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Role = role;
+            Branch = branch;
+        }
+
+        // Tina 
+        public void ChangeEmployeeId(string employeeId)
+        {
+            EmployeeId = employeeId;
         }
     }
 }

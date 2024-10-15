@@ -61,6 +61,78 @@ namespace UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you wish to delete this employee?.
+        /// </summary>
+        internal static string ConfirmDeleteMessageText {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteMessageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Employee Deletion.
+        /// </summary>
+        internal static string ConfirmDeleteMessageTop {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteMessageTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The branch cannot be empty.
+        /// </summary>
+        internal static string EmployeeBranchError {
+            get {
+                return ResourceManager.GetString("EmployeeBranchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The e-mail address cannot be empty.
+        /// </summary>
+        internal static string EmployeeEmailError {
+            get {
+                return ResourceManager.GetString("EmployeeEmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The first name cannot be empty.
+        /// </summary>
+        internal static string EmployeeFirstNameError {
+            get {
+                return ResourceManager.GetString("EmployeeFirstNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The last name cannot be empty.
+        /// </summary>
+        internal static string EmployeeLastNameError {
+            get {
+                return ResourceManager.GetString("EmployeeLastNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The phone number cannot be empty.
+        /// </summary>
+        internal static string EmployeePhoneError {
+            get {
+                return ResourceManager.GetString("EmployeePhoneError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The employee role cannot be empty.
+        /// </summary>
+        internal static string EmployeeRoleError {
+            get {
+                return ResourceManager.GetString("EmployeeRoleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pnlLogin.
         /// </summary>
         internal static string LoginPanel {

@@ -9,6 +9,11 @@ namespace Service
     {
         private readonly EmployeeDao employeeDao = new();
 
+        public async Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            return await employeeDao.GetAllEmployeesAsync();
+        }
+
         public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
         {
             return await employeeDao.GetAllEmployeesWithCountedTicketsAsync();
@@ -18,6 +23,24 @@ namespace Service
         {
             string hashedPassword = HashPassword(password);
             return await employeeDao.GetEmployeeByUsernameAndPasswordAsync(username, hashedPassword);
+        }
+
+        //Tina
+        public async Task DeleteEmployeeByID(string employeeId)
+        {
+            await employeeDao.DeleteEmployeeByID(employeeId);
+        }
+        //Tina
+        public async Task UpdateEmployeeAsync(string employeeId, Employee employee)
+        {
+            await employeeDao.UpdateEmployeeAsync(employeeId, employee);
+        }
+        //Tina
+        public async Task CreateEmployeeAsync(Employee employee)
+        {
+            string username = $"{employee.FirstName.ToLower()}.{employee.LastName.ToLower()}";
+            string password = HashPassword(username);
+            await employeeDao.CreateEmployeeAsync(employee, username, password);
         }
 
         private string HashPassword(string password)

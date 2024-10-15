@@ -87,5 +87,14 @@ namespace DAL
 
             return ticketList;
         }
+
+        // Tina
+        // Sets the isEscalated field in a ticket to true in the database
+        public async Task EscalateTicket(string ticketId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
+            var update = Builders<Ticket>.Update.Set("is_escalated", true);
+            await ticketCollection.UpdateOneAsync(filter, update);
+        }
     }
 }
