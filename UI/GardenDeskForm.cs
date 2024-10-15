@@ -9,8 +9,8 @@ namespace UI
         private readonly TicketService ticketService = new();
         private Employee? currentEmployee = null;
         // Tina
-        private Ticket selectedTicket;
-        private Employee selectedEmployee;
+        private Ticket? selectedTicket;
+        private Employee? selectedEmployee;
 
         public GardenDeskForm()
         {
@@ -182,7 +182,7 @@ namespace UI
         }
 
         // Creates an employee object based on the user inputs
-        private Employee CreateEmployeeObject()
+        private Employee CreateEmployeeObject(string? employeeId = null)
         {
             // Check if each input field is empty
             string firstName = IsInputBoxEmpty(textBoxFirstName.Text, Properties.Resources.EmployeeFirstNameError);
@@ -193,7 +193,7 @@ namespace UI
             EmployeeRole employeeRole = (EmployeeRole)Enum.Parse(typeof(EmployeeRole), employeeRoleInput);
             string branch = IsInputBoxEmpty(textBoxBranch.Text, Properties.Resources.EmployeeBranchError);
 
-            return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch);
+            return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch, null, employeeId);
         }
 
         // Checks if an input box is empty
@@ -239,7 +239,7 @@ namespace UI
 
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployeeObject());
+            await employeeService.UpdateEmployeeAsync(CreateEmployeeObject(selectedEmployee.EmployeeId));
 
             // Show confirmation message
             MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
