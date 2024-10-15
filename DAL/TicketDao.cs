@@ -12,12 +12,6 @@ namespace DAL
             return await ticketCollection.Find(filter).ToListAsync();
         }
 
-        public async Task<int> CountTicketsForEmployeeAsync(string employeeId)
-        {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
-            return (int)await ticketCollection.CountDocumentsAsync(filter);
-        }
-
         // Naz
         // Method to get all tickets along with the reporting user's first and last name
         public async Task<List<Ticket>> GetAllTicketsForServiceDeskEmployeeAsync()
@@ -95,6 +89,64 @@ namespace DAL
             var filter = Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
             var update = Builders<Ticket>.Update.Set("is_escalated", true);
             await ticketCollection.UpdateOneAsync(filter, update);
+        }
+
+        //Vladyslav
+        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllTicketsForServiceDeskUserAsync()
+        {
+            var filter = Builders<Ticket>.Filter.Empty;
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId)
+                & Builders<Ticket>.Filter.Eq(t => t.IsResolved, true)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllResolvedTicketsForServiceDeskUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.IsResolved, true)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId)
+                & Builders<Ticket>.Filter.Eq(t => t.IsResolved, false)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllOpenTicketsForServiceDeskUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.IsResolved, false)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId)
+                & Builders<Ticket>.Filter.Eq(t => t.IsResolved, false)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
+        }
+
+        public async Task<int> GetAmountOfAllClosedTicketsForServiceDeskUserAsync(string employeeId)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.IsResolved, false)
+                & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
+            return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
     }
 }
