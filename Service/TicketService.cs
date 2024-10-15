@@ -29,9 +29,6 @@ namespace Service
             await ticketDao.EscalateTicket(ticketId);
         }
 
-<<<<<<< Updated upstream
-        //Vladyslav
-        //Count tickets
         public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
         {
             return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employeeId);
@@ -69,7 +66,8 @@ namespace Service
         public async Task<int> GetAmountOfAllClosedTicketsForServiceDeskUserAsync(string employeeId)
         {
             return await ticketDao.GetAmountOfAllClosedTicketsForServiceDeskUserAsync(employeeId);
-=======
+        }
+
         public async Task UpdateTicketAsync(Ticket updatedTicket)
         { 
             ticketDao.UpdateTicketAsync(updatedTicket);
@@ -78,7 +76,6 @@ namespace Service
         public async Task AddTicketAsync(Ticket ticket)
         { 
             ticketDao.AddTicketAsync(ticket);
->>>>>>> Stashed changes
         }
     }
 }

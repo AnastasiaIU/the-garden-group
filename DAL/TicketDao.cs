@@ -149,6 +149,7 @@ namespace DAL
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
 
+        //Danylo
         public async Task AddTicketAsync(Ticket ticket)
         {
             await ticketCollection.InsertOneAsync(ticket);
