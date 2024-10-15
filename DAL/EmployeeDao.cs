@@ -155,6 +155,8 @@ namespace DAL
             var update = Builders<Employee>.Update
                 .Set("username", username)
                 .Set("password", password);
+            await employeeCollection.UpdateOneAsync(SetFilterById(newEmployee.EmployeeId), update);
+        }
 
             await employeeCollection.UpdateOneAsync(GetFilterById(newEmployee.EmployeeId), update);
         }

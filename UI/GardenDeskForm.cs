@@ -1,8 +1,5 @@
 using Model;
 using Service;
-using System.Drawing;
-using System.Media;
-using System.Numerics;
 
 namespace UI
 {
@@ -152,7 +149,6 @@ namespace UI
         }
         #endregion
 
-
         #region Tina Create/Update/Delete User Logic
 
         #region Create Employee
@@ -161,11 +157,7 @@ namespace UI
         {
             // Set up the Add/Edit panel for adding a new employee
             lblAddEditUser.Text = "Create new employee";
-
-            // button for creating an employee becomes visible
             btnCreateEmployee.Visible = true;
-
-            // buttons for editting an employee becomes invisible
             btnDeleteEmployee.Visible = false;
             btnUpdateEmployee.Visible = false;
 
@@ -238,12 +230,7 @@ namespace UI
 
             // Set up the Add/Edit panel for editing the employee's info
             lblAddEditUser.Text = "Edit employee information";
-
-            // make the button for creating an employee invisible
             btnCreateEmployee.Visible = false;
-
-            // the buttons and textboxes are changed before the panel is loaded to prevent them flickering after the panel loads
-            // make the buttons for editting an employee visible
             btnDeleteEmployee.Visible = true;
             btnUpdateEmployee.Visible = true;
 
@@ -252,15 +239,19 @@ namespace UI
 
             ShowPanel(pnlAddEditUser);
         }
+
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployee());
-            // confirm that the employee's info has been updated
+            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployeeObject());
+
+            // Show confirmation message
             MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+
             ShowUsersView();
         }
-        // prefill the textboxes and combobox
-        private void PrefillTextbox()
+
+        // Prefill the inputs with the selected employee's existing data to edit
+        private void PrefillEditInputs()
         {
             textBoxFirstName.Text = selectedEmployee.FirstName;
             textBoxLastName.Text = selectedEmployee.LastName;
@@ -269,40 +260,49 @@ namespace UI
             textBoxPhoneNumber.Text = selectedEmployee.PhoneNumber;
             textBoxBranch.Text = selectedEmployee.Branch;
         }
+
         #endregion
-        #region Delete employee logic
-        // method to delete the employee (my poor amigo)
+
+        #region Delete Employee/Cancel Changes
+
         private async void btnDeleteEmployee_Click(object sender, EventArgs e)
         {
             if (ConfirmDelete())
             {
                 await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
-                // confirm that the employee was deleted
-                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} will be missed...");
+
+                // Show confirmation message
+                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
+
                 ShowUsersView();
             }
         }
-        // ask the user to confirm deleting the employee
+
+        // Prompts user to confirm if they want to delete the employee
         private bool ConfirmDelete()
         {
-            // add a message box to get confirmation for deleting them
-            string messageTop = "Confirmation";
-            string messageText = "Are you sure you wish to delete this employee?";
-            return MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes;
+            string messageTop = Properties.Resources.ConfirmDeleteMessageTop;
+            string messageText = Properties.Resources.ConfirmDeleteMessageText;
+            bool answer = MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes ? true : false;
+            return answer;
         }
-        #endregion
+
+        // Cancels any changes and return to the user list view without saving
         private void btnCancelChangesEmployee_Click(object sender, EventArgs e)
         {
             ShowUsersView();
         }
-        #region Users view and buttons control
-        // method to show the panel, refresh the employees list and the buttons
+
+        #endregion
+
+        #region Users view control
+
+        // Set up the Users panel
         private async void ShowUsersView()
         {
-            ShowPanel(pnlUsers);
             ChangeButtonState(btnEditEmployee, Color.LightGray, false);
-            ChangeButtonState(btnAddEmployee, Color.LightGreen, true);
             await DisplayEmployeesAsync();
+            ShowPanel(pnlUsers);
         }
         #endregion
 
@@ -593,6 +593,7 @@ namespace UI
             MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
             await DisplayTicketsAsync(currentEmployee);
         }
+
         #endregion
     }
 }

@@ -341,7 +341,6 @@
             btnEscalate.TabIndex = 3;
             btnEscalate.Text = "ESCALATE";
             btnEscalate.UseVisualStyleBackColor = false;
-            btnEscalate.Visible = false;
             btnEscalate.Click += btnEscalate_Click;
             // 
             // lblTicketsOverview
@@ -424,13 +423,13 @@
             btnEditEmployee.TabIndex = 4;
             btnEditEmployee.Text = "EDIT EMPLOYEE";
             btnEditEmployee.UseVisualStyleBackColor = false;
-            btnEditEmployee.Visible = false;
             btnEditEmployee.Click += btnEditUser_Click;
             // 
             // btnAddEmployee
             // 
             btnAddEmployee.BackColor = Color.LightGreen;
-            btnAddEmployee.Location = new Point(873, 73);
+            btnAddEmployee.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddEmployee.Location = new Point(485, 17);
             btnAddEmployee.Name = "btnAddEmployee";
             btnAddEmployee.Size = new Size(212, 49);
             btnAddEmployee.TabIndex = 3;
