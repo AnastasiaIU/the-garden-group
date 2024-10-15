@@ -1,5 +1,6 @@
 ﻿using DAL;
 using Model;
+using MongoDB.Driver;
 
 namespace Service
 {
@@ -30,34 +31,43 @@ namespace Service
 
         //Vladyslav
         //Count tickets
-        public async Task<int> CountResolvedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
         {
-            return await ticketDao.CountResolvedTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employeeId);
         }
 
-        public async Task<int> CountResolvedTicketsForServiceDeskUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllTicketsForServiceDeskUserAsync()
         {
-            return await ticketDao.CountResolvedTicketsForServiceDeskUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllTicketsForServiceDeskUserAsync();
+        }
+        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(string employeeId)
+        {
+            return await ticketDao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employeeId);
         }
 
-        public async Task<int> CountOpenTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllResolvedTicketsForServiceDeskUserAsync(string employeeId)
         {
-            return await ticketDao.CountOpenTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllResolvedTicketsForServiceDeskUserAsync(employeeId);
         }
 
-        public async Task<int> CountOpenTicketsForServiceDeskUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(string employeeId)
         {
-            return await ticketDao.CountOpenTicketsForServiceDeskUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllOpenTicketsForReportingUserAsync(employeeId);
         }
 
-        public async Task<int> CountClosedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllOpenTicketsForServiceDeskUserAsync(string employeeId)
         {
-            return await ticketDao.CountClosedTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllOpenTicketsForServiceDeskUserAsync(employeeId);
         }
 
-        public async Task<int> CountClosedTicketsForServiceDeskUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(string employeeId)
         {
-            return await ticketDao.CountClosedTicketsForServiceDeskUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllClosedTicketsForReportingUserAsync(employeeId);
+        }
+
+        public async Task<int> GetAmountOfAllClosedTicketsForServiceDeskUserAsync(string employeeId)
+        {
+            return await ticketDao.GetAmountOfAllClosedTicketsForServiceDeskUserAsync(employeeId);
         }
     }
 }
