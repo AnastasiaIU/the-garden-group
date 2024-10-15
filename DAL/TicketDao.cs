@@ -148,5 +148,17 @@ namespace DAL
                 & Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
+
+        //Danylo
+        public async Task AddTicketAsync(Ticket ticket)
+        {
+            await ticketCollection.InsertOneAsync(ticket);
+        }
+
+        public async Task UpdateTicketAsync(Ticket updatedTicket)
+        {
+            var filter = Builders<Ticket>.Filter.Eq(t => t.TicketId, updatedTicket.TicketId);
+            await ticketCollection.ReplaceOneAsync(filter, updatedTicket);
+        }
     }
 }

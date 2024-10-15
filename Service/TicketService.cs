@@ -1,6 +1,5 @@
 ﻿using DAL;
 using Model;
-using MongoDB.Driver;
 
 namespace Service
 {
@@ -30,7 +29,6 @@ namespace Service
         }
 
         //Vladyslav
-        //Count tickets
         public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
         {
             return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employeeId);
@@ -68,6 +66,17 @@ namespace Service
         public async Task<int> GetAmountOfAllClosedTicketsForServiceDeskUserAsync(string employeeId)
         {
             return await ticketDao.GetAmountOfAllClosedTicketsForServiceDeskUserAsync(employeeId);
+        }
+
+        //Danylo
+        public async Task UpdateTicketAsync(Ticket updatedTicket)
+        { 
+            ticketDao.UpdateTicketAsync(updatedTicket);
+        }
+
+        public async Task AddTicketAsync(Ticket ticket)
+        { 
+            ticketDao.AddTicketAsync(ticket);
         }
     }
 }
