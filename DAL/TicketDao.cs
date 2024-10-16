@@ -175,8 +175,8 @@ namespace DAL
         public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(Employee employee)
         {
             var matchStage = Builders<Ticket>.Filter.And(
-            Builders<Ticket>.Filter.Eq("reporting_user", employee.EmployeeId),
-            Builders<Ticket>.Filter.Eq("is_resolved", true)
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, true)
             );
 
             // Get the count of matching documents
@@ -204,8 +204,8 @@ namespace DAL
         public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(Employee employee)
         {
             var matchStage = Builders<Ticket>.Filter.And(
-            Builders<Ticket>.Filter.Eq("reporting_user", employee.EmployeeId),
-            Builders<Ticket>.Filter.Eq("status", "Open")
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open)
             );
 
             // Get the count of matching documents
@@ -220,7 +220,7 @@ namespace DAL
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
         public async Task<int> GetAmountOfAllOpenTicketsAsync()
         {
-            var filter = Builders<Ticket>.Filter.Eq("status", "Open");
+            var filter = Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open);
 
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
@@ -233,8 +233,9 @@ namespace DAL
         public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(Employee employee)
         {
             var matchStage = Builders<Ticket>.Filter.And(
-            Builders<Ticket>.Filter.Eq("reporting_user", employee.EmployeeId),
-            Builders<Ticket>.Filter.Eq("status", "Closed")
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, false),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed)
             );
 
             // Get the count of matching documents
@@ -249,9 +250,13 @@ namespace DAL
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
         public async Task<int> GetAmountOfAllClosedTicketsAsync()
         {
-            var filter = Builders<Ticket>.Filter.Eq("status", "Closed");
+            var matchStage = Builders<Ticket>.Filter.And(
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, false),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed)
+            );
 
-            return (int)await ticketCollection.CountDocumentsAsync(filter);
+
+            return (int)await ticketCollection.CountDocumentsAsync(matchStage);
         }
 
         #endregion

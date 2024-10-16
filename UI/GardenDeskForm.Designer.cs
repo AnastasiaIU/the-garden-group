@@ -112,6 +112,8 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
+            label5 = new Label();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -305,6 +307,8 @@
             // pnlDashboard
             // 
             pnlDashboard.BackColor = Color.White;
+            pnlDashboard.Controls.Add(label6);
+            pnlDashboard.Controls.Add(label5);
             pnlDashboard.Controls.Add(label3);
             pnlDashboard.Controls.Add(label4);
             pnlDashboard.Controls.Add(label1);
@@ -327,8 +331,8 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(440, 129);
+            label3.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(423, 129);
             label3.Name = "label3";
             label3.Size = new Size(214, 21);
             label3.TabIndex = 13;
@@ -338,7 +342,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(456, 89);
+            label4.Location = new Point(439, 89);
             label4.Name = "label4";
             label4.Size = new Size(176, 25);
             label4.TabIndex = 12;
@@ -347,8 +351,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(235, 129);
+            label1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(205, 129);
             label1.Name = "label1";
             label1.Size = new Size(199, 21);
             label1.TabIndex = 11;
@@ -358,7 +362,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(247, 89);
+            label2.Location = new Point(217, 89);
             label2.Name = "label2";
             label2.Size = new Size(156, 25);
             label2.TabIndex = 10;
@@ -367,8 +371,8 @@
             // lblOpenDescription
             // 
             lblOpenDescription.AutoSize = true;
-            lblOpenDescription.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenDescription.Location = new Point(21, 129);
+            lblOpenDescription.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenDescription.Location = new Point(5, 129);
             lblOpenDescription.Name = "lblOpenDescription";
             lblOpenDescription.Size = new Size(189, 21);
             lblOpenDescription.TabIndex = 9;
@@ -378,7 +382,7 @@
             // 
             lblOpen.AutoSize = true;
             lblOpen.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpen.Location = new Point(33, 89);
+            lblOpen.Location = new Point(17, 89);
             lblOpen.Name = "lblOpen";
             lblOpen.Size = new Size(145, 25);
             lblOpen.TabIndex = 8;
@@ -388,7 +392,7 @@
             // 
             lblResolvedNumber.AutoSize = true;
             lblResolvedNumber.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
-            lblResolvedNumber.Location = new Point(502, 379);
+            lblResolvedNumber.Location = new Point(495, 418);
             lblResolvedNumber.Name = "lblResolvedNumber";
             lblResolvedNumber.Size = new Size(50, 19);
             lblResolvedNumber.TabIndex = 7;
@@ -398,7 +402,7 @@
             // 
             lblClosedNumber.AutoSize = true;
             lblClosedNumber.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
-            lblClosedNumber.Location = new Point(304, 378);
+            lblClosedNumber.Location = new Point(275, 418);
             lblClosedNumber.Name = "lblClosedNumber";
             lblClosedNumber.Size = new Size(50, 19);
             lblClosedNumber.TabIndex = 6;
@@ -409,7 +413,7 @@
             // 
             lblOpenNumber.AutoSize = true;
             lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenNumber.Location = new Point(86, 378);
+            lblOpenNumber.Location = new Point(71, 418);
             lblOpenNumber.Name = "lblOpenNumber";
             lblOpenNumber.Size = new Size(51, 20);
             lblOpenNumber.TabIndex = 5;
@@ -422,7 +426,7 @@
             chartResolved.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             chartResolved.Legends.Add(legend1);
-            chartResolved.Location = new Point(456, 194);
+            chartResolved.Location = new Point(440, 235);
             chartResolved.Name = "chartResolved";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
@@ -440,7 +444,7 @@
             chartClosed.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             chartClosed.Legends.Add(legend2);
-            chartClosed.Location = new Point(257, 194);
+            chartClosed.Location = new Point(228, 235);
             chartClosed.Name = "chartClosed";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
@@ -458,7 +462,7 @@
             chartOpen.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             chartOpen.Legends.Add(legend3);
-            chartOpen.Location = new Point(38, 194);
+            chartOpen.Location = new Point(23, 235);
             chartOpen.Name = "chartOpen";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
@@ -921,6 +925,26 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(236, 151);
+            label5.Name = "label5";
+            label5.Size = new Size(137, 21);
+            label5.TabIndex = 14;
+            label5.Text = "without resolving";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(485, 151);
+            label6.Name = "label6";
+            label6.Size = new Size(89, 21);
+            label6.TabIndex = 15;
+            label6.Text = "and closed";
+            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -1041,5 +1065,7 @@
         private Label label4;
         private Label label1;
         private Label label2;
+        private Label label6;
+        private Label label5;
     }
 }
