@@ -594,6 +594,123 @@ namespace UI
             await DisplayTicketsAsync(currentEmployee);
         }
 
+        private async void btnUpdateEmployee_Click(object sender, EventArgs e)
+        {
+            await employeeService.UpdateEmployeeAsync(selectedEmployee.EmployeeId, CreateEmployeeObject());
+
+            // Show confirmation message
+            MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+
+            ShowUsersView();
+        }
+
+        // Prefill the inputs with the selected employee's existing data to edit
+        private void PrefillEditInputs()
+        {
+            textBoxFirstName.Text = selectedEmployee.FirstName;
+            textBoxLastName.Text = selectedEmployee.LastName;
+            comboBoxTypeUser.SelectedItem = selectedEmployee.Role.ToString();
+            textBoxEmailAddress.Text = selectedEmployee.Email;
+            textBoxPhoneNumber.Text = selectedEmployee.PhoneNumber;
+            textBoxBranch.Text = selectedEmployee.Branch;
+        }
+
+        #endregion
+
+        #region Delete Employee/Cancel Changes
+
+        private async void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            if (ConfirmDelete())
+            {
+                await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
+
+                // Show confirmation message
+                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
+
+                ShowUsersView();
+            }
+        }
+
+        // Prompts user to confirm if they want to delete the employee
+        private bool ConfirmDelete()
+        {
+            string messageTop = Properties.Resources.ConfirmDeleteMessageTop;
+            string messageText = Properties.Resources.ConfirmDeleteMessageText;
+            bool answer = MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes ? true : false;
+            return answer;
+        }
+
+        // Cancels any changes and return to the user list view without saving
+        private void btnCancelChangesEmployee_Click(object sender, EventArgs e)
+        {
+            ShowUsersView();
+        }
+
+        #endregion
+
+        #region Users view control
+
+        // Set up the Users panel
+        private async void ShowUsersView()
+        {
+            ChangeButtonState(btnEditEmployee, Color.LightGray, false);
+            await DisplayEmployeesAsync();
+            ShowPanel(pnlUsers);
+        }
+
+        // Enable the edit button once an employee is selected
+        private void usersList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (usersList.SelectedItems.Count > 0)
+                ChangeButtonState(btnEditEmployee, Color.Orange, true);
+            else
+                ChangeButtonState(btnEditEmployee, Color.LightGray, false);
+        }
+
+        // Changes the enablement and color of a button
+        private void ChangeButtonState(Button button, Color color, bool enablement)
+        {
+            button.Enabled = enablement;
+            button.BackColor = color;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Tina Escalate Ticket
+
+        // Enable the escalate button if a non-closed and non-escalated ticket is selected
+        private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ticketsListView.SelectedItems.Count > 0)
+            {
+                selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
+
+                if (selectedTicket.IsEscalated == false && selectedTicket.Status != Status.Closed)
+                {
+                    ChangeButtonState(btnEscalate, Color.Tomato, true);
+                }
+            }
+
+            else
+                ChangeButtonState(btnEscalate, Color.LightGray, false); ;
+        }
+
+        private async void btnEscalate_Click(object sender, EventArgs e)
+        {
+            await ticketService.EscalateTicket(selectedTicket.TicketId);
+
+            // Show confirmation message
+            MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
+
+            // Disable escalate button after the operation
+            ChangeButtonState(btnEscalate, Color.LightGray, false);
+
+            await DisplayTicketsAsync(currentEmployee);
+        }
+
         #endregion
     }
 }
