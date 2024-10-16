@@ -1,5 +1,6 @@
 using Model;
 using Service;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace UI
 {
@@ -11,6 +12,11 @@ namespace UI
         // Tina
         private Ticket? selectedTicket;
         private Employee? selectedEmployee;
+        //Vlad
+        private int numberOfOpenTickets;
+        private int numberOfClosedTickets;
+        private int numberOfResolvedTickets;
+        private int numberOfAllTickets;
 
         public GardenDeskForm()
         {
@@ -92,6 +98,9 @@ namespace UI
 
                 //Tina
                 SetUserRoleAccess();
+
+                await GetTicketsForCurrentEmployee();
+                await LoadCharts();
 
                 ShowPanel(pnlDashboard);
             }
@@ -355,5 +364,74 @@ namespace UI
         }
 
         #endregion
+
+        #region Dashboard Logic
+
+        private async Task GetTicketsForCurrentEmployee()
+        {
+            if (currentEmployee.Role == EmployeeRole.ServiceDeskEmployee)
+            {
+                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsAsync();
+                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsAsync();
+                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsAsync();
+                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsAsync();
+            }
+            else
+            {
+                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(currentEmployee.EmployeeId);
+                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(currentEmployee.EmployeeId);
+                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(currentEmployee.EmployeeId);
+                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(currentEmployee.EmployeeId);
+            }
+        }
+
+        private async Task LoadCharts()
+        {
+            await SetUpCharts();
+
+            chartResolved.Series["s1"].Points.AddXY("", numberOfResolvedTickets);
+            chartResolved.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfResolvedTickets);
+            lblResolvedNumber.Text = $"{numberOfResolvedTickets}/{numberOfAllTickets}";
+
+            chartOpen.Series["s1"].Points.AddXY("", numberOfOpenTickets);
+            chartOpen.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfOpenTickets);
+            lblOpenNumber.Text = $"{numberOfOpenTickets}/{numberOfAllTickets}";
+
+            chartClosed.Series["s1"].Points.AddXY("", numberOfClosedTickets);
+            chartClosed.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfClosedTickets);
+            lblClosedNumber.Text = $"{numberOfClosedTickets}/{numberOfAllTickets}";
+
+            chartResolved.Series["s1"].Points[0].Color = Color.Orange;
+            chartResolved.Series["s1"].Points[1].Color = Color.Gray;
+
+            chartOpen.Series["s1"].Points[0].Color = Color.Green;
+            chartOpen.Series["s1"].Points[1].Color = Color.Gray;
+
+            chartClosed.Series["s1"].Points[0].Color = Color.Red;
+            chartClosed.Series["s1"].Points[1].Color = Color.Gray;
+        }
+
+        private async Task SetUpCharts()
+        {
+            foreach (Chart chart in pnlDashboard.Controls)
+            {
+                chart.Series.Clear();
+                chart.Series.Add("s1");
+                chart.Series[0].ChartType = SeriesChartType.Doughnut;
+            }
+            /*chartClosed.Series["s1"].Points.AddXY("", 1);
+            chartOpen.Series["s1"].Points.AddXY("", 1);
+            chartResolved.Series["s1"].Points.AddXY("", 1);
+            chartClosed.Series["s1"].Points[0].Color = Color.Gray;
+            chartOpen.Series["s1"].Points[0].Color = Color.Gray;
+            chartResolved.Series["s1"].Points[0].Color = Color.Gray;*/
+        }
+
+        #endregion
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

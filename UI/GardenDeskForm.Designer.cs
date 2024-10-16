@@ -28,7 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ListViewItem listViewItem1 = new ListViewItem("");
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            ListViewItem listViewItem2 = new ListViewItem("");
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
@@ -46,6 +55,9 @@
             lblLoginPrompt = new Label();
             lblLoginGardenDesk = new Label();
             pnlDashboard = new Panel();
+            chartResolved = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chartClosed = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chartOpen = new System.Windows.Forms.DataVisualization.Charting.Chart();
             lblDashboard = new Label();
             splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
@@ -91,10 +103,16 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
+            lblOpenNumber = new Label();
+            lblClosedNumber = new Label();
+            lblResolvedNumber = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
             pnlDashboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartResolved).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartClosed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartOpen).BeginInit();
             pnlTicketsOverview.SuspendLayout();
             pnlUsers.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
@@ -280,12 +298,72 @@
             // pnlDashboard
             // 
             pnlDashboard.BackColor = Color.White;
+            pnlDashboard.Controls.Add(lblResolvedNumber);
+            pnlDashboard.Controls.Add(lblClosedNumber);
+            pnlDashboard.Controls.Add(lblOpenNumber);
+            pnlDashboard.Controls.Add(chartResolved);
+            pnlDashboard.Controls.Add(chartClosed);
+            pnlDashboard.Controls.Add(chartOpen);
             pnlDashboard.Controls.Add(lblDashboard);
             pnlDashboard.Controls.Add(splitterDashboard);
             pnlDashboard.Location = new Point(0, 112);
             pnlDashboard.Name = "pnlDashboard";
             pnlDashboard.Size = new Size(634, 599);
             pnlDashboard.TabIndex = 5;
+            // 
+            // chartResolved
+            // 
+            chartArea4.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chartResolved.Legends.Add(legend4);
+            chartResolved.Location = new Point(457, 83);
+            chartResolved.Name = "chartResolved";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chartResolved.Series.Add(series4);
+            chartResolved.Size = new Size(174, 204);
+            chartResolved.TabIndex = 4;
+            chartResolved.Text = "chart3";
+            // 
+            // chartClosed
+            // 
+            chartArea5.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            chartClosed.Legends.Add(legend5);
+            chartClosed.Location = new Point(228, 89);
+            chartClosed.Name = "chartClosed";
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            chartClosed.Series.Add(series5);
+            chartClosed.Size = new Size(174, 204);
+            chartClosed.TabIndex = 3;
+            chartClosed.Text = "chart2";
+            // 
+            // chartOpen
+            // 
+            chartArea6.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            chartOpen.Legends.Add(legend6);
+            chartOpen.Location = new Point(19, 111);
+            chartOpen.Name = "chartOpen";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            chartOpen.Series.Add(series6);
+            chartOpen.Size = new Size(174, 204);
+            chartOpen.TabIndex = 2;
+            chartOpen.Text = "chart1";
             // 
             // lblDashboard
             // 
@@ -431,8 +509,8 @@
             usersList.BackColor = SystemColors.InactiveCaption;
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
-            listViewItem1.Tag = "ID";
-            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            listViewItem2.Tag = "ID";
+            usersList.Items.AddRange(new ListViewItem[] { listViewItem2 });
             usersList.Location = new Point(29, 63);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
@@ -738,6 +816,34 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
+            // lblOpenNumber
+            // 
+            lblOpenNumber.AutoSize = true;
+            lblOpenNumber.Location = new Point(62, 315);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(38, 15);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.Click += label1_Click;
+            // 
+            // lblClosedNumber
+            // 
+            lblClosedNumber.AutoSize = true;
+            lblClosedNumber.Location = new Point(269, 315);
+            lblClosedNumber.Name = "lblClosedNumber";
+            lblClosedNumber.Size = new Size(38, 15);
+            lblClosedNumber.TabIndex = 6;
+            lblClosedNumber.Text = "label2";
+            // 
+            // lblResolvedNumber
+            // 
+            lblResolvedNumber.AutoSize = true;
+            lblResolvedNumber.Location = new Point(485, 315);
+            lblResolvedNumber.Name = "lblResolvedNumber";
+            lblResolvedNumber.Size = new Size(38, 15);
+            lblResolvedNumber.TabIndex = 7;
+            lblResolvedNumber.Text = "label3";
+            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -767,6 +873,9 @@
             pnlLogin.PerformLayout();
             pnlDashboard.ResumeLayout(false);
             pnlDashboard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)chartResolved).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartClosed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartOpen).EndInit();
             pnlTicketsOverview.ResumeLayout(false);
             pnlTicketsOverview.PerformLayout();
             pnlUsers.ResumeLayout(false);
@@ -843,5 +952,11 @@
         private Button btnUpdateEmployee;
         private Button btnCreateEmployee;
         private Button btnEscalate;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartOpen;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartResolved;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartClosed;
+        private Label lblClosedNumber;
+        private Label lblOpenNumber;
+        private Label lblResolvedNumber;
     }
 }
