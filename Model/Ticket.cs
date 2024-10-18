@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace Model
 {
@@ -11,7 +12,8 @@ namespace Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? TicketId { get; private set; }
+        [JsonIgnore]
+        public string? TicketId { get; set; }
 
         [BsonElement("reporting_user")]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -28,9 +30,11 @@ namespace Model
         public string Description { get; private set; }
 
         [BsonElement("status")]
+        [BsonRepresentation(BsonType.String)]
         public Status Status { get; private set; }
 
         [BsonElement("priority")]
+        [BsonRepresentation(BsonType.String)]
         public Priority Priority { get; private set; }
 
         [BsonElement("is_resolved")]
@@ -43,12 +47,16 @@ namespace Model
         public DateTime Deadline { get; private set; }
 
         [BsonElement("type_of_incident")]
+        [BsonRepresentation(BsonType.String)] // making sure that the role is in text in db and not just the numerical value of enum
         public IncidentType IncidentType { get; private set; }
 
         [BsonElement("creation_date")]
         public DateTime CreationDate { get; private set; }
-
+        [BsonIgnore]
+        [JsonIgnore]
         public string? ReportingEmployeeFirstName { get; set; }
+        [BsonIgnore]
+        [JsonIgnore]
         public string? ReportingEmployeeLastName { get; set; }
 
         /// <summary>

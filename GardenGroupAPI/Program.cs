@@ -1,4 +1,4 @@
-using DAL;
+using Service;
 
 namespace GardenGroupAPI
 {
@@ -8,8 +8,8 @@ namespace GardenGroupAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSingleton<EmployeeDao>();
-            builder.Services.AddSingleton<TicketDao>();
+            builder.Services.AddSingleton<EmployeeService>();
+            builder.Services.AddSingleton<TicketService>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

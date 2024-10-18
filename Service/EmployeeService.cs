@@ -25,6 +25,15 @@ namespace Service
         }
 
         /// <summary>
+        /// Asyncronously updates an employee in the MongoDB collection by their unique ID.<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task UpdateEmployeeAPIAsync(string id, Employee updatedEmployee)
+        {
+            await employeeDao.UpdateEmployeeAPIAsync(id, updatedEmployee);
+        }
+
+        /// <summary>
         /// Asynchronously retrieves all employees along with the count of their open tickets.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects with ticket counts.</returns>

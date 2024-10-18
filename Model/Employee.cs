@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace Model
 {
@@ -12,7 +13,8 @@ namespace Model
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? EmployeeId { get; private set; }
+        [JsonIgnore]
+        public string? EmployeeId { get; set; }
 
         [BsonElement("first_name")]
         public string FirstName { get; private set; }
@@ -34,6 +36,7 @@ namespace Model
         public string Branch { get; private set; }
 
         [BsonIgnore]
+        [JsonIgnore]
         public int? OpenTickets { get; set; }
 
         /// <summary>

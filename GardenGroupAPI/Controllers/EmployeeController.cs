@@ -1,6 +1,6 @@
-﻿using DAL;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Model;
+using Service;
 
 namespace GardenGroupAPI.Controllers
 {
@@ -8,17 +8,38 @@ namespace GardenGroupAPI.Controllers
     [Route("api/employee")]
     public class EmployeeController : Controller
     {
-        private readonly EmployeeDao _employeeDao;
+        private readonly EmployeeService _employeeService;
 
-        public EmployeeController(EmployeeDao employeeDao)
+        public EmployeeController(EmployeeService employeeService)
         {
-            _employeeDao = employeeDao;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
         public async Task<List<Employee>> Get()
         {
-            return await _employeeDao.GetAllEmployeesAsync();
+            return await _employeeService.GetAllEmployeesAsync();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Employee employee)
+        {
+            await _employeeService.CreateEmployeeAsync(employee);
+            return CreatedAtAction(nameof(Get), new { id = employee.EmployeeId }, employee);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(string id, [FromBody] Employee employee)
+        {
+            await _employeeService.UpdateEmployeeAPIAsync(id, employee);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _employeeService.DeleteEmployeeByID(id);
+            return NoContent();
         }
     }
 }
