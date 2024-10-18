@@ -19,9 +19,18 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
         {
-            return await employeeDao.GetAllEmployeesAsync();
+            return await employeeDao.GetAllEmployeesAPIAsync();
+        }
+
+        /// <summary>
+        /// Asyncronously updates an employee in the MongoDB collection by their unique ID.<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task UpdateEmployeeAPIAsync(string id, Employee updatedEmployee)
+        {
+            await employeeDao.UpdateEmployeeAPIAsync(id, updatedEmployee);
         }
 
         /// <summary>

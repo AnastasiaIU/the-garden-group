@@ -46,7 +46,7 @@ namespace UI
             }
             else
             {
-                tickets = await ticketService.GetAllTicketsForServiceDeskEmployeeAsync();
+                tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
             }
 
             ticketsListView.Items.Clear();

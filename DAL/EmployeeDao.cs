@@ -16,12 +16,22 @@ namespace DAL
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
         {
             var filter = Builders<Employee>.Filter.Empty;
             return await employeeCollection.Find(filter).ToListAsync();
         }
 
+        /// <summary>
+        /// Asyncronously updates an employee in the MongoDB collection by their unique ID.<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task UpdateEmployeeAPIAsync(string id, Employee updatedEmployee)
+        {
+            updatedEmployee.EmployeeId = id;
+            var filter = Builders<Employee>.Filter.Eq("_id", new ObjectId(id));
+            var result = await employeeCollection.ReplaceOneAsync(filter, updatedEmployee);
+        }
 
         /// <summary>
         /// Asynchronously retrieves a list of all employees with the number of open or in-progress tickets they have.

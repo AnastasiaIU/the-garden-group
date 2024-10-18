@@ -18,9 +18,27 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetAllTicketsAsync()
+        public async Task<List<Ticket>> GetAllTicketsAPIAsync()
         {
-            return await ticketDao.GetAllTicketsAsync();
+            return await ticketDao.GetAllTicketsAPIAsync();
+        }
+
+        /// <summary>
+        /// Asynchronously updates a ticket in the MongoDB collection by its unique ID.<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task UpdateTicketAPIAsync(string id, Ticket updatedTicket)
+        {
+            await ticketDao.UpdateTicketAPIAsync(id, updatedTicket);
+        }
+
+        /// <summary>
+        /// Asyncrhonously deletes a ticket from the MongoDB collection by its unique ID.<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task DeleteTicketByIDAPIAsync(string id)
+        {
+            await ticketDao.DeleteTicketByIDAPIAsync(id);
         }
 
         #endregion
@@ -31,9 +49,9 @@ namespace Service
         /// Asynchronously retrieves all tickets for service desk employees, including the reporting user's details.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetAllTicketsForServiceDeskEmployeeAsync()
+        public async Task<List<Ticket>> GetAllTicketsWithReportingUserNameAsync()
         {
-            return await ticketDao.GetAllTicketsForServiceDeskEmployeeAsync();
+            return await ticketDao.GetAllTicketsWithReportingUserNameAsync();
         }
 
         /// <summary>
