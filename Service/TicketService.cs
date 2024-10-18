@@ -18,9 +18,9 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetAllTicketsAsync()
+        public async Task<List<Ticket>> GetAllTicketsAPIAsync()
         {
-            return await ticketDao.GetAllTicketsAsync();
+            return await ticketDao.GetAllTicketsAPIAsync();
         }
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace Service
         /// Asyncrhonously deletes a ticket from the MongoDB collection by its unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task DeleteTicketByID(string id)
+        public async Task DeleteTicketByIDAPIAsync(string id)
         {
-            await ticketDao.DeleteTicketByID(id);
+            await ticketDao.DeleteTicketByIDAPIAsync(id);
         }
 
         #endregion

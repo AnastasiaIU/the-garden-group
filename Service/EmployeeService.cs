@@ -19,9 +19,9 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
         {
-            return await employeeDao.GetAllEmployeesAsync();
+            return await employeeDao.GetAllEmployeesAPIAsync();
         }
 
         /// <summary>

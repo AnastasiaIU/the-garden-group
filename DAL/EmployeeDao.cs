@@ -16,7 +16,7 @@ namespace DAL
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
         {
             var filter = Builders<Employee>.Filter.Empty;
             return await employeeCollection.Find(filter).ToListAsync();

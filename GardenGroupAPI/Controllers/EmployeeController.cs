@@ -18,7 +18,7 @@ namespace GardenGroupAPI.Controllers
         [HttpGet]
         public async Task<List<Employee>> Get()
         {
-            return await _employeeService.GetAllEmployeesAsync();
+            return await _employeeService.GetAllEmployeesAPIAsync();
         }
 
         [HttpPost]

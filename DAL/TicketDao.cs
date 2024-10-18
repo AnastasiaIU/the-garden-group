@@ -16,7 +16,7 @@ namespace DAL
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetAllTicketsAsync()
+        public async Task<List<Ticket>> GetAllTicketsAPIAsync()
         {
             var filter = Builders<Ticket>.Filter.Empty;
             return await ticketCollection.Find(filter).ToListAsync();
@@ -37,7 +37,7 @@ namespace DAL
         /// Asyncrhonously deletes a ticket from the MongoDB collection by its unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task DeleteTicketByID(string ticketId)
+        public async Task DeleteTicketByIDAPIAsync(string ticketId)
         {
             await ticketCollection.DeleteOneAsync(t => t.TicketId == ticketId);
         }

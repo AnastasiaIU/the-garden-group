@@ -18,7 +18,7 @@ namespace GardenGroupAPI.Controllers
         [HttpGet]
         public async Task<List<Ticket>> Get()
         {
-            return await _ticketService.GetAllTicketsAsync();
+            return await _ticketService.GetAllTicketsAPIAsync();
         }
 
         [HttpPost]
@@ -38,7 +38,7 @@ namespace GardenGroupAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            await _ticketService.DeleteTicketByID(id);
+            await _ticketService.DeleteTicketByIDAPIAsync(id);
             return NoContent();
         }
     }
