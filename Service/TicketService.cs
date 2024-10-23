@@ -69,9 +69,9 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
-        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
-        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -107,9 +107,9 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
-        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllOpenTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllOpenTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -126,9 +126,9 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
-        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllClosedTicketsForReportingUserAsync(employeeId);
+            return await ticketDao.GetAmountOfAllClosedTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>

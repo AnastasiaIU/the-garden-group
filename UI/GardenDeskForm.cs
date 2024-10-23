@@ -100,7 +100,7 @@ namespace UI
                 SetUserRoleAccess();
 
                 await GetTicketsForCurrentEmployee();
-                await LoadCharts();
+                LoadCharts();
 
                 ShowPanel(pnlDashboard);
             }
@@ -378,16 +378,16 @@ namespace UI
             }
             else
             {
-                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(currentEmployee.EmployeeId);
-                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(currentEmployee.EmployeeId);
-                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(currentEmployee.EmployeeId);
-                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(currentEmployee.EmployeeId);
+                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(currentEmployee);
+                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(currentEmployee);
+                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(currentEmployee);
+                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(currentEmployee);
             }
         }
 
-        private async Task LoadCharts()
+        private void LoadCharts()
         {
-            await SetUpCharts();
+            SetUpCharts();
 
             chartResolved.Series["s1"].Points.AddXY("", numberOfResolvedTickets);
             chartResolved.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfResolvedTickets);
@@ -404,34 +404,34 @@ namespace UI
             chartResolved.Series["s1"].Points[0].Color = Color.Orange;
             chartResolved.Series["s1"].Points[1].Color = Color.Gray;
 
-            chartOpen.Series["s1"].Points[0].Color = Color.Green;
+            chartOpen.Series["s1"].Points[0].Color = Color.Red;
             chartOpen.Series["s1"].Points[1].Color = Color.Gray;
 
-            chartClosed.Series["s1"].Points[0].Color = Color.Red;
+            chartClosed.Series["s1"].Points[0].Color = Color.Green;
             chartClosed.Series["s1"].Points[1].Color = Color.Gray;
         }
 
-        private async Task SetUpCharts()
+        private void SetUpCharts()
         {
-            foreach (Chart chart in pnlDashboard.Controls)
+            foreach (Control control in pnlDashboard.Controls)
             {
-                chart.Series.Clear();
-                chart.Series.Add("s1");
-                chart.Series[0].ChartType = SeriesChartType.Doughnut;
+                if (control is Chart)
+                {
+                    Chart chart = (Chart)control;
+                    chart.Series.Clear();
+                    chart.Legends.Clear();
+                    chart.Series.Add("s1");
+                    chart.Series[0].ChartType = SeriesChartType.Doughnut;
+                }
+
             }
-            /*chartClosed.Series["s1"].Points.AddXY("", 1);
-            chartOpen.Series["s1"].Points.AddXY("", 1);
-            chartResolved.Series["s1"].Points.AddXY("", 1);
-            chartClosed.Series["s1"].Points[0].Color = Color.Gray;
-            chartOpen.Series["s1"].Points[0].Color = Color.Gray;
-            chartResolved.Series["s1"].Points[0].Color = Color.Gray;*/
+        }
+
+        private void menuItemDashboard_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlDashboard);
         }
 
         #endregion
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
