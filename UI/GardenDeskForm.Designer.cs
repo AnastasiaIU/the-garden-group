@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            ListViewItem listViewItem2 = new ListViewItem("");
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            ListViewItem listViewItem1 = new ListViewItem("");
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
@@ -55,6 +55,15 @@
             lblLoginPrompt = new Label();
             lblLoginGardenDesk = new Label();
             pnlDashboard = new Panel();
+            label3 = new Label();
+            label4 = new Label();
+            label1 = new Label();
+            label2 = new Label();
+            lblOpenDescription = new Label();
+            lblOpen = new Label();
+            lblResolvedNumber = new Label();
+            lblClosedNumber = new Label();
+            lblOpenNumber = new Label();
             chartResolved = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chartClosed = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chartOpen = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -103,9 +112,6 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
-            lblOpenNumber = new Label();
-            lblClosedNumber = new Label();
-            lblResolvedNumber = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -174,6 +180,7 @@
             menuItemDashboard.Name = "menuItemDashboard";
             menuItemDashboard.Size = new Size(210, 30);
             menuItemDashboard.Text = "Dashboard";
+            menuItemDashboard.Click += menuItemDashboard_Click;
             // 
             // menuItemIncidents
             // 
@@ -298,6 +305,12 @@
             // pnlDashboard
             // 
             pnlDashboard.BackColor = Color.White;
+            pnlDashboard.Controls.Add(label3);
+            pnlDashboard.Controls.Add(label4);
+            pnlDashboard.Controls.Add(label1);
+            pnlDashboard.Controls.Add(label2);
+            pnlDashboard.Controls.Add(lblOpenDescription);
+            pnlDashboard.Controls.Add(lblOpen);
             pnlDashboard.Controls.Add(lblResolvedNumber);
             pnlDashboard.Controls.Add(lblClosedNumber);
             pnlDashboard.Controls.Add(lblOpenNumber);
@@ -311,57 +324,149 @@
             pnlDashboard.Size = new Size(634, 599);
             pnlDashboard.TabIndex = 5;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(440, 129);
+            label3.Name = "label3";
+            label3.Size = new Size(214, 21);
+            label3.TabIndex = 13;
+            label3.Text = "all tickets currently resolved";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(456, 89);
+            label4.Name = "label4";
+            label4.Size = new Size(176, 25);
+            label4.TabIndex = 12;
+            label4.Text = "Resolved incidents";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(235, 129);
+            label1.Name = "label1";
+            label1.Size = new Size(199, 21);
+            label1.TabIndex = 11;
+            label1.Text = "all tickets currently closed";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(247, 89);
+            label2.Name = "label2";
+            label2.Size = new Size(156, 25);
+            label2.TabIndex = 10;
+            label2.Text = "Closed incidents";
+            // 
+            // lblOpenDescription
+            // 
+            lblOpenDescription.AutoSize = true;
+            lblOpenDescription.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenDescription.Location = new Point(21, 129);
+            lblOpenDescription.Name = "lblOpenDescription";
+            lblOpenDescription.Size = new Size(189, 21);
+            lblOpenDescription.TabIndex = 9;
+            lblOpenDescription.Text = "all tickets currently open";
+            // 
+            // lblOpen
+            // 
+            lblOpen.AutoSize = true;
+            lblOpen.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpen.Location = new Point(33, 89);
+            lblOpen.Name = "lblOpen";
+            lblOpen.Size = new Size(145, 25);
+            lblOpen.TabIndex = 8;
+            lblOpen.Text = "Open incidents";
+            // 
+            // lblResolvedNumber
+            // 
+            lblResolvedNumber.AutoSize = true;
+            lblResolvedNumber.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            lblResolvedNumber.Location = new Point(502, 379);
+            lblResolvedNumber.Name = "lblResolvedNumber";
+            lblResolvedNumber.Size = new Size(50, 19);
+            lblResolvedNumber.TabIndex = 7;
+            lblResolvedNumber.Text = "label3";
+            // 
+            // lblClosedNumber
+            // 
+            lblClosedNumber.AutoSize = true;
+            lblClosedNumber.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            lblClosedNumber.Location = new Point(304, 378);
+            lblClosedNumber.Name = "lblClosedNumber";
+            lblClosedNumber.Size = new Size(50, 19);
+            lblClosedNumber.TabIndex = 6;
+            lblClosedNumber.Text = "label2";
+            lblClosedNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblOpenNumber
+            // 
+            lblOpenNumber.AutoSize = true;
+            lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenNumber.Location = new Point(86, 378);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(51, 20);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // chartResolved
             // 
-            chartArea4.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chartResolved.Legends.Add(legend4);
-            chartResolved.Location = new Point(457, 83);
+            chartArea1.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartResolved.Legends.Add(legend1);
+            chartResolved.Location = new Point(456, 194);
             chartResolved.Name = "chartResolved";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chartResolved.Series.Add(series4);
-            chartResolved.Size = new Size(174, 204);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartResolved.Series.Add(series1);
+            chartResolved.Size = new Size(155, 180);
             chartResolved.TabIndex = 4;
             chartResolved.Text = "chart3";
             // 
             // chartClosed
             // 
-            chartArea5.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            chartClosed.Legends.Add(legend5);
-            chartClosed.Location = new Point(228, 89);
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
+            chartClosed.Location = new Point(257, 194);
             chartClosed.Name = "chartClosed";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            chartClosed.Series.Add(series5);
-            chartClosed.Size = new Size(174, 204);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chartClosed.Series.Add(series2);
+            chartClosed.Size = new Size(155, 180);
             chartClosed.TabIndex = 3;
             chartClosed.Text = "chart2";
             // 
             // chartOpen
             // 
-            chartArea6.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            chartOpen.Legends.Add(legend6);
-            chartOpen.Location = new Point(19, 111);
+            chartArea3.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartOpen.Legends.Add(legend3);
+            chartOpen.Location = new Point(38, 194);
             chartOpen.Name = "chartOpen";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            chartOpen.Series.Add(series6);
-            chartOpen.Size = new Size(174, 204);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartOpen.Series.Add(series3);
+            chartOpen.Size = new Size(155, 180);
             chartOpen.TabIndex = 2;
             chartOpen.Text = "chart1";
             // 
@@ -371,9 +476,9 @@
             lblDashboard.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
             lblDashboard.Location = new Point(228, 17);
             lblDashboard.Name = "lblDashboard";
-            lblDashboard.Size = new Size(152, 32);
+            lblDashboard.Size = new Size(197, 32);
             lblDashboard.TabIndex = 1;
-            lblDashboard.Text = "DASHBOARD";
+            lblDashboard.Text = "Current incidents";
             // 
             // splitterDashboard
             // 
@@ -509,8 +614,8 @@
             usersList.BackColor = SystemColors.InactiveCaption;
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
-            listViewItem2.Tag = "ID";
-            usersList.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            listViewItem1.Tag = "ID";
+            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
             usersList.Location = new Point(29, 63);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
@@ -816,34 +921,6 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
-            // lblOpenNumber
-            // 
-            lblOpenNumber.AutoSize = true;
-            lblOpenNumber.Location = new Point(62, 315);
-            lblOpenNumber.Name = "lblOpenNumber";
-            lblOpenNumber.Size = new Size(38, 15);
-            lblOpenNumber.TabIndex = 5;
-            lblOpenNumber.Text = "label1";
-            lblOpenNumber.Click += label1_Click;
-            // 
-            // lblClosedNumber
-            // 
-            lblClosedNumber.AutoSize = true;
-            lblClosedNumber.Location = new Point(269, 315);
-            lblClosedNumber.Name = "lblClosedNumber";
-            lblClosedNumber.Size = new Size(38, 15);
-            lblClosedNumber.TabIndex = 6;
-            lblClosedNumber.Text = "label2";
-            // 
-            // lblResolvedNumber
-            // 
-            lblResolvedNumber.AutoSize = true;
-            lblResolvedNumber.Location = new Point(485, 315);
-            lblResolvedNumber.Name = "lblResolvedNumber";
-            lblResolvedNumber.Size = new Size(38, 15);
-            lblResolvedNumber.TabIndex = 7;
-            lblResolvedNumber.Text = "label3";
-            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
@@ -958,5 +1035,11 @@
         private Label lblClosedNumber;
         private Label lblOpenNumber;
         private Label lblResolvedNumber;
+        private Label lblOpenDescription;
+        private Label lblOpen;
+        private Label label3;
+        private Label label4;
+        private Label label1;
+        private Label label2;
     }
 }
