@@ -220,7 +220,7 @@ namespace DAL
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
         public async Task<int> GetAmountOfAllOpenTicketsAsync()
         {
-            var filter = Builders<Ticket>.Filter.Eq("status", Status.Open);
+            var filter = Builders<Ticket>.Filter.Eq("status", "Open");
 
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
