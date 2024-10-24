@@ -401,13 +401,13 @@ namespace UI
             chartClosed.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfClosedTickets);
             lblClosedNumber.Text = $"{numberOfClosedTickets}/{numberOfAllTickets}";
 
-            chartResolved.Series["s1"].Points[0].Color = Color.Orange;
+            chartResolved.Series["s1"].Points[0].Color = Color.Green;
             chartResolved.Series["s1"].Points[1].Color = Color.Gray;
 
             chartOpen.Series["s1"].Points[0].Color = Color.Red;
             chartOpen.Series["s1"].Points[1].Color = Color.Gray;
 
-            chartClosed.Series["s1"].Points[0].Color = Color.Green;
+            chartClosed.Series["s1"].Points[0].Color = Color.Orange;
             chartClosed.Series["s1"].Points[1].Color = Color.Gray;
         }
 

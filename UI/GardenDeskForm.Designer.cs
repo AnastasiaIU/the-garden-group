@@ -951,12 +951,12 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlDashboard);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlUsers);
