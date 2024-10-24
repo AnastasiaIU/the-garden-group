@@ -59,9 +59,14 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee reporting the tickets.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetTicketsForRegularEmployeeAsync(string employeeId)
+        public async Task<List<Ticket>> GetTicketsForRegularEmployeeAsync(Employee employee)
         {
-            return await ticketDao.GetTicketsForRegularEmployeeAsync(employeeId);
+            return await ticketDao.GetTicketsForRegularEmployeeAsync(employee);
+        }
+
+        public async Task<List<Ticket>> SearchTicketsByKeywordsAsync(Employee employee, string keywordString)
+        {
+            return await ticketDao.SearchTicketsByKeywordsAsync(employee, keywordString);
         }
 
         #endregion

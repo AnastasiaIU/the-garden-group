@@ -49,12 +49,16 @@
             lblDashboard = new Label();
             splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
+            searchbtn = new Button();
+            searchtextbox = new TextBox();
             btnEscalate = new Button();
             lblTicketsOverview = new Label();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
+            ticketDescription = new ColumnHeader();
             ticketReportingUser = new ColumnHeader();
             ticketCreationDate = new ColumnHeader();
+            ticketDeadline = new ColumnHeader();
             ticketStatus = new ColumnHeader();
             splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
@@ -311,6 +315,8 @@
             // pnlTicketsOverview
             // 
             pnlTicketsOverview.BackColor = Color.White;
+            pnlTicketsOverview.Controls.Add(searchbtn);
+            pnlTicketsOverview.Controls.Add(searchtextbox);
             pnlTicketsOverview.Controls.Add(btnEscalate);
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
             pnlTicketsOverview.Controls.Add(ticketsListView);
@@ -319,6 +325,27 @@
             pnlTicketsOverview.Name = "pnlTicketsOverview";
             pnlTicketsOverview.Size = new Size(634, 599);
             pnlTicketsOverview.TabIndex = 6;
+            // 
+            // searchbtn
+            // 
+            searchbtn.BackColor = Color.Gray;
+            searchbtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            searchbtn.ForeColor = SystemColors.Control;
+            searchbtn.Location = new Point(305, 54);
+            searchbtn.Name = "searchbtn";
+            searchbtn.Size = new Size(75, 34);
+            searchbtn.TabIndex = 5;
+            searchbtn.Text = "SEARCH";
+            searchbtn.UseVisualStyleBackColor = false;
+            searchbtn.Click += searchbtn_Click;
+            // 
+            // searchtextbox
+            // 
+            searchtextbox.Location = new Point(29, 65);
+            searchtextbox.Name = "searchtextbox";
+            searchtextbox.PlaceholderText = "Search for tickets....";
+            searchtextbox.Size = new Size(244, 23);
+            searchtextbox.TabIndex = 4;
             // 
             // btnEscalate
             // 
@@ -346,12 +373,12 @@
             // ticketsListView
             // 
             ticketsListView.BackColor = SystemColors.InactiveCaption;
-            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketReportingUser, ticketCreationDate, ticketStatus });
+            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketDescription, ticketReportingUser, ticketCreationDate, ticketDeadline, ticketStatus });
             ticketsListView.FullRowSelect = true;
-            ticketsListView.Location = new Point(29, 63);
+            ticketsListView.Location = new Point(29, 110);
             ticketsListView.Margin = new Padding(2);
             ticketsListView.Name = "ticketsListView";
-            ticketsListView.Size = new Size(582, 383);
+            ticketsListView.Size = new Size(582, 336);
             ticketsListView.TabIndex = 2;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
@@ -360,7 +387,12 @@
             // ticketTitle
             // 
             ticketTitle.Text = "Title";
-            ticketTitle.Width = 370;
+            ticketTitle.Width = 330;
+            // 
+            // ticketDescription
+            // 
+            ticketDescription.Text = "Description";
+            ticketDescription.Width = 300;
             // 
             // ticketReportingUser
             // 
@@ -369,8 +401,13 @@
             // 
             // ticketCreationDate
             // 
-            ticketCreationDate.Text = "Deadline";
-            ticketCreationDate.Width = 190;
+            ticketCreationDate.Text = "Created On";
+            ticketCreationDate.Width = 170;
+            // 
+            // ticketDeadline
+            // 
+            ticketDeadline.Text = "Deadline";
+            ticketDeadline.Width = 170;
             // 
             // ticketStatus
             // 
@@ -744,13 +781,13 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
@@ -822,7 +859,7 @@
         private ListView ticketsListView;
         private ColumnHeader ticketTitle;
         private ColumnHeader ticketReportingUser;
-        private ColumnHeader ticketCreationDate;
+        private ColumnHeader ticketDeadline;
         private ColumnHeader ticketStatus;
         private Button btnAddEmployee;
         private Button btnEditEmployee;
@@ -843,5 +880,9 @@
         private Button btnUpdateEmployee;
         private Button btnCreateEmployee;
         private Button btnEscalate;
+        private ColumnHeader ticketDescription;
+        private ColumnHeader ticketCreationDate;
+        private TextBox searchtextbox;
+        private Button searchbtn;
     }
 }

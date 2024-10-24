@@ -34,7 +34,7 @@ namespace UI
 
             panel.Show();
         }
-
+        // Naz
         private async Task DisplayTicketsAsync(Employee employee)
         {
             List<Ticket> tickets;
@@ -42,20 +42,28 @@ namespace UI
             // Check the role of the employee to determine which tickets to get
             if (employee.Role == EmployeeRole.RegularEmployee)
             {
-                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee.EmployeeId);
+                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee);
             }
             else
             {
                 tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
             }
 
+            PopulateTicketsListView(tickets);
+
+        }
+        // Naz
+        private void PopulateTicketsListView(List<Ticket> tickets)
+        {
             ticketsListView.Items.Clear();
 
             foreach (var ticket in tickets)
             {
 
                 ListViewItem item = new ListViewItem(ticket.Title);
+                item.SubItems.Add(ticket.Description);
                 item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+                item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Status.ToString());
 
@@ -69,6 +77,18 @@ namespace UI
         {
             ShowPanel(pnlTicketsOverview);
             await DisplayTicketsAsync(currentEmployee);
+        }
+        private async void searchbtn_Click(object sender, EventArgs e)
+        {
+            string keywordString = searchtextbox.Text;
+            if (string.IsNullOrWhiteSpace(keywordString))
+            {
+                await DisplayTicketsAsync(currentEmployee);
+                return;
+            }
+            List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(currentEmployee, keywordString);
+
+            PopulateTicketsListView(tickets);
         }
 
         #endregion
