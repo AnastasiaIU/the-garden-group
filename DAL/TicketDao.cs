@@ -149,9 +149,10 @@ namespace DAL
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
-        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(Employee employee)
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId);
+
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
 
@@ -162,6 +163,7 @@ namespace DAL
         public async Task<int> GetAmountOfAllTicketsAsync()
         {
             var filter = Builders<Ticket>.Filter.Empty;
+
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
 
@@ -170,9 +172,12 @@ namespace DAL
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
-        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(Employee employee)
         {
-            var matchStage = Builders<Ticket>.Filter.Where(t => t.ReportingUser == employeeId && t.IsResolved);
+            var matchStage = Builders<Ticket>.Filter.And(
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, true)
+            );
 
             // Get the count of matching documents
             var count = await ticketCollection.CountDocumentsAsync(matchStage);
@@ -187,6 +192,7 @@ namespace DAL
         public async Task<int> GetAmountOfAllResolvedTicketsAsync()
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.IsResolved, true);
+
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
 
@@ -195,9 +201,12 @@ namespace DAL
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
-        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(Employee employee)
         {
-            var matchStage = Builders<Ticket>.Filter.Where(t => t.ReportingUser == employeeId && t.Status == Status.Open);
+            var matchStage = Builders<Ticket>.Filter.And(
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open)
+            );
 
             // Get the count of matching documents
             var count = await ticketCollection.CountDocumentsAsync(matchStage);
@@ -212,6 +221,7 @@ namespace DAL
         public async Task<int> GetAmountOfAllOpenTicketsAsync()
         {
             var filter = Builders<Ticket>.Filter.Eq(t => t.Status, Status.Open);
+
             return (int)await ticketCollection.CountDocumentsAsync(filter);
         }
 
@@ -220,9 +230,13 @@ namespace DAL
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
-        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(string employeeId)
+        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(Employee employee)
         {
-            var matchStage = Builders<Ticket>.Filter.Where(t => t.ReportingUser == employeeId && t.Status == Status.Closed);
+            var matchStage = Builders<Ticket>.Filter.And(
+            Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId),
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, false),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed)
+            );
 
             // Get the count of matching documents
             var count = await ticketCollection.CountDocumentsAsync(matchStage);
@@ -236,8 +250,13 @@ namespace DAL
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
         public async Task<int> GetAmountOfAllClosedTicketsAsync()
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed);
-            return (int)await ticketCollection.CountDocumentsAsync(filter);
+            var matchStage = Builders<Ticket>.Filter.And(
+            Builders<Ticket>.Filter.Eq(t => t.IsResolved, false),
+            Builders<Ticket>.Filter.Eq(t => t.Status, Status.Closed)
+            );
+
+
+            return (int)await ticketCollection.CountDocumentsAsync(matchStage);
         }
 
         #endregion
