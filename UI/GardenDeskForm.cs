@@ -41,42 +41,6 @@ namespace UI
             panel.Show();
         }
 
-        private async Task DisplayTicketsAsync(Employee employee)
-        {
-            List<Ticket> tickets;
-
-            // Check the role of the employee to determine which tickets to get
-            if (employee.Role == EmployeeRole.RegularEmployee)
-            {
-                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee.EmployeeId);
-            }
-            else
-            {
-                tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
-            }
-
-            ticketsListView.Items.Clear();
-
-            foreach (var ticket in tickets)
-            {
-
-                ListViewItem item = new ListViewItem(ticket.Title);
-                item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
-                item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
-                item.SubItems.Add(ticket.Status.ToString());
-
-                item.Tag = ticket;
-
-                ticketsListView.Items.Add(item);
-            }
-        }
-
-        private async void menuItemIncidents_Click(object sender, EventArgs e)
-        {
-            ShowPanel(pnlTicketsOverview);
-            await DisplayTicketsAsync(currentEmployee);
-        }
-
         #endregion
 
         #region Login Logic
@@ -426,6 +390,65 @@ namespace UI
         private void menuItemDashboard_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlDashboard);
+        }
+
+        #endregion
+
+        #region Naz Tickets Overview and Search Feature
+
+        private async Task DisplayTicketsAsync(Employee employee)
+        {
+            List<Ticket> tickets;
+
+            // Check the role of the employee to determine which tickets to get
+            if (employee.Role == EmployeeRole.RegularEmployee)
+            {
+                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee);
+            }
+            else
+            {
+                tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
+            }
+
+            PopulateTicketsListView(tickets);
+        }
+
+        private void PopulateTicketsListView(List<Ticket> tickets)
+        {
+            ticketsListView.Items.Clear();
+
+            foreach (var ticket in tickets)
+            {
+                ListViewItem item = new ListViewItem(ticket.Title);
+                item.SubItems.Add(ticket.Description);
+                item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+                item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
+                item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
+                item.SubItems.Add(ticket.Status.ToString());
+
+                item.Tag = ticket;
+
+                ticketsListView.Items.Add(item);
+            }
+        }
+
+        private async void menuItemIncidents_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlTicketsOverview);
+            await DisplayTicketsAsync(currentEmployee);
+        }
+
+        private async void searchbtn_Click(object sender, EventArgs e)
+        {
+            string keywordString = searchtextbox.Text;
+            if (string.IsNullOrWhiteSpace(keywordString))
+            {
+                await DisplayTicketsAsync(currentEmployee);
+                return;
+            }
+            List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(currentEmployee, keywordString);
+
+            PopulateTicketsListView(tickets);
         }
 
         #endregion

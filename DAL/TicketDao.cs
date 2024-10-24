@@ -73,10 +73,10 @@ namespace DAL
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetTicketsForRegularEmployeeAsync(string employeeId)
+        public async Task<List<Ticket>> GetTicketsForRegularEmployeeAsync(Employee employee)
         {
             // Create a filter to match tickets reported by the specific employee by id
-            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employeeId);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId);
 
             var tickets = await ticketCollection
                 .Aggregate()
@@ -122,6 +122,62 @@ namespace DAL
             }).ToList();
 
             return ticketList;
+        }
+
+        // Naz
+        // method searches for tickets based on keywords and employee role
+        public async Task<List<Ticket>> SearchTicketsByKeywordsAsync(Employee employee, string keywordString)
+        {
+            // make a filter based on the keywords in the keyword string
+            var keywordFilter = GetKeywordFilter(keywordString);
+
+            var combinedFilter = keywordFilter;
+
+            // If the employee is a regular employee, only allow them to see their own tickets
+            if (employee.Role == EmployeeRole.RegularEmployee)
+            {
+                var employeeFilter = Builders<Ticket>.Filter.Eq(t => t.ReportingUser, employee.EmployeeId);
+                combinedFilter = Builders<Ticket>.Filter.And(keywordFilter, employeeFilter); // Combine the keyword filter with the employee filter
+            }
+
+            return await GetTicketsWithFilter(combinedFilter);
+        }
+
+        // Naz
+        // Creates a filter based on the keywords provided
+        private FilterDefinition<Ticket> GetKeywordFilter(string keywordString)
+        {
+            // Split the keyword string into individual keywords
+            var keywords = keywordString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var filters = keywords.Select(keyword =>
+                Builders<Ticket>.Filter.Or(
+                    Builders<Ticket>.Filter.Regex(t => t.Title, new BsonRegularExpression(keyword, "i")), // for case insensitive
+                    Builders<Ticket>.Filter.Regex(t => t.Description, new BsonRegularExpression(keyword, "i"))
+                )
+            );
+
+            // Combine all the keyword filters into one filter
+            return Builders<Ticket>.Filter.And(filters);
+        }
+
+        // Naz
+        // method gets tickets based on the provided filter
+        private async Task<List<Ticket>> GetTicketsWithFilter(FilterDefinition<Ticket> filter)
+        {
+            var tickets = await ticketCollection
+                .Aggregate()
+                .Match(filter)
+                .Lookup<Employee, Ticket>(
+                    "Employee",
+                    "reporting_user",
+                    "_id",
+                    "reporting_employee"
+                )
+                .Unwind("reporting_employee")
+                .Sort(Builders<BsonDocument>.Sort.Descending("creation_date")) // see most recent at the top
+                .ToListAsync();
+
+            return MapToTickets(tickets);
         }
 
         #endregion
