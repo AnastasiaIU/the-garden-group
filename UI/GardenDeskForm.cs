@@ -365,7 +365,7 @@ namespace UI
 
         #endregion
 
-        #region Dashboard Logic
+        #region Vladyslav Dashboard panel
 
         private async Task GetTicketsForCurrentEmployee()
         {
@@ -389,26 +389,23 @@ namespace UI
         {
             SetUpCharts();
 
-            chartResolved.Series["s1"].Points.AddXY("", numberOfResolvedTickets);
-            chartResolved.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfResolvedTickets);
-            lblResolvedNumber.Text = $"{numberOfResolvedTickets}/{numberOfAllTickets}";
-
             chartOpen.Series["s1"].Points.AddXY("", numberOfOpenTickets);
             chartOpen.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfOpenTickets);
             lblOpenNumber.Text = $"{numberOfOpenTickets}/{numberOfAllTickets}";
+            chartOpen.Series["s1"].Points[0].Color = Color.Red;
+            chartOpen.Series["s1"].Points[1].Color = Color.Gray;
 
             chartClosed.Series["s1"].Points.AddXY("", numberOfClosedTickets);
             chartClosed.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfClosedTickets);
             lblClosedNumber.Text = $"{numberOfClosedTickets}/{numberOfAllTickets}";
-
-            chartResolved.Series["s1"].Points[0].Color = Color.Green;
-            chartResolved.Series["s1"].Points[1].Color = Color.Gray;
-
-            chartOpen.Series["s1"].Points[0].Color = Color.Red;
-            chartOpen.Series["s1"].Points[1].Color = Color.Gray;
-
             chartClosed.Series["s1"].Points[0].Color = Color.Orange;
             chartClosed.Series["s1"].Points[1].Color = Color.Gray;
+
+            chartResolved.Series["s1"].Points.AddXY("", numberOfResolvedTickets);
+            chartResolved.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfResolvedTickets);
+            lblResolvedNumber.Text = $"{numberOfResolvedTickets}/{numberOfAllTickets}";
+            chartResolved.Series["s1"].Points[0].Color = Color.Green;
+            chartResolved.Series["s1"].Points[1].Color = Color.Gray;
         }
 
         private void SetUpCharts()
@@ -423,7 +420,6 @@ namespace UI
                     chart.Series.Add("s1");
                     chart.Series[0].ChartType = SeriesChartType.Doughnut;
                 }
-
             }
         }
 
