@@ -331,9 +331,9 @@
             searchbtn.BackColor = Color.Gray;
             searchbtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             searchbtn.ForeColor = SystemColors.Control;
-            searchbtn.Location = new Point(305, 54);
+            searchbtn.Location = new Point(305, 52);
             searchbtn.Name = "searchbtn";
-            searchbtn.Size = new Size(75, 34);
+            searchbtn.Size = new Size(87, 36);
             searchbtn.TabIndex = 5;
             searchbtn.Text = "SEARCH";
             searchbtn.UseVisualStyleBackColor = false;
@@ -341,10 +341,15 @@
             // 
             // searchtextbox
             // 
-            searchtextbox.Location = new Point(29, 65);
+            searchtextbox.BackColor = SystemColors.ControlLight;
+            searchtextbox.BorderStyle = BorderStyle.FixedSingle;
+            searchtextbox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            searchtextbox.Location = new Point(29, 57);
+            searchtextbox.Margin = new Padding(10);
+            searchtextbox.Multiline = true;
             searchtextbox.Name = "searchtextbox";
-            searchtextbox.PlaceholderText = "Search for tickets....";
-            searchtextbox.Size = new Size(244, 23);
+            searchtextbox.PlaceholderText = "Search for tickets..";
+            searchtextbox.Size = new Size(270, 27);
             searchtextbox.TabIndex = 4;
             // 
             // btnEscalate
@@ -782,13 +787,13 @@
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
             Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlLogin);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
