@@ -594,6 +594,68 @@
             lblOpenDescription.TabIndex = 9;
             lblOpenDescription.Text = "all tickets currently open";
             lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
+            lblOpenNumber.AutoSize = true;
+            lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenNumber.Location = new Point(71, 418);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(51, 20);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // chartResolved
+            // 
+            chartArea1.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartResolved.Legends.Add(legend1);
+            chartResolved.Location = new Point(440, 235);
+            chartResolved.Name = "chartResolved";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartResolved.Series.Add(series1);
+            chartResolved.Size = new Size(155, 180);
+            chartResolved.TabIndex = 4;
+            chartResolved.Text = "chart3";
+            // 
+            // chartClosed
+            // 
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
+            chartClosed.Location = new Point(228, 235);
+            chartClosed.Name = "chartClosed";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chartClosed.Series.Add(series2);
+            chartClosed.Size = new Size(155, 180);
+            chartClosed.TabIndex = 3;
+            chartClosed.Text = "chart2";
+            // 
+            // chartOpen
+            // 
+            chartArea3.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartOpen.Legends.Add(legend3);
+            chartOpen.Location = new Point(23, 235);
+            chartOpen.Name = "chartOpen";
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartOpen.Series.Add(series3);
+            chartOpen.Size = new Size(155, 180);
+            chartOpen.TabIndex = 2;
+            chartOpen.Text = "chart1";
             // 
             // lblDashboard
             // 
@@ -827,8 +889,7 @@
             usersList.BackColor = SystemColors.InactiveCaption;
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
-            listViewItem1.Tag = "ID";
-            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
+
             usersList.Location = new Point(29, 63);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
