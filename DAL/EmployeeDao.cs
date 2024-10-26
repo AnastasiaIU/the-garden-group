@@ -9,6 +9,10 @@ namespace DAL
     /// </summary>
     public class EmployeeDao : BaseDao
     {
+        // Constants for referencing fields not included in the model
+        private const string UsernameField = "username";
+        private const string PasswordField = "password";
+
         #region Orest
 
         /// <summary>
@@ -97,17 +101,16 @@ namespace DAL
         #region Sia
 
         /// <summary>
-        /// Sia <para />
         /// Asynchronously retrieves an employee by their username and password.
         /// </summary>
         /// <param name="username">The username of the employee.</param>
         /// <param name="password">The password of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the <see cref="Employee"/> object if found, otherwise null.</returns>
-        public async Task<Employee?> GetEmployeeByUsernameAndPasswordAsync(string username, string password)
+        public async Task<Employee?> GetEmployeeByUsernameAndPassword(string username, string password)
         {
             var filter = Builders<Employee>.Filter.And(
-            Builders<Employee>.Filter.Eq("username", username),
-            Builders<Employee>.Filter.Eq("password", password)
+            Builders<Employee>.Filter.Eq(UsernameField, username),
+            Builders<Employee>.Filter.Eq(PasswordField, password)
             );
 
             return await employeeCollection.Find(filter).FirstOrDefaultAsync();

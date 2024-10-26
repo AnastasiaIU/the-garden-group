@@ -123,6 +123,9 @@
   <data name="ConfirmDeleteMessageTop" xml:space="preserve">
     <value>Confirm Employee Deletion</value>
   </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.</value>
+  </data>
   <data name="EmployeeBranchError" xml:space="preserve">
     <value>The branch cannot be empty</value>
   </data>

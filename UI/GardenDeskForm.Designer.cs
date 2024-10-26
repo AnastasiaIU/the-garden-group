@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            ListViewItem listViewItem2 = new ListViewItem("");
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            ListViewItem listViewItem1 = new ListViewItem("");
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
@@ -78,7 +78,9 @@
             lblTicketsOverview = new Label();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
+            ticketDescription = new ColumnHeader();
             ticketReportingUser = new ColumnHeader();
+            ticketCreationDate = new ColumnHeader();
             ticketDeadline = new ColumnHeader();
             ticketStatus = new ColumnHeader();
             splitterTicketsOverview = new Splitter();
@@ -116,8 +118,6 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
-            ticketCreationDate = new ColumnHeader();
-            ticketDescription = new ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -231,7 +231,7 @@
             btnLogin.TabIndex = 3;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += BtnLogin_Click;
+            btnLogin.Click += OnLoginButtonClick;
             // 
             // lblLoginWrongCredentials
             // 
@@ -256,6 +256,7 @@
             txtBoxLoginPassword.PlaceholderText = " Enter password";
             txtBoxLoginPassword.Size = new Size(300, 29);
             txtBoxLoginPassword.TabIndex = 2;
+            txtBoxLoginPassword.KeyPress += OnTextBoxLoginKeyPress;
             // 
             // txtBoxLoginUsername
             // 
@@ -266,6 +267,7 @@
             txtBoxLoginUsername.PlaceholderText = " Enter username";
             txtBoxLoginUsername.Size = new Size(300, 29);
             txtBoxLoginUsername.TabIndex = 1;
+            txtBoxLoginUsername.KeyPress += OnTextBoxLoginKeyPress;
             // 
             // lblLoginPassword
             // 
@@ -292,7 +294,7 @@
             lblLoginPrompt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblLoginPrompt.Location = new Point(150, 70);
             lblLoginPrompt.Name = "lblLoginPrompt";
-            lblLoginPrompt.Size = new Size(334, 56);
+            lblLoginPrompt.Size = new Size(334, 100);
             lblLoginPrompt.TabIndex = 0;
             lblLoginPrompt.Text = "Please provide login credentials to log in to GardenDesk for The Garden Group.";
             lblLoginPrompt.TextAlign = ContentAlignment.TopCenter;
@@ -446,54 +448,54 @@
             // 
             // chartResolved
             // 
-            chartArea4.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chartResolved.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartResolved.Legends.Add(legend1);
             chartResolved.Location = new Point(440, 235);
             chartResolved.Name = "chartResolved";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chartResolved.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartResolved.Series.Add(series1);
             chartResolved.Size = new Size(155, 180);
             chartResolved.TabIndex = 4;
             chartResolved.Text = "chart3";
             // 
             // chartClosed
             // 
-            chartArea5.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            chartClosed.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
             chartClosed.Location = new Point(228, 235);
             chartClosed.Name = "chartClosed";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            chartClosed.Series.Add(series5);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chartClosed.Series.Add(series2);
             chartClosed.Size = new Size(155, 180);
             chartClosed.TabIndex = 3;
             chartClosed.Text = "chart2";
             // 
             // chartOpen
             // 
-            chartArea6.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            chartOpen.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartOpen.Legends.Add(legend3);
             chartOpen.Location = new Point(23, 235);
             chartOpen.Name = "chartOpen";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            chartOpen.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartOpen.Series.Add(series3);
             chartOpen.Size = new Size(155, 180);
             chartOpen.TabIndex = 2;
             chartOpen.Text = "chart1";
@@ -597,10 +599,20 @@
             ticketTitle.Text = "Title";
             ticketTitle.Width = 350;
             // 
+            // ticketDescription
+            // 
+            ticketDescription.Text = "Description";
+            ticketDescription.Width = 300;
+            // 
             // ticketReportingUser
             // 
             ticketReportingUser.Text = "Reported By";
             ticketReportingUser.Width = 130;
+            // 
+            // ticketCreationDate
+            // 
+            ticketCreationDate.Text = "Creation Date";
+            ticketCreationDate.Width = 190;
             // 
             // ticketDeadline
             // 
@@ -666,8 +678,8 @@
             usersList.BackColor = SystemColors.InactiveCaption;
             usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
-            listViewItem2.Tag = "ID";
-            usersList.Items.AddRange(new ListViewItem[] { listViewItem2 });
+            listViewItem1.Tag = "ID";
+            usersList.Items.AddRange(new ListViewItem[] { listViewItem1 });
             usersList.Location = new Point(29, 63);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
@@ -973,22 +985,13 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
-            // ticketCreationDate
-            // 
-            ticketCreationDate.Text = "Creation Date";
-            ticketCreationDate.Width = 190;
-            // 
-            // ticketDescription
-            // 
-            ticketDescription.Text = "Description";
-            ticketDescription.Width = 300;
-            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlLogin);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
@@ -996,7 +999,6 @@
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
