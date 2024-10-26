@@ -4,11 +4,19 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace UI
 {
+    /// <summary>
+    /// Represents the main form for the GardenDesk application, which manages and displays different panels
+    /// for user login, dashboard, ticket and employee management.
+    /// </summary>
     public partial class GardenDeskForm : Form
     {
+        // Services for handling employee and ticket operations
         private readonly EmployeeService employeeService = new();
         private readonly TicketService ticketService = new();
-        private Employee? currentEmployee = null;
+
+        // Currently logged-in employee
+        private Employee? loggedInEmployee = null;
+
         // Tina
         private Ticket? selectedTicket;
         private Employee? selectedEmployee;
@@ -18,39 +26,92 @@ namespace UI
         private int numberOfResolvedTickets;
         private int numberOfAllTickets;
 
+        #region Sia Login panel and Transfer ticket
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GardenDeskForm"/> class,
+        /// setting up the login panel and verifying database connectivity.
+        /// </summary>
         public GardenDeskForm()
         {
             InitializeComponent();
+
+            // Show the login panel
             ShowPanel(pnlLogin);
+            // Display a message if there is a database connection issue
+            if (!employeeService.IsDatabaseInitiated())
+                DisplayDatabaseError();
         }
 
-        #region UI Logic
-
+        /// <summary>
+        /// Displays the specified panel, hiding all other panels and managing the visibility of the menu bar.
+        /// </summary>
+        /// <param name="panel">The panel to display.</param>
         private void ShowPanel(Panel panel)
         {
-            string panelName = Properties.Resources.PanelPrefix;
+            string panelPrefix = Properties.Resources.PanelPrefix;
 
+            // Hide all panels
             foreach (Control control in Controls)
-                if (control.Name.StartsWith(panelName)) control.Hide();
+                if (control.Name.StartsWith(panelPrefix)) control.Hide();
 
-            if (panel.Name == Properties.Resources.LoginPanel)
+            // Hide menu for the login panel
+            if (panel.Name.Equals(Properties.Resources.LoginPanel))
                 menuStrip.Visible = false;
             else
                 menuStrip.Visible = true;
 
+            // Show the provided panel
             panel.Show();
         }
 
-        #endregion
+        /// <summary>
+        /// Displays an error message in the login panel when there is a database connection issue.
+        /// Hides all other login panel controls.
+        /// </summary>
+        private void DisplayDatabaseError()
+        {
+            // Hide all elements for the login panel
+            foreach (Control control in Controls)
+                if (control.Name.Equals(Properties.Resources.LoginPanel))
+                    foreach (Control loginControl in control.Controls)
+                        loginControl.Hide();
 
-        #region Login Logic
+            // Show the error message
+            lblLoginPrompt.Text = Properties.Resources.DatabaseError;
+            lblLoginPrompt.Visible = true;
+        }
 
-        private async void BtnLogin_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Handles the login button click event, initiating the login attempt.
+        /// </summary>
+        private async void OnLoginButtonClick(object sender, EventArgs e)
+        {
+            await AttemptLogin();
+        }
+
+        /// <summary>
+        /// Initiates the login attempt when the Enter key is pressed in the username or password text boxes.
+        /// </summary>
+        private async void OnTextBoxLoginKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                await AttemptLogin();
+            }
+        }
+
+        /// <summary>
+        /// Attempts to log in the user by verifying credentials with the employee service.
+        /// Displays an error if login fails; otherwise, sets the menu according with a user role and
+        /// initiates and shows the dashboard panel.
+        /// </summary>
+        private async Task AttemptLogin()
         {
             string username = txtBoxLoginUsername.Text;
             string password = txtBoxLoginPassword.Text;
 
-            Employee? employee = await employeeService.GetEmployeeByUsernameAndPasswordAsync(username, password);
+            Employee? employee = await employeeService.GetEmployeeByUsernameAndPassword(username, password);
 
             if (employee == null)
             {
@@ -58,14 +119,14 @@ namespace UI
             }
             else
             {
-                currentEmployee = employee;
+                loggedInEmployee = employee;
 
-                //Tina
+                // Sets the menu according with a user role
                 SetUserRoleAccess();
 
+                // Initiate and show Dashboard panel
                 await GetTicketsForCurrentEmployee();
                 LoadCharts();
-
                 ShowPanel(pnlDashboard);
             }
         }
@@ -78,7 +139,7 @@ namespace UI
         // Set access to user and ticket management based on current employee's role
         private void SetUserRoleAccess()
         {
-            if (currentEmployee.Role == EmployeeRole.RegularEmployee)
+            if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
             {
                 // Regular employee is not authorised for any user management
                 menuItemUsers.Visible = false;
@@ -324,7 +385,7 @@ namespace UI
             // Disable escalate button after the operation
             ChangeButtonState(btnEscalate, Color.LightGray, false);
 
-            await DisplayTicketsAsync(currentEmployee);
+            await DisplayTicketsAsync(loggedInEmployee);
         }
 
         #endregion
@@ -333,7 +394,7 @@ namespace UI
 
         private async Task GetTicketsForCurrentEmployee()
         {
-            if (currentEmployee.Role == EmployeeRole.ServiceDeskEmployee)
+            if (loggedInEmployee.Role == EmployeeRole.ServiceDeskEmployee)
             {
                 numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsAsync();
                 numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsAsync();
@@ -342,10 +403,10 @@ namespace UI
             }
             else
             {
-                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(currentEmployee);
-                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(currentEmployee);
-                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(currentEmployee);
-                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(currentEmployee);
+                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(loggedInEmployee);
+                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(loggedInEmployee);
+                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(loggedInEmployee);
+                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(loggedInEmployee);
             }
         }
 
@@ -435,7 +496,7 @@ namespace UI
         private async void menuItemIncidents_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlTicketsOverview);
-            await DisplayTicketsAsync(currentEmployee);
+            await DisplayTicketsAsync(loggedInEmployee);
         }
 
         private async void searchbtn_Click(object sender, EventArgs e)
@@ -443,10 +504,10 @@ namespace UI
             string keywordString = searchtextbox.Text;
             if (string.IsNullOrWhiteSpace(keywordString))
             {
-                await DisplayTicketsAsync(currentEmployee);
+                await DisplayTicketsAsync(loggedInEmployee);
                 return;
             }
-            List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(currentEmployee, keywordString);
+            List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(loggedInEmployee, keywordString);
 
             PopulateTicketsListView(tickets);
         }

@@ -79,6 +79,15 @@ namespace UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application couldn&apos;t establish a connection to the database. Please check your internet connection or contact the help desk..
+        /// </summary>
+        internal static string DatabaseError {
+            get {
+                return ResourceManager.GetString("DatabaseError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The branch cannot be empty.
         /// </summary>
         internal static string EmployeeBranchError {

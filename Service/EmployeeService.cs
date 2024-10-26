@@ -52,10 +52,10 @@ namespace Service
         /// <param name="username">The username of the employee.</param>
         /// <param name="password">The plain text password of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the <see cref="Employee"/> object if found, otherwise null.</returns>
-        public async Task<Employee?> GetEmployeeByUsernameAndPasswordAsync(string username, string password)
+        public async Task<Employee?> GetEmployeeByUsernameAndPassword(string username, string password)
         {
             string hashedPassword = HashPassword(password);
-            return await employeeDao.GetEmployeeByUsernameAndPasswordAsync(username, hashedPassword);
+            return await employeeDao.GetEmployeeByUsernameAndPassword(username, hashedPassword);
         }
 
         /// <summary>
@@ -75,6 +75,21 @@ namespace Service
             }
 
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Checks if the database connection has been successfully established in the Data Access Layer (DAL).
+        /// </summary>
+        /// <returns>
+        /// True if the database is initialized and accessible; otherwise, false.
+        /// </returns>
+        /// <remarks>
+        /// This method calls <see cref="employeeDao.IsDatabaseInitiated"/> to verify the database
+        /// initialization status, providing a seamless way to check database connectivity from the Service layer.
+        /// </remarks>
+        public bool IsDatabaseInitiated()
+        {
+            return employeeDao.IsDatabaseInitiated;
         }
 
         #endregion

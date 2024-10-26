@@ -52,9 +52,11 @@ namespace Model
 
         [BsonElement("creation_date")]
         public DateTime CreationDate { get; private set; }
+
         [BsonIgnore]
         [JsonIgnore]
         public string? ReportingEmployeeFirstName { get; set; }
+
         [BsonIgnore]
         [JsonIgnore]
         public string? ReportingEmployeeLastName { get; set; }
