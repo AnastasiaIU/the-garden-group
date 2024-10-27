@@ -18,7 +18,7 @@ namespace GardenGroupAPI.Controllers
         [HttpGet]
         public async Task<List<Ticket>> Get()
         {
-            return await _ticketService.GetAllTicketsAPIAsync();
+            return await _ticketService.GetAllTicketsAPI();
         }
 
         [HttpPost]
@@ -31,14 +31,14 @@ namespace GardenGroupAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Ticket ticket)
         {
-            await _ticketService.UpdateTicketAPIAsync(id, ticket);
+            await _ticketService.UpdateTicketAPI(id, ticket);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            await _ticketService.DeleteTicketByIDAPIAsync(id);
+            await _ticketService.DeleteTicketByIdAPI(id);
             return NoContent();
         }
     }

@@ -20,7 +20,7 @@ namespace DAL
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPI()
         {
             var filter = Builders<Employee>.Filter.Empty;
             return await employeeCollection.Find(filter).ToListAsync();
@@ -30,7 +30,7 @@ namespace DAL
         /// Asyncronously updates an employee in the MongoDB collection by their unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task UpdateEmployeeAPIAsync(string id, Employee updatedEmployee)
+        public async Task UpdateEmployeeAPI(string id, Employee updatedEmployee)
         {
             updatedEmployee.EmployeeId = id;
             var filter = Builders<Employee>.Filter.Eq("_id", new ObjectId(id));
@@ -43,7 +43,7 @@ namespace DAL
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects 
         /// with an additional field for counting open or in-progress tickets.</returns>
-        public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
+        public async Task<List<Employee>> GetAllEmployeesWithCountedTickets()
         {
             var employeeDocument = await employeeCollection.Aggregate()
                 .Lookup<Ticket, BsonDocument>(
