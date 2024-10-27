@@ -18,27 +18,27 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Ticket"/> objects.</returns>
-        public async Task<List<Ticket>> GetAllTicketsAPIAsync()
+        public async Task<List<Ticket>> GetAllTicketsAPI()
         {
-            return await ticketDao.GetAllTicketsAPIAsync();
+            return await ticketDao.GetAllTicketsAPI();
         }
 
         /// <summary>
         /// Asynchronously updates a ticket in the MongoDB collection by its unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task UpdateTicketAPIAsync(string id, Ticket updatedTicket)
+        public async Task UpdateTicketAPI(string id, Ticket updatedTicket)
         {
-            await ticketDao.UpdateTicketAPIAsync(id, updatedTicket);
+            await ticketDao.UpdateTicketAPI(id, updatedTicket);
         }
 
         /// <summary>
         /// Asyncrhonously deletes a ticket from the MongoDB collection by its unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task DeleteTicketByIDAPIAsync(string id)
+        public async Task DeleteTicketByIdAPI(string id)
         {
-            await ticketDao.DeleteTicketByIDAPIAsync(id);
+            await ticketDao.DeleteTicketByIdAPI(id);
         }
 
         #endregion

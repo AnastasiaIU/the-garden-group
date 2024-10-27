@@ -149,35 +149,6 @@ namespace UI
             }
         }
 
-        private async void menuItemUsers_Click(object sender, EventArgs e)
-        {
-            ShowUsersView();
-        }
-
-        private async Task DisplayEmployeesAsync()
-        {
-            usersList.Items.Clear();
-            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTicketsAsync();
-            List<ListViewItem> items = new();
-            FillListView(employees, items);
-            usersList.Items.AddRange(items.ToArray());
-        }
-
-        private void FillListView(List<Employee> employees, List<ListViewItem> items)
-        {
-            foreach (var employee in employees)
-            {
-                ListViewItem item = new();
-
-                item.SubItems.Add(employee.Email);
-                item.SubItems.Add(employee.FirstName);
-                item.SubItems.Add(employee.LastName);
-                item.SubItems.Add(employee.OpenTickets.ToString());
-                item.Tag = employee;
-
-                items.Add(item);
-            }
-        }
         #endregion
 
         #region Tina Create/Update/Delete User Logic
@@ -510,6 +481,40 @@ namespace UI
             List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(loggedInEmployee, keywordString);
 
             PopulateTicketsListView(tickets);
+        }
+
+        #endregion
+
+        #region Orest Employee Management
+
+        private async Task DisplayEmployeesAsync()
+        {
+            usersList.Items.Clear();
+            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
+            List<ListViewItem> items = new();
+            FillListView(employees, items);
+            usersList.Items.AddRange(items.ToArray());
+        }
+
+        private void FillListView(List<Employee> employees, List<ListViewItem> items)
+        {
+            foreach (var employee in employees)
+            {
+                ListViewItem item = new();
+
+                item.SubItems.Add(employee.Email);
+                item.SubItems.Add(employee.FirstName);
+                item.SubItems.Add(employee.LastName);
+                item.SubItems.Add(employee.OpenTickets.ToString());
+                item.Tag = employee;
+
+                items.Add(item);
+            }
+        }
+
+        private async void menuItemUsers_Click(object sender, EventArgs e)
+        {
+            ShowUsersView();
         }
 
         #endregion

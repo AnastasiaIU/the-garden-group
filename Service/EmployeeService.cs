@@ -19,27 +19,27 @@ namespace Service
         /// Used in the API feature.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Employee"/> objects.</returns>
-        public async Task<List<Employee>> GetAllEmployeesAPIAsync()
+        public async Task<List<Employee>> GetAllEmployeesAPI()
         {
-            return await employeeDao.GetAllEmployeesAPIAsync();
+            return await employeeDao.GetAllEmployeesAPI();
         }
 
         /// <summary>
         /// Asyncronously updates an employee in the MongoDB collection by their unique ID.<para />
         /// Used in the API feature.
         /// </summary>
-        public async Task UpdateEmployeeAPIAsync(string id, Employee updatedEmployee)
+        public async Task UpdateEmployeeAPI(string id, Employee updatedEmployee)
         {
-            await employeeDao.UpdateEmployeeAPIAsync(id, updatedEmployee);
+            await employeeDao.UpdateEmployeeAPI(id, updatedEmployee);
         }
 
         /// <summary>
         /// Asynchronously retrieves all employees along with the count of their open tickets.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects with ticket counts.</returns>
-        public async Task<List<Employee>> GetAllEmployeesWithCountedTicketsAsync()
+        public async Task<List<Employee>> GetAllEmployeesWithCountedTickets()
         {
-            return await employeeDao.GetAllEmployeesWithCountedTicketsAsync();
+            return await employeeDao.GetAllEmployeesWithCountedTickets();
         }
 
         #endregion

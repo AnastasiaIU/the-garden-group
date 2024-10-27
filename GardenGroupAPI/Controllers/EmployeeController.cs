@@ -18,7 +18,7 @@ namespace GardenGroupAPI.Controllers
         [HttpGet]
         public async Task<List<Employee>> Get()
         {
-            return await _employeeService.GetAllEmployeesAPIAsync();
+            return await _employeeService.GetAllEmployeesAPI();
         }
 
         [HttpPost]
@@ -31,7 +31,7 @@ namespace GardenGroupAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody] Employee employee)
         {
-            await _employeeService.UpdateEmployeeAPIAsync(id, employee);
+            await _employeeService.UpdateEmployeeAPI(id, employee);
             return NoContent();
         }
 
