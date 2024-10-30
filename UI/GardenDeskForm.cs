@@ -178,7 +178,7 @@ namespace UI
                 // Show confirmation message
                 MessageBox.Show($"Warm welcome to {newEmployee.FirstName} {newEmployee.LastName}!");
 
-                ShowUsersView();
+                await ShowUsersView();
             }
             catch (Exception exception)
             {
@@ -249,7 +249,7 @@ namespace UI
             // Show confirmation message
             MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
 
-            ShowUsersView();
+            await ShowUsersView();
         }
 
         // Prefill the inputs with the selected employee's existing data to edit
@@ -276,7 +276,7 @@ namespace UI
                 // Show confirmation message
                 MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
 
-                ShowUsersView();
+                await ShowUsersView();
             }
         }
 
@@ -290,9 +290,9 @@ namespace UI
         }
 
         // Cancels any changes and return to the user list view without saving
-        private void btnCancelChangesEmployee_Click(object sender, EventArgs e)
+        private async void btnCancelChangesEmployee_Click(object sender, EventArgs e)
         {
-            ShowUsersView();
+            await ShowUsersView();
         }
 
         #endregion
@@ -300,7 +300,7 @@ namespace UI
         #region Users view control
 
         // Set up the Users panel
-        private async void ShowUsersView()
+        private async Task ShowUsersView()
         {
             ChangeButtonState(btnEditEmployee, Color.LightGray, false);
             await DisplayEmployeesAsync();
@@ -489,6 +489,14 @@ namespace UI
 
         private async Task DisplayEmployeesAsync()
         {
+            bool isInternetAvailable = await employeeService.IsInternetAvailable();
+
+            if (!isInternetAvailable)
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlUsers);
+            }
+
             usersList.Items.Clear();
             List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
             List<ListViewItem> items = new();
@@ -514,7 +522,25 @@ namespace UI
 
         private async void menuItemUsers_Click(object sender, EventArgs e)
         {
-            ShowUsersView();
+            await ShowUsersView();
+        }
+
+        private void ShowDatabaseError()
+        {
+            ShowPanel(pnlDbError);
+        }
+
+        private async Task TryToReconnect(Panel panel)
+        {
+            bool isReconnect = false;
+
+            while (!isReconnect)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(10));
+                isReconnect  = await employeeService.IsInternetAvailable();
+            }
+
+            ShowPanel(panel);
         }
 
         #endregion

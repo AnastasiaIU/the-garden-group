@@ -85,6 +85,8 @@
             ticketStatus = new ColumnHeader();
             splitterTicketsOverview = new Splitter();
             pnlUsers = new Panel();
+            pnlDbError = new Panel();
+            databaseErrorMessageLbl = new Label();
             btnEditEmployee = new Button();
             btnAddEmployee = new Button();
             usersList = new ListView();
@@ -127,6 +129,7 @@
             ((System.ComponentModel.ISupportInitialize)chartOpen).BeginInit();
             pnlTicketsOverview.SuspendLayout();
             pnlUsers.SuspendLayout();
+            pnlDbError.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
             pnlAddEditUser.SuspendLayout();
@@ -643,10 +646,29 @@
             pnlUsers.Controls.Add(usersList);
             pnlUsers.Controls.Add(lblUsers);
             pnlUsers.Controls.Add(splitterUsers);
+            pnlUsers.Controls.Add(pnlDbError);
             pnlUsers.Location = new Point(0, 112);
             pnlUsers.Name = "pnlUsers";
             pnlUsers.Size = new Size(634, 599);
             pnlUsers.TabIndex = 7;
+            // 
+            // pnlDbError
+            // 
+            pnlDbError.Controls.Add(databaseErrorMessageLbl);
+            pnlDbError.Location = new Point(0, 0);
+            pnlDbError.Name = "pnlDbError";
+            pnlDbError.Size = new Size(634, 478);
+            pnlDbError.TabIndex = 5;
+            // 
+            // databaseErrorMessageLbl
+            // 
+            databaseErrorMessageLbl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            databaseErrorMessageLbl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            databaseErrorMessageLbl.Location = new Point(112, 155);
+            databaseErrorMessageLbl.Name = "databaseErrorMessageLbl";
+            databaseErrorMessageLbl.Size = new Size(400, 100);
+            databaseErrorMessageLbl.TabIndex = 0;
+            databaseErrorMessageLbl.Text = "The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.";
             // 
             // btnEditEmployee
             // 
@@ -991,6 +1013,7 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlLogin);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlDashboard);
@@ -999,7 +1022,6 @@
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlAddEditTicket);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
@@ -1021,6 +1043,7 @@
             pnlTicketsOverview.PerformLayout();
             pnlUsers.ResumeLayout(false);
             pnlUsers.PerformLayout();
+            pnlDbError.ResumeLayout(false);
             pnlAddEditTicket.ResumeLayout(false);
             pnlAddEditTicket.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
@@ -1111,5 +1134,7 @@
         private TextBox searchtextbox;
         private ColumnHeader ticketCreationDate;
         private ColumnHeader ticketDescription;
+        private Panel pnlDbError;
+        private Label databaseErrorMessageLbl;
     }
 }
