@@ -72,6 +72,10 @@
             lblDashboard = new Label();
             splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
+            sortExplanationLbl = new Label();
+            SortByPriorityBtn = new Button();
+            btnEditTicket = new Button();
+            btnAddTicket = new Button();
             searchbtn = new Button();
             searchtextbox = new TextBox();
             btnEscalate = new Button();
@@ -96,8 +100,28 @@
             lblUsers = new Label();
             splitterUsers = new Splitter();
             pnlAddEditTicket = new Panel();
-            lblAddEditTicket = new Label();
+            descriptionTxtBox = new TextBox();
+            titleTxtBox = new TextBox();
+            deadlineCmbBox = new ComboBox();
+            isResolvedCmbBox = new ComboBox();
+            priorityCmbBox = new ComboBox();
+            statusCmbBox = new ComboBox();
+            typeOfAccidentCmbBox = new ComboBox();
+            serviceDeskUserCmbBox = new ComboBox();
+            label14 = new Label();
+            label13 = new Label();
+            label12 = new Label();
+            label11 = new Label();
+            label10 = new Label();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
+            cancelTicketBtn = new Button();
+            closeTicketBtn = new Button();
+            editTicketBtn = new Button();
+            addTicketBtn = new Button();
             splitterAddEditTicket = new Splitter();
+            lblAddEditTicket = new Label();
             menuStripBackground = new PictureBox();
             pnlAddEditUser = new Panel();
             btnCreateEmployee = new Button();
@@ -524,6 +548,10 @@
             // pnlTicketsOverview
             // 
             pnlTicketsOverview.BackColor = Color.White;
+            pnlTicketsOverview.Controls.Add(sortExplanationLbl);
+            pnlTicketsOverview.Controls.Add(SortByPriorityBtn);
+            pnlTicketsOverview.Controls.Add(btnEditTicket);
+            pnlTicketsOverview.Controls.Add(btnAddTicket);
             pnlTicketsOverview.Controls.Add(searchbtn);
             pnlTicketsOverview.Controls.Add(searchtextbox);
             pnlTicketsOverview.Controls.Add(btnEscalate);
@@ -534,6 +562,53 @@
             pnlTicketsOverview.Name = "pnlTicketsOverview";
             pnlTicketsOverview.Size = new Size(634, 599);
             pnlTicketsOverview.TabIndex = 6;
+            // 
+            // sortExplanationLbl
+            // 
+            sortExplanationLbl.AutoSize = true;
+            sortExplanationLbl.Font = new Font("Segoe UI", 7.5F, FontStyle.Regular, GraphicsUnit.Point);
+            sortExplanationLbl.Location = new Point(457, 93);
+            sortExplanationLbl.Name = "sortExplanationLbl";
+            sortExplanationLbl.Size = new Size(0, 12);
+            sortExplanationLbl.TabIndex = 9;
+            // 
+            // SortByPriorityBtn
+            // 
+            SortByPriorityBtn.BackColor = Color.Black;
+            SortByPriorityBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            SortByPriorityBtn.ForeColor = SystemColors.HighlightText;
+            SortByPriorityBtn.Location = new Point(457, 55);
+            SortByPriorityBtn.Name = "SortByPriorityBtn";
+            SortByPriorityBtn.Size = new Size(154, 38);
+            SortByPriorityBtn.TabIndex = 8;
+            SortByPriorityBtn.Text = "SORT BY PRIORITY";
+            SortByPriorityBtn.UseVisualStyleBackColor = false;
+            SortByPriorityBtn.Click += SortByPriorityBtn_Click;
+            // 
+            // btnEditTicket
+            // 
+            btnEditTicket.BackColor = Color.LightGray;
+            btnEditTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditTicket.Location = new Point(400, 12);
+            btnEditTicket.Name = "btnEditTicket";
+            btnEditTicket.Size = new Size(100, 31);
+            btnEditTicket.TabIndex = 7;
+            btnEditTicket.Text = "EDIT TICKET";
+            btnEditTicket.UseVisualStyleBackColor = false;
+            btnEditTicket.Click += btnEditTicket_Click;
+            // 
+            // btnAddTicket
+            // 
+            btnAddTicket.BackColor = Color.Black;
+            btnAddTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddTicket.ForeColor = SystemColors.HighlightText;
+            btnAddTicket.Location = new Point(291, 12);
+            btnAddTicket.Name = "btnAddTicket";
+            btnAddTicket.Size = new Size(100, 31);
+            btnAddTicket.TabIndex = 6;
+            btnAddTicket.Text = "ADD TICKET";
+            btnAddTicket.UseVisualStyleBackColor = false;
+            btnAddTicket.Click += btnAddTicket_Click;
             // 
             // searchbtn
             // 
@@ -740,22 +815,221 @@
             // pnlAddEditTicket
             // 
             pnlAddEditTicket.BackColor = Color.White;
-            pnlAddEditTicket.Controls.Add(lblAddEditTicket);
+            pnlAddEditTicket.Controls.Add(descriptionTxtBox);
+            pnlAddEditTicket.Controls.Add(titleTxtBox);
+            pnlAddEditTicket.Controls.Add(deadlineCmbBox);
+            pnlAddEditTicket.Controls.Add(isResolvedCmbBox);
+            pnlAddEditTicket.Controls.Add(priorityCmbBox);
+            pnlAddEditTicket.Controls.Add(statusCmbBox);
+            pnlAddEditTicket.Controls.Add(typeOfAccidentCmbBox);
+            pnlAddEditTicket.Controls.Add(serviceDeskUserCmbBox);
+            pnlAddEditTicket.Controls.Add(label14);
+            pnlAddEditTicket.Controls.Add(label13);
+            pnlAddEditTicket.Controls.Add(label12);
+            pnlAddEditTicket.Controls.Add(label11);
+            pnlAddEditTicket.Controls.Add(label10);
+            pnlAddEditTicket.Controls.Add(label9);
+            pnlAddEditTicket.Controls.Add(label8);
+            pnlAddEditTicket.Controls.Add(label7);
+            pnlAddEditTicket.Controls.Add(cancelTicketBtn);
+            pnlAddEditTicket.Controls.Add(closeTicketBtn);
+            pnlAddEditTicket.Controls.Add(editTicketBtn);
+            pnlAddEditTicket.Controls.Add(addTicketBtn);
             pnlAddEditTicket.Controls.Add(splitterAddEditTicket);
+            pnlAddEditTicket.Controls.Add(lblAddEditTicket);
             pnlAddEditTicket.Location = new Point(0, 112);
             pnlAddEditTicket.Name = "pnlAddEditTicket";
             pnlAddEditTicket.Size = new Size(634, 599);
             pnlAddEditTicket.TabIndex = 8;
             // 
-            // lblAddEditTicket
+            // descriptionTxtBox
             // 
-            lblAddEditTicket.AutoSize = true;
-            lblAddEditTicket.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAddEditTicket.Location = new Point(228, 17);
-            lblAddEditTicket.Name = "lblAddEditTicket";
-            lblAddEditTicket.Size = new Size(176, 32);
-            lblAddEditTicket.TabIndex = 1;
-            lblAddEditTicket.Text = "Add/Edit Ticket";
+            descriptionTxtBox.Location = new Point(167, 316);
+            descriptionTxtBox.Multiline = true;
+            descriptionTxtBox.Name = "descriptionTxtBox";
+            descriptionTxtBox.Size = new Size(216, 74);
+            descriptionTxtBox.TabIndex = 21;
+            // 
+            // titleTxtBox
+            // 
+            titleTxtBox.Location = new Point(167, 91);
+            titleTxtBox.Name = "titleTxtBox";
+            titleTxtBox.Size = new Size(216, 23);
+            titleTxtBox.TabIndex = 20;
+            // 
+            // deadlineCmbBox
+            // 
+            deadlineCmbBox.FormattingEnabled = true;
+            deadlineCmbBox.Items.AddRange(new object[] { "+ 7 days", "+ 14 days", "+ 28 days", "+ 6 months" });
+            deadlineCmbBox.Location = new Point(167, 272);
+            deadlineCmbBox.Name = "deadlineCmbBox";
+            deadlineCmbBox.Size = new Size(121, 23);
+            deadlineCmbBox.TabIndex = 19;
+            // 
+            // isResolvedCmbBox
+            // 
+            isResolvedCmbBox.FormattingEnabled = true;
+            isResolvedCmbBox.Items.AddRange(new object[] { "Yes", "No" });
+            isResolvedCmbBox.Location = new Point(167, 235);
+            isResolvedCmbBox.Name = "isResolvedCmbBox";
+            isResolvedCmbBox.Size = new Size(121, 23);
+            isResolvedCmbBox.TabIndex = 18;
+            // 
+            // priorityCmbBox
+            // 
+            priorityCmbBox.FormattingEnabled = true;
+            priorityCmbBox.Items.AddRange(new object[] { "Low", "Medium", "High" });
+            priorityCmbBox.Location = new Point(167, 200);
+            priorityCmbBox.Name = "priorityCmbBox";
+            priorityCmbBox.Size = new Size(121, 23);
+            priorityCmbBox.TabIndex = 17;
+            // 
+            // statusCmbBox
+            // 
+            statusCmbBox.FormattingEnabled = true;
+            statusCmbBox.Items.AddRange(new object[] { "Open", "Closed" });
+            statusCmbBox.Location = new Point(167, 163);
+            statusCmbBox.Name = "statusCmbBox";
+            statusCmbBox.Size = new Size(121, 23);
+            statusCmbBox.TabIndex = 16;
+            // 
+            // typeOfAccidentCmbBox
+            // 
+            typeOfAccidentCmbBox.FormattingEnabled = true;
+            typeOfAccidentCmbBox.Items.AddRange(new object[] { "Software", "Service", "Hardware" });
+            typeOfAccidentCmbBox.Location = new Point(167, 126);
+            typeOfAccidentCmbBox.Name = "typeOfAccidentCmbBox";
+            typeOfAccidentCmbBox.Size = new Size(121, 23);
+            typeOfAccidentCmbBox.TabIndex = 15;
+            // 
+            // serviceDeskUserCmbBox
+            // 
+            serviceDeskUserCmbBox.FormattingEnabled = true;
+            serviceDeskUserCmbBox.Location = new Point(167, 61);
+            serviceDeskUserCmbBox.Name = "serviceDeskUserCmbBox";
+            serviceDeskUserCmbBox.Size = new Size(121, 23);
+            serviceDeskUserCmbBox.TabIndex = 14;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(52, 321);
+            label14.Name = "label14";
+            label14.Size = new Size(73, 15);
+            label14.TabIndex = 13;
+            label14.Text = "Description :";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(52, 275);
+            label13.Name = "label13";
+            label13.Size = new Size(59, 15);
+            label13.TabIndex = 12;
+            label13.Text = "Deadline :";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(52, 238);
+            label12.Name = "label12";
+            label12.Size = new Size(68, 15);
+            label12.TabIndex = 11;
+            label12.Text = "Is resolved :";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(52, 203);
+            label11.Name = "label11";
+            label11.Size = new Size(51, 15);
+            label11.TabIndex = 10;
+            label11.Text = "Priority :";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(52, 166);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 15);
+            label10.TabIndex = 9;
+            label10.Text = "Status :";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(52, 129);
+            label9.Name = "label9";
+            label9.Size = new Size(97, 15);
+            label9.TabIndex = 8;
+            label9.Text = "Type of incident :";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(52, 94);
+            label8.Name = "label8";
+            label8.Size = new Size(35, 15);
+            label8.TabIndex = 7;
+            label8.Text = "Title :";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(52, 64);
+            label7.Name = "label7";
+            label7.Size = new Size(102, 15);
+            label7.TabIndex = 6;
+            label7.Text = "Service desk user :";
+            // 
+            // cancelTicketBtn
+            // 
+            cancelTicketBtn.BackColor = Color.Black;
+            cancelTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            cancelTicketBtn.ForeColor = SystemColors.HighlightText;
+            cancelTicketBtn.Location = new Point(482, 409);
+            cancelTicketBtn.Name = "cancelTicketBtn";
+            cancelTicketBtn.Size = new Size(140, 40);
+            cancelTicketBtn.TabIndex = 5;
+            cancelTicketBtn.Text = "Cancel Changes";
+            cancelTicketBtn.UseVisualStyleBackColor = false;
+            cancelTicketBtn.Click += cancelTicketBtn_Click;
+            // 
+            // closeTicketBtn
+            // 
+            closeTicketBtn.BackColor = Color.Tomato;
+            closeTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            closeTicketBtn.Location = new Point(157, 410);
+            closeTicketBtn.Name = "closeTicketBtn";
+            closeTicketBtn.Size = new Size(140, 40);
+            closeTicketBtn.TabIndex = 4;
+            closeTicketBtn.Text = "Close Ticket";
+            closeTicketBtn.UseVisualStyleBackColor = false;
+            closeTicketBtn.Click += closeTicketBtn_Click;
+            // 
+            // editTicketBtn
+            // 
+            editTicketBtn.BackColor = Color.Yellow;
+            editTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            editTicketBtn.Location = new Point(321, 409);
+            editTicketBtn.Name = "editTicketBtn";
+            editTicketBtn.Size = new Size(140, 40);
+            editTicketBtn.TabIndex = 3;
+            editTicketBtn.Text = "Edit Ticket";
+            editTicketBtn.UseVisualStyleBackColor = false;
+            editTicketBtn.Click += editTicketBtn_Click;
+            // 
+            // addTicketBtn
+            // 
+            addTicketBtn.BackColor = Color.LightGreen;
+            addTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            addTicketBtn.Location = new Point(321, 409);
+            addTicketBtn.Name = "addTicketBtn";
+            addTicketBtn.Size = new Size(140, 40);
+            addTicketBtn.TabIndex = 2;
+            addTicketBtn.Text = "Add Ticket";
+            addTicketBtn.UseVisualStyleBackColor = false;
+            addTicketBtn.Click += addTicketBtn_Click;
             // 
             // splitterAddEditTicket
             // 
@@ -767,6 +1041,16 @@
             splitterAddEditTicket.Size = new Size(634, 1);
             splitterAddEditTicket.TabIndex = 0;
             splitterAddEditTicket.TabStop = false;
+            // 
+            // lblAddEditTicket
+            // 
+            lblAddEditTicket.AutoSize = true;
+            lblAddEditTicket.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAddEditTicket.Location = new Point(228, 17);
+            lblAddEditTicket.Name = "lblAddEditTicket";
+            lblAddEditTicket.Size = new Size(176, 32);
+            lblAddEditTicket.TabIndex = 1;
+            lblAddEditTicket.Text = "Add/Edit Ticket";
             // 
             // menuStripBackground
             // 
@@ -991,8 +1275,9 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlAddEditTicket);
+            Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
@@ -1001,7 +1286,6 @@
             Controls.Add(menuStripBackground);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlAddEditTicket);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip;
             Margin = new Padding(2, 1, 2, 1);
@@ -1111,5 +1395,29 @@
         private TextBox searchtextbox;
         private ColumnHeader ticketCreationDate;
         private ColumnHeader ticketDescription;
+        private Button btnEditTicket;
+        private Button btnAddTicket;
+        private Button cancelTicketBtn;
+        private Button closeTicketBtn;
+        private Button editTicketBtn;
+        private Button addTicketBtn;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label13;
+        private Label label14;
+        private ComboBox statusCmbBox;
+        private ComboBox typeOfAccidentCmbBox;
+        private ComboBox serviceDeskUserCmbBox;
+        private TextBox descriptionTxtBox;
+        private TextBox titleTxtBox;
+        private ComboBox deadlineCmbBox;
+        private ComboBox isResolvedCmbBox;
+        private ComboBox priorityCmbBox;
+        private Button SortByPriorityBtn;
+        private Label sortExplanationLbl;
     }
 }

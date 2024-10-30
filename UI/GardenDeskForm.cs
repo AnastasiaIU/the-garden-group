@@ -1,3 +1,4 @@
+using Amazon.Runtime.Internal.Util;
 using Model;
 using Service;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -336,6 +337,8 @@ namespace UI
             {
                 selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
 
+                ChangeButtonState(btnEditTicket, Color.Yellow, true);
+
                 if (selectedTicket.IsEscalated == false && selectedTicket.Status != Status.Closed)
                 {
                     ChangeButtonState(btnEscalate, Color.Tomato, true);
@@ -357,6 +360,7 @@ namespace UI
             ChangeButtonState(btnEscalate, Color.LightGray, false);
 
             await DisplayTicketsAsync(loggedInEmployee);
+            ClearLabel();
         }
 
         #endregion
@@ -518,5 +522,266 @@ namespace UI
         }
 
         #endregion
+
+        #region Danylo Create/Update/Close Ticket Logic
+
+        #region Create Ticket
+
+        private void btnAddTicket_Click(object sender, EventArgs e)
+        {
+            lblAddEditTicket.Text = "Create new ticket";
+
+            addTicketBtn.Visible = true;
+            editTicketBtn.Visible = false;
+            closeTicketBtn.Visible = false;
+            serviceDeskUserCmbBox.Visible = true;
+
+            PopulateServiceDeskEmployeeComboBoxAsync();
+            serviceDeskUserCmbBox.Enabled = true;
+            ClearInputs();
+            ShowPanel(pnlAddEditTicket);
+            ClearLabel();
+        }
+
+        private async void ShowTicketsView()
+        {
+            await DisplayTicketsAsync(loggedInEmployee);
+            ShowPanel(pnlTicketsOverview);
+        }
+
+        private async void addTicketBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Ticket newTicket = CreateTicketObject(DateTime.Now);
+                await ticketService.AddTicketAsync(newTicket);
+
+                ShowTicketsView();
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+
+
+        private Ticket CreateTicketObject(DateTime time, string? ticketId = null)
+        {
+            string reportingUser = loggedInEmployee.EmployeeId;
+
+            string serviceDeskUser = serviceDeskUserCmbBox.SelectedValue != null ? ((Employee)serviceDeskUserCmbBox.SelectedValue).EmployeeId : throw new Exception("Service Desk User is required.");
+
+            string title = IsInputBoxEmpty(titleTxtBox.Text, "Title is required.");
+            string incidentTypeInput = IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.");
+            string statusInput = IsInputBoxEmpty(statusCmbBox.Text, "Status is required.");
+            string priorityInput = IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.");
+            string isResolvedInput = IsInputBoxEmpty(isResolvedCmbBox.Text, "Is ticket resolved or not is required.");
+            string description = IsInputBoxEmpty(deadlineCmbBox.Text, "Description is required.");
+
+            if (!TryParseEnum(incidentTypeInput, out IncidentType incidentType) ||
+                !TryParseEnum(statusInput, out Status status) ||
+                !TryParseEnum(priorityInput, out Priority priority))
+            {
+                throw new Exception("Invalid enum value provided.");
+            }
+
+            bool isResolved = isResolvedInput.Equals("Yes", StringComparison.OrdinalIgnoreCase);
+            bool isEscalated = false;
+            DateTime deadline = CalculateDeadline(descriptionTxtBox.Text, time);
+            DateTime creationTime = DateTime.Now;
+
+            return new Ticket(reportingUser, serviceDeskUser, title, description, status, priority, isResolved, isEscalated, deadline, incidentType, creationTime, ticketId);
+        }
+
+        private bool TryParseEnum<T>(string value, out T result) where T : struct
+        {
+            return Enum.TryParse(value, true, out result) && Enum.IsDefined(typeof(T), result);
+        }
+
+
+        private async Task PopulateServiceDeskEmployeeComboBoxAsync(string? id = null)
+        {
+            List<Employee> employees = await employeeService.GetAllEmployeesAPI();
+            List<Employee> serviceDeskEmployees = employees.Where(employee => employee.Role == EmployeeRole.ServiceDeskEmployee).ToList();
+
+            var serviceDeskrEmployees = employees
+                .Where(employee => employee.Role == EmployeeRole.ServiceDeskEmployee)
+                .Select(employee => new
+                {
+                    FullName = $"{employee.FirstName} {employee.LastName}",
+                    Employee = employee
+                })
+                .ToList();
+
+            serviceDeskUserCmbBox.DataSource = serviceDeskrEmployees;
+            serviceDeskUserCmbBox.DisplayMember = "FullName";
+            serviceDeskUserCmbBox.ValueMember = "Employee";
+
+            SetSelectedEmployeeById(serviceDeskEmployees, id);
+        }
+
+        private void SetSelectedEmployeeById(List<Employee> serviceDeskEmployees, string? id)
+        {
+            if (id != null)
+            {
+                var matchingEmployee = serviceDeskEmployees
+                    .FirstOrDefault(emp => emp.EmployeeId == id);
+
+                int index = serviceDeskEmployees.IndexOf(matchingEmployee);
+                serviceDeskUserCmbBox.SelectedIndex = index;
+            }
+            else
+            {
+                serviceDeskUserCmbBox.SelectedIndex = -1;
+            }
+        }
+
+        public DateTime CalculateDeadline(string selectedOption, DateTime time) =>
+            selectedOption switch
+            {
+                "+ 7 days" => time.AddDays(7),
+                "+ 14 days" => time.AddDays(14),
+                "+ 28 days" => time.AddDays(28),
+                "+ 6 months" => time.AddMonths(6),
+                _ => time
+            };
+
+        private void ClearInputs()
+        {
+            serviceDeskUserCmbBox.SelectedItem = null;
+            titleTxtBox.Text = "";
+            typeOfAccidentCmbBox.SelectedItem = null;
+            statusCmbBox.SelectedItem = null;
+            priorityCmbBox.SelectedItem = null;
+            isResolvedCmbBox.SelectedItem = null;
+            deadlineCmbBox.SelectedItem = null;
+            descriptionTxtBox.Text = "";
+        }
+        private void cancelTicketBtn_Click(object sender, EventArgs e)
+        {
+            ClearInputs();
+
+            ShowTicketsView();
+            ChangeButtonState(btnEditTicket, Color.LightGray, false);
+        }
+        #endregion
+
+        #region Update Ticket
+
+        private void btnEditTicket_Click(object sender, EventArgs e)
+        {
+            selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
+
+            lblAddEditTicket.Text = "Edit ticket";
+
+            addTicketBtn.Visible = false;
+            editTicketBtn.Visible = true;
+            closeTicketBtn.Visible = true;
+
+            PrefillEditTicketInputs();
+
+            ShowPanel(pnlAddEditTicket);
+            ClearLabel();
+        }
+
+        private async void editTicketBtn_Click(object sender, EventArgs e)
+        {
+            var updatedTicket = CreateTicketObject(selectedTicket.Deadline, selectedTicket.TicketId);
+
+            await ticketService.UpdateTicketAsync(updatedTicket);
+
+            ShowTicketsView();
+            ChangeButtonState(btnEditTicket, Color.LightGray, false);
+        }
+
+        private async void PrefillEditTicketInputs()
+        {
+            PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
+
+            titleTxtBox.Text = selectedTicket.Title;
+            typeOfAccidentCmbBox.Text = selectedTicket.IncidentType.ToString();
+            statusCmbBox.Text = selectedTicket.Status.ToString();
+            priorityCmbBox.Text = selectedTicket.Priority.ToString();
+            isResolvedCmbBox.Text = selectedTicket.IsResolved ? "Yes" : "No";
+            deadlineCmbBox.Text = selectedTicket.Deadline.ToString("MM/dd/yyyy");
+            descriptionTxtBox.Text = selectedTicket.Description;
+
+            serviceDeskUserCmbBox.Enabled = false;
+        }
+
+        #endregion
+
+        #region Close Ticket
+        private async void closeTicketBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedTicket.Status == Status.Closed)
+            {
+                MessageBox.Show("The ticket is already closed.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            await ticketService.CloseTicketAsync(selectedTicket.TicketId);
+
+            ShowTicketsView();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Danylo Sort by Priority Feature
+
+        private bool isAscendingOrder = true;
+
+        private async Task SortAndDisplayTicketsByPriorityAsync(Employee employee)
+        {
+            List<Ticket> tickets = await GetTicketsAsync(employee);
+
+            tickets = SortTicketsByPriority(tickets, isAscendingOrder);
+
+            PopulateTicketsListView(tickets);
+
+            isAscendingOrder = !isAscendingOrder;
+        }
+
+        private async Task<List<Ticket>> GetTicketsAsync(Employee employee)
+        {
+            if (employee.Role == EmployeeRole.RegularEmployee)
+            {
+                return await ticketService.GetTicketsForRegularEmployeeAsync(employee);
+            }
+            else
+            {
+                return await ticketService.GetAllTicketsWithReportingUserNameAsync();
+            }
+        }
+
+        private List<Ticket> SortTicketsByPriority(List<Ticket> tickets, bool ascending)
+        {
+            ShowExplanationToSorting(ascending);
+            return ascending ? tickets.OrderBy(ticket => ticket.Priority).ToList() : tickets.OrderByDescending(ticket => ticket.Priority).ToList();
+        }
+
+        private void ShowExplanationToSorting(bool ascending)
+        {
+            sortExplanationLbl.Text = ascending == true ? "Low to High priority" : "High to Low priority";
+        }
+
+        private async void SortByPriorityBtn_Click(object sender, EventArgs e)
+        {
+            await SortAndDisplayTicketsByPriorityAsync(loggedInEmployee);
+        }
+
+        private void ClearLabel()
+        {
+            sortExplanationLbl.Text = string.Empty;
+        }
+
+        #endregion
+
+
+
     }
 }
