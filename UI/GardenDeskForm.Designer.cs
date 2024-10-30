@@ -568,9 +568,9 @@
             label15.AutoSize = true;
             label15.Location = new Point(438, 52);
             label15.Name = "label15";
-            label15.Size = new Size(141, 15);
+            label15.Size = new Size(169, 15);
             label15.TabIndex = 9;
-            label15.Text = "Select Sorting Preference:";
+            label15.Text = "Choose Ticket Sorting Priority :";
             // 
             // SortOrderComboBox
             // 
@@ -1279,8 +1279,8 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
-            Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
