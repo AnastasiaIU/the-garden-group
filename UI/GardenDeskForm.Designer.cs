@@ -568,9 +568,9 @@
             label15.AutoSize = true;
             label15.Location = new Point(438, 52);
             label15.Name = "label15";
-            label15.Size = new Size(169, 15);
+            label15.Size = new Size(91, 15);
             label15.TabIndex = 9;
-            label15.Text = "Choose Ticket Sorting Priority :";
+            label15.Text = "Sort by priority :";
             // 
             // SortOrderComboBox
             // 
