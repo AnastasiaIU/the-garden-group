@@ -604,7 +604,7 @@ namespace UI
 
         private async Task PopulateServiceDeskEmployeeComboBoxAsync(string? id = null)
         {
-            List<Employee> employees = await employeeService.GetAllEmployeesAPI();
+            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
             List<Employee> serviceDeskEmployees = employees.Where(employee => employee.Role == EmployeeRole.ServiceDeskEmployee).ToList();
 
             var serviceDeskrEmployees = employees
@@ -657,6 +657,7 @@ namespace UI
             statusCmbBox.SelectedItem = null;
             priorityCmbBox.SelectedItem = null;
             isResolvedCmbBox.SelectedItem = null;
+            deadlineCmbBox.Text = "";
             deadlineCmbBox.SelectedItem = null;
             descriptionTxtBox.Text = "";
         }

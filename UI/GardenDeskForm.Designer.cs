@@ -1009,6 +1009,7 @@
             closeTicketBtn.TabIndex = 4;
             closeTicketBtn.Text = "Close Ticket";
             closeTicketBtn.UseVisualStyleBackColor = false;
+            closeTicketBtn.Visible = false;
             closeTicketBtn.Click += closeTicketBtn_Click;
             // 
             // editTicketBtn
@@ -1021,6 +1022,7 @@
             editTicketBtn.TabIndex = 3;
             editTicketBtn.Text = "Edit Ticket";
             editTicketBtn.UseVisualStyleBackColor = false;
+            editTicketBtn.Visible = false;
             editTicketBtn.Click += editTicketBtn_Click;
             // 
             // addTicketBtn
@@ -1279,8 +1281,8 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlAddEditTicket);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
