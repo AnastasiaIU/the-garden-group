@@ -1,4 +1,3 @@
-using Amazon.Runtime.Internal.Util;
 using Model;
 using Service;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -601,6 +600,18 @@ namespace UI
             return Enum.TryParse(value, true, out result) && Enum.IsDefined(typeof(T), result);
         }
 
+        private void isResolvedCmbBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isResolvedCmbBox.SelectedItem.ToString() == "Yes")
+            {
+                statusCmbBox.SelectedItem = "Closed";
+                statusCmbBox.Enabled = false;
+            }
+            else
+            {
+                statusCmbBox.Enabled = true;
+            }
+        }
 
         private async Task PopulateServiceDeskEmployeeComboBoxAsync(string? id = null)
         {
@@ -697,7 +708,7 @@ namespace UI
             ChangeButtonState(btnEditTicket, Color.LightGray, false);
         }
 
-        private async void PrefillEditTicketInputs()
+        private async Task PrefillEditTicketInputs()
         {
             PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
 
@@ -737,23 +748,16 @@ namespace UI
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
             List<Ticket> tickets = await GetTicketsAsync();
-
             bool isAscendingOrder = SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
-
             PopulateTicketsListView(tickets);
         }
 
         private async Task<List<Ticket>> GetTicketsAsync()
         {
-            if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
-            {
-                return await ticketService.GetTicketsForRegularEmployeeAsync(loggedInEmployee);
-            }
-            else
-            {
-                return await ticketService.GetAllTicketsWithReportingUserNameAsync();
-            }
+            return loggedInEmployee.Role == EmployeeRole.RegularEmployee
+                ? await ticketService.GetTicketsForRegularEmployeeAsync(loggedInEmployee)
+                : await ticketService.GetAllTicketsWithReportingUserNameAsync();
         }
 
         private List<Ticket> SortTicketsByPriority(List<Ticket> tickets, bool ascending)
@@ -772,6 +776,7 @@ namespace UI
         }
 
         #endregion
+
 
     }
 }

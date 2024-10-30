@@ -874,6 +874,7 @@
             isResolvedCmbBox.Name = "isResolvedCmbBox";
             isResolvedCmbBox.Size = new Size(121, 23);
             isResolvedCmbBox.TabIndex = 18;
+            isResolvedCmbBox.SelectedIndexChanged += isResolvedCmbBox_SelectedIndexChanged;
             // 
             // priorityCmbBox
             // 
