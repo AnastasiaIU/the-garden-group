@@ -76,6 +76,7 @@
             SortOrderComboBox = new ComboBox();
             btnEditTicket = new Button();
             btnAddTicket = new Button();
+            btnViewTicket = new Button();
             searchbtn = new Button();
             searchtextbox = new TextBox();
             btnEscalate = new Button();
@@ -256,7 +257,7 @@
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(150, 45);
             btnLogin.TabIndex = 3;
-            btnLogin.Text = "Login";
+            btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += OnLoginButtonClick;
             // 
@@ -555,6 +556,7 @@
             pnlTicketsOverview.Controls.Add(SortOrderComboBox);
             pnlTicketsOverview.Controls.Add(btnEditTicket);
             pnlTicketsOverview.Controls.Add(btnAddTicket);
+            pnlTicketsOverview.Controls.Add(btnViewTicket);
             pnlTicketsOverview.Controls.Add(searchbtn);
             pnlTicketsOverview.Controls.Add(searchtextbox);
             pnlTicketsOverview.Controls.Add(btnEscalate);
@@ -612,6 +614,18 @@
             btnAddTicket.UseVisualStyleBackColor = false;
             btnAddTicket.Click += btnAddTicket_Click;
             // 
+            // btnViewTicket
+            // 
+            btnViewTicket.BackColor = Color.LightGray;
+            btnViewTicket.Enabled = false;
+            btnViewTicket.ForeColor = SystemColors.ControlText;
+            btnViewTicket.Location = new Point(29, 423);
+            btnViewTicket.Name = "btnViewTicket";
+            btnViewTicket.Size = new Size(100, 31);
+            btnViewTicket.TabIndex = 6;
+            btnViewTicket.Text = "VIEW TICKET";
+            btnViewTicket.UseVisualStyleBackColor = false;
+            // 
             // searchbtn
             // 
             searchbtn.BackColor = Color.Gray;
@@ -665,7 +679,7 @@
             ticketsListView.Location = new Point(29, 110);
             ticketsListView.Margin = new Padding(2);
             ticketsListView.Name = "ticketsListView";
-            ticketsListView.Size = new Size(582, 336);
+            ticketsListView.Size = new Size(582, 300);
             ticketsListView.TabIndex = 2;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
@@ -1452,5 +1466,6 @@
         private Panel pnlDbError;
         private Label databaseErrorMessageLbl;
         private ColumnHeader ticketDescription;
+        private Button btnViewTicket;
     }
 }
