@@ -360,7 +360,6 @@ namespace UI
             ChangeButtonState(btnEscalate, Color.LightGray, false);
 
             await DisplayTicketsAsync(loggedInEmployee);
-            ClearLabel();
         }
 
         #endregion
@@ -536,17 +535,18 @@ namespace UI
             closeTicketBtn.Visible = false;
             serviceDeskUserCmbBox.Visible = true;
 
+
             PopulateServiceDeskEmployeeComboBoxAsync();
             serviceDeskUserCmbBox.Enabled = true;
             ClearInputs();
             ShowPanel(pnlAddEditTicket);
-            ClearLabel();
         }
 
         private async void ShowTicketsView()
         {
             await DisplayTicketsAsync(loggedInEmployee);
             ShowPanel(pnlTicketsOverview);
+            CleanSortOrderComboBox();
         }
 
         private async void addTicketBtn_Click(object sender, EventArgs e)
@@ -578,7 +578,7 @@ namespace UI
             string statusInput = IsInputBoxEmpty(statusCmbBox.Text, "Status is required.");
             string priorityInput = IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.");
             string isResolvedInput = IsInputBoxEmpty(isResolvedCmbBox.Text, "Is ticket resolved or not is required.");
-            string description = IsInputBoxEmpty(deadlineCmbBox.Text, "Description is required.");
+            string description = IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required.");
 
             if (!TryParseEnum(incidentTypeInput, out IncidentType incidentType) ||
                 !TryParseEnum(statusInput, out Status status) ||
@@ -589,7 +589,8 @@ namespace UI
 
             bool isResolved = isResolvedInput.Equals("Yes", StringComparison.OrdinalIgnoreCase);
             bool isEscalated = false;
-            DateTime deadline = CalculateDeadline(descriptionTxtBox.Text, time);
+
+            DateTime deadline = deadlineCmbBox.Text != string.Empty ? CalculateDeadline(deadlineCmbBox.Text, time) : throw new Exception("Deadline is required.");
             DateTime creationTime = DateTime.Now;
 
             return new Ticket(reportingUser, serviceDeskUser, title, description, status, priority, isResolved, isEscalated, deadline, incidentType, creationTime, ticketId);
@@ -683,7 +684,6 @@ namespace UI
             PrefillEditTicketInputs();
 
             ShowPanel(pnlAddEditTicket);
-            ClearLabel();
         }
 
         private async void editTicketBtn_Click(object sender, EventArgs e)
@@ -733,24 +733,21 @@ namespace UI
 
         #region Danylo Sort by Priority Feature
 
-        private bool isAscendingOrder = true;
-
-        private async Task SortAndDisplayTicketsByPriorityAsync(Employee employee)
+        private async Task SortAndDisplayTicketsByPriorityAsync()
         {
-            List<Ticket> tickets = await GetTicketsAsync(employee);
+            List<Ticket> tickets = await GetTicketsAsync();
 
+            bool isAscendingOrder = SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
 
             PopulateTicketsListView(tickets);
-
-            isAscendingOrder = !isAscendingOrder;
         }
 
-        private async Task<List<Ticket>> GetTicketsAsync(Employee employee)
+        private async Task<List<Ticket>> GetTicketsAsync()
         {
-            if (employee.Role == EmployeeRole.RegularEmployee)
+            if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
             {
-                return await ticketService.GetTicketsForRegularEmployeeAsync(employee);
+                return await ticketService.GetTicketsForRegularEmployeeAsync(loggedInEmployee);
             }
             else
             {
@@ -760,28 +757,20 @@ namespace UI
 
         private List<Ticket> SortTicketsByPriority(List<Ticket> tickets, bool ascending)
         {
-            ShowExplanationToSorting(ascending);
             return ascending ? tickets.OrderBy(ticket => ticket.Priority).ToList() : tickets.OrderByDescending(ticket => ticket.Priority).ToList();
         }
 
-        private void ShowExplanationToSorting(bool ascending)
+        private async void SortOrderComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sortExplanationLbl.Text = ascending == true ? "Low to High priority" : "High to Low priority";
+            await SortAndDisplayTicketsByPriorityAsync();
         }
 
-        private async void SortByPriorityBtn_Click(object sender, EventArgs e)
+        private void CleanSortOrderComboBox()
         {
-            await SortAndDisplayTicketsByPriorityAsync(loggedInEmployee);
-        }
-
-        private void ClearLabel()
-        {
-            sortExplanationLbl.Text = string.Empty;
+            SortOrderComboBox.SelectedIndex = -1;
         }
 
         #endregion
-
-
 
     }
 }

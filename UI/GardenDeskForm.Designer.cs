@@ -72,8 +72,8 @@
             lblDashboard = new Label();
             splitterDashboard = new Splitter();
             pnlTicketsOverview = new Panel();
-            sortExplanationLbl = new Label();
-            SortByPriorityBtn = new Button();
+            label15 = new Label();
+            SortOrderComboBox = new ComboBox();
             btnEditTicket = new Button();
             btnAddTicket = new Button();
             searchbtn = new Button();
@@ -548,8 +548,8 @@
             // pnlTicketsOverview
             // 
             pnlTicketsOverview.BackColor = Color.White;
-            pnlTicketsOverview.Controls.Add(sortExplanationLbl);
-            pnlTicketsOverview.Controls.Add(SortByPriorityBtn);
+            pnlTicketsOverview.Controls.Add(label15);
+            pnlTicketsOverview.Controls.Add(SortOrderComboBox);
             pnlTicketsOverview.Controls.Add(btnEditTicket);
             pnlTicketsOverview.Controls.Add(btnAddTicket);
             pnlTicketsOverview.Controls.Add(searchbtn);
@@ -563,31 +563,30 @@
             pnlTicketsOverview.Size = new Size(634, 599);
             pnlTicketsOverview.TabIndex = 6;
             // 
-            // sortExplanationLbl
+            // label15
             // 
-            sortExplanationLbl.AutoSize = true;
-            sortExplanationLbl.Font = new Font("Segoe UI", 7.5F, FontStyle.Regular, GraphicsUnit.Point);
-            sortExplanationLbl.Location = new Point(457, 93);
-            sortExplanationLbl.Name = "sortExplanationLbl";
-            sortExplanationLbl.Size = new Size(0, 12);
-            sortExplanationLbl.TabIndex = 9;
+            label15.AutoSize = true;
+            label15.Location = new Point(438, 52);
+            label15.Name = "label15";
+            label15.Size = new Size(141, 15);
+            label15.TabIndex = 9;
+            label15.Text = "Select Sorting Preference:";
             // 
-            // SortByPriorityBtn
+            // SortOrderComboBox
             // 
-            SortByPriorityBtn.BackColor = Color.Black;
-            SortByPriorityBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            SortByPriorityBtn.ForeColor = SystemColors.HighlightText;
-            SortByPriorityBtn.Location = new Point(457, 55);
-            SortByPriorityBtn.Name = "SortByPriorityBtn";
-            SortByPriorityBtn.Size = new Size(154, 38);
-            SortByPriorityBtn.TabIndex = 8;
-            SortByPriorityBtn.Text = "SORT BY PRIORITY";
-            SortByPriorityBtn.UseVisualStyleBackColor = false;
-            SortByPriorityBtn.Click += SortByPriorityBtn_Click;
+            SortOrderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SortOrderComboBox.FormattingEnabled = true;
+            SortOrderComboBox.Items.AddRange(new object[] { "Low to High", "High to Low" });
+            SortOrderComboBox.Location = new Point(440, 70);
+            SortOrderComboBox.Name = "SortOrderComboBox";
+            SortOrderComboBox.Size = new Size(171, 23);
+            SortOrderComboBox.TabIndex = 8;
+            SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
             // 
             // btnEditTicket
             // 
             btnEditTicket.BackColor = Color.LightGray;
+            btnEditTicket.Enabled = false;
             btnEditTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
             btnEditTicket.Location = new Point(400, 12);
             btnEditTicket.Name = "btnEditTicket";
@@ -868,6 +867,7 @@
             // 
             // isResolvedCmbBox
             // 
+            isResolvedCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             isResolvedCmbBox.FormattingEnabled = true;
             isResolvedCmbBox.Items.AddRange(new object[] { "Yes", "No" });
             isResolvedCmbBox.Location = new Point(167, 235);
@@ -877,6 +877,7 @@
             // 
             // priorityCmbBox
             // 
+            priorityCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             priorityCmbBox.FormattingEnabled = true;
             priorityCmbBox.Items.AddRange(new object[] { "Low", "Medium", "High" });
             priorityCmbBox.Location = new Point(167, 200);
@@ -886,6 +887,7 @@
             // 
             // statusCmbBox
             // 
+            statusCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             statusCmbBox.FormattingEnabled = true;
             statusCmbBox.Items.AddRange(new object[] { "Open", "Closed" });
             statusCmbBox.Location = new Point(167, 163);
@@ -895,6 +897,7 @@
             // 
             // typeOfAccidentCmbBox
             // 
+            typeOfAccidentCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             typeOfAccidentCmbBox.FormattingEnabled = true;
             typeOfAccidentCmbBox.Items.AddRange(new object[] { "Software", "Service", "Hardware" });
             typeOfAccidentCmbBox.Location = new Point(167, 126);
@@ -904,6 +907,7 @@
             // 
             // serviceDeskUserCmbBox
             // 
+            serviceDeskUserCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
             serviceDeskUserCmbBox.FormattingEnabled = true;
             serviceDeskUserCmbBox.Location = new Point(167, 61);
             serviceDeskUserCmbBox.Name = "serviceDeskUserCmbBox";
@@ -1275,8 +1279,8 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlAddEditTicket);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
@@ -1417,7 +1421,7 @@
         private ComboBox deadlineCmbBox;
         private ComboBox isResolvedCmbBox;
         private ComboBox priorityCmbBox;
-        private Button SortByPriorityBtn;
-        private Label sortExplanationLbl;
+        private ComboBox SortOrderComboBox;
+        private Label label15;
     }
 }
