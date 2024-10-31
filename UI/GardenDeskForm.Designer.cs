@@ -606,20 +606,20 @@
             // chartResolved
             // 
             chartArea1.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea1);
+            chartOpen.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            chartResolved.Legends.Add(legend1);
-            chartResolved.Location = new Point(440, 235);
-            chartResolved.Name = "chartResolved";
+            chartOpen.Legends.Add(legend1);
+            chartOpen.Location = new Point(25, 108);
+            chartOpen.Name = "chartOpen";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
             series1.IsVisibleInLegend = false;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            chartResolved.Series.Add(series1);
-            chartResolved.Size = new Size(155, 180);
-            chartResolved.TabIndex = 4;
-            chartResolved.Text = "chart3";
+            chartOpen.Series.Add(series1);
+            chartOpen.Size = new Size(150, 180);
+            chartOpen.TabIndex = 2;
+            chartOpen.Text = "chart1";
             // 
             // chartClosed
             // 
@@ -627,7 +627,7 @@
             chartClosed.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             chartClosed.Legends.Add(legend2);
-            chartClosed.Location = new Point(228, 235);
+            chartClosed.Location = new Point(275, 108);
             chartClosed.Name = "chartClosed";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
@@ -635,27 +635,110 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             chartClosed.Series.Add(series2);
-            chartClosed.Size = new Size(155, 180);
-            chartClosed.TabIndex = 3;
+            chartClosed.Size = new Size(150, 180);
+            chartClosed.TabIndex = 0;
             chartClosed.Text = "chart2";
             // 
-            // chartOpen
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(500, 25);
+            label3.Name = "label3";
+            label3.Padding = new Padding(0, 10, 0, 0);
+            label3.Size = new Size(200, 65);
+            label3.TabIndex = 13;
+            label3.Text = "all tickets currently resolved and closed";
+            label3.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // chartResolved
             // 
             chartArea3.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea3);
+            chartResolved.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
-            chartOpen.Legends.Add(legend3);
-            chartOpen.Location = new Point(23, 235);
-            chartOpen.Name = "chartOpen";
+            chartResolved.Legends.Add(legend3);
+            chartResolved.Location = new Point(525, 108);
+            chartResolved.Name = "chartResolved";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
             series3.IsVisibleInLegend = false;
             series3.Legend = "Legend1";
             series3.Name = "Series1";
-            chartOpen.Series.Add(series3);
-            chartOpen.Size = new Size(155, 180);
-            chartOpen.TabIndex = 2;
-            chartOpen.Text = "chart1";
+            chartResolved.Series.Add(series3);
+            chartResolved.Size = new Size(150, 180);
+            chartResolved.TabIndex = 0;
+            chartResolved.Text = "chart3";
+            // 
+            // label4
+            // 
+            label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(500, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(200, 25);
+            label4.TabIndex = 12;
+            label4.Text = "Resolved incidents";
+            label4.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblOpenNumber
+            // 
+            lblOpenNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenNumber.Location = new Point(0, 288);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(200, 20);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(250, 25);
+            label1.Name = "label1";
+            label1.Padding = new Padding(0, 10, 0, 0);
+            label1.Size = new Size(200, 65);
+            label1.TabIndex = 11;
+            label1.Text = "all tickets currently closed without resolving";
+            label1.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblClosedNumber
+            // 
+            lblClosedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblClosedNumber.Location = new Point(250, 288);
+            lblClosedNumber.Name = "lblClosedNumber";
+            lblClosedNumber.Size = new Size(200, 20);
+            lblClosedNumber.TabIndex = 0;
+            lblClosedNumber.Text = "label2";
+            lblClosedNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(250, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(200, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Closed incidents";
+            label2.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblResolvedNumber
+            // 
+            lblResolvedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblResolvedNumber.Location = new Point(500, 288);
+            lblResolvedNumber.Name = "lblResolvedNumber";
+            lblResolvedNumber.Size = new Size(200, 20);
+            lblResolvedNumber.TabIndex = 0;
+            lblResolvedNumber.Text = "label3";
+            lblResolvedNumber.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblOpenDescription
+            // 
+            lblOpenDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblOpenDescription.Location = new Point(0, 25);
+            lblOpenDescription.Name = "lblOpenDescription";
+            lblOpenDescription.Padding = new Padding(0, 10, 0, 0);
+            lblOpenDescription.Size = new Size(200, 65);
+            lblOpenDescription.TabIndex = 9;
+            lblOpenDescription.Text = "all tickets currently open";
+            lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblDashboard
             // 
