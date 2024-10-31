@@ -49,6 +49,58 @@ namespace UI
         }
 
         /// <summary>
+        /// Centers the login panel elements horizontally within the form by calculating and applying a common indent.
+        /// This method ensures that the login panel components are visually aligned and positioned correctly for a centered layout.
+        /// </summary>
+        private void SetUpLoginPanelIndents()
+        {
+            // Calculate indent based on screen width and username textbox width
+            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - txtBoxLoginUsername.Width / 2;
+
+            // Apply the calculated indent to each login component to center them horizontally
+            lblLoginUsername.Left += indent;
+            txtBoxLoginUsername.Left += indent;
+            lblLoginPassword.Left += indent;
+            txtBoxLoginPassword.Left += indent;
+            lblLoginWrongCredentials.Left += indent;
+            btnLogin.Left += indent;
+        }
+
+        /// <summary>
+        /// Configures and displays the menu items in the menu strip based on the current user's role.
+        /// Regular employees will not have access to the user management menu item, and all items are resized
+        /// to evenly fill the menu strip width.
+        /// </summary>
+        private void SetUpMenuStrip()
+        {
+            List<ToolStripItem> menuItems = new List<ToolStripItem>();
+
+            foreach (ToolStripItem menuItem in menuStrip.Items)
+            {
+                // Display all items, including separators
+                menuItem.Visible = true;
+
+                // Store temporary all menu items
+                if (menuItem is ToolStripMenuItem)
+                    menuItems.Add(menuItem);
+
+                // Remove and hide the user management for a regular employee
+                if (menuItem.Name == menuItemUsers.Name && loggedInEmployee != null && loggedInEmployee.Role == EmployeeRole.RegularEmployee)
+                {
+                    menuItems.Remove(menuItem);
+                    menuItem.Visible = false;
+                    toolStripSeparator2.Visible = false;
+                }
+            }
+
+            // Resize menu items to fill the menu strip width
+            foreach (ToolStripItem menuItem in menuItems)
+            {
+                menuItem.Width = menuStrip.Width / menuItems.Count - toolStripSeparator1.Width - menuStrip.Padding.Horizontal;
+            }
+        }
+
+        /// <summary>
         /// Centers the specified holder panel horizontally within the form by calculating and applying an indent 
         /// based on the screen width.
         /// </summary>
