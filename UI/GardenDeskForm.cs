@@ -676,6 +676,7 @@ namespace UI
             closeTicketBtn.Visible = showClose;
             serviceDeskUserCmbBox.Enabled = enableServiceDeskCombo;
         }
+
         #endregion
 
         #region Update Ticket
