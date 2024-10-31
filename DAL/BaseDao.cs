@@ -15,6 +15,7 @@ namespace DAL
         private static string? connectionString;
         private static IMongoClient? mongoClient;
         private static IMongoDatabase? database;
+        private static MongoClientSettings? mongoSettings;
 
         // References to the collections in the MongoDB instance.
         protected static IMongoCollection<Employee>? employeeCollection;
@@ -33,7 +34,11 @@ namespace DAL
             try
             {
                 connectionString = ConfigurationManager.AppSettings["MongoDB"];
-                mongoClient = new MongoClient(connectionString);
+                mongoSettings = MongoClientSettings.FromConnectionString(connectionString);
+                mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
+                mongoSettings.SocketTimeout = TimeSpan.FromSeconds(5);
+                mongoSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
+                mongoClient = new MongoClient(mongoSettings);
                 database = mongoClient.GetDatabase("NoSQLCluster");
                 employeeCollection = database.GetCollection<Employee>("Employee");
                 ticketCollection = database.GetCollection<Ticket>("Ticket");
