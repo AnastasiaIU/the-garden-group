@@ -306,6 +306,7 @@ namespace UI
             ClearEdittedInputs(); // in the case of a previous edit operation
 
             ShowPanel(pnlAddEditUser);
+            SetIndentForHolderPanel(panelAddEditUserHolder);
         }
 
         private async void btnCreateEmployee_Click(object sender, EventArgs e)
@@ -380,6 +381,7 @@ namespace UI
             PrefillEditInputs();
 
             ShowPanel(pnlAddEditUser);
+            SetIndentForHolderPanel(panelAddEditUserHolder);
         }
 
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)

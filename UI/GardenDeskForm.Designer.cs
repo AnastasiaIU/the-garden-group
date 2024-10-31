@@ -128,22 +128,23 @@
             addTicketBtn = new Button();
             menuStripBackground = new PictureBox();
             pnlAddEditUser = new Panel();
-            btnCreateEmployee = new Button();
+            panelAddEditUserHolder = new Panel();
+            lblFirstNameEdit = new Label();
             btnCancelChangesEmployee = new Button();
+            btnCreateEmployee = new Button();
+            btnDeleteEmployee = new Button();
             btnUpdateEmployee = new Button();
+            lblLastNameEdit = new Label();
+            lblTypeUserEdit = new Label();
+            lblEmailAddressEdit = new Label();
             comboBoxTypeUser = new ComboBox();
+            lblPhoneNumberEdit = new Label();
             textBoxBranch = new TextBox();
+            lblBranchEdit = new Label();
             textBoxPhoneNumber = new TextBox();
+            textBoxFirstName = new TextBox();
             textBoxEmailAddress = new TextBox();
             textBoxLastName = new TextBox();
-            textBoxFirstName = new TextBox();
-            lblBranchEdit = new Label();
-            lblPhoneNumberEdit = new Label();
-            lblEmailAddressEdit = new Label();
-            lblTypeUserEdit = new Label();
-            lblLastNameEdit = new Label();
-            lblFirstNameEdit = new Label();
-            btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
             pnlViewTicket = new Panel();
@@ -189,6 +190,7 @@
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
             pnlAddEditUser.SuspendLayout();
+            panelAddEditUserHolder.SuspendLayout();
             pnlViewTicket.SuspendLayout();
             pnlDbError.SuspendLayout();
             SuspendLayout();
@@ -1107,7 +1109,7 @@
             lblTicketsOverview.Padding = new Padding(0, 10, 0, 0);
             lblTicketsOverview.Size = new Size(784, 46);
             lblTicketsOverview.TabIndex = 0;
-            lblTicketsOverview.Text = "Tickets Overview";
+            lblTicketsOverview.Text = "Tickets overview";
             lblTicketsOverview.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlUsers
@@ -1482,200 +1484,223 @@
             // 
             // pnlAddEditUser
             // 
+            pnlAddEditUser.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlAddEditUser.BackColor = Color.White;
-            pnlAddEditUser.Controls.Add(btnCreateEmployee);
-            pnlAddEditUser.Controls.Add(btnCancelChangesEmployee);
-            pnlAddEditUser.Controls.Add(btnUpdateEmployee);
-            pnlAddEditUser.Controls.Add(comboBoxTypeUser);
-            pnlAddEditUser.Controls.Add(textBoxBranch);
-            pnlAddEditUser.Controls.Add(textBoxPhoneNumber);
-            pnlAddEditUser.Controls.Add(textBoxEmailAddress);
-            pnlAddEditUser.Controls.Add(textBoxLastName);
-            pnlAddEditUser.Controls.Add(textBoxFirstName);
-            pnlAddEditUser.Controls.Add(lblBranchEdit);
-            pnlAddEditUser.Controls.Add(lblPhoneNumberEdit);
-            pnlAddEditUser.Controls.Add(lblEmailAddressEdit);
-            pnlAddEditUser.Controls.Add(lblTypeUserEdit);
-            pnlAddEditUser.Controls.Add(lblLastNameEdit);
-            pnlAddEditUser.Controls.Add(lblFirstNameEdit);
-            pnlAddEditUser.Controls.Add(btnDeleteEmployee);
+            pnlAddEditUser.Controls.Add(panelAddEditUserHolder);
             pnlAddEditUser.Controls.Add(lblAddEditUser);
             pnlAddEditUser.Controls.Add(splitterAddEditUser);
-            pnlAddEditUser.Location = new Point(0, 130);
+            pnlAddEditUser.Location = new Point(0, 122);
             pnlAddEditUser.Name = "pnlAddEditUser";
-            pnlAddEditUser.Size = new Size(634, 599);
-            pnlAddEditUser.TabIndex = 10;
+            pnlAddEditUser.Size = new Size(784, 758);
+            pnlAddEditUser.TabIndex = 0;
             // 
-            // btnCreateEmployee
+            // panelAddEditUserHolder
             // 
-            btnCreateEmployee.BackColor = Color.LightGreen;
-            btnCreateEmployee.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCreateEmployee.Location = new Point(471, 406);
-            btnCreateEmployee.Name = "btnCreateEmployee";
-            btnCreateEmployee.Size = new Size(140, 40);
-            btnCreateEmployee.TabIndex = 17;
-            btnCreateEmployee.Text = "Create Employee";
-            btnCreateEmployee.UseVisualStyleBackColor = false;
-            btnCreateEmployee.Visible = false;
-            btnCreateEmployee.Click += btnCreateEmployee_Click;
-            // 
-            // btnCancelChangesEmployee
-            // 
-            btnCancelChangesEmployee.BackColor = Color.Silver;
-            btnCancelChangesEmployee.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancelChangesEmployee.Location = new Point(321, 406);
-            btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
-            btnCancelChangesEmployee.Size = new Size(140, 40);
-            btnCancelChangesEmployee.TabIndex = 16;
-            btnCancelChangesEmployee.Text = "Cancel Changes";
-            btnCancelChangesEmployee.UseVisualStyleBackColor = false;
-            btnCancelChangesEmployee.Click += btnCancelChangesEmployee_Click;
-            // 
-            // btnUpdateEmployee
-            // 
-            btnUpdateEmployee.BackColor = Color.Orange;
-            btnUpdateEmployee.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnUpdateEmployee.Location = new Point(471, 406);
-            btnUpdateEmployee.Name = "btnUpdateEmployee";
-            btnUpdateEmployee.Size = new Size(140, 40);
-            btnUpdateEmployee.TabIndex = 15;
-            btnUpdateEmployee.Text = "Update Employee";
-            btnUpdateEmployee.UseVisualStyleBackColor = false;
-            btnUpdateEmployee.Click += btnUpdateEmployee_Click;
-            // 
-            // comboBoxTypeUser
-            // 
-            comboBoxTypeUser.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxTypeUser.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxTypeUser.FormattingEnabled = true;
-            comboBoxTypeUser.Items.AddRange(new object[] { "RegularEmployee", "ServiceDeskEmployee" });
-            comboBoxTypeUser.Location = new Point(199, 163);
-            comboBoxTypeUser.Name = "comboBoxTypeUser";
-            comboBoxTypeUser.Size = new Size(155, 25);
-            comboBoxTypeUser.TabIndex = 14;
-            // 
-            // textBoxBranch
-            // 
-            textBoxBranch.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxBranch.Location = new Point(199, 283);
-            textBoxBranch.Name = "textBoxBranch";
-            textBoxBranch.Size = new Size(155, 25);
-            textBoxBranch.TabIndex = 13;
-            // 
-            // textBoxPhoneNumber
-            // 
-            textBoxPhoneNumber.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxPhoneNumber.Location = new Point(199, 243);
-            textBoxPhoneNumber.Name = "textBoxPhoneNumber";
-            textBoxPhoneNumber.Size = new Size(155, 25);
-            textBoxPhoneNumber.TabIndex = 12;
-            // 
-            // textBoxEmailAddress
-            // 
-            textBoxEmailAddress.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxEmailAddress.Location = new Point(199, 203);
-            textBoxEmailAddress.Name = "textBoxEmailAddress";
-            textBoxEmailAddress.Size = new Size(155, 25);
-            textBoxEmailAddress.TabIndex = 11;
-            // 
-            // textBoxLastName
-            // 
-            textBoxLastName.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxLastName.Location = new Point(199, 123);
-            textBoxLastName.Name = "textBoxLastName";
-            textBoxLastName.Size = new Size(155, 25);
-            textBoxLastName.TabIndex = 10;
-            // 
-            // textBoxFirstName
-            // 
-            textBoxFirstName.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxFirstName.Location = new Point(199, 83);
-            textBoxFirstName.Name = "textBoxFirstName";
-            textBoxFirstName.Size = new Size(155, 25);
-            textBoxFirstName.TabIndex = 9;
-            // 
-            // lblBranchEdit
-            // 
-            lblBranchEdit.AutoSize = true;
-            lblBranchEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblBranchEdit.Location = new Point(36, 290);
-            lblBranchEdit.Name = "lblBranchEdit";
-            lblBranchEdit.Size = new Size(54, 19);
-            lblBranchEdit.TabIndex = 8;
-            lblBranchEdit.Text = "Branch:";
-            // 
-            // lblPhoneNumberEdit
-            // 
-            lblPhoneNumberEdit.AutoSize = true;
-            lblPhoneNumberEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPhoneNumberEdit.Location = new Point(36, 249);
-            lblPhoneNumberEdit.Name = "lblPhoneNumberEdit";
-            lblPhoneNumberEdit.Size = new Size(103, 19);
-            lblPhoneNumberEdit.TabIndex = 7;
-            lblPhoneNumberEdit.Text = "Phone number:";
-            // 
-            // lblEmailAddressEdit
-            // 
-            lblEmailAddressEdit.AutoSize = true;
-            lblEmailAddressEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblEmailAddressEdit.Location = new Point(36, 210);
-            lblEmailAddressEdit.Name = "lblEmailAddressEdit";
-            lblEmailAddressEdit.Size = new Size(101, 19);
-            lblEmailAddressEdit.TabIndex = 6;
-            lblEmailAddressEdit.Text = "E-mail address:";
-            // 
-            // lblTypeUserEdit
-            // 
-            lblTypeUserEdit.AutoSize = true;
-            lblTypeUserEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTypeUserEdit.Location = new Point(35, 169);
-            lblTypeUserEdit.Name = "lblTypeUserEdit";
-            lblTypeUserEdit.Size = new Size(90, 19);
-            lblTypeUserEdit.TabIndex = 5;
-            lblTypeUserEdit.Text = "Type of user: ";
-            // 
-            // lblLastNameEdit
-            // 
-            lblLastNameEdit.AutoSize = true;
-            lblLastNameEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLastNameEdit.Location = new Point(35, 129);
-            lblLastNameEdit.Name = "lblLastNameEdit";
-            lblLastNameEdit.Size = new Size(75, 19);
-            lblLastNameEdit.TabIndex = 4;
-            lblLastNameEdit.Text = "Last name:";
+            panelAddEditUserHolder.Controls.Add(lblFirstNameEdit);
+            panelAddEditUserHolder.Controls.Add(btnCancelChangesEmployee);
+            panelAddEditUserHolder.Controls.Add(btnCreateEmployee);
+            panelAddEditUserHolder.Controls.Add(btnDeleteEmployee);
+            panelAddEditUserHolder.Controls.Add(btnUpdateEmployee);
+            panelAddEditUserHolder.Controls.Add(lblLastNameEdit);
+            panelAddEditUserHolder.Controls.Add(lblTypeUserEdit);
+            panelAddEditUserHolder.Controls.Add(lblEmailAddressEdit);
+            panelAddEditUserHolder.Controls.Add(comboBoxTypeUser);
+            panelAddEditUserHolder.Controls.Add(lblPhoneNumberEdit);
+            panelAddEditUserHolder.Controls.Add(textBoxBranch);
+            panelAddEditUserHolder.Controls.Add(lblBranchEdit);
+            panelAddEditUserHolder.Controls.Add(textBoxPhoneNumber);
+            panelAddEditUserHolder.Controls.Add(textBoxFirstName);
+            panelAddEditUserHolder.Controls.Add(textBoxEmailAddress);
+            panelAddEditUserHolder.Controls.Add(textBoxLastName);
+            panelAddEditUserHolder.Location = new Point(0, 70);
+            panelAddEditUserHolder.Name = "panelAddEditUserHolder";
+            panelAddEditUserHolder.Size = new Size(470, 300);
+            panelAddEditUserHolder.TabIndex = 0;
             // 
             // lblFirstNameEdit
             // 
             lblFirstNameEdit.AutoSize = true;
-            lblFirstNameEdit.Font = new Font("Segoe UI", 9.857143F, FontStyle.Regular, GraphicsUnit.Point);
-            lblFirstNameEdit.Location = new Point(35, 89);
+            lblFirstNameEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblFirstNameEdit.Location = new Point(0, 4);
             lblFirstNameEdit.Name = "lblFirstNameEdit";
-            lblFirstNameEdit.Size = new Size(76, 19);
+            lblFirstNameEdit.Size = new Size(86, 21);
             lblFirstNameEdit.TabIndex = 3;
             lblFirstNameEdit.Text = "First name:";
             // 
+            // btnCancelChangesEmployee
+            // 
+            btnCancelChangesEmployee.BackColor = Color.DarkGray;
+            btnCancelChangesEmployee.FlatAppearance.BorderSize = 0;
+            btnCancelChangesEmployee.FlatStyle = FlatStyle.Flat;
+            btnCancelChangesEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelChangesEmployee.ForeColor = Color.White;
+            btnCancelChangesEmployee.Location = new Point(160, 260);
+            btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
+            btnCancelChangesEmployee.Size = new Size(150, 30);
+            btnCancelChangesEmployee.TabIndex = 9;
+            btnCancelChangesEmployee.Text = "CANCEL CHANGES";
+            btnCancelChangesEmployee.UseVisualStyleBackColor = false;
+            btnCancelChangesEmployee.Click += btnCancelChangesEmployee_Click;
+            // 
+            // btnCreateEmployee
+            // 
+            btnCreateEmployee.BackColor = Color.OliveDrab;
+            btnCreateEmployee.FlatAppearance.BorderSize = 0;
+            btnCreateEmployee.FlatStyle = FlatStyle.Flat;
+            btnCreateEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCreateEmployee.ForeColor = Color.White;
+            btnCreateEmployee.Location = new Point(0, 260);
+            btnCreateEmployee.Name = "btnCreateEmployee";
+            btnCreateEmployee.Size = new Size(150, 30);
+            btnCreateEmployee.TabIndex = 7;
+            btnCreateEmployee.Text = "CREATE EMPLOYEE";
+            btnCreateEmployee.UseVisualStyleBackColor = false;
+            btnCreateEmployee.Visible = false;
+            btnCreateEmployee.Click += btnCreateEmployee_Click;
+            // 
             // btnDeleteEmployee
             // 
-            btnDeleteEmployee.BackColor = Color.Tomato;
-            btnDeleteEmployee.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnDeleteEmployee.Location = new Point(167, 406);
+            btnDeleteEmployee.BackColor = Color.Firebrick;
+            btnDeleteEmployee.FlatAppearance.BorderSize = 0;
+            btnDeleteEmployee.FlatStyle = FlatStyle.Flat;
+            btnDeleteEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDeleteEmployee.ForeColor = Color.White;
+            btnDeleteEmployee.Location = new Point(320, 260);
             btnDeleteEmployee.Name = "btnDeleteEmployee";
-            btnDeleteEmployee.Size = new Size(140, 40);
-            btnDeleteEmployee.TabIndex = 2;
-            btnDeleteEmployee.Text = "Delete Employee";
+            btnDeleteEmployee.Size = new Size(150, 30);
+            btnDeleteEmployee.TabIndex = 8;
+            btnDeleteEmployee.Text = "DELETE EMPLOYEE";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
             btnDeleteEmployee.Click += btnDeleteEmployee_Click;
             // 
+            // btnUpdateEmployee
+            // 
+            btnUpdateEmployee.BackColor = Color.OliveDrab;
+            btnUpdateEmployee.FlatAppearance.BorderSize = 0;
+            btnUpdateEmployee.FlatStyle = FlatStyle.Flat;
+            btnUpdateEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnUpdateEmployee.ForeColor = Color.White;
+            btnUpdateEmployee.Location = new Point(0, 260);
+            btnUpdateEmployee.Name = "btnUpdateEmployee";
+            btnUpdateEmployee.Size = new Size(150, 30);
+            btnUpdateEmployee.TabIndex = 7;
+            btnUpdateEmployee.Text = "UPDATE EMPLOYEE";
+            btnUpdateEmployee.UseVisualStyleBackColor = false;
+            btnUpdateEmployee.Click += btnUpdateEmployee_Click;
+            // 
+            // lblLastNameEdit
+            // 
+            lblLastNameEdit.AutoSize = true;
+            lblLastNameEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLastNameEdit.Location = new Point(0, 45);
+            lblLastNameEdit.Name = "lblLastNameEdit";
+            lblLastNameEdit.Size = new Size(84, 21);
+            lblLastNameEdit.TabIndex = 4;
+            lblLastNameEdit.Text = "Last name:";
+            // 
+            // lblTypeUserEdit
+            // 
+            lblTypeUserEdit.AutoSize = true;
+            lblTypeUserEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTypeUserEdit.Location = new Point(0, 83);
+            lblTypeUserEdit.Name = "lblTypeUserEdit";
+            lblTypeUserEdit.Size = new Size(101, 21);
+            lblTypeUserEdit.TabIndex = 5;
+            lblTypeUserEdit.Text = "Type of user: ";
+            // 
+            // lblEmailAddressEdit
+            // 
+            lblEmailAddressEdit.AutoSize = true;
+            lblEmailAddressEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEmailAddressEdit.Location = new Point(0, 123);
+            lblEmailAddressEdit.Name = "lblEmailAddressEdit";
+            lblEmailAddressEdit.Size = new Size(115, 21);
+            lblEmailAddressEdit.TabIndex = 6;
+            lblEmailAddressEdit.Text = "E-mail address:";
+            // 
+            // comboBoxTypeUser
+            // 
+            comboBoxTypeUser.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxTypeUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxTypeUser.FormattingEnabled = true;
+            comboBoxTypeUser.Items.AddRange(new object[] { "RegularEmployee", "ServiceDeskEmployee" });
+            comboBoxTypeUser.Location = new Point(165, 80);
+            comboBoxTypeUser.Name = "comboBoxTypeUser";
+            comboBoxTypeUser.Size = new Size(200, 29);
+            comboBoxTypeUser.TabIndex = 3;
+            // 
+            // lblPhoneNumberEdit
+            // 
+            lblPhoneNumberEdit.AutoSize = true;
+            lblPhoneNumberEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPhoneNumberEdit.Location = new Point(0, 163);
+            lblPhoneNumberEdit.Name = "lblPhoneNumberEdit";
+            lblPhoneNumberEdit.Size = new Size(116, 21);
+            lblPhoneNumberEdit.TabIndex = 7;
+            lblPhoneNumberEdit.Text = "Phone number:";
+            // 
+            // textBoxBranch
+            // 
+            textBoxBranch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxBranch.Location = new Point(165, 200);
+            textBoxBranch.Name = "textBoxBranch";
+            textBoxBranch.Size = new Size(200, 29);
+            textBoxBranch.TabIndex = 6;
+            // 
+            // lblBranchEdit
+            // 
+            lblBranchEdit.AutoSize = true;
+            lblBranchEdit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblBranchEdit.Location = new Point(0, 203);
+            lblBranchEdit.Name = "lblBranchEdit";
+            lblBranchEdit.Size = new Size(61, 21);
+            lblBranchEdit.TabIndex = 8;
+            lblBranchEdit.Text = "Branch:";
+            // 
+            // textBoxPhoneNumber
+            // 
+            textBoxPhoneNumber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxPhoneNumber.Location = new Point(165, 160);
+            textBoxPhoneNumber.Name = "textBoxPhoneNumber";
+            textBoxPhoneNumber.Size = new Size(200, 29);
+            textBoxPhoneNumber.TabIndex = 5;
+            // 
+            // textBoxFirstName
+            // 
+            textBoxFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxFirstName.Location = new Point(165, 0);
+            textBoxFirstName.Name = "textBoxFirstName";
+            textBoxFirstName.Size = new Size(200, 29);
+            textBoxFirstName.TabIndex = 1;
+            // 
+            // textBoxEmailAddress
+            // 
+            textBoxEmailAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxEmailAddress.Location = new Point(165, 120);
+            textBoxEmailAddress.Name = "textBoxEmailAddress";
+            textBoxEmailAddress.Size = new Size(200, 29);
+            textBoxEmailAddress.TabIndex = 4;
+            // 
+            // textBoxLastName
+            // 
+            textBoxLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLastName.Location = new Point(165, 40);
+            textBoxLastName.Name = "textBoxLastName";
+            textBoxLastName.Size = new Size(200, 29);
+            textBoxLastName.TabIndex = 2;
+            // 
             // lblAddEditUser
             // 
-            lblAddEditUser.AutoSize = true;
-            lblAddEditUser.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAddEditUser.Location = new Point(36, 29);
-            lblAddEditUser.Margin = new Padding(5, 0, 5, 0);
+            lblAddEditUser.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblAddEditUser.Font = new Font("Segoe UI", 16.125F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAddEditUser.Location = new Point(0, 0);
+            lblAddEditUser.Margin = new Padding(0);
             lblAddEditUser.Name = "lblAddEditUser";
-            lblAddEditUser.Size = new Size(160, 32);
-            lblAddEditUser.TabIndex = 1;
+            lblAddEditUser.Padding = new Padding(0, 10, 0, 0);
+            lblAddEditUser.Size = new Size(784, 46);
+            lblAddEditUser.TabIndex = 0;
             lblAddEditUser.Text = "Add/Edit User";
+            lblAddEditUser.TextAlign = ContentAlignment.TopCenter;
             // 
             // splitterAddEditUser
             // 
@@ -1684,7 +1709,7 @@
             splitterAddEditUser.Location = new Point(0, 0);
             splitterAddEditUser.Margin = new Padding(5);
             splitterAddEditUser.Name = "splitterAddEditUser";
-            splitterAddEditUser.Size = new Size(634, 2);
+            splitterAddEditUser.Size = new Size(784, 2);
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
@@ -1958,6 +1983,7 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
+            Controls.Add(pnlAddEditUser);
             Controls.Add(pnlUsers);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
@@ -1998,7 +2024,8 @@
             pnlAddEditTicket.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
             pnlAddEditUser.ResumeLayout(false);
-            pnlAddEditUser.PerformLayout();
+            panelAddEditUserHolder.ResumeLayout(false);
+            panelAddEditUserHolder.PerformLayout();
             pnlViewTicket.ResumeLayout(false);
             pnlViewTicket.PerformLayout();
             pnlDbError.ResumeLayout(false);
@@ -2062,7 +2089,6 @@
         private ComboBox comboBoxTypeUser;
         private Button btnCancelChangesEmployee;
         private Button btnUpdateEmployee;
-        private Button btnCreateEmployee;
         private Button btnEscalate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartOpen;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResolved;
@@ -2151,5 +2177,7 @@
         private ComboBox SortOrderComboBox;
         private Button btnViewTicket;
         private Panel panelUsersHandler;
+        private Panel panelAddEditUserHolder;
+        private Button btnCreateEmployee;
     }
 }
