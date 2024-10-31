@@ -168,9 +168,6 @@
             lblVTIncident = new Label();
             lblVTTitle = new Label();
             lblVTServiceDesk = new Label();
-            cancelTicketBtn = new Button();
-            closeTicketBtn = new Button();
-            editTicketBtn = new Button();
             splitterViewTicket = new Splitter();
             lblViewTicketTitle = new Label();
             menuStrip.SuspendLayout();
@@ -1048,10 +1045,6 @@
             pnlAddEditTicket.Controls.Add(label9);
             pnlAddEditTicket.Controls.Add(label8);
             pnlAddEditTicket.Controls.Add(label7);
-            pnlAddEditTicket.Controls.Add(cancelTicketBtn);
-            pnlAddEditTicket.Controls.Add(closeTicketBtn);
-            pnlAddEditTicket.Controls.Add(editTicketBtn);
-            pnlAddEditTicket.Controls.Add(addTicketBtn);
             pnlAddEditTicket.Controls.Add(splitterAddEditTicket);
             pnlAddEditTicket.Controls.Add(lblAddEditTicket);
             pnlAddEditTicket.Location = new Point(0, 130);
@@ -1716,42 +1709,6 @@
             lblVTServiceDesk.Size = new Size(99, 15);
             lblVTServiceDesk.TabIndex = 6;
             lblVTServiceDesk.Text = "Service desk user:";
-            // 
-            // cancelTicketBtn
-            // 
-            cancelTicketBtn.BackColor = Color.Black;
-            cancelTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            cancelTicketBtn.ForeColor = SystemColors.HighlightText;
-            cancelTicketBtn.Location = new Point(482, 409);
-            cancelTicketBtn.Name = "cancelTicketBtn";
-            cancelTicketBtn.Size = new Size(140, 40);
-            cancelTicketBtn.TabIndex = 5;
-            cancelTicketBtn.Text = "Cancel Changes";
-            cancelTicketBtn.UseVisualStyleBackColor = false;
-            // 
-            // closeTicketBtn
-            // 
-            closeTicketBtn.BackColor = Color.Tomato;
-            closeTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            closeTicketBtn.Location = new Point(157, 410);
-            closeTicketBtn.Name = "closeTicketBtn";
-            closeTicketBtn.Size = new Size(140, 40);
-            closeTicketBtn.TabIndex = 4;
-            closeTicketBtn.Text = "Close Ticket";
-            closeTicketBtn.UseVisualStyleBackColor = false;
-            closeTicketBtn.Visible = false;
-            // 
-            // editTicketBtn
-            // 
-            editTicketBtn.BackColor = Color.Yellow;
-            editTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            editTicketBtn.Location = new Point(321, 409);
-            editTicketBtn.Name = "editTicketBtn";
-            editTicketBtn.Size = new Size(140, 40);
-            editTicketBtn.TabIndex = 3;
-            editTicketBtn.Text = "Edit Ticket";
-            editTicketBtn.UseVisualStyleBackColor = false;
-            editTicketBtn.Visible = false;
             // 
             // splitterViewTicket
             // 
