@@ -525,10 +525,10 @@ namespace UI
 
         #region Create Ticket
 
-        private void btnAddTicket_Click(object sender, EventArgs e)
+        private async void btnAddTicket_Click(object sender, EventArgs e)
         {
             ConfigureTicketPanel("Create new ticket", true, false, false, true);
-            PopulateServiceDeskEmployeeComboBoxAsync();
+            await PopulateServiceDeskEmployeeComboBoxAsync();
             serviceDeskUserCmbBox.Enabled = true;
             ClearInputs();
             ShowPanel(pnlAddEditTicket);
@@ -558,22 +558,19 @@ namespace UI
 
         private Ticket CreateTicketObject(DateTime time, string? ticketId = null)
         {
-                var ticket = new Ticket(
-                    reportingUser: loggedInEmployee.EmployeeId,
-                    serviceDeskUser: GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required."),
-                    title: IsInputBoxEmpty(titleTxtBox.Text, "Title is required."),
-                    description: IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required."),
-                    status: ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required.")),
-                    priority: ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.")),
-                    isResolved: ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required.")),
-                    isEscalated: false,
-                    deadline: CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time),
-                    incidentType: ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.")),
-                    creationDate: time,
-                    ticketId: ticketId
-                );
+            string reportingUser = loggedInEmployee.EmployeeId;
+            string serviceDeskUser = GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required.");
+            string title = IsInputBoxEmpty(titleTxtBox.Text, "Title is required.");
+            string description = IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required.");
+            Status status = ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required."));
+            Priority priority = ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required."));
+            bool isResolved = ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required."));
+            bool isEscalated = false;
+            DateTime deadline = CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time);
+            IncidentType incidentType = ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required."));
+            DateTime creationDate = time;
 
-                return ticket;
+            return new Ticket(reportingUser,serviceDeskUser, title, description, status, priority, isResolved, isEscalated, deadline, incidentType, creationDate);
         }
 
         private string GetServiceDeskUserId(ComboBox comboBox, string errorMessage)
@@ -656,14 +653,14 @@ namespace UI
         private void ClearInputs()
         {
             serviceDeskUserCmbBox.SelectedItem = null;
-            titleTxtBox.Text = "";
+            titleTxtBox.Text = string.Empty;
             typeOfAccidentCmbBox.SelectedItem = null;
             statusCmbBox.SelectedItem = null;
             priorityCmbBox.SelectedItem = null;
             isResolvedCmbBox.SelectedItem = null;
-            deadlineCmbBox.Text = "";
+            deadlineCmbBox.Text = string.Empty;
             deadlineCmbBox.SelectedItem = null;
-            descriptionTxtBox.Text = "";
+            descriptionTxtBox.Text = string.Empty;
         }
         private void cancelTicketBtn_Click(object sender, EventArgs e)
         {
@@ -683,11 +680,11 @@ namespace UI
 
         #region Update Ticket
 
-        private void btnEditTicket_Click(object sender, EventArgs e)
+        private async void btnEditTicket_Click(object sender, EventArgs e)
         {
             selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
             ConfigureTicketPanel("Edit ticket", false, true, true, false);
-            PrefillEditTicketInputs();
+            await PrefillEditTicketInputs();
             ShowPanel(pnlAddEditTicket);
         }
 
@@ -708,7 +705,7 @@ namespace UI
 
         private async Task PrefillEditTicketInputs()
         {
-            PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
+            await PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
 
             titleTxtBox.Text = selectedTicket.Title;
             typeOfAccidentCmbBox.Text = selectedTicket.IncidentType.ToString();
