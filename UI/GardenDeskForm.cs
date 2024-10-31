@@ -254,6 +254,21 @@ namespace UI
             ticketsListView.Columns[6].Width = (int)(tableWidth * 0.11);
         }
 
+        /// <summary>
+        /// Configures the column widths of the <see cref="usersList"/> control based on its total width.
+        /// Each column is assigned a proportional width to ensure a balanced and readable layout for user data.
+        /// </summary>
+        private void SetUsersListViewColumns()
+        {
+            int tableWidth = usersList.Width;
+
+            // Set the column widths based on the table width
+            usersList.Columns[0].Width = (int)(tableWidth * 0.25);
+            usersList.Columns[1].Width = (int)(tableWidth * 0.25);
+            usersList.Columns[2].Width = (int)(tableWidth * 0.25);
+            usersList.Columns[3].Width = (int)(tableWidth * 0.22);
+        }
+
         #endregion
 
         #region User Management Logic
@@ -427,7 +442,7 @@ namespace UI
         // Set up the Users panel
         private async Task ShowUsersView()
         {
-            ChangeButtonState(btnEditEmployee, Color.LightGray, false);
+            ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
             await DisplayEmployeesAsync();
             ShowPanel(pnlUsers);
         }
@@ -436,16 +451,17 @@ namespace UI
         private void usersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (usersList.SelectedItems.Count > 0)
-                ChangeButtonState(btnEditEmployee, Color.Orange, true);
+                ChangeButtonState(btnEditEmployee, Color.Peru, Color.White, true);
             else
-                ChangeButtonState(btnEditEmployee, Color.LightGray, false);
+                ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
         }
 
         // Changes the enablement and color of a button
-        private void ChangeButtonState(Button button, Color color, bool enablement)
+        private void ChangeButtonState(Button button, Color background, Color textColor, bool enablement)
         {
             button.Enabled = enablement;
-            button.BackColor = color;
+            button.BackColor = background;
+            button.ForeColor = textColor;
         }
 
         #endregion
@@ -461,16 +477,16 @@ namespace UI
             {
                 selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
 
-                ChangeButtonState(btnEditTicket, Color.Yellow, true);
+                ChangeButtonState(btnEditTicket, Color.Yellow, SystemColors.ControlText, true);
 
                 if (selectedTicket.IsEscalated == false && selectedTicket.Status != Status.Closed)
                 {
-                    ChangeButtonState(btnEscalate, Color.Tomato, true);
+                    ChangeButtonState(btnEscalate, Color.Tomato, SystemColors.ControlText, true);
                 }
             }
 
             else
-                ChangeButtonState(btnEscalate, Color.LightGray, false); ;
+                ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false); ;
         }
 
         private async void btnEscalate_Click(object sender, EventArgs e)
@@ -481,7 +497,7 @@ namespace UI
             MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
 
             // Disable escalate button after the operation
-            ChangeButtonState(btnEscalate, Color.LightGray, false);
+            ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false);
 
             await DisplayTicketsAsync(loggedInEmployee);
         }
@@ -761,7 +777,7 @@ namespace UI
         private void cancelTicketBtn_Click(object sender, EventArgs e)
         {
             ShowTicketsView();
-            ChangeButtonState(btnEditTicket, Color.LightGray, false);
+            ChangeButtonState(btnEditTicket, Color.LightGray, SystemColors.ControlText, false);
         }
 
         private void ConfigureTicketPanel(string label, bool showAdd, bool showEdit, bool showClose, bool enableServiceDeskCombo)

@@ -28,16 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            ListViewItem listViewItem2 = new ListViewItem("");
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             menuStrip = new ToolStrip();
             menuItemDashboard = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -94,16 +93,16 @@
             btnEscalate = new Button();
             lblTicketsOverview = new Label();
             pnlUsers = new Panel();
-            btnEditEmployee = new Button();
-            btnAddEmployee = new Button();
+            splitterUsers = new Splitter();
+            panelUsersHandler = new Panel();
             usersList = new ListView();
-            leftColumn = new ColumnHeader();
             userEmail = new ColumnHeader();
             userFirstName = new ColumnHeader();
             userLastName = new ColumnHeader();
             userTicketCount = new ColumnHeader();
+            btnEditEmployee = new Button();
+            btnAddEmployee = new Button();
             lblUsers = new Label();
-            splitterUsers = new Splitter();
             pnlAddEditTicket = new Panel();
             descriptionTxtBox = new TextBox();
             titleTxtBox = new TextBox();
@@ -186,6 +185,7 @@
             pnlTicketsOverview.SuspendLayout();
             panelTicketsHolder.SuspendLayout();
             pnlUsers.SuspendLayout();
+            panelUsersHandler.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
             pnlAddEditUser.SuspendLayout();
@@ -461,28 +461,28 @@
             // 
             // chartOpen
             // 
-            chartArea4.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chartOpen.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartOpen.Legends.Add(legend1);
             chartOpen.Location = new Point(25, 108);
             chartOpen.Name = "chartOpen";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series4.IsVisibleInLegend = false;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chartOpen.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartOpen.Series.Add(series1);
             chartOpen.Size = new Size(150, 180);
-            chartOpen.TabIndex = 2;
+            chartOpen.TabIndex = 0;
             chartOpen.Text = "chart1";
             // 
             // chartClosed
             // 
-            chartArea5.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            chartClosed.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
             chartClosed.Location = new Point(275, 108);
             chartClosed.Name = "chartClosed";
             series5.ChartArea = "ChartArea1";
@@ -798,18 +798,18 @@
             // 
             // chartResolved
             // 
-            chartArea6.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            chartResolved.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartResolved.Legends.Add(legend3);
             chartResolved.Location = new Point(525, 108);
             chartResolved.Name = "chartResolved";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            chartResolved.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartResolved.Series.Add(series3);
             chartResolved.Size = new Size(150, 180);
             chartResolved.TabIndex = 0;
             chartResolved.Text = "chart3";
@@ -1112,61 +1112,56 @@
             // 
             // pnlUsers
             // 
+            pnlUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlUsers.BackColor = Color.White;
-            pnlUsers.Controls.Add(btnEditEmployee);
-            pnlUsers.Controls.Add(btnAddEmployee);
-            pnlUsers.Controls.Add(usersList);
-            pnlUsers.Controls.Add(lblUsers);
             pnlUsers.Controls.Add(splitterUsers);
-            pnlUsers.Location = new Point(0, 130);
+            pnlUsers.Controls.Add(panelUsersHandler);
+            pnlUsers.Controls.Add(lblUsers);
+            pnlUsers.Location = new Point(0, 122);
             pnlUsers.Name = "pnlUsers";
-            pnlUsers.Size = new Size(634, 599);
-            pnlUsers.TabIndex = 7;
+            pnlUsers.Size = new Size(784, 758);
+            pnlUsers.TabIndex = 0;
             // 
-            // btnEditEmployee
+            // splitterUsers
             // 
-            btnEditEmployee.BackColor = Color.LightGray;
-            btnEditEmployee.Enabled = false;
-            btnEditEmployee.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEditEmployee.Location = new Point(353, 17);
-            btnEditEmployee.Name = "btnEditEmployee";
-            btnEditEmployee.Size = new Size(126, 31);
-            btnEditEmployee.TabIndex = 4;
-            btnEditEmployee.Text = "EDIT EMPLOYEE";
-            btnEditEmployee.UseVisualStyleBackColor = false;
-            btnEditEmployee.Click += btnEditUser_Click;
+            splitterUsers.BackColor = SystemColors.ControlDark;
+            splitterUsers.Dock = DockStyle.Top;
+            splitterUsers.Location = new Point(0, 0);
+            splitterUsers.Margin = new Padding(5);
+            splitterUsers.Name = "splitterUsers";
+            splitterUsers.Size = new Size(784, 1);
+            splitterUsers.TabIndex = 0;
+            splitterUsers.TabStop = false;
             // 
-            // btnAddEmployee
+            // panelUsersHandler
             // 
-            btnAddEmployee.BackColor = Color.LightGreen;
-            btnAddEmployee.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddEmployee.Location = new Point(485, 17);
-            btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(126, 31);
-            btnAddEmployee.TabIndex = 3;
-            btnAddEmployee.Text = "ADD EMPLOYEE";
-            btnAddEmployee.UseVisualStyleBackColor = false;
-            btnAddEmployee.Click += btnAddEmployee_Click;
+            panelUsersHandler.Controls.Add(usersList);
+            panelUsersHandler.Controls.Add(btnEditEmployee);
+            panelUsersHandler.Controls.Add(btnAddEmployee);
+            panelUsersHandler.Location = new Point(0, 70);
+            panelUsersHandler.Name = "panelUsersHandler";
+            panelUsersHandler.Size = new Size(780, 550);
+            panelUsersHandler.TabIndex = 0;
             // 
             // usersList
             // 
-            usersList.BackColor = SystemColors.InactiveCaption;
-            usersList.Columns.AddRange(new ColumnHeader[] { leftColumn, userEmail, userFirstName, userLastName, userTicketCount });
+            usersList.BackColor = SystemColors.Control;
+            usersList.BorderStyle = BorderStyle.FixedSingle;
+            usersList.Columns.AddRange(new ColumnHeader[] { userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
 
             usersList.Location = new Point(29, 63);
+            usersList.GridLines = true;
+            usersList.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            usersList.Location = new Point(0, 0);
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
-            usersList.Size = new Size(582, 383);
-            usersList.TabIndex = 2;
+            usersList.Size = new Size(780, 500);
+            usersList.TabIndex = 1;
+            usersList.TabStop = false;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
             usersList.SelectedIndexChanged += usersList_SelectedIndexChanged;
-            // 
-            // leftColumn
-            // 
-            leftColumn.Text = "";
-            leftColumn.Width = 0;
             // 
             // userEmail
             // 
@@ -1175,41 +1170,62 @@
             // 
             // userFirstName
             // 
-            userFirstName.Text = "First Name";
+            userFirstName.Text = "First name";
             userFirstName.Width = 150;
             // 
             // userLastName
             // 
-            userLastName.Text = "Last Name";
+            userLastName.Text = "Last name";
             userLastName.Width = 150;
             // 
             // userTicketCount
             // 
-            userTicketCount.Text = "#tickets";
-            userTicketCount.Width = 100;
+            userTicketCount.Text = "Number of tickets";
+            userTicketCount.Width = 150;
+            // 
+            // btnEditEmployee
+            // 
+            btnEditEmployee.BackColor = Color.LightGray;
+            btnEditEmployee.Enabled = false;
+            btnEditEmployee.FlatAppearance.BorderSize = 0;
+            btnEditEmployee.FlatStyle = FlatStyle.Flat;
+            btnEditEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditEmployee.Location = new Point(160, 515);
+            btnEditEmployee.Name = "btnEditEmployee";
+            btnEditEmployee.Size = new Size(150, 30);
+            btnEditEmployee.TabIndex = 3;
+            btnEditEmployee.Text = "EDIT EMPLOYEE";
+            btnEditEmployee.UseVisualStyleBackColor = false;
+            btnEditEmployee.Click += btnEditUser_Click;
+            // 
+            // btnAddEmployee
+            // 
+            btnAddEmployee.BackColor = Color.OliveDrab;
+            btnAddEmployee.FlatAppearance.BorderSize = 0;
+            btnAddEmployee.FlatStyle = FlatStyle.Flat;
+            btnAddEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddEmployee.ForeColor = Color.WhiteSmoke;
+            btnAddEmployee.Location = new Point(0, 515);
+            btnAddEmployee.Name = "btnAddEmployee";
+            btnAddEmployee.Size = new Size(150, 30);
+            btnAddEmployee.TabIndex = 2;
+            btnAddEmployee.Text = "ADD EMPLOYEE";
+            btnAddEmployee.UseVisualStyleBackColor = false;
+            btnAddEmployee.Click += btnAddEmployee_Click;
             // 
             // lblUsers
             // 
-            lblUsers.AutoSize = true;
-            lblUsers.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            lblUsers.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblUsers.Font = new Font("Segoe UI", 16.125F, FontStyle.Bold, GraphicsUnit.Point);
             lblUsers.ForeColor = SystemColors.ControlText;
-            lblUsers.Location = new Point(19, 13);
+            lblUsers.Location = new Point(0, 0);
             lblUsers.Margin = new Padding(2, 0, 2, 0);
             lblUsers.Name = "lblUsers";
-            lblUsers.Size = new Size(191, 30);
-            lblUsers.TabIndex = 1;
+            lblUsers.Padding = new Padding(0, 10, 0, 0);
+            lblUsers.Size = new Size(784, 46);
+            lblUsers.TabIndex = 0;
             lblUsers.Text = "User management";
-            // 
-            // splitterUsers
-            // 
-            splitterUsers.BackColor = Color.Black;
-            splitterUsers.Dock = DockStyle.Top;
-            splitterUsers.Location = new Point(0, 0);
-            splitterUsers.Margin = new Padding(5);
-            splitterUsers.Name = "splitterUsers";
-            splitterUsers.Size = new Size(634, 1);
-            splitterUsers.TabIndex = 0;
-            splitterUsers.TabStop = false;
+            lblUsers.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlAddEditTicket
             // 
@@ -1942,6 +1958,7 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
@@ -1976,7 +1993,7 @@
             panelTicketsHolder.ResumeLayout(false);
             panelTicketsHolder.PerformLayout();
             pnlUsers.ResumeLayout(false);
-            pnlUsers.PerformLayout();
+            panelUsersHandler.ResumeLayout(false);
             pnlAddEditTicket.ResumeLayout(false);
             pnlAddEditTicket.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
@@ -2024,7 +2041,6 @@
         private Label lblLoginUsername;
         private Label lblLoginPrompt;
         private ListView usersList;
-        private ColumnHeader leftColumn;
         private ColumnHeader userEmail;
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
@@ -2134,5 +2150,6 @@
         private Button searchbtn;
         private ComboBox SortOrderComboBox;
         private Button btnViewTicket;
+        private Panel panelUsersHandler;
     }
 }
