@@ -41,7 +41,7 @@ namespace UI
 
             // Show the login panel
             ShowPanel(pnlLogin);
-            SetUpLoginPanelIndents();
+            SetIndentForHolderPanel(panelLoginHolder);
 
             // Display a message if there is a database connection issue
             if (!employeeService.IsDatabaseInitiated())
@@ -49,21 +49,17 @@ namespace UI
         }
 
         /// <summary>
-        /// Centers the login panel elements horizontally within the form by calculating and applying a common indent.
-        /// This method ensures that the login panel components are visually aligned and positioned correctly for a centered layout.
+        /// Centers the specified holder panel horizontally within the form by calculating and applying an indent 
+        /// based on the screen width.
         /// </summary>
-        private void SetUpLoginPanelIndents()
+        /// <param name="holderPanel">The panel to center horizontally within the form.</param>
+        private void SetIndentForHolderPanel(Panel holderPanel)
         {
-            // Calculate indent based on screen width and username textbox width
-            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - txtBoxLoginUsername.Width / 2;
+            // Calculate indent based on screen width and the provided panel
+            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - holderPanel.Width / 2;
 
-            // Apply the calculated indent to each login component to center them horizontally
-            lblLoginUsername.Left += indent;
-            txtBoxLoginUsername.Left += indent;
-            lblLoginPassword.Left += indent;
-            txtBoxLoginPassword.Left += indent;
-            lblLoginWrongCredentials.Left += indent;
-            btnLogin.Left += indent;
+            // Apply the calculated indent
+            holderPanel.Left += indent;
         }
 
         /// <summary>
@@ -185,6 +181,7 @@ namespace UI
                 await GetTicketsForCurrentEmployee();
                 LoadCharts();
                 ShowPanel(pnlDashboard);
+                SetIndentForHolderPanel(panelChartHolder);
             }
         }
 
@@ -467,7 +464,7 @@ namespace UI
 
         private void SetUpCharts()
         {
-            foreach (Control control in pnlDashboard.Controls)
+            foreach (Control control in panelChartHolder.Controls)
             {
                 if (control is Chart)
                 {
