@@ -36,11 +36,68 @@ namespace UI
         {
             InitializeComponent();
 
+            // Set up the menu strip width
+            menuStrip.Width = Screen.FromHandle(Handle).Bounds.Width;
+
             // Show the login panel
             ShowPanel(pnlLogin);
+            SetUpLoginPanelIndents();
+
             // Display a message if there is a database connection issue
             if (!employeeService.IsDatabaseInitiated())
                 DisplayDatabaseError();
+        }
+
+        /// <summary>
+        /// Centers the login panel elements horizontally within the form by calculating and applying a common indent.
+        /// This method ensures that the login panel components are visually aligned and positioned correctly for a centered layout.
+        /// </summary>
+        private void SetUpLoginPanelIndents()
+        {
+            // Calculate indent based on screen width and username textbox width
+            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - txtBoxLoginUsername.Width / 2;
+
+            // Apply the calculated indent to each login component to center them horizontally
+            lblLoginUsername.Left += indent;
+            txtBoxLoginUsername.Left += indent;
+            lblLoginPassword.Left += indent;
+            txtBoxLoginPassword.Left += indent;
+            lblLoginWrongCredentials.Left += indent;
+            btnLogin.Left += indent;
+        }
+
+        /// <summary>
+        /// Configures and displays the menu items in the menu strip based on the current user's role.
+        /// Regular employees will not have access to the user management menu item, and all items are resized
+        /// to evenly fill the menu strip width.
+        /// </summary>
+        private void SetUpMenuStrip()
+        {
+            List<ToolStripItem> menuItems = new List<ToolStripItem>();
+
+            foreach (ToolStripItem menuItem in menuStrip.Items)
+            {
+                // Display all items, including separators
+                menuItem.Visible = true;
+
+                // Store temporary all menu items
+                if (menuItem is ToolStripMenuItem)
+                    menuItems.Add(menuItem);
+
+                // Remove and hide the user management for a regular employee
+                if (menuItem.Name == menuItemUsers.Name && loggedInEmployee != null && loggedInEmployee.Role == EmployeeRole.RegularEmployee)
+                {
+                    menuItems.Remove(menuItem);
+                    menuItem.Visible = false;
+                    toolStripSeparator2.Visible = false;
+                }
+            }
+
+            // Resize menu items to fill the menu strip width
+            foreach (ToolStripItem menuItem in menuItems)
+            {
+                menuItem.Width = menuStrip.Width / menuItems.Count - toolStripSeparator1.Width - menuStrip.Padding.Horizontal;
+            }
         }
 
         /// <summary>
@@ -55,14 +112,23 @@ namespace UI
             foreach (Control control in Controls)
                 if (control.Name.StartsWith(panelPrefix)) control.Hide();
 
-            // Hide menu for the login panel
-            if (panel.Name.Equals(Properties.Resources.LoginPanel))
-                menuStrip.Visible = false;
-            else
-                menuStrip.Visible = true;
-
             // Show the provided panel
             panel.Show();
+        }
+
+        /// <summary>
+        /// Handles the visibility change event for the login panel, setting the form's Accept button 
+        /// to <see cref="btnLogin"/> when the login panel is visible. This allows the Enter key to 
+        /// trigger the login action automatically.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void PanelLoginVisibilityChanged(object sender, EventArgs e)
+        {
+            if (pnlLogin.Visible)
+                AcceptButton = btnLogin;
+            else
+                AcceptButton = null;
         }
 
         /// <summary>
@@ -91,17 +157,6 @@ namespace UI
         }
 
         /// <summary>
-        /// Initiates the login attempt when the Enter key is pressed in the username or password text boxes.
-        /// </summary>
-        private async void OnTextBoxLoginKeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Return)
-            {
-                await AttemptLogin();
-            }
-        }
-
-        /// <summary>
         /// Attempts to log in the user by verifying credentials with the employee service.
         /// Displays an error if login fails; otherwise, sets the menu according with a user role and
         /// initiates and shows the dashboard panel.
@@ -121,7 +176,9 @@ namespace UI
             {
                 loggedInEmployee = employee;
 
-                // Sets the menu according with a user role
+                // Set up the menu according with a user role
+                SetUpMenuStrip();
+
                 SetUserRoleAccess();
 
                 // Initiate and show Dashboard panel
@@ -141,9 +198,6 @@ namespace UI
         {
             if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
             {
-                // Regular employee is not authorised for any user management
-                menuItemUsers.Visible = false;
-
                 // Regular employee is not authorised for escalating a ticket
                 btnEscalate.Visible = false;
             }

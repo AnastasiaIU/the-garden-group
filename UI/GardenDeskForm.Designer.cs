@@ -38,13 +38,15 @@
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             ListViewItem listViewItem1 = new ListViewItem("");
+            menuStrip = new ToolStrip();
+            menuItemDashboard = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            menuItemIncidents = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            menuItemUsers = new ToolStripMenuItem();
             logo = new PictureBox();
             lblGardenDesk = new Label();
             lblLicense = new Label();
-            menuStrip = new MenuStrip();
-            menuItemDashboard = new ToolStripMenuItem();
-            menuItemIncidents = new ToolStripMenuItem();
-            menuItemUsers = new ToolStripMenuItem();
             pnlLogin = new Panel();
             btnLogin = new Button();
             lblLoginWrongCredentials = new Label();
@@ -143,10 +145,39 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
+            pnlViewTicket = new Panel();
+            lblVTDeadlineValue = new Label();
+            lblVTDeadline = new Label();
+            lblVTEscalatedValue = new Label();
+            lblVTEscalated = new Label();
+            lblVTReportingUserValue = new Label();
+            lblVTReportingUser = new Label();
+            lblVTDescriptionValue = new Label();
+            lblVTCreationDateValue = new Label();
+            lblVTResolvedValue = new Label();
+            lblVTPriorityValue = new Label();
+            lblVTStatusValue = new Label();
+            lblVTIncidentValue = new Label();
+            lblVTTitleValue = new Label();
+            lblVTServiceDeskValue = new Label();
+            lblVTDescription = new Label();
+            lblVTCreationDate = new Label();
+            lblVTResolved = new Label();
+            lblVTPriority = new Label();
+            lblVTStatus = new Label();
+            lblVTIncident = new Label();
+            lblVTTitle = new Label();
+            lblVTServiceDesk = new Label();
+            cancelTicketBtn = new Button();
+            closeTicketBtn = new Button();
+            editTicketBtn = new Button();
+            addTicketBtn = new Button();
+            splitterViewTicket = new Splitter();
+            lblViewTicketTitle = new Label();
+            menuStrip.SuspendLayout();
             pnlDbError = new Panel();
             databaseErrorMessageLbl = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
-            menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
             pnlDashboard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartResolved).BeginInit();
@@ -157,8 +188,66 @@
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
             pnlAddEditUser.SuspendLayout();
+            pnlViewTicket.SuspendLayout();
             pnlDbError.SuspendLayout();
             SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            menuStrip.AutoSize = false;
+            menuStrip.BackColor = Color.White;
+            menuStrip.BackgroundImageLayout = ImageLayout.None;
+            menuStrip.CanOverflow = false;
+            menuStrip.Dock = DockStyle.None;
+            menuStrip.GripStyle = ToolStripGripStyle.Hidden;
+            menuStrip.ImageScalingSize = new Size(32, 32);
+            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, toolStripSeparator1, menuItemIncidents, toolStripSeparator2, menuItemUsers });
+            menuStrip.Location = new Point(0, 80);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Padding = new Padding(3, 1, 0, 1);
+            menuStrip.ShowItemToolTips = false;
+            menuStrip.Size = new Size(784, 42);
+            menuStrip.TabIndex = 0;
+            menuStrip.Text = "menuStrip";
+            // 
+            // menuItemDashboard
+            // 
+            menuItemDashboard.AutoSize = false;
+            menuItemDashboard.Name = "menuItemDashboard";
+            menuItemDashboard.Size = new Size(76, 40);
+            menuItemDashboard.Text = "Dashboard";
+            menuItemDashboard.Visible = false;
+            menuItemDashboard.Click += menuItemDashboard_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(6, 40);
+            toolStripSeparator1.Visible = false;
+            // 
+            // menuItemIncidents
+            // 
+            menuItemIncidents.AutoSize = false;
+            menuItemIncidents.Name = "menuItemIncidents";
+            menuItemIncidents.Size = new Size(136, 40);
+            menuItemIncidents.Text = "Incident Management";
+            menuItemIncidents.Visible = false;
+            menuItemIncidents.Click += menuItemIncidents_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 40);
+            toolStripSeparator2.Visible = false;
+            // 
+            // menuItemUsers
+            // 
+            menuItemUsers.AutoSize = false;
+            menuItemUsers.Name = "menuItemUsers";
+            menuItemUsers.Size = new Size(110, 40);
+            menuItemUsers.Text = "User Managment";
+            menuItemUsers.Visible = false;
+            menuItemUsers.Click += menuItemUsers_Click;
             // 
             // logo
             // 
@@ -173,12 +262,13 @@
             // 
             // lblGardenDesk
             // 
+            lblGardenDesk.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblGardenDesk.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblGardenDesk.Location = new Point(485, 0);
+            lblGardenDesk.Location = new Point(570, 0);
             lblGardenDesk.Margin = new Padding(2, 0, 2, 0);
             lblGardenDesk.Name = "lblGardenDesk";
             lblGardenDesk.Padding = new Padding(0, 7, 10, 0);
-            lblGardenDesk.Size = new Size(149, 32);
+            lblGardenDesk.Size = new Size(218, 32);
             lblGardenDesk.TabIndex = 1;
             lblGardenDesk.Text = "GardenDesk";
             lblGardenDesk.TextAlign = ContentAlignment.MiddleRight;
@@ -186,54 +276,19 @@
             // lblLicense
             // 
             lblLicense.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblLicense.Location = new Point(457, 50);
+            lblLicense.Location = new Point(546, 49);
             lblLicense.Margin = new Padding(2, 0, 2, 0);
             lblLicense.Name = "lblLicense";
             lblLicense.Padding = new Padding(0, 0, 10, 0);
-            lblLicense.Size = new Size(179, 15);
+            lblLicense.Size = new Size(242, 15);
             lblLicense.TabIndex = 2;
             lblLicense.Text = "Licensed to: The Garden Group";
-            // 
-            // menuStrip
-            // 
-            menuStrip.AutoSize = false;
-            menuStrip.BackColor = Color.White;
-            menuStrip.Dock = DockStyle.None;
-            menuStrip.ImageScalingSize = new Size(32, 32);
-            menuStrip.Items.AddRange(new ToolStripItem[] { menuItemDashboard, menuItemIncidents, menuItemUsers });
-            menuStrip.Location = new Point(0, 80);
-            menuStrip.Name = "menuStrip";
-            menuStrip.Padding = new Padding(3, 1, 0, 1);
-            menuStrip.Size = new Size(634, 32);
-            menuStrip.TabIndex = 3;
-            menuStrip.Text = "menuStrip";
-            // 
-            // menuItemDashboard
-            // 
-            menuItemDashboard.AutoSize = false;
-            menuItemDashboard.Name = "menuItemDashboard";
-            menuItemDashboard.Size = new Size(210, 30);
-            menuItemDashboard.Text = "Dashboard";
-            menuItemDashboard.Click += menuItemDashboard_Click;
-            // 
-            // menuItemIncidents
-            // 
-            menuItemIncidents.AutoSize = false;
-            menuItemIncidents.Name = "menuItemIncidents";
-            menuItemIncidents.Size = new Size(210, 30);
-            menuItemIncidents.Text = "Incident Management";
-            menuItemIncidents.Click += menuItemIncidents_Click;
-            // 
-            // menuItemUsers
-            // 
-            menuItemUsers.AutoSize = false;
-            menuItemUsers.Name = "menuItemUsers";
-            menuItemUsers.Size = new Size(210, 30);
-            menuItemUsers.Text = "User Managment";
-            menuItemUsers.Click += menuItemUsers_Click;
+            lblLicense.TextAlign = ContentAlignment.TopRight;
             // 
             // pnlLogin
             // 
+            pnlLogin.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlLogin.AutoSize = true;
             pnlLogin.BackColor = Color.White;
             pnlLogin.Controls.Add(btnLogin);
             pnlLogin.Controls.Add(lblLoginWrongCredentials);
@@ -243,17 +298,18 @@
             pnlLogin.Controls.Add(lblLoginUsername);
             pnlLogin.Controls.Add(lblLoginPrompt);
             pnlLogin.Controls.Add(lblLoginGardenDesk);
-            pnlLogin.Location = new Point(0, 112);
+            pnlLogin.Location = new Point(0, 80);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(634, 599);
-            pnlLogin.TabIndex = 4;
+            pnlLogin.Size = new Size(790, 803);
+            pnlLogin.TabIndex = 0;
+            pnlLogin.VisibleChanged += PanelLoginVisibilityChanged;
             // 
             // btnLogin
             // 
             btnLogin.BackColor = Color.OliveDrab;
             btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(242, 380);
+            btnLogin.Location = new Point(75, 453);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(150, 45);
             btnLogin.TabIndex = 3;
@@ -263,45 +319,43 @@
             // 
             // lblLoginWrongCredentials
             // 
-            lblLoginWrongCredentials.AutoSize = true;
             lblLoginWrongCredentials.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblLoginWrongCredentials.ForeColor = Color.Red;
-            lblLoginWrongCredentials.Location = new Point(167, 330);
+            lblLoginWrongCredentials.Location = new Point(0, 407);
             lblLoginWrongCredentials.Name = "lblLoginWrongCredentials";
-            lblLoginWrongCredentials.Size = new Size(294, 21);
+            lblLoginWrongCredentials.Size = new Size(300, 21);
             lblLoginWrongCredentials.TabIndex = 0;
             lblLoginWrongCredentials.Text = "Wrong username or password. Try again.";
+            lblLoginWrongCredentials.TextAlign = ContentAlignment.TopCenter;
             lblLoginWrongCredentials.Visible = false;
             // 
             // txtBoxLoginPassword
             // 
             txtBoxLoginPassword.BorderStyle = BorderStyle.FixedSingle;
             txtBoxLoginPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBoxLoginPassword.Location = new Point(167, 280);
+            txtBoxLoginPassword.Location = new Point(0, 355);
             txtBoxLoginPassword.Margin = new Padding(4);
             txtBoxLoginPassword.Name = "txtBoxLoginPassword";
             txtBoxLoginPassword.PasswordChar = '•';
             txtBoxLoginPassword.PlaceholderText = " Enter password";
             txtBoxLoginPassword.Size = new Size(300, 29);
             txtBoxLoginPassword.TabIndex = 2;
-            txtBoxLoginPassword.KeyPress += OnTextBoxLoginKeyPress;
             // 
             // txtBoxLoginUsername
             // 
             txtBoxLoginUsername.BorderStyle = BorderStyle.FixedSingle;
             txtBoxLoginUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBoxLoginUsername.Location = new Point(167, 200);
+            txtBoxLoginUsername.Location = new Point(0, 277);
             txtBoxLoginUsername.Name = "txtBoxLoginUsername";
             txtBoxLoginUsername.PlaceholderText = " Enter username";
             txtBoxLoginUsername.Size = new Size(300, 29);
             txtBoxLoginUsername.TabIndex = 1;
-            txtBoxLoginUsername.KeyPress += OnTextBoxLoginKeyPress;
             // 
             // lblLoginPassword
             // 
             lblLoginPassword.AutoSize = true;
             lblLoginPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLoginPassword.Location = new Point(167, 250);
+            lblLoginPassword.Location = new Point(0, 326);
             lblLoginPassword.Name = "lblLoginPassword";
             lblLoginPassword.Size = new Size(79, 21);
             lblLoginPassword.TabIndex = 0;
@@ -311,7 +365,7 @@
             // 
             lblLoginUsername.AutoSize = true;
             lblLoginUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLoginUsername.Location = new Point(167, 170);
+            lblLoginUsername.Location = new Point(0, 248);
             lblLoginUsername.Name = "lblLoginUsername";
             lblLoginUsername.Size = new Size(84, 21);
             lblLoginUsername.TabIndex = 0;
@@ -319,21 +373,25 @@
             // 
             // lblLoginPrompt
             // 
+            lblLoginPrompt.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblLoginPrompt.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblLoginPrompt.Location = new Point(150, 70);
+            lblLoginPrompt.Location = new Point(0, 133);
             lblLoginPrompt.Name = "lblLoginPrompt";
-            lblLoginPrompt.Size = new Size(334, 100);
+            lblLoginPrompt.Padding = new Padding(0, 20, 0, 0);
+            lblLoginPrompt.Size = new Size(785, 61);
             lblLoginPrompt.TabIndex = 0;
             lblLoginPrompt.Text = "Please provide login credentials to log in to GardenDesk for The Garden Group.";
             lblLoginPrompt.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblLoginGardenDesk
             // 
+            lblLoginGardenDesk.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblLoginGardenDesk.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblLoginGardenDesk.Location = new Point(0, 0);
             lblLoginGardenDesk.Margin = new Padding(5, 0, 5, 0);
             lblLoginGardenDesk.Name = "lblLoginGardenDesk";
-            lblLoginGardenDesk.Size = new Size(634, 37);
+            lblLoginGardenDesk.Padding = new Padding(0, 80, 0, 0);
+            lblLoginGardenDesk.Size = new Size(785, 130);
             lblLoginGardenDesk.TabIndex = 0;
             lblLoginGardenDesk.Text = "GardenDesk: TGG";
             lblLoginGardenDesk.TextAlign = ContentAlignment.TopCenter;
@@ -357,7 +415,7 @@
             pnlDashboard.Controls.Add(chartOpen);
             pnlDashboard.Controls.Add(lblDashboard);
             pnlDashboard.Controls.Add(splitterDashboard);
-            pnlDashboard.Location = new Point(0, 112);
+            pnlDashboard.Location = new Point(0, 130);
             pnlDashboard.Name = "pnlDashboard";
             pnlDashboard.Size = new Size(634, 599);
             pnlDashboard.TabIndex = 5;
@@ -563,7 +621,7 @@
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
             pnlTicketsOverview.Controls.Add(ticketsListView);
             pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
-            pnlTicketsOverview.Location = new Point(0, 112);
+            pnlTicketsOverview.Location = new Point(0, 130);
             pnlTicketsOverview.Name = "pnlTicketsOverview";
             pnlTicketsOverview.Size = new Size(634, 599);
             pnlTicketsOverview.TabIndex = 6;
@@ -734,7 +792,7 @@
             pnlUsers.Controls.Add(usersList);
             pnlUsers.Controls.Add(lblUsers);
             pnlUsers.Controls.Add(splitterUsers);
-            pnlUsers.Location = new Point(0, 112);
+            pnlUsers.Location = new Point(0, 130);
             pnlUsers.Name = "pnlUsers";
             pnlUsers.Size = new Size(634, 599);
             pnlUsers.TabIndex = 7;
@@ -853,7 +911,7 @@
             pnlAddEditTicket.Controls.Add(addTicketBtn);
             pnlAddEditTicket.Controls.Add(splitterAddEditTicket);
             pnlAddEditTicket.Controls.Add(lblAddEditTicket);
-            pnlAddEditTicket.Location = new Point(0, 112);
+            pnlAddEditTicket.Location = new Point(0, 130);
             pnlAddEditTicket.Name = "pnlAddEditTicket";
             pnlAddEditTicket.Size = new Size(634, 599);
             pnlAddEditTicket.TabIndex = 8;
@@ -1106,7 +1164,7 @@
             pnlAddEditUser.Controls.Add(btnDeleteEmployee);
             pnlAddEditUser.Controls.Add(lblAddEditUser);
             pnlAddEditUser.Controls.Add(splitterAddEditUser);
-            pnlAddEditUser.Location = new Point(0, 112);
+            pnlAddEditUser.Location = new Point(0, 130);
             pnlAddEditUser.Name = "pnlAddEditUser";
             pnlAddEditUser.Size = new Size(634, 599);
             pnlAddEditUser.TabIndex = 10;
@@ -1293,6 +1351,297 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
+            // pnlViewTicket
+            // 
+            pnlViewTicket.BackColor = Color.White;
+            pnlViewTicket.Controls.Add(lblVTDeadlineValue);
+            pnlViewTicket.Controls.Add(lblVTDeadline);
+            pnlViewTicket.Controls.Add(lblVTEscalatedValue);
+            pnlViewTicket.Controls.Add(lblVTEscalated);
+            pnlViewTicket.Controls.Add(lblVTReportingUserValue);
+            pnlViewTicket.Controls.Add(lblVTReportingUser);
+            pnlViewTicket.Controls.Add(lblVTDescriptionValue);
+            pnlViewTicket.Controls.Add(lblVTCreationDateValue);
+            pnlViewTicket.Controls.Add(lblVTResolvedValue);
+            pnlViewTicket.Controls.Add(lblVTPriorityValue);
+            pnlViewTicket.Controls.Add(lblVTStatusValue);
+            pnlViewTicket.Controls.Add(lblVTIncidentValue);
+            pnlViewTicket.Controls.Add(lblVTTitleValue);
+            pnlViewTicket.Controls.Add(lblVTServiceDeskValue);
+            pnlViewTicket.Controls.Add(lblVTDescription);
+            pnlViewTicket.Controls.Add(lblVTCreationDate);
+            pnlViewTicket.Controls.Add(lblVTResolved);
+            pnlViewTicket.Controls.Add(lblVTPriority);
+            pnlViewTicket.Controls.Add(lblVTStatus);
+            pnlViewTicket.Controls.Add(lblVTIncident);
+            pnlViewTicket.Controls.Add(lblVTTitle);
+            pnlViewTicket.Controls.Add(lblVTServiceDesk);
+            pnlViewTicket.Controls.Add(cancelTicketBtn);
+            pnlViewTicket.Controls.Add(closeTicketBtn);
+            pnlViewTicket.Controls.Add(editTicketBtn);
+            pnlViewTicket.Controls.Add(addTicketBtn);
+            pnlViewTicket.Controls.Add(splitterViewTicket);
+            pnlViewTicket.Controls.Add(lblViewTicketTitle);
+            pnlViewTicket.Location = new Point(0, 130);
+            pnlViewTicket.Name = "pnlViewTicket";
+            pnlViewTicket.Size = new Size(634, 599);
+            pnlViewTicket.TabIndex = 0;
+            // 
+            // lblVTDeadlineValue
+            // 
+            lblVTDeadlineValue.AutoSize = true;
+            lblVTDeadlineValue.Location = new Point(160, 361);
+            lblVTDeadlineValue.Name = "lblVTDeadlineValue";
+            lblVTDeadlineValue.Size = new Size(0, 15);
+            lblVTDeadlineValue.TabIndex = 27;
+            // 
+            // lblVTDeadline
+            // 
+            lblVTDeadline.AutoSize = true;
+            lblVTDeadline.Location = new Point(45, 361);
+            lblVTDeadline.Name = "lblVTDeadline";
+            lblVTDeadline.Size = new Size(56, 15);
+            lblVTDeadline.TabIndex = 26;
+            lblVTDeadline.Text = "Deadline:";
+            // 
+            // lblVTEscalatedValue
+            // 
+            lblVTEscalatedValue.AutoSize = true;
+            lblVTEscalatedValue.Location = new Point(160, 294);
+            lblVTEscalatedValue.Name = "lblVTEscalatedValue";
+            lblVTEscalatedValue.Size = new Size(0, 15);
+            lblVTEscalatedValue.TabIndex = 25;
+            // 
+            // lblVTEscalated
+            // 
+            lblVTEscalated.AutoSize = true;
+            lblVTEscalated.Location = new Point(45, 294);
+            lblVTEscalated.Name = "lblVTEscalated";
+            lblVTEscalated.Size = new Size(59, 15);
+            lblVTEscalated.TabIndex = 24;
+            lblVTEscalated.Text = "Escalated:";
+            // 
+            // lblVTReportingUserValue
+            // 
+            lblVTReportingUserValue.AutoSize = true;
+            lblVTReportingUserValue.Location = new Point(160, 61);
+            lblVTReportingUserValue.Name = "lblVTReportingUserValue";
+            lblVTReportingUserValue.Size = new Size(0, 15);
+            lblVTReportingUserValue.TabIndex = 23;
+            // 
+            // lblVTReportingUser
+            // 
+            lblVTReportingUser.AutoSize = true;
+            lblVTReportingUser.Location = new Point(45, 61);
+            lblVTReportingUser.Name = "lblVTReportingUser";
+            lblVTReportingUser.Size = new Size(87, 15);
+            lblVTReportingUser.TabIndex = 22;
+            lblVTReportingUser.Text = "Reporting user:";
+            // 
+            // lblVTDescriptionValue
+            // 
+            lblVTDescriptionValue.AutoSize = true;
+            lblVTDescriptionValue.Location = new Point(160, 380);
+            lblVTDescriptionValue.Name = "lblVTDescriptionValue";
+            lblVTDescriptionValue.Size = new Size(0, 15);
+            lblVTDescriptionValue.TabIndex = 21;
+            // 
+            // lblVTCreationDateValue
+            // 
+            lblVTCreationDateValue.AutoSize = true;
+            lblVTCreationDateValue.Location = new Point(160, 330);
+            lblVTCreationDateValue.Name = "lblVTCreationDateValue";
+            lblVTCreationDateValue.Size = new Size(0, 15);
+            lblVTCreationDateValue.TabIndex = 20;
+            // 
+            // lblVTResolvedValue
+            // 
+            lblVTResolvedValue.AutoSize = true;
+            lblVTResolvedValue.Location = new Point(160, 265);
+            lblVTResolvedValue.Name = "lblVTResolvedValue";
+            lblVTResolvedValue.Size = new Size(0, 15);
+            lblVTResolvedValue.TabIndex = 19;
+            // 
+            // lblVTPriorityValue
+            // 
+            lblVTPriorityValue.AutoSize = true;
+            lblVTPriorityValue.Location = new Point(160, 230);
+            lblVTPriorityValue.Name = "lblVTPriorityValue";
+            lblVTPriorityValue.Size = new Size(0, 15);
+            lblVTPriorityValue.TabIndex = 18;
+            // 
+            // lblVTStatusValue
+            // 
+            lblVTStatusValue.AutoSize = true;
+            lblVTStatusValue.Location = new Point(160, 193);
+            lblVTStatusValue.Name = "lblVTStatusValue";
+            lblVTStatusValue.Size = new Size(0, 15);
+            lblVTStatusValue.TabIndex = 17;
+            // 
+            // lblVTIncidentValue
+            // 
+            lblVTIncidentValue.AutoSize = true;
+            lblVTIncidentValue.Location = new Point(160, 156);
+            lblVTIncidentValue.Name = "lblVTIncidentValue";
+            lblVTIncidentValue.Size = new Size(0, 15);
+            lblVTIncidentValue.TabIndex = 16;
+            // 
+            // lblVTTitleValue
+            // 
+            lblVTTitleValue.AutoSize = true;
+            lblVTTitleValue.Location = new Point(160, 121);
+            lblVTTitleValue.Name = "lblVTTitleValue";
+            lblVTTitleValue.Size = new Size(0, 15);
+            lblVTTitleValue.TabIndex = 15;
+            // 
+            // lblVTServiceDeskValue
+            // 
+            lblVTServiceDeskValue.AutoSize = true;
+            lblVTServiceDeskValue.Location = new Point(160, 91);
+            lblVTServiceDeskValue.Name = "lblVTServiceDeskValue";
+            lblVTServiceDeskValue.Size = new Size(0, 15);
+            lblVTServiceDeskValue.TabIndex = 14;
+            // 
+            // lblVTDescription
+            // 
+            lblVTDescription.AutoSize = true;
+            lblVTDescription.Location = new Point(45, 380);
+            lblVTDescription.Name = "lblVTDescription";
+            lblVTDescription.Size = new Size(70, 15);
+            lblVTDescription.TabIndex = 13;
+            lblVTDescription.Text = "Description:";
+            // 
+            // lblVTCreationDate
+            // 
+            lblVTCreationDate.AutoSize = true;
+            lblVTCreationDate.Location = new Point(45, 330);
+            lblVTCreationDate.Name = "lblVTCreationDate";
+            lblVTCreationDate.Size = new Size(81, 15);
+            lblVTCreationDate.TabIndex = 12;
+            lblVTCreationDate.Text = "Creation date:";
+            // 
+            // lblVTResolved
+            // 
+            lblVTResolved.AutoSize = true;
+            lblVTResolved.Location = new Point(45, 265);
+            lblVTResolved.Name = "lblVTResolved";
+            lblVTResolved.Size = new Size(57, 15);
+            lblVTResolved.TabIndex = 11;
+            lblVTResolved.Text = "Resolved:";
+            // 
+            // lblVTPriority
+            // 
+            lblVTPriority.AutoSize = true;
+            lblVTPriority.Location = new Point(45, 230);
+            lblVTPriority.Name = "lblVTPriority";
+            lblVTPriority.Size = new Size(48, 15);
+            lblVTPriority.TabIndex = 10;
+            lblVTPriority.Text = "Priority:";
+            // 
+            // lblVTStatus
+            // 
+            lblVTStatus.AutoSize = true;
+            lblVTStatus.Location = new Point(45, 193);
+            lblVTStatus.Name = "lblVTStatus";
+            lblVTStatus.Size = new Size(42, 15);
+            lblVTStatus.TabIndex = 9;
+            lblVTStatus.Text = "Status:";
+            // 
+            // lblVTIncident
+            // 
+            lblVTIncident.AutoSize = true;
+            lblVTIncident.Location = new Point(45, 156);
+            lblVTIncident.Name = "lblVTIncident";
+            lblVTIncident.Size = new Size(94, 15);
+            lblVTIncident.TabIndex = 8;
+            lblVTIncident.Text = "Type of incident:";
+            // 
+            // lblVTTitle
+            // 
+            lblVTTitle.AutoSize = true;
+            lblVTTitle.Location = new Point(45, 121);
+            lblVTTitle.Name = "lblVTTitle";
+            lblVTTitle.Size = new Size(32, 15);
+            lblVTTitle.TabIndex = 7;
+            lblVTTitle.Text = "Title:";
+            // 
+            // lblVTServiceDesk
+            // 
+            lblVTServiceDesk.AutoSize = true;
+            lblVTServiceDesk.Location = new Point(45, 91);
+            lblVTServiceDesk.Name = "lblVTServiceDesk";
+            lblVTServiceDesk.Size = new Size(99, 15);
+            lblVTServiceDesk.TabIndex = 6;
+            lblVTServiceDesk.Text = "Service desk user:";
+            // 
+            // cancelTicketBtn
+            // 
+            cancelTicketBtn.BackColor = Color.Black;
+            cancelTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            cancelTicketBtn.ForeColor = SystemColors.HighlightText;
+            cancelTicketBtn.Location = new Point(482, 409);
+            cancelTicketBtn.Name = "cancelTicketBtn";
+            cancelTicketBtn.Size = new Size(140, 40);
+            cancelTicketBtn.TabIndex = 5;
+            cancelTicketBtn.Text = "Cancel Changes";
+            cancelTicketBtn.UseVisualStyleBackColor = false;
+            // 
+            // closeTicketBtn
+            // 
+            closeTicketBtn.BackColor = Color.Tomato;
+            closeTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            closeTicketBtn.Location = new Point(157, 410);
+            closeTicketBtn.Name = "closeTicketBtn";
+            closeTicketBtn.Size = new Size(140, 40);
+            closeTicketBtn.TabIndex = 4;
+            closeTicketBtn.Text = "Close Ticket";
+            closeTicketBtn.UseVisualStyleBackColor = false;
+            closeTicketBtn.Visible = false;
+            // 
+            // editTicketBtn
+            // 
+            editTicketBtn.BackColor = Color.Yellow;
+            editTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            editTicketBtn.Location = new Point(321, 409);
+            editTicketBtn.Name = "editTicketBtn";
+            editTicketBtn.Size = new Size(140, 40);
+            editTicketBtn.TabIndex = 3;
+            editTicketBtn.Text = "Edit Ticket";
+            editTicketBtn.UseVisualStyleBackColor = false;
+            editTicketBtn.Visible = false;
+            // 
+            // addTicketBtn
+            // 
+            addTicketBtn.BackColor = Color.LightGreen;
+            addTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
+            addTicketBtn.Location = new Point(321, 409);
+            addTicketBtn.Name = "addTicketBtn";
+            addTicketBtn.Size = new Size(140, 40);
+            addTicketBtn.TabIndex = 2;
+            addTicketBtn.Text = "Add Ticket";
+            addTicketBtn.UseVisualStyleBackColor = false;
+            // 
+            // splitterViewTicket
+            // 
+            splitterViewTicket.BackColor = Color.Black;
+            splitterViewTicket.Dock = DockStyle.Top;
+            splitterViewTicket.Location = new Point(0, 0);
+            splitterViewTicket.Margin = new Padding(5);
+            splitterViewTicket.Name = "splitterViewTicket";
+            splitterViewTicket.Size = new Size(634, 1);
+            splitterViewTicket.TabIndex = 0;
+            splitterViewTicket.TabStop = false;
+            // 
+            // lblViewTicketTitle
+            // 
+            lblViewTicketTitle.AutoSize = true;
+            lblViewTicketTitle.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            lblViewTicketTitle.Location = new Point(19, 13);
+            lblViewTicketTitle.Name = "lblViewTicketTitle";
+            lblViewTicketTitle.Size = new Size(129, 25);
+            lblViewTicketTitle.TabIndex = 1;
+            lblViewTicketTitle.Text = "Ticket Details";
+            // 
             // pnlDbError
             // 
             pnlDbError.BackColor = Color.White;
@@ -1316,14 +1665,16 @@
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
+            AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
-            ClientSize = new Size(634, 587);
+            ClientSize = new Size(784, 881);
+            Controls.Add(pnlLogin);
+            Controls.Add(pnlViewTicket);
             Controls.Add(pnlDbError);
             Controls.Add(pnlAddEditUser);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlTicketsOverview);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
@@ -1331,13 +1682,13 @@
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            MainMenuStrip = menuStrip;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
             Text = "GardenDesk";
-            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
+            WindowState = FormWindowState.Maximized;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)logo).EndInit();
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
             pnlDashboard.ResumeLayout(false);
@@ -1354,8 +1705,11 @@
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
             pnlAddEditUser.ResumeLayout(false);
             pnlAddEditUser.PerformLayout();
+            pnlViewTicket.ResumeLayout(false);
+            pnlViewTicket.PerformLayout();
             pnlDbError.ResumeLayout(false);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -1363,7 +1717,7 @@
         private PictureBox logo;
         private Label lblGardenDesk;
         private Label lblLicense;
-        private MenuStrip menuStrip;
+        private ToolStrip menuStrip;
         private ToolStripMenuItem menuItemDashboard;
         private ToolStripMenuItem menuItemIncidents;
         private ToolStripMenuItem menuItemUsers;
@@ -1467,5 +1821,36 @@
         private Label databaseErrorMessageLbl;
         private ColumnHeader ticketDescription;
         private Button btnViewTicket;
+        private Panel pnlViewTicket;
+        private Label lblVTDescriptionValue;
+        private Label lblVTCreationDateValue;
+        private Label lblVTResolvedValue;
+        private Label lblVTPriorityValue;
+        private Label lblVTStatusValue;
+        private Label lblVTIncidentValue;
+        private Label lblVTTitleValue;
+        private Label lblVTServiceDeskValue;
+        private Label lblVTDescription;
+        private Label lblVTCreationDate;
+        private Label lblVTResolved;
+        private Label lblVTPriority;
+        private Label lblVTStatus;
+        private Label lblVTIncident;
+        private Label lblVTTitle;
+        private Label lblVTServiceDesk;
+        private Button cancelTicketBtn;
+        private Button closeTicketBtn;
+        private Button editTicketBtn;
+        private Button addTicketBtn;
+        private Splitter splitterViewTicket;
+        private Label lblViewTicketTitle;
+        private Label lblVTReportingUserValue;
+        private Label lblVTReportingUser;
+        private Label lblVTEscalatedValue;
+        private Label lblVTEscalated;
+        private Label lblVTDeadlineValue;
+        private Label lblVTDeadline;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
