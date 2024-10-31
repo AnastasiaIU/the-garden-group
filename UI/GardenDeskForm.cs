@@ -527,14 +527,7 @@ namespace UI
 
         private void btnAddTicket_Click(object sender, EventArgs e)
         {
-            lblAddEditTicket.Text = "Create new ticket";
-
-            addTicketBtn.Visible = true;
-            editTicketBtn.Visible = false;
-            closeTicketBtn.Visible = false;
-            serviceDeskUserCmbBox.Visible = true;
-
-
+            ConfigureTicketPanel("Create new ticket", true, false, false, true);
             PopulateServiceDeskEmployeeComboBoxAsync();
             serviceDeskUserCmbBox.Enabled = true;
             ClearInputs();
@@ -602,7 +595,7 @@ namespace UI
 
         private void isResolvedCmbBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (isResolvedCmbBox.SelectedItem.ToString() == "Yes")
+            if (isResolvedCmbBox.SelectedItem != null && isResolvedCmbBox.SelectedItem.ToString() == "Yes")
             {
                 statusCmbBox.SelectedItem = "Closed";
                 statusCmbBox.Enabled = false;
@@ -674,10 +667,17 @@ namespace UI
         }
         private void cancelTicketBtn_Click(object sender, EventArgs e)
         {
-            ClearInputs();
-
             ShowTicketsView();
             ChangeButtonState(btnEditTicket, Color.LightGray, false);
+        }
+
+        private void ConfigureTicketPanel(string label, bool showAdd, bool showEdit, bool showClose, bool enableServiceDeskCombo)
+        {
+            lblAddEditTicket.Text = label;
+            addTicketBtn.Visible = showAdd;
+            editTicketBtn.Visible = showEdit;
+            closeTicketBtn.Visible = showClose;
+            serviceDeskUserCmbBox.Enabled = enableServiceDeskCombo;
         }
         #endregion
 
@@ -687,11 +687,7 @@ namespace UI
         {
             selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
 
-            lblAddEditTicket.Text = "Edit ticket";
-
-            addTicketBtn.Visible = false;
-            editTicketBtn.Visible = true;
-            closeTicketBtn.Visible = true;
+            ConfigureTicketPanel("Edit ticket", false, true, true, false);
 
             PrefillEditTicketInputs();
 
@@ -748,7 +744,10 @@ namespace UI
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
             List<Ticket> tickets = await GetTicketsAsync();
-            bool isAscendingOrder = SortOrderComboBox.SelectedItem.ToString() == "Low to High";
+
+            bool isAscendingOrder = SortOrderComboBox.SelectedItem != null &&
+                                    SortOrderComboBox.SelectedItem.ToString() == "Low to High";
+
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
             PopulateTicketsListView(tickets);
         }
