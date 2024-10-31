@@ -34,10 +34,7 @@ namespace DAL
             try
             {
                 connectionString = ConfigurationManager.AppSettings["MongoDB"];
-                mongoSettings = MongoClientSettings.FromConnectionString(connectionString);
-                mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
-                mongoSettings.SocketTimeout = TimeSpan.FromSeconds(5);
-                mongoSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
+                SetTimeOutSettings();
                 mongoClient = new MongoClient(mongoSettings);
                 database = mongoClient.GetDatabase("NoSQLCluster");
                 employeeCollection = database.GetCollection<Employee>("Employee");
@@ -47,6 +44,14 @@ namespace DAL
             {
                 // In a real app, errors or exceptions are logged here for troubleshooting which is out of scope for this project.
             }
+        }
+        
+        private void SetTimeOutSettings()
+        {
+            mongoSettings = MongoClientSettings.FromConnectionString(connectionString);
+            mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
+            mongoSettings.SocketTimeout = TimeSpan.FromSeconds(5);
+            mongoSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
         }
 
         /// <summary>
@@ -60,13 +65,21 @@ namespace DAL
             get { return database != null; }
         }
 
-        // This method is used to check if the internet connection is available. It tries to list the database names and returns true if successful.
-        public async Task<bool> IsInternetAvailable()
+        /// <summary>
+        /// This method is used to check if the internet connection is available. It tries to list database names to validate the connection.
+        /// </summary>
+        /// <returns>True if connection with database exist, otherwise false</returns>
+        public async Task<bool> IsDatabaseConnctionAvailable()
         {
             try
             {
-                await mongoClient.ListDatabaseNamesAsync();
-                return true;
+                if (mongoClient is not null)
+                {
+                    await mongoClient.ListDatabaseNamesAsync();
+                    return true;
+                }
+
+                return false;
             }
             catch
             {

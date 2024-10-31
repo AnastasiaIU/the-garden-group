@@ -6,9 +6,9 @@ namespace Service
     {
         protected readonly TDao dao = new();
 
-        public async Task<bool> IsInternetAvailable()
+        public async Task<bool> IsDatabaseConnctionAvailable()
         {
-            return await dao.IsInternetAvailable();
+            return await dao.IsDatabaseConnctionAvailable();
         }
     }
 }

@@ -149,6 +149,70 @@ namespace UI
             }
         }
 
+        private async void menuItemUsers_Click(object sender, EventArgs e)
+        {
+            await ShowUsersView();
+        }
+
+        #region Orest User Management
+
+        private async Task DisplayEmployeesAsync()
+        {
+            bool isInternetAvailable = await employeeService.IsDatabaseConnctionAvailable();
+
+            if (!isInternetAvailable)
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlUsers);
+            }
+
+            usersList.Items.Clear();
+            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
+            List<ListViewItem> items = new();
+            FillListView(employees, items);
+            usersList.Items.AddRange(items.ToArray());
+        }
+
+        private void FillListView(List<Employee> employees, List<ListViewItem> items)
+        {
+            foreach (var employee in employees)
+            {
+                ListViewItem item = new();
+
+                item.SubItems.Add(employee.Email);
+                item.SubItems.Add(employee.FirstName);
+                item.SubItems.Add(employee.LastName);
+                item.SubItems.Add(employee.OpenTickets.ToString());
+                item.Tag = employee;
+
+                items.Add(item);
+            }
+        }
+
+        private void ShowDatabaseError()
+        {
+            ShowPanel(pnlDbError);
+        }
+
+        /// <summary>
+        /// This method is used to reconnect to the database and view a panel after the connection was lost.
+        /// </summary>
+        /// <param name="panel">A spacific panel which needs to be open after connection was restored.</param>
+        private async Task TryToReconnect(Panel panel)
+        {
+            bool isReconnect = false;
+
+            while (!isReconnect)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(10));
+                isReconnect = await employeeService.IsDatabaseConnctionAvailable();
+            }
+
+            ShowPanel(panel);
+        }
+
+        #endregion
+
         #endregion
 
         #region Tina Create/Update/Delete User Logic
@@ -487,67 +551,6 @@ namespace UI
 
         #endregion
 
-        #region Orest Employee Management
-
-        private async Task DisplayEmployeesAsync()
-        {
-            bool isInternetAvailable = await employeeService.IsInternetAvailable();
-
-            if (!isInternetAvailable)
-            {
-                ShowDatabaseError();
-                await TryToReconnect(pnlUsers);
-            }
-
-            usersList.Items.Clear();
-            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
-            List<ListViewItem> items = new();
-            FillListView(employees, items);
-            usersList.Items.AddRange(items.ToArray());
-        }
-
-        private void FillListView(List<Employee> employees, List<ListViewItem> items)
-        {
-            foreach (var employee in employees)
-            {
-                ListViewItem item = new();
-
-                item.SubItems.Add(employee.Email);
-                item.SubItems.Add(employee.FirstName);
-                item.SubItems.Add(employee.LastName);
-                item.SubItems.Add(employee.OpenTickets.ToString());
-                item.Tag = employee;
-
-                items.Add(item);
-            }
-        }
-
-        private async void menuItemUsers_Click(object sender, EventArgs e)
-        {
-            await ShowUsersView();
-        }
-
-        private void ShowDatabaseError()
-        {
-            ShowPanel(pnlDbError);
-        }
-
-        // This method is used to reconnect to the database after the connection was lost
-        private async Task TryToReconnect(Panel panel)
-        {
-            bool isReconnect = false;
-
-            while (!isReconnect)
-            {
-                await Task.Delay(TimeSpan.FromSeconds(10));
-                isReconnect  = await employeeService.IsInternetAvailable();
-            }
-
-            ShowPanel(panel);
-        }
-
-        #endregion
-
         #region Danylo Create/Update/Close Ticket Logic
 
         #region Create Ticket
@@ -803,7 +806,5 @@ namespace UI
         }
 
         #endregion
-
-
     }
 }
