@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            ListViewItem listViewItem1 = new ListViewItem("");
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            ListViewItem listViewItem2 = new ListViewItem("");
             menuStrip = new ToolStrip();
             menuItemDashboard = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -74,15 +74,8 @@
             lblOpenDescription = new Label();
             lblDashboard = new Label();
             pnlTicketsOverview = new Panel();
-            label15 = new Label();
-            SortOrderComboBox = new ComboBox();
-            btnEditTicket = new Button();
-            btnAddTicket = new Button();
-            btnViewTicket = new Button();
-            searchbtn = new Button();
+            panelTicketsHolder = new Panel();
             searchtextbox = new TextBox();
-            btnEscalate = new Button();
-            lblTicketsOverview = new Label();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
             ticketDescription = new ColumnHeader();
@@ -90,7 +83,16 @@
             ticketCreationDate = new ColumnHeader();
             ticketDeadline = new ColumnHeader();
             ticketStatus = new ColumnHeader();
+            ticketPriority = new ColumnHeader();
+            label15 = new Label();
+            searchbtn = new Button();
+            SortOrderComboBox = new ComboBox();
+            btnViewTicket = new Button();
             splitterTicketsOverview = new Splitter();
+            btnEditTicket = new Button();
+            btnAddTicket = new Button();
+            btnEscalate = new Button();
+            lblTicketsOverview = new Label();
             pnlUsers = new Panel();
             btnEditEmployee = new Button();
             btnAddEmployee = new Button();
@@ -119,12 +121,12 @@
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
+            splitterAddEditTicket = new Splitter();
+            lblAddEditTicket = new Label();
             cancelTicketBtn = new Button();
             closeTicketBtn = new Button();
             editTicketBtn = new Button();
             addTicketBtn = new Button();
-            splitterAddEditTicket = new Splitter();
-            lblAddEditTicket = new Label();
             menuStripBackground = new PictureBox();
             pnlAddEditUser = new Panel();
             btnCreateEmployee = new Button();
@@ -182,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)chartClosed).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartResolved).BeginInit();
             pnlTicketsOverview.SuspendLayout();
+            panelTicketsHolder.SuspendLayout();
             pnlUsers.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
@@ -323,11 +326,13 @@
             // btnLogin
             // 
             btnLogin.BackColor = Color.OliveDrab;
-            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(75, 200);
+            btnLogin.Location = new Point(100, 200);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(150, 45);
+            btnLogin.Size = new Size(100, 30);
             btnLogin.TabIndex = 3;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
@@ -412,7 +417,7 @@
             pnlDashboard.Location = new Point(0, 122);
             pnlDashboard.Name = "pnlDashboard";
             pnlDashboard.Size = new Size(784, 761);
-            pnlDashboard.TabIndex = 5;
+            pnlDashboard.TabIndex = 0;
             // 
             // splitterDashboard
             // 
@@ -456,36 +461,36 @@
             // 
             // chartOpen
             // 
-            chartArea1.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chartOpen.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chartOpen.Legends.Add(legend4);
             chartOpen.Location = new Point(25, 108);
             chartOpen.Name = "chartOpen";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartOpen.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chartOpen.Series.Add(series4);
             chartOpen.Size = new Size(150, 180);
             chartOpen.TabIndex = 2;
             chartOpen.Text = "chart1";
             // 
             // chartClosed
             // 
-            chartArea2.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartClosed.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            chartClosed.Legends.Add(legend5);
             chartClosed.Location = new Point(275, 108);
             chartClosed.Name = "chartClosed";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartClosed.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            chartClosed.Series.Add(series5);
             chartClosed.Size = new Size(150, 180);
             chartClosed.TabIndex = 0;
             chartClosed.Text = "chart2";
@@ -735,6 +740,151 @@
             lblOpenDescription.TabIndex = 9;
             lblOpenDescription.Text = "all tickets currently open";
             lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
+            lblOpenNumber.AutoSize = true;
+            lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenNumber.Location = new Point(71, 418);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(51, 20);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // chartResolved
+            // 
+            chartArea1.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartOpen.Legends.Add(legend1);
+            chartOpen.Location = new Point(25, 108);
+            chartOpen.Name = "chartOpen";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartOpen.Series.Add(series1);
+            chartOpen.Size = new Size(150, 180);
+            chartOpen.TabIndex = 2;
+            chartOpen.Text = "chart1";
+            // 
+            // chartClosed
+            // 
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
+            chartClosed.Location = new Point(275, 108);
+            chartClosed.Name = "chartClosed";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chartClosed.Series.Add(series2);
+            chartClosed.Size = new Size(150, 180);
+            chartClosed.TabIndex = 0;
+            chartClosed.Text = "chart2";
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(500, 25);
+            label3.Name = "label3";
+            label3.Padding = new Padding(0, 10, 0, 0);
+            label3.Size = new Size(200, 65);
+            label3.TabIndex = 13;
+            label3.Text = "all tickets currently resolved and closed";
+            label3.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // chartResolved
+            // 
+            chartArea6.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            chartResolved.Legends.Add(legend6);
+            chartResolved.Location = new Point(525, 108);
+            chartResolved.Name = "chartResolved";
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            chartResolved.Series.Add(series6);
+            chartResolved.Size = new Size(150, 180);
+            chartResolved.TabIndex = 0;
+            chartResolved.Text = "chart3";
+            // 
+            // label4
+            // 
+            label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(500, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(200, 25);
+            label4.TabIndex = 12;
+            label4.Text = "Resolved incidents";
+            label4.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblOpenNumber
+            // 
+            lblOpenNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOpenNumber.Location = new Point(0, 288);
+            lblOpenNumber.Name = "lblOpenNumber";
+            lblOpenNumber.Size = new Size(200, 20);
+            lblOpenNumber.TabIndex = 5;
+            lblOpenNumber.Text = "label1";
+            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(250, 25);
+            label1.Name = "label1";
+            label1.Padding = new Padding(0, 10, 0, 0);
+            label1.Size = new Size(200, 65);
+            label1.TabIndex = 11;
+            label1.Text = "all tickets currently closed without resolving";
+            label1.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblClosedNumber
+            // 
+            lblClosedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblClosedNumber.Location = new Point(250, 288);
+            lblClosedNumber.Name = "lblClosedNumber";
+            lblClosedNumber.Size = new Size(200, 20);
+            lblClosedNumber.TabIndex = 0;
+            lblClosedNumber.Text = "label2";
+            lblClosedNumber.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(250, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(200, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Closed incidents";
+            label2.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblResolvedNumber
+            // 
+            lblResolvedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblResolvedNumber.Location = new Point(500, 288);
+            lblResolvedNumber.Name = "lblResolvedNumber";
+            lblResolvedNumber.Size = new Size(200, 20);
+            lblResolvedNumber.TabIndex = 0;
+            lblResolvedNumber.Text = "label3";
+            lblResolvedNumber.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // lblOpenDescription
+            // 
+            lblOpenDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblOpenDescription.Location = new Point(0, 25);
+            lblOpenDescription.Name = "lblOpenDescription";
+            lblOpenDescription.Padding = new Padding(0, 10, 0, 0);
+            lblOpenDescription.Size = new Size(200, 65);
+            lblOpenDescription.TabIndex = 9;
+            lblOpenDescription.Text = "all tickets currently open";
+            lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
             // 
             // lblDashboard
             // 
@@ -750,49 +900,171 @@
             // 
             // pnlTicketsOverview
             // 
+            pnlTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlTicketsOverview.BackColor = Color.White;
-            pnlTicketsOverview.Controls.Add(label15);
-            pnlTicketsOverview.Controls.Add(SortOrderComboBox);
+            pnlTicketsOverview.Controls.Add(panelTicketsHolder);
+            pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
             pnlTicketsOverview.Controls.Add(btnEditTicket);
             pnlTicketsOverview.Controls.Add(btnAddTicket);
-            pnlTicketsOverview.Controls.Add(btnViewTicket);
-            pnlTicketsOverview.Controls.Add(searchbtn);
-            pnlTicketsOverview.Controls.Add(searchtextbox);
             pnlTicketsOverview.Controls.Add(btnEscalate);
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
-            pnlTicketsOverview.Controls.Add(ticketsListView);
-            pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
-            pnlTicketsOverview.Location = new Point(0, 130);
+            pnlTicketsOverview.Location = new Point(0, 122);
             pnlTicketsOverview.Name = "pnlTicketsOverview";
-            pnlTicketsOverview.Size = new Size(634, 599);
+            pnlTicketsOverview.Size = new Size(784, 758);
             pnlTicketsOverview.TabIndex = 6;
+            // 
+            // panelTicketsHolder
+            // 
+            panelTicketsHolder.Controls.Add(searchtextbox);
+            panelTicketsHolder.Controls.Add(ticketsListView);
+            panelTicketsHolder.Controls.Add(label15);
+            panelTicketsHolder.Controls.Add(searchbtn);
+            panelTicketsHolder.Controls.Add(SortOrderComboBox);
+            panelTicketsHolder.Controls.Add(btnViewTicket);
+            panelTicketsHolder.Location = new Point(0, 46);
+            panelTicketsHolder.Name = "panelTicketsHolder";
+            panelTicketsHolder.Size = new Size(780, 670);
+            panelTicketsHolder.TabIndex = 8;
+            // 
+            // searchtextbox
+            // 
+            searchtextbox.BorderStyle = BorderStyle.FixedSingle;
+            searchtextbox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            searchtextbox.Location = new Point(0, 30);
+            searchtextbox.Name = "searchtextbox";
+            searchtextbox.PlaceholderText = "Search by title or description";
+            searchtextbox.Size = new Size(300, 29);
+            searchtextbox.TabIndex = 1;
+            // 
+            // ticketsListView
+            // 
+            ticketsListView.AutoArrange = false;
+            ticketsListView.BackColor = SystemColors.Control;
+            ticketsListView.BorderStyle = BorderStyle.FixedSingle;
+            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketDescription, ticketReportingUser, ticketCreationDate, ticketDeadline, ticketStatus, ticketPriority });
+            ticketsListView.FullRowSelect = true;
+            ticketsListView.GridLines = true;
+            ticketsListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            ticketsListView.Location = new Point(0, 120);
+            ticketsListView.Margin = new Padding(2);
+            ticketsListView.MultiSelect = false;
+            ticketsListView.Name = "ticketsListView";
+            ticketsListView.Size = new Size(780, 500);
+            ticketsListView.TabIndex = 4;
+            ticketsListView.UseCompatibleStateImageBehavior = false;
+            ticketsListView.View = View.Details;
+            ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
+            // 
+            // ticketTitle
+            // 
+            ticketTitle.Tag = "";
+            ticketTitle.Text = "Title";
+            ticketTitle.Width = 100;
+            // 
+            // ticketDescription
+            // 
+            ticketDescription.Tag = "";
+            ticketDescription.Text = "Description";
+            ticketDescription.Width = 100;
+            // 
+            // ticketReportingUser
+            // 
+            ticketReportingUser.Tag = "";
+            ticketReportingUser.Text = "Reported by";
+            ticketReportingUser.Width = 100;
+            // 
+            // ticketCreationDate
+            // 
+            ticketCreationDate.Tag = "";
+            ticketCreationDate.Text = "Creation date";
+            ticketCreationDate.Width = 100;
+            // 
+            // ticketDeadline
+            // 
+            ticketDeadline.Tag = "";
+            ticketDeadline.Text = "Deadline";
+            ticketDeadline.Width = 100;
+            // 
+            // ticketStatus
+            // 
+            ticketStatus.Tag = "";
+            ticketStatus.Text = "Status";
+            ticketStatus.Width = 100;
+            // 
+            // ticketPriority
+            // 
+            ticketPriority.Text = "Priority";
+            ticketPriority.Width = 100;
             // 
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(438, 52);
+            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(610, 0);
             label15.Name = "label15";
-            label15.Size = new Size(91, 15);
-            label15.TabIndex = 9;
+            label15.Size = new Size(122, 21);
+            label15.TabIndex = 0;
             label15.Text = "Sort by priority :";
+            // 
+            // searchbtn
+            // 
+            searchbtn.BackColor = Color.OliveDrab;
+            searchbtn.FlatAppearance.BorderSize = 0;
+            searchbtn.FlatStyle = FlatStyle.Flat;
+            searchbtn.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            searchbtn.ForeColor = Color.White;
+            searchbtn.Location = new Point(0, 75);
+            searchbtn.Margin = new Padding(0);
+            searchbtn.Name = "searchbtn";
+            searchbtn.Size = new Size(100, 30);
+            searchbtn.TabIndex = 2;
+            searchbtn.Text = "SEARCH";
+            searchbtn.UseVisualStyleBackColor = false;
+            searchbtn.Click += searchbtn_Click;
             // 
             // SortOrderComboBox
             // 
-            SortOrderComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            SortOrderComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             SortOrderComboBox.FormattingEnabled = true;
             SortOrderComboBox.Items.AddRange(new object[] { "Low to High", "High to Low" });
-            SortOrderComboBox.Location = new Point(440, 70);
+            SortOrderComboBox.Location = new Point(610, 30);
             SortOrderComboBox.Name = "SortOrderComboBox";
-            SortOrderComboBox.Size = new Size(171, 23);
-            SortOrderComboBox.TabIndex = 8;
+            SortOrderComboBox.Size = new Size(170, 29);
+            SortOrderComboBox.TabIndex = 3;
             SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
+            // 
+            // btnViewTicket
+            // 
+            btnViewTicket.BackColor = Color.LightGray;
+            btnViewTicket.Enabled = false;
+            btnViewTicket.FlatAppearance.BorderSize = 0;
+            btnViewTicket.FlatStyle = FlatStyle.Flat;
+            btnViewTicket.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            btnViewTicket.ForeColor = SystemColors.ControlText;
+            btnViewTicket.Location = new Point(0, 635);
+            btnViewTicket.Name = "btnViewTicket";
+            btnViewTicket.Size = new Size(150, 30);
+            btnViewTicket.TabIndex = 5;
+            btnViewTicket.Text = "VIEW TICKET";
+            btnViewTicket.UseVisualStyleBackColor = false;
+            // 
+            // splitterTicketsOverview
+            // 
+            splitterTicketsOverview.BackColor = SystemColors.ControlDark;
+            splitterTicketsOverview.Dock = DockStyle.Top;
+            splitterTicketsOverview.Location = new Point(0, 0);
+            splitterTicketsOverview.Margin = new Padding(5);
+            splitterTicketsOverview.Name = "splitterTicketsOverview";
+            splitterTicketsOverview.Size = new Size(784, 1);
+            splitterTicketsOverview.TabIndex = 0;
+            splitterTicketsOverview.TabStop = false;
             // 
             // btnEditTicket
             // 
             btnEditTicket.BackColor = Color.LightGray;
             btnEditTicket.Enabled = false;
             btnEditTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEditTicket.Location = new Point(400, 12);
+            btnEditTicket.Location = new Point(450, 722);
             btnEditTicket.Name = "btnEditTicket";
             btnEditTicket.Size = new Size(100, 31);
             btnEditTicket.TabIndex = 7;
@@ -805,7 +1077,7 @@
             btnAddTicket.BackColor = Color.Black;
             btnAddTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddTicket.ForeColor = SystemColors.HighlightText;
-            btnAddTicket.Location = new Point(291, 12);
+            btnAddTicket.Location = new Point(341, 722);
             btnAddTicket.Name = "btnAddTicket";
             btnAddTicket.Size = new Size(100, 31);
             btnAddTicket.TabIndex = 6;
@@ -813,46 +1085,12 @@
             btnAddTicket.UseVisualStyleBackColor = false;
             btnAddTicket.Click += btnAddTicket_Click;
             // 
-            // btnViewTicket
-            // 
-            btnViewTicket.BackColor = Color.LightGray;
-            btnViewTicket.Enabled = false;
-            btnViewTicket.ForeColor = SystemColors.ControlText;
-            btnViewTicket.Location = new Point(29, 423);
-            btnViewTicket.Name = "btnViewTicket";
-            btnViewTicket.Size = new Size(100, 31);
-            btnViewTicket.TabIndex = 6;
-            btnViewTicket.Text = "VIEW TICKET";
-            btnViewTicket.UseVisualStyleBackColor = false;
-            // 
-            // searchbtn
-            // 
-            searchbtn.BackColor = Color.Gray;
-            searchbtn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            searchbtn.ForeColor = SystemColors.ButtonHighlight;
-            searchbtn.Location = new Point(271, 55);
-            searchbtn.Name = "searchbtn";
-            searchbtn.Size = new Size(93, 38);
-            searchbtn.TabIndex = 5;
-            searchbtn.Text = "SEARCH";
-            searchbtn.UseVisualStyleBackColor = false;
-            searchbtn.Click += searchbtn_Click;
-            // 
-            // searchtextbox
-            // 
-            searchtextbox.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            searchtextbox.Location = new Point(29, 64);
-            searchtextbox.Name = "searchtextbox";
-            searchtextbox.PlaceholderText = "Search for tickets..";
-            searchtextbox.Size = new Size(236, 25);
-            searchtextbox.TabIndex = 4;
-            // 
             // btnEscalate
             // 
             btnEscalate.BackColor = Color.LightGray;
             btnEscalate.Enabled = false;
             btnEscalate.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEscalate.Location = new Point(511, 12);
+            btnEscalate.Location = new Point(561, 722);
             btnEscalate.Name = "btnEscalate";
             btnEscalate.Size = new Size(100, 31);
             btnEscalate.TabIndex = 3;
@@ -862,68 +1100,15 @@
             // 
             // lblTicketsOverview
             // 
-            lblTicketsOverview.AutoSize = true;
-            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTicketsOverview.Location = new Point(19, 13);
+            lblTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTicketsOverview.Location = new Point(0, 0);
             lblTicketsOverview.Name = "lblTicketsOverview";
-            lblTicketsOverview.Size = new Size(177, 30);
-            lblTicketsOverview.TabIndex = 1;
+            lblTicketsOverview.Padding = new Padding(0, 10, 0, 0);
+            lblTicketsOverview.Size = new Size(784, 46);
+            lblTicketsOverview.TabIndex = 0;
             lblTicketsOverview.Text = "Tickets Overview";
-            // 
-            // ticketsListView
-            // 
-            ticketsListView.BackColor = SystemColors.InactiveCaption;
-            ticketsListView.Columns.AddRange(new ColumnHeader[] { ticketTitle, ticketDescription, ticketReportingUser, ticketCreationDate, ticketDeadline, ticketStatus });
-            ticketsListView.FullRowSelect = true;
-            ticketsListView.Location = new Point(29, 110);
-            ticketsListView.Margin = new Padding(2);
-            ticketsListView.Name = "ticketsListView";
-            ticketsListView.Size = new Size(582, 300);
-            ticketsListView.TabIndex = 2;
-            ticketsListView.UseCompatibleStateImageBehavior = false;
-            ticketsListView.View = View.Details;
-            ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
-            // 
-            // ticketTitle
-            // 
-            ticketTitle.Text = "Title";
-            ticketTitle.Width = 350;
-            // 
-            // ticketDescription
-            // 
-            ticketDescription.Text = "Description";
-            ticketDescription.Width = 300;
-            // 
-            // ticketReportingUser
-            // 
-            ticketReportingUser.Text = "Reported By";
-            ticketReportingUser.Width = 130;
-            // 
-            // ticketCreationDate
-            // 
-            ticketCreationDate.Text = "Creation Date";
-            ticketCreationDate.Width = 190;
-            // 
-            // ticketDeadline
-            // 
-            ticketDeadline.Text = "Deadline";
-            ticketDeadline.Width = 190;
-            // 
-            // ticketStatus
-            // 
-            ticketStatus.Text = "Status";
-            ticketStatus.Width = 100;
-            // 
-            // splitterTicketsOverview
-            // 
-            splitterTicketsOverview.BackColor = Color.Black;
-            splitterTicketsOverview.Dock = DockStyle.Top;
-            splitterTicketsOverview.Location = new Point(0, 0);
-            splitterTicketsOverview.Margin = new Padding(5);
-            splitterTicketsOverview.Name = "splitterTicketsOverview";
-            splitterTicketsOverview.Size = new Size(634, 1);
-            splitterTicketsOverview.TabIndex = 0;
-            splitterTicketsOverview.TabStop = false;
+            lblTicketsOverview.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlUsers
             // 
@@ -1198,6 +1383,27 @@
             label7.TabIndex = 6;
             label7.Text = "Service desk user :";
             // 
+            // splitterAddEditTicket
+            // 
+            splitterAddEditTicket.BackColor = Color.Black;
+            splitterAddEditTicket.Dock = DockStyle.Top;
+            splitterAddEditTicket.Location = new Point(0, 0);
+            splitterAddEditTicket.Margin = new Padding(5);
+            splitterAddEditTicket.Name = "splitterAddEditTicket";
+            splitterAddEditTicket.Size = new Size(634, 1);
+            splitterAddEditTicket.TabIndex = 0;
+            splitterAddEditTicket.TabStop = false;
+            // 
+            // lblAddEditTicket
+            // 
+            lblAddEditTicket.AutoSize = true;
+            lblAddEditTicket.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAddEditTicket.Location = new Point(228, 17);
+            lblAddEditTicket.Name = "lblAddEditTicket";
+            lblAddEditTicket.Size = new Size(176, 32);
+            lblAddEditTicket.TabIndex = 1;
+            lblAddEditTicket.Text = "Add/Edit Ticket";
+            // 
             // cancelTicketBtn
             // 
             cancelTicketBtn.BackColor = Color.Black;
@@ -1248,27 +1454,6 @@
             addTicketBtn.Text = "Add Ticket";
             addTicketBtn.UseVisualStyleBackColor = false;
             addTicketBtn.Click += addTicketBtn_Click;
-            // 
-            // splitterAddEditTicket
-            // 
-            splitterAddEditTicket.BackColor = Color.Black;
-            splitterAddEditTicket.Dock = DockStyle.Top;
-            splitterAddEditTicket.Location = new Point(0, 0);
-            splitterAddEditTicket.Margin = new Padding(5);
-            splitterAddEditTicket.Name = "splitterAddEditTicket";
-            splitterAddEditTicket.Size = new Size(634, 1);
-            splitterAddEditTicket.TabIndex = 0;
-            splitterAddEditTicket.TabStop = false;
-            // 
-            // lblAddEditTicket
-            // 
-            lblAddEditTicket.AutoSize = true;
-            lblAddEditTicket.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAddEditTicket.Location = new Point(228, 17);
-            lblAddEditTicket.Name = "lblAddEditTicket";
-            lblAddEditTicket.Size = new Size(176, 32);
-            lblAddEditTicket.TabIndex = 1;
-            lblAddEditTicket.Text = "Add/Edit Ticket";
             // 
             // menuStripBackground
             // 
@@ -1757,8 +1942,9 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
-            Controls.Add(pnlDashboard);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
+            Controls.Add(pnlDashboard);
             Controls.Add(menuStrip);
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlDbError);
@@ -1787,7 +1973,8 @@
             ((System.ComponentModel.ISupportInitialize)chartClosed).EndInit();
             ((System.ComponentModel.ISupportInitialize)chartResolved).EndInit();
             pnlTicketsOverview.ResumeLayout(false);
-            pnlTicketsOverview.PerformLayout();
+            panelTicketsHolder.ResumeLayout(false);
+            panelTicketsHolder.PerformLayout();
             pnlUsers.ResumeLayout(false);
             pnlUsers.PerformLayout();
             pnlAddEditTicket.ResumeLayout(false);
@@ -1842,11 +2029,6 @@
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
         private ColumnHeader userTicketCount;
-        private ListView ticketsListView;
-        private ColumnHeader ticketTitle;
-        private ColumnHeader ticketReportingUser;
-        private ColumnHeader ticketDeadline;
-        private ColumnHeader ticketStatus;
         private Button btnAddEmployee;
         private Button btnEditEmployee;
         private Button btnDeleteEmployee;
@@ -1938,5 +2120,19 @@
         private ToolStripSeparator toolStripSeparator2;
         private Panel panelChartHolder;
         private Panel panelLoginHolder;
+        private Panel panelTicketsHolder;
+        private TextBox searchtextbox;
+        private ListView ticketsListView;
+        private ColumnHeader ticketTitle;
+        private ColumnHeader ticketDescription;
+        private ColumnHeader ticketReportingUser;
+        private ColumnHeader ticketCreationDate;
+        private ColumnHeader ticketDeadline;
+        private ColumnHeader ticketStatus;
+        private ColumnHeader ticketPriority;
+        private Label label15;
+        private Button searchbtn;
+        private ComboBox SortOrderComboBox;
+        private Button btnViewTicket;
     }
 }

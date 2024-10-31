@@ -55,11 +55,14 @@ namespace UI
         /// <param name="holderPanel">The panel to center horizontally within the form.</param>
         private void SetIndentForHolderPanel(Panel holderPanel)
         {
-            // Calculate indent based on screen width and the provided panel
-            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - holderPanel.Width / 2;
+            if (holderPanel.Left == 0)
+            {
+                // Calculate indent based on screen width and the provided panel
+                int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - holderPanel.Width / 2;
 
-            // Apply the calculated indent
-            holderPanel.Left += indent;
+                // Apply the calculated indent
+                holderPanel.Left += indent;
+            }
         }
 
         /// <summary>
@@ -231,6 +234,24 @@ namespace UI
                 ShowPanel(pnlDashboard);
                 SetIndentForHolderPanel(panelChartHolder);
             }
+        }
+
+        /// <summary>
+        /// Configures the column widths of the <see cref="ticketsListView"/> control based on its total width.
+        /// Each column is assigned a proportional width to ensure a balanced and readable layout.
+        /// </summary>
+        private void SetTicketsListViewColumns()
+        {
+            int tableWidth = ticketsListView.Width;
+
+            // Set the column widths based on the table width
+            ticketsListView.Columns[0].Width = (int)(tableWidth * 0.18);
+            ticketsListView.Columns[1].Width = (int)(tableWidth * 0.18);
+            ticketsListView.Columns[2].Width = (int)(tableWidth * 0.11);
+            ticketsListView.Columns[3].Width = (int)(tableWidth * 0.15);
+            ticketsListView.Columns[4].Width = (int)(tableWidth * 0.15);
+            ticketsListView.Columns[5].Width = (int)(tableWidth * 0.1);
+            ticketsListView.Columns[6].Width = (int)(tableWidth * 0.11);
         }
 
         #endregion
@@ -573,6 +594,8 @@ namespace UI
         private async void menuItemIncidents_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlTicketsOverview);
+            SetIndentForHolderPanel(panelTicketsHolder);
+            SetTicketsListViewColumns();
             await DisplayTicketsAsync(loggedInEmployee);
         }
 
