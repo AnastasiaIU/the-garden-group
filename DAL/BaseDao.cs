@@ -58,6 +58,7 @@ namespace DAL
             get { return database != null; }
         }
 
+        // This method is used to check if the internet connection is available. It tries to list the database names and returns true if successful.
         public async Task<bool> IsInternetAvailable()
         {
             try

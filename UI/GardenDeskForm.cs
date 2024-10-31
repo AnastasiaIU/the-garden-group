@@ -530,6 +530,7 @@ namespace UI
             ShowPanel(pnlDbError);
         }
 
+        // This method is used to reconnect to the database after the connection was lost
         private async Task TryToReconnect(Panel panel)
         {
             bool isReconnect = false;
