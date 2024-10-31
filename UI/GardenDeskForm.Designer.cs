@@ -171,7 +171,6 @@
             cancelTicketBtn = new Button();
             closeTicketBtn = new Button();
             editTicketBtn = new Button();
-            addTicketBtn = new Button();
             splitterViewTicket = new Splitter();
             lblViewTicketTitle = new Label();
             menuStrip.SuspendLayout();
@@ -1754,17 +1753,6 @@
             editTicketBtn.UseVisualStyleBackColor = false;
             editTicketBtn.Visible = false;
             // 
-            // addTicketBtn
-            // 
-            addTicketBtn.BackColor = Color.LightGreen;
-            addTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            addTicketBtn.Location = new Point(321, 409);
-            addTicketBtn.Name = "addTicketBtn";
-            addTicketBtn.Size = new Size(140, 40);
-            addTicketBtn.TabIndex = 2;
-            addTicketBtn.Text = "Add Ticket";
-            addTicketBtn.UseVisualStyleBackColor = false;
-            // 
             // splitterViewTicket
             // 
             splitterViewTicket.BackColor = Color.Black;
@@ -1981,10 +1969,6 @@
         private Label lblVTIncident;
         private Label lblVTTitle;
         private Label lblVTServiceDesk;
-        private Button cancelTicketBtn;
-        private Button closeTicketBtn;
-        private Button editTicketBtn;
-        private Button addTicketBtn;
         private Splitter splitterViewTicket;
         private Label lblViewTicketTitle;
         private Label lblVTReportingUserValue;
