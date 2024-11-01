@@ -45,7 +45,7 @@ namespace UI
 
             // Display a message if there is a database connection issue
             if (!employeeService.IsDatabaseInitiated())
-                DisplayDatabaseError();
+                ShowDatabaseError();
         }
 
         /// <summary>
@@ -131,23 +131,6 @@ namespace UI
         }
 
         /// <summary>
-        /// Displays an error message in the login panel when there is a database connection issue.
-        /// Hides all other login panel controls.
-        /// </summary>
-        private void DisplayDatabaseError()
-        {
-            // Hide all elements for the login panel
-            foreach (Control control in Controls)
-                if (control.Name.Equals(Properties.Resources.LoginPanel))
-                    foreach (Control loginControl in control.Controls)
-                        loginControl.Hide();
-
-            // Show the error message
-            lblLoginPrompt.Text = Properties.Resources.DatabaseError;
-            lblLoginPrompt.Visible = true;
-        }
-
-        /// <summary>
         /// Handles the login button click event, initiating the login attempt.
         /// </summary>
         private async void OnLoginButtonClick(object sender, EventArgs e)
@@ -162,29 +145,41 @@ namespace UI
         /// </summary>
         private async Task AttemptLogin()
         {
-            string username = txtBoxLoginUsername.Text;
-            string password = txtBoxLoginPassword.Text;
-
-            Employee? employee = await employeeService.GetEmployeeByUsernameAndPassword(username, password);
-
-            if (employee == null)
+            try
             {
-                lblLoginWrongCredentials.Visible = true;
+                lblLoginLoading.Visible = true;
+
+                string username = txtBoxLoginUsername.Text;
+                string password = txtBoxLoginPassword.Text;
+
+                Employee? employee = await employeeService.GetEmployeeByUsernameAndPassword(username, password);
+
+                if (employee == null)
+                {
+                    lblLoginLoading.Visible = false;
+                    lblLoginWrongCredentials.Visible = true;
+                }
+                else
+                {
+                    loggedInEmployee = employee;
+
+                    // Set up the menu according with a user role
+                    SetUpMenuStrip();
+
+                    SetUserRoleAccess();
+
+                    // Initiate and show Dashboard panel
+                    ShowPanel(pnlDashboard);
+                    await GetTicketsForCurrentEmployee();
+                    LoadCharts();
+                    SetIndentForHolderPanel(panelChartHolder);
+                }
             }
-            else
+            catch
             {
-                loggedInEmployee = employee;
-
-                // Set up the menu according with a user role
-                SetUpMenuStrip();
-
-                SetUserRoleAccess();
-
-                // Initiate and show Dashboard panel
-                await GetTicketsForCurrentEmployee();
-                LoadCharts();
-                ShowPanel(pnlDashboard);
-                SetIndentForHolderPanel(panelChartHolder);
+                ShowDatabaseError();
+                lblLoginLoading.Visible = false;
+                await TryToReconnect(pnlLogin);
             }
         }
 
@@ -221,29 +216,51 @@ namespace UI
             usersList.Columns[3].Width = (int)(tableWidth * 0.22);
         }
 
+        /// <summary>
+        /// Handles the click event for the "View Ticket" button, centers the ticket view panel,
+        /// fills in ticket details, and displays the panel.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnViewTicketButtonClick(object sender, EventArgs e)
         {
-            ShowPanel(pnlViewTicket);
             SetIndentForHolderPanel(panelViewTicketHolder);
             FillViewTicketFields();
+            ShowPanel(pnlViewTicket);
         }
 
+        /// <summary>
+        /// Resets the selection in the tickets overview by clearing the selected employee 
+        /// and disabling the "View Ticket" button.
+        /// </summary>
         private void ResetTicketsOverviewSelection()
         {
             selectedEmployee = null;
             ChangeButtonState(btnViewTicket, Color.LightGray, SystemColors.ControlText, false);
         }
 
+        /// <summary>
+        /// Handles the click event for the "Close View" button, returns to the tickets overview view, 
+        /// and resets the view ticket panel.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnCloseViewButtonClick(object sender, EventArgs e)
         {
             ShowTicketsView();
             ResetViewTicket();
         }
 
+        /// <summary>
+        /// Fills in the fields in the "View Ticket" panel with the selected ticket's details. 
+        /// Retrieves the assigned service desk employee's information asynchronously.
+        /// </summary>
         private async void FillViewTicketFields()
         {
-            if (selectedTicket is not null)
+            try
             {
+                // the selectedTicket is guaranteed not to be null here
+#nullable disable
                 Employee serviceDeskEmployee = await employeeService.GetEmployeeById(selectedTicket.ServiceDeskUser);
 
                 lblVTReportingUserValue.Text = selectedTicket.ReportingEmployeeFirstName + " " + selectedTicket.ReportingEmployeeLastName;
@@ -257,34 +274,59 @@ namespace UI
                 lblVTCreationDateValue.Text = selectedTicket.CreationDate.ToString();
                 lblVTDeadlineValue.Text = selectedTicket.Deadline.ToString();
                 lblVTDescriptionValue.Text = selectedTicket.Description;
+#nullable enable
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlViewTicket);
             }
         }
 
+        /// <summary>
+        /// Handles the click event for the "Transfer Ticket" button. 
+        /// If the service desk dropdown is visible, updates the ticket's assigned service desk employee; 
+        /// otherwise, populates the dropdown with service desk employees for selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void OnTransferTicketButtonClick(object sender, EventArgs e)
         {
-            // the selectedTicket and EmployeeId are guaranteed not to be null here
+            try
+            {
+                // the selectedTicket and EmployeeId are guaranteed not to be null here
 #nullable disable
-            if (cmbBoxServiceDesk.Visible)
-            {
-                ResetViewTicket();
-                Employee serviceDeskUser = ((Employee)cmbBoxServiceDesk.SelectedItem);
-                selectedTicket.ServiceDeskUser = serviceDeskUser.EmployeeId;
-                lblVTServiceDeskValue.Text = serviceDeskUser.ToString();
-                await ticketService.UpdateServiceDeskEmployee(selectedTicket);
-            }
-            else
-            {
-                lblVTServiceDeskValue.Visible = false;
-                cmbBoxServiceDesk.Visible = true;
-                btnTransfer.Text = Properties.Resources.Save;
-                List<Employee> serviceDeskEmployees = await employeeService.GetAllServiceDeskEmployeesSorted();
-                cmbBoxServiceDesk.Items.Clear();
-                cmbBoxServiceDesk.Items.AddRange(serviceDeskEmployees.ToArray());
-                cmbBoxServiceDesk.SelectedItem = serviceDeskEmployees.Find(e => e.EmployeeId.Equals(selectedTicket.ServiceDeskUser));
-            }
+                if (cmbBoxServiceDesk.Visible)
+                {
+                    Employee serviceDeskUser = ((Employee)cmbBoxServiceDesk.SelectedItem);
+                    selectedTicket.ServiceDeskUser = serviceDeskUser.EmployeeId;
+                    lblVTServiceDeskValue.Text = serviceDeskUser.ToString();
+                    await ticketService.UpdateServiceDeskEmployee(selectedTicket);
+                    ResetViewTicket();
+                }
+                else
+                {
+                    List<Employee> serviceDeskEmployees = await employeeService.GetAllServiceDeskEmployeesSorted();
+                    cmbBoxServiceDesk.Items.Clear();
+                    cmbBoxServiceDesk.Items.AddRange(serviceDeskEmployees.ToArray());
+                    cmbBoxServiceDesk.SelectedItem = serviceDeskEmployees.Find(e => e.EmployeeId.Equals(selectedTicket.ServiceDeskUser));
+                    lblVTServiceDeskValue.Visible = false;
+                    cmbBoxServiceDesk.Visible = true;
+                    btnTransfer.Text = Properties.Resources.Save;
+                }
 #nullable enable
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlViewTicket);
+            }
         }
 
+        /// <summary>
+        /// Resets the view ticket panel to its initial state by hiding the service desk selection dropdown
+        /// and resetting the "Transfer" button text.
+        /// </summary>
         private void ResetViewTicket()
         {
             cmbBoxServiceDesk.Visible = false;
@@ -774,11 +816,11 @@ namespace UI
 
         private void SetSelectedEmployeeById(List<Employee> serviceDeskEmployees, string? id)
         {
-                var matchingEmployee = serviceDeskEmployees
-                    .FirstOrDefault(emp => emp.EmployeeId == id);
+            var matchingEmployee = serviceDeskEmployees
+                .FirstOrDefault(emp => emp.EmployeeId == id);
 
-                int index = serviceDeskEmployees.IndexOf(matchingEmployee);
-                serviceDeskUserCmbBox.SelectedIndex = index;
+            int index = serviceDeskEmployees.IndexOf(matchingEmployee);
+            serviceDeskUserCmbBox.SelectedIndex = index;
         }
 
         public DateTime CalculateDeadline(string selectedOption, DateTime time) =>
@@ -831,11 +873,11 @@ namespace UI
 
         private async void editTicketBtn_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
-            var updatedTicket = CreateTicketObject(selectedTicket.Deadline, selectedTicket.TicketId);
-            await ticketService.UpdateTicketAsync(updatedTicket);
-            ShowTicketsView();
+                var updatedTicket = CreateTicketObject(selectedTicket.Deadline, selectedTicket.TicketId);
+                await ticketService.UpdateTicketAsync(updatedTicket);
+                ShowTicketsView();
             }
             catch (Exception ex)
             {
@@ -883,7 +925,7 @@ namespace UI
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
             List<Ticket> tickets = await GetTicketsAsync();
-            bool isAscendingOrder = SortOrderComboBox.SelectedItem != null &&SortOrderComboBox.SelectedItem.ToString() == "Low to High";
+            bool isAscendingOrder = SortOrderComboBox.SelectedItem != null && SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
             PopulateTicketsListView(tickets);
         }

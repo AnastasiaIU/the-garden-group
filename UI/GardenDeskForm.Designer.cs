@@ -48,6 +48,7 @@
             lblLicense = new Label();
             pnlLogin = new Panel();
             panelLoginHolder = new Panel();
+            lblLoginLoading = new Label();
             lblLoginUsername = new Label();
             btnLogin = new Button();
             lblLoginPassword = new Label();
@@ -311,6 +312,7 @@
             // 
             // panelLoginHolder
             // 
+            panelLoginHolder.Controls.Add(lblLoginLoading);
             panelLoginHolder.Controls.Add(lblLoginUsername);
             panelLoginHolder.Controls.Add(btnLogin);
             panelLoginHolder.Controls.Add(lblLoginPassword);
@@ -321,6 +323,18 @@
             panelLoginHolder.Name = "panelLoginHolder";
             panelLoginHolder.Size = new Size(300, 250);
             panelLoginHolder.TabIndex = 0;
+            // 
+            // lblLoginLoading
+            // 
+            lblLoginLoading.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLoginLoading.ForeColor = SystemColors.ControlText;
+            lblLoginLoading.Location = new Point(0, 159);
+            lblLoginLoading.Name = "lblLoginLoading";
+            lblLoginLoading.Size = new Size(300, 21);
+            lblLoginLoading.TabIndex = 0;
+            lblLoginLoading.Text = "Trying to log in...";
+            lblLoginLoading.TextAlign = ContentAlignment.TopCenter;
+            lblLoginLoading.Visible = false;
             // 
             // lblLoginUsername
             // 
@@ -379,6 +393,7 @@
             txtBoxLoginUsername.PlaceholderText = " Enter username";
             txtBoxLoginUsername.Size = new Size(300, 29);
             txtBoxLoginUsername.TabIndex = 1;
+            txtBoxLoginUsername.TabStop = false;
             // 
             // txtBoxLoginPassword
             // 
@@ -391,6 +406,7 @@
             txtBoxLoginPassword.PlaceholderText = " Enter password";
             txtBoxLoginPassword.Size = new Size(300, 29);
             txtBoxLoginPassword.TabIndex = 2;
+            txtBoxLoginPassword.TabStop = false;
             // 
             // lblLoginPrompt
             // 
@@ -1840,22 +1856,25 @@
             // 
             // pnlDbError
             // 
+            pnlDbError.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlDbError.BackColor = Color.White;
             pnlDbError.Controls.Add(databaseErrorMessageLbl);
-            pnlDbError.Location = new Point(-1, 111);
+            pnlDbError.Location = new Point(0, 80);
             pnlDbError.Name = "pnlDbError";
-            pnlDbError.Size = new Size(634, 478);
+            pnlDbError.Size = new Size(784, 800);
             pnlDbError.TabIndex = 12;
             // 
             // databaseErrorMessageLbl
             // 
-            databaseErrorMessageLbl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            databaseErrorMessageLbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             databaseErrorMessageLbl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            databaseErrorMessageLbl.Location = new Point(135, 151);
+            databaseErrorMessageLbl.ImageAlign = ContentAlignment.TopCenter;
+            databaseErrorMessageLbl.Location = new Point(0, 150);
             databaseErrorMessageLbl.Name = "databaseErrorMessageLbl";
-            databaseErrorMessageLbl.Size = new Size(326, 95);
+            databaseErrorMessageLbl.Size = new Size(784, 100);
             databaseErrorMessageLbl.TabIndex = 0;
             databaseErrorMessageLbl.Text = "The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.";
+            databaseErrorMessageLbl.TextAlign = ContentAlignment.TopCenter;
             // 
             // GardenDeskForm
             // 
@@ -1864,13 +1883,13 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
+            Controls.Add(pnlDbError);
+            Controls.Add(pnlLogin);
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlLogin);
             Controls.Add(pnlDashboard);
             Controls.Add(menuStrip);
-            Controls.Add(pnlDbError);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
@@ -2060,5 +2079,6 @@
         private Button btnTransfer;
         private Button btnCloseViewTicket;
         private ComboBox cmbBoxServiceDesk;
+        private Label lblLoginLoading;
     }
 }

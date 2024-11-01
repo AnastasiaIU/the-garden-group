@@ -90,11 +90,21 @@ namespace Service
             return dao.IsDatabaseInitiated;
         }
 
+        /// <summary>
+        /// Retrieves an employee by their unique identifier asynchronously.
+        /// </summary>
+        /// <param name="employeeId">The unique identifier of the employee to retrieve.</param>
+        /// <returns>A task representing the asynchronous operation, containing the <see cref="Employee"/> with the specified ID.</returns>
         public async Task<Employee> GetEmployeeById(string employeeId)
         {
             return await dao.GetEmployeeById(employeeId);
         }
 
+        /// <summary>
+        /// Retrieves a sorted list of all service desk employees asynchronously.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, containing a list of <see cref="Employee"/> objects
+        /// sorted by predefined criteria for service desk employees.</returns>
         public async Task<List<Employee>> GetAllServiceDeskEmployeesSorted()
         {
             return await dao.GetAllServiceDeskEmployeesSorted();

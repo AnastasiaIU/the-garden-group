@@ -358,6 +358,15 @@ namespace DAL
 
         #region Sia
 
+        /// <summary>
+        /// Updates the assigned service desk employee for a specific ticket in the database asynchronously.
+        /// </summary>
+        /// <param name="ticket">The <see cref="Ticket"/> object containing the ticket ID and the new service desk employee information to update.</param>
+        /// <returns>A task representing the asynchronous update operation.</returns>
+        /// <remarks>
+        /// This method checks that the <see cref="ticketCollection"/> and the ticket's <see cref="Ticket.TicketId"/> are not null
+        /// before attempting to update. It modifies only the <see cref="Ticket.ServiceDeskUser"/> field in the specified ticket.
+        /// </remarks>
         public async Task UpdateServiceDeskEmployee(Ticket ticket)
         {
             if (ticketCollection is not null && ticket.TicketId is not null)
