@@ -643,6 +643,7 @@ namespace UI
             serviceDeskUserCmbBox.Enabled = true;
             ClearInputs();
             ShowPanel(pnlAddEditTicket);
+            SetIndentForHolderPanel(panelAddEditTicketHolder);
         }
 
         private async void ShowTicketsView()
@@ -801,6 +802,7 @@ namespace UI
             ConfigureTicketPanel("Edit ticket", false, true, true, false);
             await PrefillEditTicketInputs();
             ShowPanel(pnlAddEditTicket);
+            SetIndentForHolderPanel(panelAddEditTicketHolder);
         }
 
         private async void editTicketBtn_Click(object sender, EventArgs e)

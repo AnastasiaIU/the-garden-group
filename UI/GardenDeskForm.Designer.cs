@@ -74,6 +74,8 @@
             lblDashboard = new Label();
             pnlTicketsOverview = new Panel();
             panelTicketsHolder = new Panel();
+            txtBoxFilter = new TextBox();
+            btnFilter = new Button();
             searchtextbox = new TextBox();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
@@ -104,33 +106,33 @@
             btnAddEmployee = new Button();
             lblUsers = new Label();
             pnlAddEditTicket = new Panel();
+            splitterAddEditTicket = new Splitter();
+            panelAddEditTicketHolder = new Panel();
+            label7 = new Label();
+            label8 = new Label();
             descriptionTxtBox = new TextBox();
+            label9 = new Label();
             titleTxtBox = new TextBox();
+            label10 = new Label();
             deadlineCmbBox = new ComboBox();
+            label11 = new Label();
             isResolvedCmbBox = new ComboBox();
+            label12 = new Label();
             priorityCmbBox = new ComboBox();
+            label13 = new Label();
             statusCmbBox = new ComboBox();
+            label14 = new Label();
             typeOfAccidentCmbBox = new ComboBox();
             serviceDeskUserCmbBox = new ComboBox();
-            label14 = new Label();
-            label13 = new Label();
-            label12 = new Label();
-            label11 = new Label();
-            label10 = new Label();
-            label9 = new Label();
-            label8 = new Label();
-            label7 = new Label();
-            splitterAddEditTicket = new Splitter();
-            lblAddEditTicket = new Label();
             cancelTicketBtn = new Button();
             closeTicketBtn = new Button();
             editTicketBtn = new Button();
             addTicketBtn = new Button();
-            menuStripBackground = new PictureBox();
+            lblAddEditTicket = new Label();
             pnlAddEditUser = new Panel();
+            splitterAddEditUser = new Splitter();
             panelAddEditUserHolder = new Panel();
             lblFirstNameEdit = new Label();
-            btnCancelChangesEmployee = new Button();
             btnCreateEmployee = new Button();
             btnDeleteEmployee = new Button();
             btnUpdateEmployee = new Button();
@@ -145,8 +147,8 @@
             textBoxFirstName = new TextBox();
             textBoxEmailAddress = new TextBox();
             textBoxLastName = new TextBox();
+            btnCancelChangesEmployee = new Button();
             lblAddEditUser = new Label();
-            splitterAddEditUser = new Splitter();
             pnlViewTicket = new Panel();
             lblVTDeadlineValue = new Label();
             lblVTDeadline = new Label();
@@ -188,7 +190,7 @@
             pnlUsers.SuspendLayout();
             panelUsersHandler.SuspendLayout();
             pnlAddEditTicket.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
+            panelAddEditTicketHolder.SuspendLayout();
             pnlAddEditUser.SuspendLayout();
             panelAddEditUserHolder.SuspendLayout();
             pnlViewTicket.SuspendLayout();
@@ -298,7 +300,7 @@
             pnlLogin.Controls.Add(lblLoginGardenDesk);
             pnlLogin.Location = new Point(0, 80);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(791, 803);
+            pnlLogin.Size = new Size(793, 803);
             pnlLogin.TabIndex = 0;
             pnlLogin.VisibleChanged += PanelLoginVisibilityChanged;
             // 
@@ -391,7 +393,7 @@
             lblLoginPrompt.Location = new Point(0, 88);
             lblLoginPrompt.Name = "lblLoginPrompt";
             lblLoginPrompt.Padding = new Padding(0, 20, 0, 0);
-            lblLoginPrompt.Size = new Size(786, 62);
+            lblLoginPrompt.Size = new Size(788, 62);
             lblLoginPrompt.TabIndex = 0;
             lblLoginPrompt.Text = "Please provide login credentials to log in to GardenDesk for The Garden Group.";
             lblLoginPrompt.TextAlign = ContentAlignment.TopCenter;
@@ -404,7 +406,7 @@
             lblLoginGardenDesk.Margin = new Padding(5, 0, 5, 0);
             lblLoginGardenDesk.Name = "lblLoginGardenDesk";
             lblLoginGardenDesk.Padding = new Padding(0, 10, 0, 0);
-            lblLoginGardenDesk.Size = new Size(791, 46);
+            lblLoginGardenDesk.Size = new Size(793, 46);
             lblLoginGardenDesk.TabIndex = 0;
             lblLoginGardenDesk.Text = "GardenDesk: TGG";
             lblLoginGardenDesk.TextAlign = ContentAlignment.TopCenter;
@@ -917,22 +919,49 @@
             // 
             // panelTicketsHolder
             // 
+            panelTicketsHolder.Controls.Add(txtBoxFilter);
+            panelTicketsHolder.Controls.Add(btnFilter);
             panelTicketsHolder.Controls.Add(searchtextbox);
             panelTicketsHolder.Controls.Add(ticketsListView);
             panelTicketsHolder.Controls.Add(label15);
             panelTicketsHolder.Controls.Add(searchbtn);
             panelTicketsHolder.Controls.Add(SortOrderComboBox);
             panelTicketsHolder.Controls.Add(btnViewTicket);
-            panelTicketsHolder.Location = new Point(0, 46);
+            panelTicketsHolder.Location = new Point(0, 70);
             panelTicketsHolder.Name = "panelTicketsHolder";
-            panelTicketsHolder.Size = new Size(780, 670);
+            panelTicketsHolder.Size = new Size(780, 660);
             panelTicketsHolder.TabIndex = 8;
+            // 
+            // txtBoxFilter
+            // 
+            txtBoxFilter.BorderStyle = BorderStyle.FixedSingle;
+            txtBoxFilter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtBoxFilter.Location = new Point(0, 50);
+            txtBoxFilter.Name = "txtBoxFilter";
+            txtBoxFilter.PlaceholderText = "Filter by common keywords";
+            txtBoxFilter.Size = new Size(300, 29);
+            txtBoxFilter.TabIndex = 3;
+            // 
+            // btnFilter
+            // 
+            btnFilter.BackColor = Color.OliveDrab;
+            btnFilter.FlatAppearance.BorderSize = 0;
+            btnFilter.FlatStyle = FlatStyle.Flat;
+            btnFilter.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            btnFilter.ForeColor = Color.White;
+            btnFilter.Location = new Point(320, 49);
+            btnFilter.Margin = new Padding(0);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(100, 30);
+            btnFilter.TabIndex = 4;
+            btnFilter.Text = "FILTER";
+            btnFilter.UseVisualStyleBackColor = false;
             // 
             // searchtextbox
             // 
             searchtextbox.BorderStyle = BorderStyle.FixedSingle;
             searchtextbox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            searchtextbox.Location = new Point(0, 30);
+            searchtextbox.Location = new Point(0, 1);
             searchtextbox.Name = "searchtextbox";
             searchtextbox.PlaceholderText = "Search by title or description";
             searchtextbox.Size = new Size(300, 29);
@@ -947,12 +976,12 @@
             ticketsListView.FullRowSelect = true;
             ticketsListView.GridLines = true;
             ticketsListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            ticketsListView.Location = new Point(0, 120);
+            ticketsListView.Location = new Point(0, 100);
             ticketsListView.Margin = new Padding(2);
             ticketsListView.MultiSelect = false;
             ticketsListView.Name = "ticketsListView";
             ticketsListView.Size = new Size(780, 500);
-            ticketsListView.TabIndex = 4;
+            ticketsListView.TabIndex = 6;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
             ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
@@ -1002,7 +1031,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.Location = new Point(610, 0);
+            label15.Location = new Point(478, 3);
             label15.Name = "label15";
             label15.Size = new Size(122, 21);
             label15.TabIndex = 0;
@@ -1015,7 +1044,7 @@
             searchbtn.FlatStyle = FlatStyle.Flat;
             searchbtn.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
             searchbtn.ForeColor = Color.White;
-            searchbtn.Location = new Point(0, 75);
+            searchbtn.Location = new Point(320, 0);
             searchbtn.Margin = new Padding(0);
             searchbtn.Name = "searchbtn";
             searchbtn.Size = new Size(100, 30);
@@ -1029,10 +1058,10 @@
             SortOrderComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             SortOrderComboBox.FormattingEnabled = true;
             SortOrderComboBox.Items.AddRange(new object[] { "Low to High", "High to Low" });
-            SortOrderComboBox.Location = new Point(610, 30);
+            SortOrderComboBox.Location = new Point(610, 0);
             SortOrderComboBox.Name = "SortOrderComboBox";
             SortOrderComboBox.Size = new Size(170, 29);
-            SortOrderComboBox.TabIndex = 3;
+            SortOrderComboBox.TabIndex = 5;
             SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
             // 
             // btnViewTicket
@@ -1043,10 +1072,10 @@
             btnViewTicket.FlatStyle = FlatStyle.Flat;
             btnViewTicket.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
             btnViewTicket.ForeColor = SystemColors.ControlText;
-            btnViewTicket.Location = new Point(0, 635);
+            btnViewTicket.Location = new Point(0, 620);
             btnViewTicket.Name = "btnViewTicket";
             btnViewTicket.Size = new Size(150, 30);
-            btnViewTicket.TabIndex = 5;
+            btnViewTicket.TabIndex = 7;
             btnViewTicket.Text = "VIEW TICKET";
             btnViewTicket.UseVisualStyleBackColor = false;
             // 
@@ -1231,273 +1260,313 @@
             // 
             // pnlAddEditTicket
             // 
+            pnlAddEditTicket.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlAddEditTicket.BackColor = Color.White;
-            pnlAddEditTicket.Controls.Add(descriptionTxtBox);
-            pnlAddEditTicket.Controls.Add(titleTxtBox);
-            pnlAddEditTicket.Controls.Add(deadlineCmbBox);
-            pnlAddEditTicket.Controls.Add(isResolvedCmbBox);
-            pnlAddEditTicket.Controls.Add(priorityCmbBox);
-            pnlAddEditTicket.Controls.Add(statusCmbBox);
-            pnlAddEditTicket.Controls.Add(typeOfAccidentCmbBox);
-            pnlAddEditTicket.Controls.Add(serviceDeskUserCmbBox);
-            pnlAddEditTicket.Controls.Add(label14);
-            pnlAddEditTicket.Controls.Add(label13);
-            pnlAddEditTicket.Controls.Add(label12);
-            pnlAddEditTicket.Controls.Add(label11);
-            pnlAddEditTicket.Controls.Add(label10);
-            pnlAddEditTicket.Controls.Add(label9);
-            pnlAddEditTicket.Controls.Add(label8);
-            pnlAddEditTicket.Controls.Add(label7);
             pnlAddEditTicket.Controls.Add(splitterAddEditTicket);
+            pnlAddEditTicket.Controls.Add(panelAddEditTicketHolder);
             pnlAddEditTicket.Controls.Add(lblAddEditTicket);
-            pnlAddEditTicket.Location = new Point(0, 130);
+            pnlAddEditTicket.Location = new Point(0, 122);
             pnlAddEditTicket.Name = "pnlAddEditTicket";
-            pnlAddEditTicket.Size = new Size(634, 599);
-            pnlAddEditTicket.TabIndex = 8;
-            // 
-            // descriptionTxtBox
-            // 
-            descriptionTxtBox.Location = new Point(167, 316);
-            descriptionTxtBox.Multiline = true;
-            descriptionTxtBox.Name = "descriptionTxtBox";
-            descriptionTxtBox.Size = new Size(216, 74);
-            descriptionTxtBox.TabIndex = 21;
-            // 
-            // titleTxtBox
-            // 
-            titleTxtBox.Location = new Point(167, 91);
-            titleTxtBox.Name = "titleTxtBox";
-            titleTxtBox.Size = new Size(216, 23);
-            titleTxtBox.TabIndex = 20;
-            // 
-            // deadlineCmbBox
-            // 
-            deadlineCmbBox.FormattingEnabled = true;
-            deadlineCmbBox.Items.AddRange(new object[] { "+ 7 days", "+ 14 days", "+ 28 days", "+ 6 months" });
-            deadlineCmbBox.Location = new Point(167, 272);
-            deadlineCmbBox.Name = "deadlineCmbBox";
-            deadlineCmbBox.Size = new Size(121, 23);
-            deadlineCmbBox.TabIndex = 19;
-            // 
-            // isResolvedCmbBox
-            // 
-            isResolvedCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            isResolvedCmbBox.FormattingEnabled = true;
-            isResolvedCmbBox.Items.AddRange(new object[] { "Yes", "No" });
-            isResolvedCmbBox.Location = new Point(167, 235);
-            isResolvedCmbBox.Name = "isResolvedCmbBox";
-            isResolvedCmbBox.Size = new Size(121, 23);
-            isResolvedCmbBox.TabIndex = 18;
-            isResolvedCmbBox.SelectedIndexChanged += isResolvedCmbBox_SelectedIndexChanged;
-            // 
-            // priorityCmbBox
-            // 
-            priorityCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            priorityCmbBox.FormattingEnabled = true;
-            priorityCmbBox.Items.AddRange(new object[] { "Low", "Medium", "High" });
-            priorityCmbBox.Location = new Point(167, 200);
-            priorityCmbBox.Name = "priorityCmbBox";
-            priorityCmbBox.Size = new Size(121, 23);
-            priorityCmbBox.TabIndex = 17;
-            // 
-            // statusCmbBox
-            // 
-            statusCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            statusCmbBox.FormattingEnabled = true;
-            statusCmbBox.Items.AddRange(new object[] { "Open", "Closed" });
-            statusCmbBox.Location = new Point(167, 163);
-            statusCmbBox.Name = "statusCmbBox";
-            statusCmbBox.Size = new Size(121, 23);
-            statusCmbBox.TabIndex = 16;
-            // 
-            // typeOfAccidentCmbBox
-            // 
-            typeOfAccidentCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            typeOfAccidentCmbBox.FormattingEnabled = true;
-            typeOfAccidentCmbBox.Items.AddRange(new object[] { "Software", "Service", "Hardware" });
-            typeOfAccidentCmbBox.Location = new Point(167, 126);
-            typeOfAccidentCmbBox.Name = "typeOfAccidentCmbBox";
-            typeOfAccidentCmbBox.Size = new Size(121, 23);
-            typeOfAccidentCmbBox.TabIndex = 15;
-            // 
-            // serviceDeskUserCmbBox
-            // 
-            serviceDeskUserCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            serviceDeskUserCmbBox.FormattingEnabled = true;
-            serviceDeskUserCmbBox.Location = new Point(167, 61);
-            serviceDeskUserCmbBox.Name = "serviceDeskUserCmbBox";
-            serviceDeskUserCmbBox.Size = new Size(121, 23);
-            serviceDeskUserCmbBox.TabIndex = 14;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Location = new Point(52, 321);
-            label14.Name = "label14";
-            label14.Size = new Size(73, 15);
-            label14.TabIndex = 13;
-            label14.Text = "Description :";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Location = new Point(52, 275);
-            label13.Name = "label13";
-            label13.Size = new Size(59, 15);
-            label13.TabIndex = 12;
-            label13.Text = "Deadline :";
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(52, 238);
-            label12.Name = "label12";
-            label12.Size = new Size(68, 15);
-            label12.TabIndex = 11;
-            label12.Text = "Is resolved :";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Location = new Point(52, 203);
-            label11.Name = "label11";
-            label11.Size = new Size(51, 15);
-            label11.TabIndex = 10;
-            label11.Text = "Priority :";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(52, 166);
-            label10.Name = "label10";
-            label10.Size = new Size(45, 15);
-            label10.TabIndex = 9;
-            label10.Text = "Status :";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(52, 129);
-            label9.Name = "label9";
-            label9.Size = new Size(97, 15);
-            label9.TabIndex = 8;
-            label9.Text = "Type of incident :";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(52, 94);
-            label8.Name = "label8";
-            label8.Size = new Size(35, 15);
-            label8.TabIndex = 7;
-            label8.Text = "Title :";
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(52, 64);
-            label7.Name = "label7";
-            label7.Size = new Size(102, 15);
-            label7.TabIndex = 6;
-            label7.Text = "Service desk user :";
+            pnlAddEditTicket.Size = new Size(784, 758);
+            pnlAddEditTicket.TabIndex = 0;
             // 
             // splitterAddEditTicket
             // 
-            splitterAddEditTicket.BackColor = Color.Black;
+            splitterAddEditTicket.BackColor = SystemColors.ControlDark;
             splitterAddEditTicket.Dock = DockStyle.Top;
             splitterAddEditTicket.Location = new Point(0, 0);
             splitterAddEditTicket.Margin = new Padding(5);
             splitterAddEditTicket.Name = "splitterAddEditTicket";
-            splitterAddEditTicket.Size = new Size(634, 1);
+            splitterAddEditTicket.Size = new Size(784, 1);
             splitterAddEditTicket.TabIndex = 0;
             splitterAddEditTicket.TabStop = false;
             // 
-            // lblAddEditTicket
+            // panelAddEditTicketHolder
             // 
-            lblAddEditTicket.AutoSize = true;
-            lblAddEditTicket.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAddEditTicket.Location = new Point(228, 17);
-            lblAddEditTicket.Name = "lblAddEditTicket";
-            lblAddEditTicket.Size = new Size(176, 32);
-            lblAddEditTicket.TabIndex = 1;
-            lblAddEditTicket.Text = "Add/Edit Ticket";
+            panelAddEditTicketHolder.Controls.Add(label7);
+            panelAddEditTicketHolder.Controls.Add(label8);
+            panelAddEditTicketHolder.Controls.Add(descriptionTxtBox);
+            panelAddEditTicketHolder.Controls.Add(label9);
+            panelAddEditTicketHolder.Controls.Add(titleTxtBox);
+            panelAddEditTicketHolder.Controls.Add(label10);
+            panelAddEditTicketHolder.Controls.Add(deadlineCmbBox);
+            panelAddEditTicketHolder.Controls.Add(label11);
+            panelAddEditTicketHolder.Controls.Add(isResolvedCmbBox);
+            panelAddEditTicketHolder.Controls.Add(label12);
+            panelAddEditTicketHolder.Controls.Add(priorityCmbBox);
+            panelAddEditTicketHolder.Controls.Add(label13);
+            panelAddEditTicketHolder.Controls.Add(statusCmbBox);
+            panelAddEditTicketHolder.Controls.Add(label14);
+            panelAddEditTicketHolder.Controls.Add(typeOfAccidentCmbBox);
+            panelAddEditTicketHolder.Controls.Add(serviceDeskUserCmbBox);
+            panelAddEditTicketHolder.Controls.Add(cancelTicketBtn);
+            panelAddEditTicketHolder.Controls.Add(closeTicketBtn);
+            panelAddEditTicketHolder.Controls.Add(editTicketBtn);
+            panelAddEditTicketHolder.Controls.Add(addTicketBtn);
+            panelAddEditTicketHolder.Location = new Point(0, 70);
+            panelAddEditTicketHolder.Name = "panelAddEditTicketHolder";
+            panelAddEditTicketHolder.Size = new Size(470, 430);
+            panelAddEditTicketHolder.TabIndex = 0;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(0, 4);
+            label7.Name = "label7";
+            label7.Size = new Size(137, 21);
+            label7.TabIndex = 6;
+            label7.Text = "Service desk user :";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(0, 42);
+            label8.Name = "label8";
+            label8.Size = new Size(46, 21);
+            label8.TabIndex = 7;
+            label8.Text = "Title :";
+            // 
+            // descriptionTxtBox
+            // 
+            descriptionTxtBox.BorderStyle = BorderStyle.FixedSingle;
+            descriptionTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            descriptionTxtBox.Location = new Point(165, 290);
+            descriptionTxtBox.Multiline = true;
+            descriptionTxtBox.Name = "descriptionTxtBox";
+            descriptionTxtBox.Size = new Size(250, 80);
+            descriptionTxtBox.TabIndex = 8;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.Location = new Point(0, 83);
+            label9.Name = "label9";
+            label9.Size = new Size(126, 21);
+            label9.TabIndex = 8;
+            label9.Text = "Type of incident :";
+            // 
+            // titleTxtBox
+            // 
+            titleTxtBox.BorderStyle = BorderStyle.FixedSingle;
+            titleTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            titleTxtBox.Location = new Point(165, 40);
+            titleTxtBox.Name = "titleTxtBox";
+            titleTxtBox.Size = new Size(200, 29);
+            titleTxtBox.TabIndex = 2;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Location = new Point(0, 123);
+            label10.Name = "label10";
+            label10.Size = new Size(59, 21);
+            label10.TabIndex = 9;
+            label10.Text = "Status :";
+            // 
+            // deadlineCmbBox
+            // 
+            deadlineCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            deadlineCmbBox.FormattingEnabled = true;
+            deadlineCmbBox.Items.AddRange(new object[] { "+ 7 days", "+ 14 days", "+ 28 days", "+ 6 months" });
+            deadlineCmbBox.Location = new Point(165, 240);
+            deadlineCmbBox.Name = "deadlineCmbBox";
+            deadlineCmbBox.Size = new Size(200, 29);
+            deadlineCmbBox.TabIndex = 7;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.Location = new Point(0, 163);
+            label11.Name = "label11";
+            label11.Size = new Size(68, 21);
+            label11.TabIndex = 10;
+            label11.Text = "Priority :";
+            // 
+            // isResolvedCmbBox
+            // 
+            isResolvedCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            isResolvedCmbBox.FormattingEnabled = true;
+            isResolvedCmbBox.Items.AddRange(new object[] { "Yes", "No" });
+            isResolvedCmbBox.Location = new Point(165, 200);
+            isResolvedCmbBox.Name = "isResolvedCmbBox";
+            isResolvedCmbBox.Size = new Size(200, 29);
+            isResolvedCmbBox.TabIndex = 6;
+            isResolvedCmbBox.SelectedIndexChanged += isResolvedCmbBox_SelectedIndexChanged;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Location = new Point(0, 203);
+            label12.Name = "label12";
+            label12.Size = new Size(91, 21);
+            label12.TabIndex = 11;
+            label12.Text = "Is resolved :";
+            // 
+            // priorityCmbBox
+            // 
+            priorityCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            priorityCmbBox.FormattingEnabled = true;
+            priorityCmbBox.Items.AddRange(new object[] { "Low", "Medium", "High" });
+            priorityCmbBox.Location = new Point(165, 160);
+            priorityCmbBox.Name = "priorityCmbBox";
+            priorityCmbBox.Size = new Size(200, 29);
+            priorityCmbBox.TabIndex = 5;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.Location = new Point(0, 243);
+            label13.Name = "label13";
+            label13.Size = new Size(78, 21);
+            label13.TabIndex = 12;
+            label13.Text = "Deadline :";
+            // 
+            // statusCmbBox
+            // 
+            statusCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            statusCmbBox.FormattingEnabled = true;
+            statusCmbBox.Items.AddRange(new object[] { "Open", "Closed" });
+            statusCmbBox.Location = new Point(165, 120);
+            statusCmbBox.Name = "statusCmbBox";
+            statusCmbBox.Size = new Size(200, 29);
+            statusCmbBox.TabIndex = 4;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.Location = new Point(0, 292);
+            label14.Name = "label14";
+            label14.Size = new Size(96, 21);
+            label14.TabIndex = 13;
+            label14.Text = "Description :";
+            // 
+            // typeOfAccidentCmbBox
+            // 
+            typeOfAccidentCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            typeOfAccidentCmbBox.FormattingEnabled = true;
+            typeOfAccidentCmbBox.Items.AddRange(new object[] { "Software", "Service", "Hardware" });
+            typeOfAccidentCmbBox.Location = new Point(165, 80);
+            typeOfAccidentCmbBox.Name = "typeOfAccidentCmbBox";
+            typeOfAccidentCmbBox.Size = new Size(200, 29);
+            typeOfAccidentCmbBox.TabIndex = 3;
+            // 
+            // serviceDeskUserCmbBox
+            // 
+            serviceDeskUserCmbBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            serviceDeskUserCmbBox.FormattingEnabled = true;
+            serviceDeskUserCmbBox.Location = new Point(165, 0);
+            serviceDeskUserCmbBox.Name = "serviceDeskUserCmbBox";
+            serviceDeskUserCmbBox.Size = new Size(200, 29);
+            serviceDeskUserCmbBox.TabIndex = 1;
             // 
             // cancelTicketBtn
             // 
-            cancelTicketBtn.BackColor = Color.Black;
-            cancelTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            cancelTicketBtn.ForeColor = SystemColors.HighlightText;
-            cancelTicketBtn.Location = new Point(482, 409);
+            cancelTicketBtn.BackColor = Color.DarkGray;
+            cancelTicketBtn.FlatAppearance.BorderSize = 0;
+            cancelTicketBtn.FlatStyle = FlatStyle.Flat;
+            cancelTicketBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            cancelTicketBtn.ForeColor = Color.White;
+            cancelTicketBtn.Location = new Point(160, 400);
             cancelTicketBtn.Name = "cancelTicketBtn";
-            cancelTicketBtn.Size = new Size(140, 40);
-            cancelTicketBtn.TabIndex = 5;
-            cancelTicketBtn.Text = "Cancel Changes";
+            cancelTicketBtn.Size = new Size(150, 30);
+            cancelTicketBtn.TabIndex = 10;
+            cancelTicketBtn.Text = "CANCEL CHANGES";
             cancelTicketBtn.UseVisualStyleBackColor = false;
             cancelTicketBtn.Click += cancelTicketBtn_Click;
             // 
             // closeTicketBtn
             // 
-            closeTicketBtn.BackColor = Color.Tomato;
-            closeTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            closeTicketBtn.Location = new Point(157, 410);
+            closeTicketBtn.BackColor = Color.Firebrick;
+            closeTicketBtn.FlatAppearance.BorderSize = 0;
+            closeTicketBtn.FlatStyle = FlatStyle.Flat;
+            closeTicketBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            closeTicketBtn.ForeColor = Color.White;
+            closeTicketBtn.Location = new Point(320, 400);
             closeTicketBtn.Name = "closeTicketBtn";
-            closeTicketBtn.Size = new Size(140, 40);
-            closeTicketBtn.TabIndex = 4;
-            closeTicketBtn.Text = "Close Ticket";
+            closeTicketBtn.Size = new Size(150, 30);
+            closeTicketBtn.TabIndex = 11;
+            closeTicketBtn.Text = "CLOSE TICKET";
             closeTicketBtn.UseVisualStyleBackColor = false;
             closeTicketBtn.Visible = false;
             closeTicketBtn.Click += closeTicketBtn_Click;
             // 
             // editTicketBtn
             // 
-            editTicketBtn.BackColor = Color.Yellow;
-            editTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            editTicketBtn.Location = new Point(321, 409);
+            editTicketBtn.BackColor = Color.OliveDrab;
+            editTicketBtn.FlatAppearance.BorderSize = 0;
+            editTicketBtn.FlatStyle = FlatStyle.Flat;
+            editTicketBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            editTicketBtn.ForeColor = Color.White;
+            editTicketBtn.Location = new Point(0, 400);
             editTicketBtn.Name = "editTicketBtn";
-            editTicketBtn.Size = new Size(140, 40);
-            editTicketBtn.TabIndex = 3;
-            editTicketBtn.Text = "Edit Ticket";
+            editTicketBtn.Size = new Size(150, 30);
+            editTicketBtn.TabIndex = 9;
+            editTicketBtn.Text = "EDIT TICKET";
             editTicketBtn.UseVisualStyleBackColor = false;
             editTicketBtn.Visible = false;
             editTicketBtn.Click += editTicketBtn_Click;
             // 
             // addTicketBtn
             // 
-            addTicketBtn.BackColor = Color.LightGreen;
-            addTicketBtn.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            addTicketBtn.Location = new Point(321, 409);
+            addTicketBtn.BackColor = Color.OliveDrab;
+            addTicketBtn.FlatAppearance.BorderSize = 0;
+            addTicketBtn.FlatStyle = FlatStyle.Flat;
+            addTicketBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            addTicketBtn.ForeColor = Color.White;
+            addTicketBtn.Location = new Point(0, 400);
             addTicketBtn.Name = "addTicketBtn";
-            addTicketBtn.Size = new Size(140, 40);
-            addTicketBtn.TabIndex = 2;
-            addTicketBtn.Text = "Add Ticket";
+            addTicketBtn.Size = new Size(150, 30);
+            addTicketBtn.TabIndex = 9;
+            addTicketBtn.Text = "ADD TICKET";
             addTicketBtn.UseVisualStyleBackColor = false;
             addTicketBtn.Click += addTicketBtn_Click;
             // 
-            // menuStripBackground
+            // lblAddEditTicket
             // 
-            menuStripBackground.BackColor = Color.White;
-            menuStripBackground.Location = new Point(0, 80);
-            menuStripBackground.Name = "menuStripBackground";
-            menuStripBackground.Size = new Size(634, 32);
-            menuStripBackground.TabIndex = 9;
-            menuStripBackground.TabStop = false;
+            lblAddEditTicket.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblAddEditTicket.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblAddEditTicket.Location = new Point(0, 0);
+            lblAddEditTicket.Name = "lblAddEditTicket";
+            lblAddEditTicket.Padding = new Padding(0, 10, 0, 0);
+            lblAddEditTicket.Size = new Size(784, 46);
+            lblAddEditTicket.TabIndex = 0;
+            lblAddEditTicket.Text = "Add/Edit Ticket";
+            lblAddEditTicket.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlAddEditUser
             // 
             pnlAddEditUser.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlAddEditUser.BackColor = Color.White;
+            pnlAddEditUser.Controls.Add(splitterAddEditUser);
             pnlAddEditUser.Controls.Add(panelAddEditUserHolder);
             pnlAddEditUser.Controls.Add(lblAddEditUser);
-            pnlAddEditUser.Controls.Add(splitterAddEditUser);
             pnlAddEditUser.Location = new Point(0, 122);
             pnlAddEditUser.Name = "pnlAddEditUser";
             pnlAddEditUser.Size = new Size(784, 758);
             pnlAddEditUser.TabIndex = 0;
             // 
+            // splitterAddEditUser
+            // 
+            splitterAddEditUser.BackColor = SystemColors.ControlDark;
+            splitterAddEditUser.Dock = DockStyle.Top;
+            splitterAddEditUser.Location = new Point(0, 0);
+            splitterAddEditUser.Margin = new Padding(5);
+            splitterAddEditUser.Name = "splitterAddEditUser";
+            splitterAddEditUser.Size = new Size(784, 1);
+            splitterAddEditUser.TabIndex = 0;
+            splitterAddEditUser.TabStop = false;
+            // 
             // panelAddEditUserHolder
             // 
             panelAddEditUserHolder.Controls.Add(lblFirstNameEdit);
-            panelAddEditUserHolder.Controls.Add(btnCancelChangesEmployee);
             panelAddEditUserHolder.Controls.Add(btnCreateEmployee);
             panelAddEditUserHolder.Controls.Add(btnDeleteEmployee);
             panelAddEditUserHolder.Controls.Add(btnUpdateEmployee);
@@ -1512,6 +1581,7 @@
             panelAddEditUserHolder.Controls.Add(textBoxFirstName);
             panelAddEditUserHolder.Controls.Add(textBoxEmailAddress);
             panelAddEditUserHolder.Controls.Add(textBoxLastName);
+            panelAddEditUserHolder.Controls.Add(btnCancelChangesEmployee);
             panelAddEditUserHolder.Location = new Point(0, 70);
             panelAddEditUserHolder.Name = "panelAddEditUserHolder";
             panelAddEditUserHolder.Size = new Size(470, 300);
@@ -1526,21 +1596,6 @@
             lblFirstNameEdit.Size = new Size(86, 21);
             lblFirstNameEdit.TabIndex = 3;
             lblFirstNameEdit.Text = "First name:";
-            // 
-            // btnCancelChangesEmployee
-            // 
-            btnCancelChangesEmployee.BackColor = Color.DarkGray;
-            btnCancelChangesEmployee.FlatAppearance.BorderSize = 0;
-            btnCancelChangesEmployee.FlatStyle = FlatStyle.Flat;
-            btnCancelChangesEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancelChangesEmployee.ForeColor = Color.White;
-            btnCancelChangesEmployee.Location = new Point(160, 260);
-            btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
-            btnCancelChangesEmployee.Size = new Size(150, 30);
-            btnCancelChangesEmployee.TabIndex = 9;
-            btnCancelChangesEmployee.Text = "CANCEL CHANGES";
-            btnCancelChangesEmployee.UseVisualStyleBackColor = false;
-            btnCancelChangesEmployee.Click += btnCancelChangesEmployee_Click;
             // 
             // btnCreateEmployee
             // 
@@ -1620,7 +1675,6 @@
             // 
             // comboBoxTypeUser
             // 
-            comboBoxTypeUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTypeUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxTypeUser.FormattingEnabled = true;
             comboBoxTypeUser.Items.AddRange(new object[] { "RegularEmployee", "ServiceDeskEmployee" });
@@ -1641,6 +1695,7 @@
             // 
             // textBoxBranch
             // 
+            textBoxBranch.BorderStyle = BorderStyle.FixedSingle;
             textBoxBranch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxBranch.Location = new Point(165, 200);
             textBoxBranch.Name = "textBoxBranch";
@@ -1659,6 +1714,7 @@
             // 
             // textBoxPhoneNumber
             // 
+            textBoxPhoneNumber.BorderStyle = BorderStyle.FixedSingle;
             textBoxPhoneNumber.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPhoneNumber.Location = new Point(165, 160);
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
@@ -1667,6 +1723,7 @@
             // 
             // textBoxFirstName
             // 
+            textBoxFirstName.BorderStyle = BorderStyle.FixedSingle;
             textBoxFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxFirstName.Location = new Point(165, 0);
             textBoxFirstName.Name = "textBoxFirstName";
@@ -1675,6 +1732,7 @@
             // 
             // textBoxEmailAddress
             // 
+            textBoxEmailAddress.BorderStyle = BorderStyle.FixedSingle;
             textBoxEmailAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxEmailAddress.Location = new Point(165, 120);
             textBoxEmailAddress.Name = "textBoxEmailAddress";
@@ -1683,11 +1741,27 @@
             // 
             // textBoxLastName
             // 
+            textBoxLastName.BorderStyle = BorderStyle.FixedSingle;
             textBoxLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxLastName.Location = new Point(165, 40);
             textBoxLastName.Name = "textBoxLastName";
             textBoxLastName.Size = new Size(200, 29);
             textBoxLastName.TabIndex = 2;
+            // 
+            // btnCancelChangesEmployee
+            // 
+            btnCancelChangesEmployee.BackColor = Color.DarkGray;
+            btnCancelChangesEmployee.FlatAppearance.BorderSize = 0;
+            btnCancelChangesEmployee.FlatStyle = FlatStyle.Flat;
+            btnCancelChangesEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelChangesEmployee.ForeColor = Color.White;
+            btnCancelChangesEmployee.Location = new Point(160, 260);
+            btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
+            btnCancelChangesEmployee.Size = new Size(150, 30);
+            btnCancelChangesEmployee.TabIndex = 9;
+            btnCancelChangesEmployee.Text = "CANCEL CHANGES";
+            btnCancelChangesEmployee.UseVisualStyleBackColor = false;
+            btnCancelChangesEmployee.Click += btnCancelChangesEmployee_Click;
             // 
             // lblAddEditUser
             // 
@@ -1701,17 +1775,6 @@
             lblAddEditUser.TabIndex = 0;
             lblAddEditUser.Text = "Add/Edit User";
             lblAddEditUser.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // splitterAddEditUser
-            // 
-            splitterAddEditUser.BackColor = Color.Black;
-            splitterAddEditUser.Dock = DockStyle.Top;
-            splitterAddEditUser.Location = new Point(0, 0);
-            splitterAddEditUser.Margin = new Padding(5);
-            splitterAddEditUser.Name = "splitterAddEditUser";
-            splitterAddEditUser.Size = new Size(784, 2);
-            splitterAddEditUser.TabIndex = 0;
-            splitterAddEditUser.TabStop = false;
             // 
             // pnlViewTicket
             // 
@@ -1738,10 +1801,6 @@
             pnlViewTicket.Controls.Add(lblVTIncident);
             pnlViewTicket.Controls.Add(lblVTTitle);
             pnlViewTicket.Controls.Add(lblVTServiceDesk);
-            pnlViewTicket.Controls.Add(cancelTicketBtn);
-            pnlViewTicket.Controls.Add(closeTicketBtn);
-            pnlViewTicket.Controls.Add(editTicketBtn);
-            pnlViewTicket.Controls.Add(addTicketBtn);
             pnlViewTicket.Controls.Add(splitterViewTicket);
             pnlViewTicket.Controls.Add(lblViewTicketTitle);
             pnlViewTicket.Location = new Point(0, 130);
@@ -1983,11 +2042,11 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
-            Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlTicketsOverview);
-            Controls.Add(pnlLogin);
+            Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlDashboard);
+            Controls.Add(pnlUsers);
+            Controls.Add(pnlLogin);
             Controls.Add(menuStrip);
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlDbError);
@@ -1998,7 +2057,7 @@
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
-            Controls.Add(menuStripBackground);
+            Controls.Add(pnlAddEditUser);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
@@ -2021,8 +2080,8 @@
             pnlUsers.ResumeLayout(false);
             panelUsersHandler.ResumeLayout(false);
             pnlAddEditTicket.ResumeLayout(false);
-            pnlAddEditTicket.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
+            panelAddEditTicketHolder.ResumeLayout(false);
+            panelAddEditTicketHolder.PerformLayout();
             pnlAddEditUser.ResumeLayout(false);
             panelAddEditUserHolder.ResumeLayout(false);
             panelAddEditUserHolder.PerformLayout();
@@ -2056,7 +2115,6 @@
         private Panel pnlAddEditTicket;
         private Label lblAddEditTicket;
         private Splitter splitterAddEditTicket;
-        private PictureBox menuStripBackground;
         private Panel pnlAddEditUser;
         private Label lblAddEditUser;
         private Splitter splitterAddEditUser;
@@ -2109,7 +2167,6 @@
         private Button btnAddTicket;
         private Button cancelTicketBtn;
         private Button closeTicketBtn;
-        private Button editTicketBtn;
         private Button addTicketBtn;
         private Label label12;
         private Label label11;
@@ -2179,5 +2236,9 @@
         private Panel panelUsersHandler;
         private Panel panelAddEditUserHolder;
         private Button btnCreateEmployee;
+        private TextBox txtBoxFilter;
+        private Button btnFilter;
+        private Panel panelAddEditTicketHolder;
+        private Button editTicketBtn;
     }
 }
