@@ -45,7 +45,11 @@ namespace DAL
                 // In a real app, errors or exceptions are logged here for troubleshooting which is out of scope for this project.
             }
         }
-        
+
+        /// <summary>
+        /// Sets the client settings for the MongoDB connection.
+        /// Timeouts are set to 5 seconds for connection, socket, and server selection.
+        /// </summary>
         private void SetTimeOutSettings()
         {
             mongoSettings = MongoClientSettings.FromConnectionString(connectionString);
