@@ -92,12 +92,12 @@ namespace Service
 
         public async Task<Employee> GetEmployeeById(string employeeId)
         {
-            return await employeeDao.GetEmployeeById(employeeId);
+            return await dao.GetEmployeeById(employeeId);
         }
 
         public async Task<List<Employee>> GetAllServiceDeskEmployeesSorted()
         {
-            return await employeeDao.GetAllServiceDeskEmployeesSorted();
+            return await dao.GetAllServiceDeskEmployeesSorted();
         }
 
         #endregion

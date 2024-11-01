@@ -202,7 +202,7 @@ namespace Service
 
         public async Task UpdateServiceDeskEmployee(Ticket ticket)
         {
-            await ticketDao.UpdateServiceDeskEmployee(ticket);
+            await dao.UpdateServiceDeskEmployee(ticket);
         }
 
         #endregion

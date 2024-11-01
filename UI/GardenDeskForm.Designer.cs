@@ -178,9 +178,9 @@
             lblVTStatusValue = new Label();
             splitterViewTicket = new Splitter();
             lblViewTicketTitle = new Label();
-            menuStrip.SuspendLayout();
             pnlDbError = new Panel();
             databaseErrorMessageLbl = new Label();
+            menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             pnlLogin.SuspendLayout();
             panelLoginHolder.SuspendLayout();
@@ -198,8 +198,8 @@
             pnlAddEditUser.SuspendLayout();
             panelAddEditUserHolder.SuspendLayout();
             pnlViewTicket.SuspendLayout();
-            pnlDbError.SuspendLayout();
             panelViewTicketHolder.SuspendLayout();
+            pnlDbError.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip
@@ -470,296 +470,6 @@
             lblOpen.TextAlign = ContentAlignment.TopCenter;
             // 
             // chartOpen
-            // 
-            chartArea1.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chartOpen.Legends.Add(legend1);
-            chartOpen.Location = new Point(25, 108);
-            chartOpen.Name = "chartOpen";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartOpen.Series.Add(series1);
-            chartOpen.Size = new Size(150, 180);
-            chartOpen.TabIndex = 0;
-            chartOpen.Text = "chart1";
-            // 
-            // chartClosed
-            // 
-            chartArea2.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartClosed.Legends.Add(legend2);
-            chartClosed.Location = new Point(275, 108);
-            chartClosed.Name = "chartClosed";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            chartClosed.Series.Add(series5);
-            chartClosed.Size = new Size(150, 180);
-            chartClosed.TabIndex = 0;
-            chartClosed.Text = "chart2";
-            // 
-            // label3
-            // 
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(500, 25);
-            label3.Name = "label3";
-            label3.Padding = new Padding(0, 10, 0, 0);
-            label3.Size = new Size(200, 65);
-            label3.TabIndex = 13;
-            label3.Text = "all tickets currently resolved and closed";
-            label3.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // chartResolved
-            // 
-            chartArea3.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chartResolved.Legends.Add(legend3);
-            chartResolved.Location = new Point(525, 108);
-            chartResolved.Name = "chartResolved";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chartResolved.Series.Add(series3);
-            chartResolved.Size = new Size(150, 180);
-            chartResolved.TabIndex = 0;
-            chartResolved.Text = "chart3";
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(500, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(200, 25);
-            label4.TabIndex = 12;
-            label4.Text = "Resolved incidents";
-            label4.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblOpenNumber
-            // 
-            lblOpenNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenNumber.Location = new Point(0, 288);
-            lblOpenNumber.Name = "lblOpenNumber";
-            lblOpenNumber.Size = new Size(200, 20);
-            lblOpenNumber.TabIndex = 5;
-            lblOpenNumber.Text = "label1";
-            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(250, 25);
-            label1.Name = "label1";
-            label1.Padding = new Padding(0, 10, 0, 0);
-            label1.Size = new Size(200, 65);
-            label1.TabIndex = 11;
-            label1.Text = "all tickets currently closed without resolving";
-            label1.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblClosedNumber
-            // 
-            lblClosedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblClosedNumber.Location = new Point(250, 288);
-            lblClosedNumber.Name = "lblClosedNumber";
-            lblClosedNumber.Size = new Size(200, 20);
-            lblClosedNumber.TabIndex = 0;
-            lblClosedNumber.Text = "label2";
-            lblClosedNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(250, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(200, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Closed incidents";
-            label2.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblResolvedNumber
-            // 
-            lblResolvedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblResolvedNumber.Location = new Point(500, 288);
-            lblResolvedNumber.Name = "lblResolvedNumber";
-            lblResolvedNumber.Size = new Size(200, 20);
-            lblResolvedNumber.TabIndex = 0;
-            lblResolvedNumber.Text = "label3";
-            lblResolvedNumber.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblOpenDescription
-            // 
-            lblOpenDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblOpenDescription.Location = new Point(0, 25);
-            lblOpenDescription.Name = "lblOpenDescription";
-            lblOpenDescription.Padding = new Padding(0, 10, 0, 0);
-            lblOpenDescription.Size = new Size(200, 65);
-            lblOpenDescription.TabIndex = 9;
-            lblOpenDescription.Text = "all tickets currently open";
-            lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
-            lblOpenNumber.AutoSize = true;
-            lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenNumber.Location = new Point(71, 418);
-            lblOpenNumber.Name = "lblOpenNumber";
-            lblOpenNumber.Size = new Size(51, 20);
-            lblOpenNumber.TabIndex = 5;
-            lblOpenNumber.Text = "label1";
-            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // chartResolved
-            // 
-            chartArea1.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chartOpen.Legends.Add(legend1);
-            chartOpen.Location = new Point(25, 108);
-            chartOpen.Name = "chartOpen";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartOpen.Series.Add(series1);
-            chartOpen.Size = new Size(150, 180);
-            chartOpen.TabIndex = 2;
-            chartOpen.Text = "chart1";
-            // 
-            // chartClosed
-            // 
-            chartArea2.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartClosed.Legends.Add(legend2);
-            chartClosed.Location = new Point(275, 108);
-            chartClosed.Name = "chartClosed";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartClosed.Series.Add(series2);
-            chartClosed.Size = new Size(150, 180);
-            chartClosed.TabIndex = 0;
-            chartClosed.Text = "chart2";
-            // 
-            // label3
-            // 
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(500, 25);
-            label3.Name = "label3";
-            label3.Padding = new Padding(0, 10, 0, 0);
-            label3.Size = new Size(200, 65);
-            label3.TabIndex = 13;
-            label3.Text = "all tickets currently resolved and closed";
-            label3.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // chartResolved
-            // 
-            chartArea3.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chartResolved.Legends.Add(legend3);
-            chartResolved.Location = new Point(525, 108);
-            chartResolved.Name = "chartResolved";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chartResolved.Series.Add(series3);
-            chartResolved.Size = new Size(150, 180);
-            chartResolved.TabIndex = 0;
-            chartResolved.Text = "chart3";
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(500, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(200, 25);
-            label4.TabIndex = 12;
-            label4.Text = "Resolved incidents";
-            label4.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblOpenNumber
-            // 
-            lblOpenNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenNumber.Location = new Point(0, 288);
-            lblOpenNumber.Name = "lblOpenNumber";
-            lblOpenNumber.Size = new Size(200, 20);
-            lblOpenNumber.TabIndex = 5;
-            lblOpenNumber.Text = "label1";
-            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(250, 25);
-            label1.Name = "label1";
-            label1.Padding = new Padding(0, 10, 0, 0);
-            label1.Size = new Size(200, 65);
-            label1.TabIndex = 11;
-            label1.Text = "all tickets currently closed without resolving";
-            label1.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblClosedNumber
-            // 
-            lblClosedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblClosedNumber.Location = new Point(250, 288);
-            lblClosedNumber.Name = "lblClosedNumber";
-            lblClosedNumber.Size = new Size(200, 20);
-            lblClosedNumber.TabIndex = 0;
-            lblClosedNumber.Text = "label2";
-            lblClosedNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            label2.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(250, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(200, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Closed incidents";
-            label2.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblResolvedNumber
-            // 
-            lblResolvedNumber.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblResolvedNumber.Location = new Point(500, 288);
-            lblResolvedNumber.Name = "lblResolvedNumber";
-            lblResolvedNumber.Size = new Size(200, 20);
-            lblResolvedNumber.TabIndex = 0;
-            lblResolvedNumber.Text = "label3";
-            lblResolvedNumber.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // lblOpenDescription
-            // 
-            lblOpenDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblOpenDescription.Location = new Point(0, 25);
-            lblOpenDescription.Name = "lblOpenDescription";
-            lblOpenDescription.Padding = new Padding(0, 10, 0, 0);
-            lblOpenDescription.Size = new Size(200, 65);
-            lblOpenDescription.TabIndex = 9;
-            lblOpenDescription.Text = "all tickets currently open";
-            lblOpenDescription.TextAlign = ContentAlignment.TopCenter;
-            lblOpenNumber.AutoSize = true;
-            lblOpenNumber.Font = new Font("Segoe UI", 10.875F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOpenNumber.Location = new Point(71, 418);
-            lblOpenNumber.Name = "lblOpenNumber";
-            lblOpenNumber.Size = new Size(51, 20);
-            lblOpenNumber.TabIndex = 5;
-            lblOpenNumber.Text = "label1";
-            lblOpenNumber.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // chartResolved
             // 
             chartArea1.Name = "ChartArea1";
             chartOpen.ChartAreas.Add(chartArea1);
@@ -1164,8 +874,6 @@
             usersList.BorderStyle = BorderStyle.FixedSingle;
             usersList.Columns.AddRange(new ColumnHeader[] { userEmail, userFirstName, userLastName, userTicketCount });
             usersList.FullRowSelect = true;
-
-            usersList.Location = new Point(29, 63);
             usersList.GridLines = true;
             usersList.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             usersList.Location = new Point(0, 0);
@@ -1870,7 +1578,7 @@
             btnEditTicket.TabStop = false;
             btnEditTicket.Text = "EDIT TICKET";
             btnEditTicket.UseVisualStyleBackColor = false;
-            btnEditTicket.Click += editTicketBtn_Click;
+            btnEditTicket.Click += btnEditTicket_Click;
             // 
             // btnEscalate
             // 
@@ -2128,6 +1836,7 @@
             lblViewTicketTitle.Size = new Size(784, 46);
             lblViewTicketTitle.TabIndex = 0;
             lblViewTicketTitle.Text = "Ticket Details";
+            lblViewTicketTitle.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlDbError
             // 
@@ -2147,7 +1856,6 @@
             databaseErrorMessageLbl.Size = new Size(326, 95);
             databaseErrorMessageLbl.TabIndex = 0;
             databaseErrorMessageLbl.Text = "The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.";
-            lblViewTicketTitle.TextAlign = ContentAlignment.TopCenter;
             // 
             // GardenDeskForm
             // 
@@ -2158,20 +1866,15 @@
             ClientSize = new Size(784, 881);
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlUsers);
-            Controls.Add(pnlAddEditTicket);
-            Controls.Add(pnlDashboard);
-            Controls.Add(pnlLogin);
-            Controls.Add(menuStrip);
-            Controls.Add(pnlViewTicket);
-            Controls.Add(pnlDbError);
             Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlUsers);
+            Controls.Add(pnlLogin);
+            Controls.Add(pnlDashboard);
+            Controls.Add(menuStrip);
+            Controls.Add(pnlDbError);
             Controls.Add(pnlAddEditTicket);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
-            Controls.Add(pnlAddEditUser);
             Controls.Add(pnlTicketsOverview);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
@@ -2201,10 +1904,9 @@
             panelAddEditUserHolder.ResumeLayout(false);
             panelAddEditUserHolder.PerformLayout();
             pnlViewTicket.ResumeLayout(false);
-            pnlViewTicket.PerformLayout();
-            pnlDbError.ResumeLayout(false);
             panelViewTicketHolder.ResumeLayout(false);
             panelViewTicketHolder.PerformLayout();
+            pnlDbError.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2232,6 +1934,7 @@
         private Panel pnlAddEditTicket;
         private Label lblAddEditTicket;
         private Splitter splitterAddEditTicket;
+        private PictureBox menuStripBackground;
         private Panel pnlAddEditUser;
         private Label lblAddEditUser;
         private Splitter splitterAddEditUser;
@@ -2243,10 +1946,16 @@
         private Label lblLoginUsername;
         private Label lblLoginPrompt;
         private ListView usersList;
+        private ColumnHeader leftColumn;
         private ColumnHeader userEmail;
         private ColumnHeader userFirstName;
         private ColumnHeader userLastName;
         private ColumnHeader userTicketCount;
+        private ListView ticketsListView;
+        private ColumnHeader ticketTitle;
+        private ColumnHeader ticketReportingUser;
+        private ColumnHeader ticketDeadline;
+        private ColumnHeader ticketStatus;
         private Button btnAddEmployee;
         private Button btnEditEmployee;
         private Button btnDeleteEmployee;
@@ -2264,6 +1973,8 @@
         private ComboBox comboBoxTypeUser;
         private Button btnCancelChangesEmployee;
         private Button btnUpdateEmployee;
+        private Button btnCreateEmployee;
+        private Button btnEscalate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartOpen;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResolved;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartClosed;
@@ -2276,6 +1987,8 @@
         private Label label4;
         private Label label1;
         private Label label2;
+        private Label label6;
+        private Label label5;
         private Button searchbtn;
         private TextBox searchtextbox;
         private ColumnHeader ticketCreationDate;
@@ -2283,6 +1996,7 @@
         private Button btnAddTicket;
         private Button cancelTicketBtn;
         private Button closeTicketBtn;
+        private Button editTicketBtn;
         private Button addTicketBtn;
         private Label label12;
         private Label label11;
@@ -2336,30 +2050,14 @@
         private Panel panelChartHolder;
         private Panel panelLoginHolder;
         private Panel panelTicketsHolder;
-        private TextBox searchtextbox;
-        private ListView ticketsListView;
-        private ColumnHeader ticketTitle;
-        private ColumnHeader ticketDescription;
-        private ColumnHeader ticketReportingUser;
-        private ColumnHeader ticketCreationDate;
-        private ColumnHeader ticketDeadline;
-        private ColumnHeader ticketStatus;
         private ColumnHeader ticketPriority;
-        private Label label15;
-        private Button searchbtn;
-        private ComboBox SortOrderComboBox;
-        private Button btnViewTicket;
         private Panel panelUsersHandler;
         private Panel panelAddEditUserHolder;
-        private Button btnCreateEmployee;
         private TextBox txtBoxFilter;
         private Button btnFilter;
         private Panel panelAddEditTicketHolder;
-        private Button editTicketBtn;
         private Panel panelViewTicketHolder;
         private Button btnTransfer;
-        private Button btnEditTicket;
-        private Button btnEscalate;
         private Button btnCloseViewTicket;
         private ComboBox cmbBoxServiceDesk;
     }

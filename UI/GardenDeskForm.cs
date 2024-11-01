@@ -100,54 +100,6 @@ namespace UI
         }
 
         /// <summary>
-        /// Centers the specified holder panel horizontally within the form by calculating and applying an indent 
-        /// based on the screen width.
-        /// </summary>
-        /// <param name="holderPanel">The panel to center horizontally within the form.</param>
-        private void SetIndentForHolderPanel(Panel holderPanel)
-        {
-            // Calculate indent based on screen width and the provided panel
-            int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - holderPanel.Width / 2;
-
-            // Apply the calculated indent
-            holderPanel.Left += indent;
-        }
-
-        /// <summary>
-        /// Configures and displays the menu items in the menu strip based on the current user's role.
-        /// Regular employees will not have access to the user management menu item, and all items are resized
-        /// to evenly fill the menu strip width.
-        /// </summary>
-        private void SetUpMenuStrip()
-        {
-            List<ToolStripItem> menuItems = new List<ToolStripItem>();
-
-            foreach (ToolStripItem menuItem in menuStrip.Items)
-            {
-                // Display all items, including separators
-                menuItem.Visible = true;
-
-                // Store temporary all menu items
-                if (menuItem is ToolStripMenuItem)
-                    menuItems.Add(menuItem);
-
-                // Remove and hide the user management for a regular employee
-                if (menuItem.Name == menuItemUsers.Name && loggedInEmployee != null && loggedInEmployee.Role == EmployeeRole.RegularEmployee)
-                {
-                    menuItems.Remove(menuItem);
-                    menuItem.Visible = false;
-                    toolStripSeparator2.Visible = false;
-                }
-            }
-
-            // Resize menu items to fill the menu strip width
-            foreach (ToolStripItem menuItem in menuItems)
-            {
-                menuItem.Width = menuStrip.Width / menuItems.Count - toolStripSeparator1.Width - menuStrip.Padding.Horizontal;
-            }
-        }
-
-        /// <summary>
         /// Displays the specified panel, hiding all other panels and managing the visibility of the menu bar.
         /// </summary>
         /// <param name="panel">The panel to display.</param>
@@ -519,6 +471,8 @@ namespace UI
             ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
             await DisplayEmployeesAsync();
             ShowPanel(pnlUsers);
+            SetIndentForHolderPanel(panelUsersHandler);
+            SetUsersListViewColumns();
         }
 
         // Enable the edit button once an employee is selected
@@ -732,7 +686,6 @@ namespace UI
             {
                 Ticket newTicket = CreateTicketObject(DateTime.Now);
                 await ticketService.AddTicketAsync(newTicket);
-                ChangeButtonState(btnEditTicket, Color.LightGray, false);
                 ShowTicketsView();
             }
             catch (Exception ex)
@@ -853,7 +806,6 @@ namespace UI
         private void cancelTicketBtn_Click(object sender, EventArgs e)
         {
             ShowTicketsView();
-            ChangeButtonState(btnEditTicket, Color.LightGray, SystemColors.ControlText, false);
         }
 
         private void ConfigureTicketPanel(string label, bool showAdd, bool showEdit, bool showClose, bool enableServiceDeskCombo)
@@ -871,7 +823,6 @@ namespace UI
 
         private async void btnEditTicket_Click(object sender, EventArgs e)
         {
-            selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
             ConfigureTicketPanel("Edit ticket", false, true, true, false);
             await PrefillEditTicketInputs();
             ShowPanel(pnlAddEditTicket);
@@ -885,7 +836,6 @@ namespace UI
             var updatedTicket = CreateTicketObject(selectedTicket.Deadline, selectedTicket.TicketId);
             await ticketService.UpdateTicketAsync(updatedTicket);
             ShowTicketsView();
-            ChangeButtonState(btnEditTicket, Color.LightGray, false);
             }
             catch (Exception ex)
             {
@@ -985,9 +935,8 @@ namespace UI
         {
             foreach (var employee in employees)
             {
-                ListViewItem item = new();
+                ListViewItem item = new(employee.Email);
 
-                item.SubItems.Add(employee.Email);
                 item.SubItems.Add(employee.FirstName);
                 item.SubItems.Add(employee.LastName);
                 item.SubItems.Add(employee.OpenTickets.ToString());
