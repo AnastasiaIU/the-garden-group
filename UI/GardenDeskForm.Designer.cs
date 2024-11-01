@@ -1886,6 +1886,7 @@
             btnEscalate.TabStop = false;
             btnEscalate.Text = "ESCALATE";
             btnEscalate.UseVisualStyleBackColor = false;
+            btnEscalate.Click += btnEscalate_Click;
             // 
             // lblVTReportingUser
             // 
