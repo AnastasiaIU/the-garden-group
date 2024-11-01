@@ -496,17 +496,10 @@ namespace UI
 
         #region Create Ticket
 
-        private void btnAddTicket_Click(object sender, EventArgs e)
+        private async void btnAddTicket_Click(object sender, EventArgs e)
         {
-            lblAddEditTicket.Text = "Create new ticket";
-
-            addTicketBtn.Visible = true;
-            editTicketBtn.Visible = false;
-            closeTicketBtn.Visible = false;
-            serviceDeskUserCmbBox.Visible = true;
-
-
-            PopulateServiceDeskEmployeeComboBoxAsync();
+            ConfigureTicketPanel("Create new ticket", true, false, false, true);
+            await PopulateServiceDeskEmployeeComboBoxAsync();
             serviceDeskUserCmbBox.Enabled = true;
             ClearInputs();
             ShowPanel(pnlAddEditTicket);
@@ -525,55 +518,62 @@ namespace UI
             {
                 Ticket newTicket = CreateTicketObject(DateTime.Now);
                 await ticketService.AddTicketAsync(newTicket);
-
+                ChangeButtonState(btnEditTicket, Color.LightGray, false);
                 ShowTicketsView();
-
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(exception.Message);
+                DisplayMessage(ex.Message);
             }
         }
-
-
 
         private Ticket CreateTicketObject(DateTime time, string? ticketId = null)
         {
-            string reportingUser = loggedInEmployee.EmployeeId;
+            var ticket = new Ticket(
+                reportingUser: loggedInEmployee.EmployeeId,
+                serviceDeskUser: GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required."),
+                title: IsInputBoxEmpty(titleTxtBox.Text, "Title is required."),
+                description: IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required."),
+                status: ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required.")),
+                priority: ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.")),
+                isResolved: ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required.")),
+                isEscalated: false,
+                deadline: CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time),
+                incidentType: ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.")),
+                creationDate: time,
+                ticketId: ticketId
+            );
 
-            string serviceDeskUser = serviceDeskUserCmbBox.SelectedValue != null ? ((Employee)serviceDeskUserCmbBox.SelectedValue).EmployeeId : throw new Exception("Service Desk User is required.");
-
-            string title = IsInputBoxEmpty(titleTxtBox.Text, "Title is required.");
-            string incidentTypeInput = IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.");
-            string statusInput = IsInputBoxEmpty(statusCmbBox.Text, "Status is required.");
-            string priorityInput = IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.");
-            string isResolvedInput = IsInputBoxEmpty(isResolvedCmbBox.Text, "Is ticket resolved or not is required.");
-            string description = IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required.");
-
-            if (!TryParseEnum(incidentTypeInput, out IncidentType incidentType) ||
-                !TryParseEnum(statusInput, out Status status) ||
-                !TryParseEnum(priorityInput, out Priority priority))
-            {
-                throw new Exception("Invalid enum value provided.");
-            }
-
-            bool isResolved = isResolvedInput.Equals("Yes", StringComparison.OrdinalIgnoreCase);
-            bool isEscalated = false;
-
-            DateTime deadline = deadlineCmbBox.Text != string.Empty ? CalculateDeadline(deadlineCmbBox.Text, time) : throw new Exception("Deadline is required.");
-            DateTime creationTime = DateTime.Now;
-
-            return new Ticket(reportingUser, serviceDeskUser, title, description, status, priority, isResolved, isEscalated, deadline, incidentType, creationTime, ticketId);
+            return ticket;
         }
 
-        private bool TryParseEnum<T>(string value, out T result) where T : struct
+        private string GetServiceDeskUserId(ComboBox comboBox, string errorMessage)
         {
-            return Enum.TryParse(value, true, out result) && Enum.IsDefined(typeof(T), result);
+            var selectedEmployee = comboBox.SelectedValue as Employee;
+            return selectedEmployee?.EmployeeId ?? throw new Exception(errorMessage);
+        }
+
+        private void DisplayMessage(string message)
+        {
+            MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private T ParseEnum<T>(string value) where T : struct
+        {
+            if (Enum.TryParse(value, true, out T result) && Enum.IsDefined(typeof(T), result))
+                return result;
+
+            throw new ArgumentException("Invalid value for " + typeof(T).Name);
+        }
+
+        private bool ParseBoolean(string value)
+        {
+            return value.Equals("Yes", StringComparison.OrdinalIgnoreCase);
         }
 
         private void isResolvedCmbBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (isResolvedCmbBox.SelectedItem.ToString() == "Yes")
+            if (isResolvedCmbBox.SelectedItem != null && isResolvedCmbBox.SelectedItem.ToString() == "Yes")
             {
                 statusCmbBox.SelectedItem = "Closed";
                 statusCmbBox.Enabled = false;
@@ -607,18 +607,11 @@ namespace UI
 
         private void SetSelectedEmployeeById(List<Employee> serviceDeskEmployees, string? id)
         {
-            if (id != null)
-            {
                 var matchingEmployee = serviceDeskEmployees
                     .FirstOrDefault(emp => emp.EmployeeId == id);
 
                 int index = serviceDeskEmployees.IndexOf(matchingEmployee);
                 serviceDeskUserCmbBox.SelectedIndex = index;
-            }
-            else
-            {
-                serviceDeskUserCmbBox.SelectedIndex = -1;
-            }
         }
 
         public DateTime CalculateDeadline(string selectedOption, DateTime time) =>
@@ -634,54 +627,60 @@ namespace UI
         private void ClearInputs()
         {
             serviceDeskUserCmbBox.SelectedItem = null;
-            titleTxtBox.Text = "";
+            titleTxtBox.Text = string.Empty;
             typeOfAccidentCmbBox.SelectedItem = null;
             statusCmbBox.SelectedItem = null;
             priorityCmbBox.SelectedItem = null;
             isResolvedCmbBox.SelectedItem = null;
-            deadlineCmbBox.Text = "";
+            deadlineCmbBox.Text = string.Empty;
             deadlineCmbBox.SelectedItem = null;
-            descriptionTxtBox.Text = "";
+            descriptionTxtBox.Text = string.Empty;
         }
         private void cancelTicketBtn_Click(object sender, EventArgs e)
         {
-            ClearInputs();
-
             ShowTicketsView();
             ChangeButtonState(btnEditTicket, Color.LightGray, false);
         }
+
+        private void ConfigureTicketPanel(string label, bool showAdd, bool showEdit, bool showClose, bool enableServiceDeskCombo)
+        {
+            lblAddEditTicket.Text = label;
+            addTicketBtn.Visible = showAdd;
+            editTicketBtn.Visible = showEdit;
+            closeTicketBtn.Visible = showClose;
+            serviceDeskUserCmbBox.Enabled = enableServiceDeskCombo;
+        }
+
         #endregion
 
         #region Update Ticket
 
-        private void btnEditTicket_Click(object sender, EventArgs e)
+        private async void btnEditTicket_Click(object sender, EventArgs e)
         {
             selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
-
-            lblAddEditTicket.Text = "Edit ticket";
-
-            addTicketBtn.Visible = false;
-            editTicketBtn.Visible = true;
-            closeTicketBtn.Visible = true;
-
-            PrefillEditTicketInputs();
-
+            ConfigureTicketPanel("Edit ticket", false, true, true, false);
+            await PrefillEditTicketInputs();
             ShowPanel(pnlAddEditTicket);
         }
 
         private async void editTicketBtn_Click(object sender, EventArgs e)
         {
+            try 
+            {
             var updatedTicket = CreateTicketObject(selectedTicket.Deadline, selectedTicket.TicketId);
-
             await ticketService.UpdateTicketAsync(updatedTicket);
-
             ShowTicketsView();
             ChangeButtonState(btnEditTicket, Color.LightGray, false);
+            }
+            catch (Exception ex)
+            {
+                DisplayMessage(ex.Message);
+            }
         }
 
         private async Task PrefillEditTicketInputs()
         {
-            PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
+            await PopulateServiceDeskEmployeeComboBoxAsync(selectedTicket.ServiceDeskUser);
 
             titleTxtBox.Text = selectedTicket.Title;
             typeOfAccidentCmbBox.Text = selectedTicket.IncidentType.ToString();
@@ -719,7 +718,7 @@ namespace UI
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
             List<Ticket> tickets = await GetTicketsAsync();
-            bool isAscendingOrder = SortOrderComboBox.SelectedItem.ToString() == "Low to High";
+            bool isAscendingOrder = SortOrderComboBox.SelectedItem != null &&SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
             PopulateTicketsListView(tickets);
         }
