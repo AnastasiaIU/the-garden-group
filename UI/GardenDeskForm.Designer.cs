@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea21 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend21 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
             menuStrip = new ToolStrip();
             menuItemDashboard = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -485,38 +485,40 @@
             // 
             // chartOpen
             // 
-            chartArea1.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chartOpen.Legends.Add(legend1);
+            chartArea19.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea19);
+            legend19.Name = "Legend1";
+            chartOpen.Legends.Add(legend19);
             chartOpen.Location = new Point(25, 108);
             chartOpen.Name = "chartOpen";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chartOpen.Series.Add(series1);
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series19.IsVisibleInLegend = false;
+            series19.Legend = "Legend1";
+            series19.Name = "Series1";
+            chartOpen.Series.Add(series19);
             chartOpen.Size = new Size(150, 180);
             chartOpen.TabIndex = 2;
+            chartOpen.TabStop = false;
             chartOpen.Text = "chart1";
             // 
             // chartClosed
             // 
-            chartArea2.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chartClosed.Legends.Add(legend2);
+            chartArea20.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea20);
+            legend20.Name = "Legend1";
+            chartClosed.Legends.Add(legend20);
             chartClosed.Location = new Point(275, 108);
             chartClosed.Name = "chartClosed";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chartClosed.Series.Add(series2);
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series20.IsVisibleInLegend = false;
+            series20.Legend = "Legend1";
+            series20.Name = "Series1";
+            chartClosed.Series.Add(series20);
             chartClosed.Size = new Size(150, 180);
             chartClosed.TabIndex = 0;
+            chartClosed.TabStop = false;
             chartClosed.Text = "chart2";
             // 
             // label3
@@ -532,20 +534,21 @@
             // 
             // chartResolved
             // 
-            chartArea3.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chartResolved.Legends.Add(legend3);
+            chartArea21.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea21);
+            legend21.Name = "Legend1";
+            chartResolved.Legends.Add(legend21);
             chartResolved.Location = new Point(525, 108);
             chartResolved.Name = "chartResolved";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chartResolved.Series.Add(series3);
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series21.IsVisibleInLegend = false;
+            series21.Legend = "Legend1";
+            series21.Name = "Series1";
+            chartResolved.Series.Add(series21);
             chartResolved.Size = new Size(150, 180);
             chartResolved.TabIndex = 0;
+            chartResolved.TabStop = false;
             chartResolved.Text = "chart3";
             // 
             // label4
@@ -691,7 +694,7 @@
             txtBoxFilter.Name = "txtBoxFilter";
             txtBoxFilter.PlaceholderText = "Filter by common keywords";
             txtBoxFilter.Size = new Size(300, 29);
-            txtBoxFilter.TabIndex = 3;
+            txtBoxFilter.TabIndex = 2;
             // 
             // btnFilter
             // 
@@ -704,8 +707,7 @@
             btnFilter.Margin = new Padding(0);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(100, 30);
-            btnFilter.TabIndex = 4;
-            btnFilter.TabStop = false;
+            btnFilter.TabIndex = 3;
             btnFilter.Text = "FILTER";
             btnFilter.UseVisualStyleBackColor = false;
             // 
@@ -717,7 +719,7 @@
             searchtextbox.Name = "searchtextbox";
             searchtextbox.PlaceholderText = "Search by title or description";
             searchtextbox.Size = new Size(300, 29);
-            searchtextbox.TabIndex = 1;
+            searchtextbox.TabIndex = 0;
             // 
             // btnAddTicket
             // 
@@ -729,8 +731,7 @@
             btnAddTicket.Location = new Point(160, 620);
             btnAddTicket.Name = "btnAddTicket";
             btnAddTicket.Size = new Size(150, 30);
-            btnAddTicket.TabIndex = 8;
-            btnAddTicket.TabStop = false;
+            btnAddTicket.TabIndex = 7;
             btnAddTicket.Text = "ADD TICKET";
             btnAddTicket.UseVisualStyleBackColor = false;
             btnAddTicket.Click += btnAddTicket_Click;
@@ -756,7 +757,7 @@
             searchbtn.Margin = new Padding(0);
             searchbtn.Name = "searchbtn";
             searchbtn.Size = new Size(100, 30);
-            searchbtn.TabIndex = 2;
+            searchbtn.TabIndex = 1;
             searchbtn.Text = "SEARCH";
             searchbtn.UseVisualStyleBackColor = false;
             searchbtn.Click += searchbtn_Click;
@@ -769,7 +770,7 @@
             SortOrderComboBox.Location = new Point(610, 0);
             SortOrderComboBox.Name = "SortOrderComboBox";
             SortOrderComboBox.Size = new Size(170, 29);
-            SortOrderComboBox.TabIndex = 5;
+            SortOrderComboBox.TabIndex = 4;
             SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
             // 
             // btnViewTicket
@@ -783,8 +784,7 @@
             btnViewTicket.Location = new Point(0, 620);
             btnViewTicket.Name = "btnViewTicket";
             btnViewTicket.Size = new Size(150, 30);
-            btnViewTicket.TabIndex = 7;
-            btnViewTicket.TabStop = false;
+            btnViewTicket.TabIndex = 6;
             btnViewTicket.Text = "VIEW TICKET";
             btnViewTicket.UseVisualStyleBackColor = false;
             btnViewTicket.Click += OnViewTicketButtonClick;
@@ -803,7 +803,7 @@
             ticketsListView.MultiSelect = false;
             ticketsListView.Name = "ticketsListView";
             ticketsListView.Size = new Size(780, 500);
-            ticketsListView.TabIndex = 6;
+            ticketsListView.TabIndex = 5;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
             ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
@@ -894,8 +894,7 @@
             usersList.Margin = new Padding(2);
             usersList.Name = "usersList";
             usersList.Size = new Size(780, 500);
-            usersList.TabIndex = 1;
-            usersList.TabStop = false;
+            usersList.TabIndex = 0;
             usersList.UseCompatibleStateImageBehavior = false;
             usersList.View = View.Details;
             usersList.SelectedIndexChanged += usersList_SelectedIndexChanged;
@@ -930,8 +929,7 @@
             btnEditEmployee.Location = new Point(160, 515);
             btnEditEmployee.Name = "btnEditEmployee";
             btnEditEmployee.Size = new Size(150, 30);
-            btnEditEmployee.TabIndex = 3;
-            btnEditEmployee.TabStop = false;
+            btnEditEmployee.TabIndex = 2;
             btnEditEmployee.Text = "EDIT EMPLOYEE";
             btnEditEmployee.UseVisualStyleBackColor = false;
             btnEditEmployee.Click += btnEditUser_Click;
@@ -946,8 +944,7 @@
             btnAddEmployee.Location = new Point(0, 515);
             btnAddEmployee.Name = "btnAddEmployee";
             btnAddEmployee.Size = new Size(150, 30);
-            btnAddEmployee.TabIndex = 2;
-            btnAddEmployee.TabStop = false;
+            btnAddEmployee.TabIndex = 1;
             btnAddEmployee.Text = "ADD EMPLOYEE";
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
@@ -1044,7 +1041,7 @@
             descriptionTxtBox.Multiline = true;
             descriptionTxtBox.Name = "descriptionTxtBox";
             descriptionTxtBox.Size = new Size(250, 80);
-            descriptionTxtBox.TabIndex = 8;
+            descriptionTxtBox.TabIndex = 7;
             // 
             // label9
             // 
@@ -1063,7 +1060,7 @@
             titleTxtBox.Location = new Point(165, 40);
             titleTxtBox.Name = "titleTxtBox";
             titleTxtBox.Size = new Size(200, 29);
-            titleTxtBox.TabIndex = 2;
+            titleTxtBox.TabIndex = 1;
             // 
             // label10
             // 
@@ -1083,7 +1080,7 @@
             deadlineCmbBox.Location = new Point(165, 240);
             deadlineCmbBox.Name = "deadlineCmbBox";
             deadlineCmbBox.Size = new Size(200, 29);
-            deadlineCmbBox.TabIndex = 7;
+            deadlineCmbBox.TabIndex = 6;
             // 
             // label11
             // 
@@ -1103,7 +1100,7 @@
             isResolvedCmbBox.Location = new Point(165, 200);
             isResolvedCmbBox.Name = "isResolvedCmbBox";
             isResolvedCmbBox.Size = new Size(200, 29);
-            isResolvedCmbBox.TabIndex = 6;
+            isResolvedCmbBox.TabIndex = 5;
             isResolvedCmbBox.SelectedIndexChanged += isResolvedCmbBox_SelectedIndexChanged;
             // 
             // label12
@@ -1124,7 +1121,7 @@
             priorityCmbBox.Location = new Point(165, 160);
             priorityCmbBox.Name = "priorityCmbBox";
             priorityCmbBox.Size = new Size(200, 29);
-            priorityCmbBox.TabIndex = 5;
+            priorityCmbBox.TabIndex = 4;
             // 
             // label13
             // 
@@ -1144,7 +1141,7 @@
             statusCmbBox.Location = new Point(165, 120);
             statusCmbBox.Name = "statusCmbBox";
             statusCmbBox.Size = new Size(200, 29);
-            statusCmbBox.TabIndex = 4;
+            statusCmbBox.TabIndex = 3;
             // 
             // label14
             // 
@@ -1164,7 +1161,7 @@
             typeOfAccidentCmbBox.Location = new Point(165, 80);
             typeOfAccidentCmbBox.Name = "typeOfAccidentCmbBox";
             typeOfAccidentCmbBox.Size = new Size(200, 29);
-            typeOfAccidentCmbBox.TabIndex = 3;
+            typeOfAccidentCmbBox.TabIndex = 2;
             // 
             // serviceDeskUserCmbBox
             // 
@@ -1173,7 +1170,7 @@
             serviceDeskUserCmbBox.Location = new Point(165, 0);
             serviceDeskUserCmbBox.Name = "serviceDeskUserCmbBox";
             serviceDeskUserCmbBox.Size = new Size(200, 29);
-            serviceDeskUserCmbBox.TabIndex = 1;
+            serviceDeskUserCmbBox.TabIndex = 0;
             // 
             // cancelTicketBtn
             // 
@@ -1185,7 +1182,7 @@
             cancelTicketBtn.Location = new Point(160, 400);
             cancelTicketBtn.Name = "cancelTicketBtn";
             cancelTicketBtn.Size = new Size(150, 30);
-            cancelTicketBtn.TabIndex = 10;
+            cancelTicketBtn.TabIndex = 9;
             cancelTicketBtn.Text = "CANCEL CHANGES";
             cancelTicketBtn.UseVisualStyleBackColor = false;
             cancelTicketBtn.Click += cancelTicketBtn_Click;
@@ -1200,7 +1197,7 @@
             closeTicketBtn.Location = new Point(320, 400);
             closeTicketBtn.Name = "closeTicketBtn";
             closeTicketBtn.Size = new Size(150, 30);
-            closeTicketBtn.TabIndex = 11;
+            closeTicketBtn.TabIndex = 10;
             closeTicketBtn.Text = "CLOSE TICKET";
             closeTicketBtn.UseVisualStyleBackColor = false;
             closeTicketBtn.Visible = false;
@@ -1216,7 +1213,7 @@
             editTicketBtn.Location = new Point(0, 400);
             editTicketBtn.Name = "editTicketBtn";
             editTicketBtn.Size = new Size(150, 30);
-            editTicketBtn.TabIndex = 9;
+            editTicketBtn.TabIndex = 8;
             editTicketBtn.Text = "EDIT TICKET";
             editTicketBtn.UseVisualStyleBackColor = false;
             editTicketBtn.Visible = false;
@@ -1232,7 +1229,7 @@
             addTicketBtn.Location = new Point(0, 400);
             addTicketBtn.Name = "addTicketBtn";
             addTicketBtn.Size = new Size(150, 30);
-            addTicketBtn.TabIndex = 9;
+            addTicketBtn.TabIndex = 8;
             addTicketBtn.Text = "ADD TICKET";
             addTicketBtn.UseVisualStyleBackColor = false;
             addTicketBtn.Click += addTicketBtn_Click;
@@ -1315,8 +1312,7 @@
             btnCreateEmployee.Location = new Point(0, 260);
             btnCreateEmployee.Name = "btnCreateEmployee";
             btnCreateEmployee.Size = new Size(150, 30);
-            btnCreateEmployee.TabIndex = 7;
-            btnCreateEmployee.TabStop = false;
+            btnCreateEmployee.TabIndex = 6;
             btnCreateEmployee.Text = "CREATE EMPLOYEE";
             btnCreateEmployee.UseVisualStyleBackColor = false;
             btnCreateEmployee.Visible = false;
@@ -1333,7 +1329,6 @@
             btnDeleteEmployee.Name = "btnDeleteEmployee";
             btnDeleteEmployee.Size = new Size(150, 30);
             btnDeleteEmployee.TabIndex = 8;
-            btnDeleteEmployee.TabStop = false;
             btnDeleteEmployee.Text = "DELETE EMPLOYEE";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
             btnDeleteEmployee.Click += btnDeleteEmployee_Click;
@@ -1348,8 +1343,7 @@
             btnUpdateEmployee.Location = new Point(0, 260);
             btnUpdateEmployee.Name = "btnUpdateEmployee";
             btnUpdateEmployee.Size = new Size(150, 30);
-            btnUpdateEmployee.TabIndex = 7;
-            btnUpdateEmployee.TabStop = false;
+            btnUpdateEmployee.TabIndex = 6;
             btnUpdateEmployee.Text = "UPDATE EMPLOYEE";
             btnUpdateEmployee.UseVisualStyleBackColor = false;
             btnUpdateEmployee.Click += btnUpdateEmployee_Click;
@@ -1392,7 +1386,7 @@
             comboBoxTypeUser.Location = new Point(165, 80);
             comboBoxTypeUser.Name = "comboBoxTypeUser";
             comboBoxTypeUser.Size = new Size(200, 29);
-            comboBoxTypeUser.TabIndex = 3;
+            comboBoxTypeUser.TabIndex = 2;
             // 
             // lblPhoneNumberEdit
             // 
@@ -1411,7 +1405,7 @@
             textBoxBranch.Location = new Point(165, 200);
             textBoxBranch.Name = "textBoxBranch";
             textBoxBranch.Size = new Size(200, 29);
-            textBoxBranch.TabIndex = 6;
+            textBoxBranch.TabIndex = 5;
             // 
             // lblBranchEdit
             // 
@@ -1430,7 +1424,7 @@
             textBoxPhoneNumber.Location = new Point(165, 160);
             textBoxPhoneNumber.Name = "textBoxPhoneNumber";
             textBoxPhoneNumber.Size = new Size(200, 29);
-            textBoxPhoneNumber.TabIndex = 5;
+            textBoxPhoneNumber.TabIndex = 4;
             // 
             // textBoxFirstName
             // 
@@ -1439,7 +1433,7 @@
             textBoxFirstName.Location = new Point(165, 0);
             textBoxFirstName.Name = "textBoxFirstName";
             textBoxFirstName.Size = new Size(200, 29);
-            textBoxFirstName.TabIndex = 1;
+            textBoxFirstName.TabIndex = 0;
             // 
             // textBoxEmailAddress
             // 
@@ -1448,7 +1442,7 @@
             textBoxEmailAddress.Location = new Point(165, 120);
             textBoxEmailAddress.Name = "textBoxEmailAddress";
             textBoxEmailAddress.Size = new Size(200, 29);
-            textBoxEmailAddress.TabIndex = 4;
+            textBoxEmailAddress.TabIndex = 3;
             // 
             // textBoxLastName
             // 
@@ -1457,7 +1451,7 @@
             textBoxLastName.Location = new Point(165, 40);
             textBoxLastName.Name = "textBoxLastName";
             textBoxLastName.Size = new Size(200, 29);
-            textBoxLastName.TabIndex = 2;
+            textBoxLastName.TabIndex = 1;
             // 
             // btnCancelChangesEmployee
             // 
@@ -1469,7 +1463,7 @@
             btnCancelChangesEmployee.Location = new Point(160, 260);
             btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
             btnCancelChangesEmployee.Size = new Size(150, 30);
-            btnCancelChangesEmployee.TabIndex = 9;
+            btnCancelChangesEmployee.TabIndex = 7;
             btnCancelChangesEmployee.Text = "CANCEL CHANGES";
             btnCancelChangesEmployee.UseVisualStyleBackColor = false;
             btnCancelChangesEmployee.Click += btnCancelChangesEmployee_Click;
@@ -1543,8 +1537,7 @@
             cmbBoxServiceDesk.MaxDropDownItems = 7;
             cmbBoxServiceDesk.Name = "cmbBoxServiceDesk";
             cmbBoxServiceDesk.Size = new Size(200, 29);
-            cmbBoxServiceDesk.TabIndex = 1;
-            cmbBoxServiceDesk.TabStop = false;
+            cmbBoxServiceDesk.TabIndex = 2;
             cmbBoxServiceDesk.Visible = false;
             // 
             // btnCloseViewTicket
@@ -1556,8 +1549,7 @@
             btnCloseViewTicket.Location = new Point(160, 520);
             btnCloseViewTicket.Name = "btnCloseViewTicket";
             btnCloseViewTicket.Size = new Size(150, 30);
-            btnCloseViewTicket.TabIndex = 5;
-            btnCloseViewTicket.TabStop = false;
+            btnCloseViewTicket.TabIndex = 1;
             btnCloseViewTicket.Text = "CLOSE VIEW";
             btnCloseViewTicket.UseVisualStyleBackColor = false;
             btnCloseViewTicket.Click += OnCloseViewButtonClick;
@@ -1572,8 +1564,7 @@
             btnTransfer.Location = new Point(430, 31);
             btnTransfer.Name = "btnTransfer";
             btnTransfer.Size = new Size(150, 30);
-            btnTransfer.TabIndex = 2;
-            btnTransfer.TabStop = false;
+            btnTransfer.TabIndex = 3;
             btnTransfer.Text = "TRANSFER TICKET";
             btnTransfer.UseVisualStyleBackColor = false;
             btnTransfer.Click += OnTransferTicketButtonClick;
@@ -1588,8 +1579,7 @@
             btnEditTicket.Location = new Point(0, 520);
             btnEditTicket.Name = "btnEditTicket";
             btnEditTicket.Size = new Size(150, 30);
-            btnEditTicket.TabIndex = 4;
-            btnEditTicket.TabStop = false;
+            btnEditTicket.TabIndex = 0;
             btnEditTicket.Text = "EDIT TICKET";
             btnEditTicket.UseVisualStyleBackColor = false;
             btnEditTicket.Click += btnEditTicket_Click;
@@ -1604,8 +1594,7 @@
             btnEscalate.Location = new Point(430, 241);
             btnEscalate.Name = "btnEscalate";
             btnEscalate.Size = new Size(150, 30);
-            btnEscalate.TabIndex = 3;
-            btnEscalate.TabStop = false;
+            btnEscalate.TabIndex = 4;
             btnEscalate.Text = "ESCALATE";
             btnEscalate.UseVisualStyleBackColor = false;
             btnEscalate.Click += btnEscalate_Click;
@@ -1881,18 +1870,18 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
+            Controls.Add(pnlViewTicket);
+            Controls.Add(pnlAddEditTicket);
+            Controls.Add(pnlAddEditUser);
+            Controls.Add(pnlUsers);
+            Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlDashboard);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDbError);
-            Controls.Add(pnlViewTicket);
-            Controls.Add(pnlUsers);
-            Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlDashboard);
             Controls.Add(menuStrip);
-            Controls.Add(pnlAddEditTicket);
             Controls.Add(lblLicense);
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
-            Controls.Add(pnlTicketsOverview);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
