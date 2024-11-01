@@ -280,7 +280,7 @@
             lblGardenDesk.Name = "lblGardenDesk";
             lblGardenDesk.Padding = new Padding(0, 7, 10, 0);
             lblGardenDesk.Size = new Size(218, 32);
-            lblGardenDesk.TabIndex = 1;
+            lblGardenDesk.TabIndex = 0;
             lblGardenDesk.Text = "GardenDesk";
             lblGardenDesk.TextAlign = ContentAlignment.MiddleRight;
             // 
@@ -292,7 +292,7 @@
             lblLicense.Name = "lblLicense";
             lblLicense.Padding = new Padding(0, 0, 10, 0);
             lblLicense.Size = new Size(242, 15);
-            lblLicense.TabIndex = 2;
+            lblLicense.TabIndex = 0;
             lblLicense.Text = "Licensed to: The Garden Group";
             lblLicense.TextAlign = ContentAlignment.TopRight;
             // 
@@ -356,8 +356,7 @@
             btnLogin.Location = new Point(100, 200);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(100, 30);
-            btnLogin.TabIndex = 3;
-            btnLogin.TabStop = false;
+            btnLogin.TabIndex = 2;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += OnLoginButtonClick;
@@ -392,8 +391,8 @@
             txtBoxLoginUsername.Name = "txtBoxLoginUsername";
             txtBoxLoginUsername.PlaceholderText = " Enter username";
             txtBoxLoginUsername.Size = new Size(300, 29);
-            txtBoxLoginUsername.TabIndex = 1;
-            txtBoxLoginUsername.TabStop = false;
+            txtBoxLoginUsername.TabIndex = 0;
+            txtBoxLoginUsername.TextChanged += OnTextBoxLoginTextChanged;
             // 
             // txtBoxLoginPassword
             // 
@@ -405,8 +404,7 @@
             txtBoxLoginPassword.PasswordChar = '•';
             txtBoxLoginPassword.PlaceholderText = " Enter password";
             txtBoxLoginPassword.Size = new Size(300, 29);
-            txtBoxLoginPassword.TabIndex = 2;
-            txtBoxLoginPassword.TabStop = false;
+            txtBoxLoginPassword.TabIndex = 1;
             // 
             // lblLoginPrompt
             // 
@@ -1862,7 +1860,7 @@
             pnlDbError.Location = new Point(0, 80);
             pnlDbError.Name = "pnlDbError";
             pnlDbError.Size = new Size(784, 800);
-            pnlDbError.TabIndex = 12;
+            pnlDbError.TabIndex = 0;
             // 
             // databaseErrorMessageLbl
             // 
@@ -1883,8 +1881,8 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
-            Controls.Add(pnlDbError);
             Controls.Add(pnlLogin);
+            Controls.Add(pnlDbError);
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditUser);

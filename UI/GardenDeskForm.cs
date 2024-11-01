@@ -334,6 +334,18 @@ namespace UI
             btnTransfer.Text = Properties.Resources.TransferTicket;
         }
 
+        /// <summary>
+        /// Handles the text changed event for the login text boxes, hiding the "wrong credentials" label
+        /// whenever the user modifies the login input. This provides immediate feedback, clearing any 
+        /// previous error message as the user enters new information.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OnTextBoxLoginTextChanged(object sender, EventArgs e)
+        {
+            lblLoginWrongCredentials.Visible = false;
+        }
+
         #endregion
 
         #region User Management Logic
