@@ -7,7 +7,7 @@ namespace DAL
     /// <summary>
     /// Data Access Object (DAO) for managing Ticket-related operations in the MongoDB database.
     /// </summary>
-    public class TicketDao : BaseDao
+    public class TicketDao : BaseDao<Ticket>
     {
         #region Orest
 

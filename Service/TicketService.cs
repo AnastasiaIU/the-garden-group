@@ -7,10 +7,8 @@ namespace Service
     /// Service layer for managing ticket-related operations. Provides business logic and interacts with the data access layer (TicketDao).
     /// </summary>
 
-    public class TicketService
+    public class TicketService : BaseService<Ticket, TicketDao>
     {
-        private readonly TicketDao ticketDao = new();
-
         #region Orest
 
         /// <summary>
@@ -20,7 +18,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Ticket"/> objects.</returns>
         public async Task<List<Ticket>> GetAllTicketsAPI()
         {
-            return await ticketDao.GetAllTicketsAPI();
+            return await dao.GetAllTicketsAPI();
         }
 
         /// <summary>
@@ -29,7 +27,7 @@ namespace Service
         /// </summary>
         public async Task UpdateTicketAPI(string id, Ticket updatedTicket)
         {
-            await ticketDao.UpdateTicketAPI(id, updatedTicket);
+            await dao.UpdateTicketAPI(id, updatedTicket);
         }
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace Service
         /// </summary>
         public async Task DeleteTicketByIdAPI(string id)
         {
-            await ticketDao.DeleteTicketByIdAPI(id);
+            await dao.DeleteTicketByIdAPI(id);
         }
 
         #endregion
@@ -51,7 +49,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
         public async Task<List<Ticket>> GetAllTicketsWithReportingUserNameAsync()
         {
-            return await ticketDao.GetAllTicketsWithReportingUserNameAsync();
+            return await dao.GetAllTicketsWithReportingUserNameAsync();
         }
 
         /// <summary>
@@ -61,11 +59,11 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Ticket"/> objects.</returns>
         public async Task<List<Ticket>> GetTicketsForRegularEmployeeAsync(Employee employee)
         {
-            return await ticketDao.GetTicketsForRegularEmployeeAsync(employee);
+            return await dao.GetTicketsForRegularEmployeeAsync(employee);
         }
         public async Task<List<Ticket>> SearchTicketsByKeywordsAsync(Employee employee, string keywordString)
         {
-            return await ticketDao.SearchTicketsByKeywordsAsync(employee, keywordString);
+            return await dao.SearchTicketsByKeywordsAsync(employee, keywordString);
         }
 
         #endregion
@@ -79,7 +77,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task EscalateTicket(string ticketId)
         {
-            await ticketDao.EscalateTicket(ticketId);
+            await dao.EscalateTicket(ticketId);
         }
 
         #endregion
@@ -93,7 +91,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
         public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -102,7 +100,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
         public async Task<int> GetAmountOfAllTicketsAsync()
         {
-            return await ticketDao.GetAmountOfAllTicketsAsync();
+            return await dao.GetAmountOfAllTicketsAsync();
         }
 
         /// <summary>
@@ -112,7 +110,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
         public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -121,7 +119,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
         public async Task<int> GetAmountOfAllResolvedTicketsAsync()
         {
-            return await ticketDao.GetAmountOfAllResolvedTicketsAsync();
+            return await dao.GetAmountOfAllResolvedTicketsAsync();
         }
 
         /// <summary>
@@ -131,7 +129,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
         public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllOpenTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllOpenTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -140,7 +138,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
         public async Task<int> GetAmountOfAllOpenTicketsAsync()
         {
-            return await ticketDao.GetAmountOfAllOpenTicketsAsync();
+            return await dao.GetAmountOfAllOpenTicketsAsync();
         }
 
         /// <summary>
@@ -150,7 +148,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
         public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(Employee employee)
         {
-            return await ticketDao.GetAmountOfAllClosedTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllClosedTicketsForReportingUserAsync(employee);
         }
 
         /// <summary>
@@ -159,7 +157,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
         public async Task<int> GetAmountOfAllClosedTicketsAsync()
         {
-            return await ticketDao.GetAmountOfAllClosedTicketsAsync();
+            return await dao.GetAmountOfAllClosedTicketsAsync();
         }
 
         #endregion
@@ -173,7 +171,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task UpdateTicketAsync(Ticket updatedTicket)
         {
-            await ticketDao.UpdateTicketAsync(updatedTicket);
+            await dao.UpdateTicketAsync(updatedTicket);
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task AddTicketAsync(Ticket ticket)
         {
-            await ticketDao.AddTicketAsync(ticket);
+            await dao.AddTicketAsync(ticket);
         }
 
         /// <summary>
@@ -193,7 +191,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CloseTicketAsync(string ticketId)
         {
-            await ticketDao.CloseTicketAsync(ticketId);
+            await dao.CloseTicketAsync(ticketId);
         }
 
         #endregion

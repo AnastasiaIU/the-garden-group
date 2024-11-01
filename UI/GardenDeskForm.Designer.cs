@@ -142,6 +142,8 @@
             btnDeleteEmployee = new Button();
             lblAddEditUser = new Label();
             splitterAddEditUser = new Splitter();
+            pnlDbError = new Panel();
+            databaseErrorMessageLbl = new Label();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             menuStrip.SuspendLayout();
             pnlLogin.SuspendLayout();
@@ -154,6 +156,7 @@
             pnlAddEditTicket.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).BeginInit();
             pnlAddEditUser.SuspendLayout();
+            pnlDbError.SuspendLayout();
             SuspendLayout();
             // 
             // logo
@@ -1276,12 +1279,34 @@
             splitterAddEditUser.TabIndex = 0;
             splitterAddEditUser.TabStop = false;
             // 
+            // pnlDbError
+            // 
+            pnlDbError.BackColor = Color.White;
+            pnlDbError.Controls.Add(databaseErrorMessageLbl);
+            pnlDbError.Location = new Point(-1, 111);
+            pnlDbError.Name = "pnlDbError";
+            pnlDbError.Size = new Size(634, 478);
+            pnlDbError.TabIndex = 12;
+            // 
+            // databaseErrorMessageLbl
+            // 
+            databaseErrorMessageLbl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            databaseErrorMessageLbl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            databaseErrorMessageLbl.Location = new Point(135, 151);
+            databaseErrorMessageLbl.Name = "databaseErrorMessageLbl";
+            databaseErrorMessageLbl.Size = new Size(326, 95);
+            databaseErrorMessageLbl.TabIndex = 0;
+            databaseErrorMessageLbl.Text = "The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.";
+            // 
             // GardenDeskForm
             // 
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(634, 587);
+            Controls.Add(pnlDbError);
+            Controls.Add(pnlAddEditUser);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlLogin);
@@ -1291,8 +1316,6 @@
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlUsers);
-            Controls.Add(pnlAddEditUser);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip;
             Margin = new Padding(2, 1, 2, 1);
@@ -1317,6 +1340,7 @@
             ((System.ComponentModel.ISupportInitialize)menuStripBackground).EndInit();
             pnlAddEditUser.ResumeLayout(false);
             pnlAddEditUser.PerformLayout();
+            pnlDbError.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1401,7 +1425,6 @@
         private Button searchbtn;
         private TextBox searchtextbox;
         private ColumnHeader ticketCreationDate;
-        private ColumnHeader ticketDescription;
         private Button btnEditTicket;
         private Button btnAddTicket;
         private Button cancelTicketBtn;
@@ -1426,5 +1449,8 @@
         private ComboBox priorityCmbBox;
         private ComboBox SortOrderComboBox;
         private Label label15;
+        private Panel pnlDbError;
+        private Label databaseErrorMessageLbl;
+        private ColumnHeader ticketDescription;
     }
 }
