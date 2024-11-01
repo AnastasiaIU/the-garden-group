@@ -1316,9 +1316,6 @@
             Controls.Add(logo);
             Controls.Add(menuStrip);
             Controls.Add(menuStripBackground);
-            Controls.Add(pnlUsers);
-            Controls.Add(pnlAddEditUser);
-            Controls.Add(pnlAddEditTicket);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             MainMenuStrip = menuStrip;
             Margin = new Padding(2, 1, 2, 1);
