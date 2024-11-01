@@ -1,5 +1,7 @@
 ﻿using DAL;
 using Model;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Service
 {
@@ -192,6 +194,15 @@ namespace Service
         public async Task CloseTicketAsync(string ticketId)
         {
             await dao.CloseTicketAsync(ticketId);
+        }
+
+        #endregion
+
+        #region Sia
+
+        public async Task UpdateServiceDeskEmployee(Ticket ticket)
+        {
+            await ticketDao.UpdateServiceDeskEmployee(ticket);
         }
 
         #endregion

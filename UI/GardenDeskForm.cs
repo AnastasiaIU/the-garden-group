@@ -55,7 +55,7 @@ namespace UI
         /// <param name="holderPanel">The panel to center horizontally within the form.</param>
         private void SetIndentForHolderPanel(Panel holderPanel)
         {
-            if (holderPanel.Left == 0)
+            if (holderPanel.Left.Equals(0))
             {
                 // Calculate indent based on screen width and the provided panel
                 int indent = Screen.FromHandle(Handle).Bounds.Width / 2 - holderPanel.Width / 2;
@@ -84,7 +84,7 @@ namespace UI
                     menuItems.Add(menuItem);
 
                 // Remove and hide the user management for a regular employee
-                if (menuItem.Name == menuItemUsers.Name && loggedInEmployee != null && loggedInEmployee.Role == EmployeeRole.RegularEmployee)
+                if (menuItem.Name.Equals(menuItemUsers.Name) && loggedInEmployee is not null && loggedInEmployee.Role.Equals(EmployeeRole.RegularEmployee))
                 {
                     menuItems.Remove(menuItem);
                     menuItem.Visible = false;
@@ -269,6 +269,77 @@ namespace UI
             usersList.Columns[3].Width = (int)(tableWidth * 0.22);
         }
 
+        private void OnViewTicketButtonClick(object sender, EventArgs e)
+        {
+            ShowPanel(pnlViewTicket);
+            SetIndentForHolderPanel(panelViewTicketHolder);
+            FillViewTicketFields();
+        }
+
+        private void ResetTicketsOverviewSelection()
+        {
+            selectedEmployee = null;
+            ChangeButtonState(btnViewTicket, Color.LightGray, SystemColors.ControlText, false);
+        }
+
+        private void OnCloseViewButtonClick(object sender, EventArgs e)
+        {
+            ShowTicketsView();
+            ResetViewTicket();
+        }
+
+        private async void FillViewTicketFields()
+        {
+            if (selectedTicket is not null)
+            {
+                Employee serviceDeskEmployee = await employeeService.GetEmployeeById(selectedTicket.ServiceDeskUser);
+
+                lblVTReportingUserValue.Text = selectedTicket.ReportingEmployeeFirstName + " " + selectedTicket.ReportingEmployeeLastName;
+                lblVTServiceDeskValue.Text = serviceDeskEmployee.ToString();
+                lblVTTitleValue.Text = selectedTicket.Title;
+                lblVTIncidentValue.Text = selectedTicket.IncidentType.ToString();
+                lblVTStatusValue.Text = selectedTicket.Status.ToString();
+                lblVTPriorityValue.Text = selectedTicket.Priority.ToString();
+                lblVTResolvedValue.Text = selectedTicket.IsResolved ? Properties.Resources.Yes : Properties.Resources.No;
+                lblVTEscalatedValue.Text = selectedTicket.IsEscalated ? Properties.Resources.Yes : Properties.Resources.No;
+                lblVTCreationDateValue.Text = selectedTicket.CreationDate.ToString();
+                lblVTDeadlineValue.Text = selectedTicket.Deadline.ToString();
+                lblVTDescriptionValue.Text = selectedTicket.Description;
+            }
+        }
+
+        private async void OnTransferTicketButtonClick(object sender, EventArgs e)
+        {
+            // the selectedTicket and EmployeeId are guaranteed not to be null here
+#nullable disable
+            if (cmbBoxServiceDesk.Visible)
+            {
+                ResetViewTicket();
+                Employee serviceDeskUser = ((Employee)cmbBoxServiceDesk.SelectedItem);
+                selectedTicket.ServiceDeskUser = serviceDeskUser.EmployeeId;
+                lblVTServiceDeskValue.Text = serviceDeskUser.ToString();
+                await ticketService.UpdateServiceDeskEmployee(selectedTicket);
+            }
+            else
+            {
+                lblVTServiceDeskValue.Visible = false;
+                cmbBoxServiceDesk.Visible = true;
+                btnTransfer.Text = Properties.Resources.Save;
+                List<Employee> serviceDeskEmployees = await employeeService.GetAllServiceDeskEmployeesSorted();
+                cmbBoxServiceDesk.Items.Clear();
+                cmbBoxServiceDesk.Items.AddRange(serviceDeskEmployees.ToArray());
+                cmbBoxServiceDesk.SelectedItem = serviceDeskEmployees.Find(e => e.EmployeeId.Equals(selectedTicket.ServiceDeskUser));
+            }
+#nullable enable
+        }
+
+        private void ResetViewTicket()
+        {
+            cmbBoxServiceDesk.Visible = false;
+            lblVTServiceDeskValue.Visible = true;
+            btnTransfer.Text = Properties.Resources.TransferTicket;
+        }
+
         #endregion
 
         #region User Management Logic
@@ -279,8 +350,9 @@ namespace UI
         {
             if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
             {
-                // Regular employee is not authorised for escalating a ticket
+                // Regular employee is not authorised for escalating and transfering a ticket
                 btnEscalate.Visible = false;
+                btnTransfer.Visible = false;
             }
         }
 
@@ -479,16 +551,15 @@ namespace UI
             {
                 selectedTicket = (Ticket)ticketsListView.SelectedItems[0].Tag;
 
-                ChangeButtonState(btnEditTicket, Color.Yellow, SystemColors.ControlText, true);
-
                 if (selectedTicket.IsEscalated == false && selectedTicket.Status != Status.Closed)
                 {
-                    ChangeButtonState(btnEscalate, Color.Tomato, SystemColors.ControlText, true);
+                    ChangeButtonState(btnEscalate, Color.Firebrick, Color.White, true);
                 }
-            }
+                else
+                    ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false);
 
-            else
-                ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false); ;
+                ChangeButtonState(btnViewTicket, Color.OliveDrab, Color.White, true);
+            }
         }
 
         private async void btnEscalate_Click(object sender, EventArgs e)
@@ -615,6 +686,7 @@ namespace UI
             SetIndentForHolderPanel(panelTicketsHolder);
             SetTicketsListViewColumns();
             await DisplayTicketsAsync(loggedInEmployee);
+            ResetTicketsOverviewSelection();
         }
 
         private async void searchbtn_Click(object sender, EventArgs e)
@@ -651,6 +723,7 @@ namespace UI
             await DisplayTicketsAsync(loggedInEmployee);
             ShowPanel(pnlTicketsOverview);
             CleanSortOrderComboBox();
+            ResetTicketsOverviewSelection();
         }
 
         private async void addTicketBtn_Click(object sender, EventArgs e)

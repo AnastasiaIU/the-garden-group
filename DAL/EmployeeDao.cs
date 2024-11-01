@@ -116,6 +116,23 @@ namespace DAL
             return await employeeCollection.Find(filter).FirstOrDefaultAsync();
         }
 
+        public async Task<Employee> GetEmployeeById(string employeeId)
+        {
+            return await employeeCollection.Find(GetFilterById(employeeId)).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Employee>> GetAllServiceDeskEmployeesSorted()
+        {
+            var filter = Builders<Employee>.Filter.Eq(e => e.Role, EmployeeRole.ServiceDeskEmployee);
+
+            var aggregate = employeeCollection.Aggregate()
+                    .Match(filter)
+                    .SortBy(e => e.LastName)
+                    .ThenBy(e => e.FirstName);
+
+            return await aggregate.ToListAsync();
+        }
+
         #endregion
 
         #region Tina

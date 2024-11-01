@@ -355,5 +355,28 @@ namespace DAL
         }
 
         #endregion
+
+        #region Sia
+
+        public async Task UpdateServiceDeskEmployee(Ticket ticket)
+        {
+            if (ticketCollection is not null && ticket.TicketId is not null)
+            {
+                var update = Builders<Ticket>.Update.Set(t => t.ServiceDeskUser, ticket.ServiceDeskUser);
+                await ticketCollection.UpdateOneAsync(GetFilterById(ticket.TicketId), update);
+            }
+        }
+
+        /// <summary>
+        /// Generates a filter to find a ticket by its unique ID.
+        /// </summary>
+        /// <param name="ticketId">The unique ID of the ticket.</param>
+        /// <returns>A filter definition used for MongoDB queries.</returns>
+        private FilterDefinition<Ticket> GetFilterById(string ticketId)
+        {
+            return Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
+        }
+
+        #endregion
     }
 }

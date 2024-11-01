@@ -73,10 +73,17 @@
             lblOpenDescription = new Label();
             lblDashboard = new Label();
             pnlTicketsOverview = new Panel();
+            splitterTicketsOverview = new Splitter();
+            lblTicketsOverview = new Label();
             panelTicketsHolder = new Panel();
             txtBoxFilter = new TextBox();
             btnFilter = new Button();
             searchtextbox = new TextBox();
+            btnAddTicket = new Button();
+            label15 = new Label();
+            searchbtn = new Button();
+            SortOrderComboBox = new ComboBox();
+            btnViewTicket = new Button();
             ticketsListView = new ListView();
             ticketTitle = new ColumnHeader();
             ticketDescription = new ColumnHeader();
@@ -85,15 +92,6 @@
             ticketDeadline = new ColumnHeader();
             ticketStatus = new ColumnHeader();
             ticketPriority = new ColumnHeader();
-            label15 = new Label();
-            searchbtn = new Button();
-            SortOrderComboBox = new ComboBox();
-            btnViewTicket = new Button();
-            splitterTicketsOverview = new Splitter();
-            btnEditTicket = new Button();
-            btnAddTicket = new Button();
-            btnEscalate = new Button();
-            lblTicketsOverview = new Label();
             pnlUsers = new Panel();
             splitterUsers = new Splitter();
             panelUsersHandler = new Panel();
@@ -150,28 +148,34 @@
             btnCancelChangesEmployee = new Button();
             lblAddEditUser = new Label();
             pnlViewTicket = new Panel();
-            lblVTDeadlineValue = new Label();
-            lblVTDeadline = new Label();
-            lblVTEscalatedValue = new Label();
-            lblVTEscalated = new Label();
-            lblVTReportingUserValue = new Label();
+            panelViewTicketHolder = new Panel();
+            cmbBoxServiceDesk = new ComboBox();
+            btnCloseViewTicket = new Button();
+            btnTransfer = new Button();
+            btnEditTicket = new Button();
+            btnEscalate = new Button();
             lblVTReportingUser = new Label();
-            lblVTDescriptionValue = new Label();
-            lblVTCreationDateValue = new Label();
-            lblVTResolvedValue = new Label();
-            lblVTPriorityValue = new Label();
-            lblVTStatusValue = new Label();
-            lblVTIncidentValue = new Label();
-            lblVTTitleValue = new Label();
-            lblVTServiceDeskValue = new Label();
-            lblVTDescription = new Label();
-            lblVTCreationDate = new Label();
-            lblVTResolved = new Label();
-            lblVTPriority = new Label();
-            lblVTStatus = new Label();
-            lblVTIncident = new Label();
-            lblVTTitle = new Label();
             lblVTServiceDesk = new Label();
+            lblVTDeadlineValue = new Label();
+            lblVTTitle = new Label();
+            lblVTDeadline = new Label();
+            lblVTIncident = new Label();
+            lblVTEscalatedValue = new Label();
+            lblVTStatus = new Label();
+            lblVTEscalated = new Label();
+            lblVTPriority = new Label();
+            lblVTReportingUserValue = new Label();
+            lblVTResolved = new Label();
+            lblVTCreationDate = new Label();
+            lblVTDescriptionValue = new Label();
+            lblVTDescription = new Label();
+            lblVTCreationDateValue = new Label();
+            lblVTServiceDeskValue = new Label();
+            lblVTResolvedValue = new Label();
+            lblVTTitleValue = new Label();
+            lblVTPriorityValue = new Label();
+            lblVTIncidentValue = new Label();
+            lblVTStatusValue = new Label();
             splitterViewTicket = new Splitter();
             lblViewTicketTitle = new Label();
             menuStrip.SuspendLayout();
@@ -195,6 +199,7 @@
             panelAddEditUserHolder.SuspendLayout();
             pnlViewTicket.SuspendLayout();
             pnlDbError.SuspendLayout();
+            panelViewTicketHolder.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip
@@ -338,6 +343,7 @@
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(100, 30);
             btnLogin.TabIndex = 3;
+            btnLogin.TabStop = false;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += OnLoginButtonClick;
@@ -906,27 +912,48 @@
             // 
             pnlTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlTicketsOverview.BackColor = Color.White;
-            pnlTicketsOverview.Controls.Add(panelTicketsHolder);
             pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
-            pnlTicketsOverview.Controls.Add(btnEditTicket);
-            pnlTicketsOverview.Controls.Add(btnAddTicket);
-            pnlTicketsOverview.Controls.Add(btnEscalate);
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
+            pnlTicketsOverview.Controls.Add(panelTicketsHolder);
             pnlTicketsOverview.Location = new Point(0, 122);
             pnlTicketsOverview.Name = "pnlTicketsOverview";
             pnlTicketsOverview.Size = new Size(784, 758);
             pnlTicketsOverview.TabIndex = 6;
+            // 
+            // splitterTicketsOverview
+            // 
+            splitterTicketsOverview.BackColor = SystemColors.ControlDark;
+            splitterTicketsOverview.Dock = DockStyle.Top;
+            splitterTicketsOverview.Location = new Point(0, 0);
+            splitterTicketsOverview.Margin = new Padding(5);
+            splitterTicketsOverview.Name = "splitterTicketsOverview";
+            splitterTicketsOverview.Size = new Size(784, 1);
+            splitterTicketsOverview.TabIndex = 0;
+            splitterTicketsOverview.TabStop = false;
+            // 
+            // lblTicketsOverview
+            // 
+            lblTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTicketsOverview.Location = new Point(0, 0);
+            lblTicketsOverview.Name = "lblTicketsOverview";
+            lblTicketsOverview.Padding = new Padding(0, 10, 0, 0);
+            lblTicketsOverview.Size = new Size(784, 46);
+            lblTicketsOverview.TabIndex = 0;
+            lblTicketsOverview.Text = "Tickets overview";
+            lblTicketsOverview.TextAlign = ContentAlignment.TopCenter;
             // 
             // panelTicketsHolder
             // 
             panelTicketsHolder.Controls.Add(txtBoxFilter);
             panelTicketsHolder.Controls.Add(btnFilter);
             panelTicketsHolder.Controls.Add(searchtextbox);
-            panelTicketsHolder.Controls.Add(ticketsListView);
+            panelTicketsHolder.Controls.Add(btnAddTicket);
             panelTicketsHolder.Controls.Add(label15);
             panelTicketsHolder.Controls.Add(searchbtn);
             panelTicketsHolder.Controls.Add(SortOrderComboBox);
             panelTicketsHolder.Controls.Add(btnViewTicket);
+            panelTicketsHolder.Controls.Add(ticketsListView);
             panelTicketsHolder.Location = new Point(0, 70);
             panelTicketsHolder.Name = "panelTicketsHolder";
             panelTicketsHolder.Size = new Size(780, 660);
@@ -954,6 +981,7 @@
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(100, 30);
             btnFilter.TabIndex = 4;
+            btnFilter.TabStop = false;
             btnFilter.Text = "FILTER";
             btnFilter.UseVisualStyleBackColor = false;
             // 
@@ -966,6 +994,76 @@
             searchtextbox.PlaceholderText = "Search by title or description";
             searchtextbox.Size = new Size(300, 29);
             searchtextbox.TabIndex = 1;
+            // 
+            // btnAddTicket
+            // 
+            btnAddTicket.BackColor = Color.Peru;
+            btnAddTicket.FlatAppearance.BorderSize = 0;
+            btnAddTicket.FlatStyle = FlatStyle.Flat;
+            btnAddTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAddTicket.ForeColor = Color.White;
+            btnAddTicket.Location = new Point(160, 620);
+            btnAddTicket.Name = "btnAddTicket";
+            btnAddTicket.Size = new Size(150, 30);
+            btnAddTicket.TabIndex = 8;
+            btnAddTicket.TabStop = false;
+            btnAddTicket.Text = "ADD TICKET";
+            btnAddTicket.UseVisualStyleBackColor = false;
+            btnAddTicket.Click += btnAddTicket_Click;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.Location = new Point(478, 3);
+            label15.Name = "label15";
+            label15.Size = new Size(122, 21);
+            label15.TabIndex = 0;
+            label15.Text = "Sort by priority :";
+            // 
+            // searchbtn
+            // 
+            searchbtn.BackColor = Color.OliveDrab;
+            searchbtn.FlatAppearance.BorderSize = 0;
+            searchbtn.FlatStyle = FlatStyle.Flat;
+            searchbtn.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            searchbtn.ForeColor = Color.White;
+            searchbtn.Location = new Point(320, 0);
+            searchbtn.Margin = new Padding(0);
+            searchbtn.Name = "searchbtn";
+            searchbtn.Size = new Size(100, 30);
+            searchbtn.TabIndex = 2;
+            searchbtn.Text = "SEARCH";
+            searchbtn.UseVisualStyleBackColor = false;
+            searchbtn.Click += searchbtn_Click;
+            // 
+            // SortOrderComboBox
+            // 
+            SortOrderComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            SortOrderComboBox.FormattingEnabled = true;
+            SortOrderComboBox.Items.AddRange(new object[] { "Low to High", "High to Low" });
+            SortOrderComboBox.Location = new Point(610, 0);
+            SortOrderComboBox.Name = "SortOrderComboBox";
+            SortOrderComboBox.Size = new Size(170, 29);
+            SortOrderComboBox.TabIndex = 5;
+            SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
+            // 
+            // btnViewTicket
+            // 
+            btnViewTicket.BackColor = Color.LightGray;
+            btnViewTicket.Enabled = false;
+            btnViewTicket.FlatAppearance.BorderSize = 0;
+            btnViewTicket.FlatStyle = FlatStyle.Flat;
+            btnViewTicket.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
+            btnViewTicket.ForeColor = SystemColors.ControlText;
+            btnViewTicket.Location = new Point(0, 620);
+            btnViewTicket.Name = "btnViewTicket";
+            btnViewTicket.Size = new Size(150, 30);
+            btnViewTicket.TabIndex = 7;
+            btnViewTicket.TabStop = false;
+            btnViewTicket.Text = "VIEW TICKET";
+            btnViewTicket.UseVisualStyleBackColor = false;
+            btnViewTicket.Click += OnViewTicketButtonClick;
             // 
             // ticketsListView
             // 
@@ -1026,120 +1124,6 @@
             // 
             ticketPriority.Text = "Priority";
             ticketPriority.Width = 100;
-            // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label15.Location = new Point(478, 3);
-            label15.Name = "label15";
-            label15.Size = new Size(122, 21);
-            label15.TabIndex = 0;
-            label15.Text = "Sort by priority :";
-            // 
-            // searchbtn
-            // 
-            searchbtn.BackColor = Color.OliveDrab;
-            searchbtn.FlatAppearance.BorderSize = 0;
-            searchbtn.FlatStyle = FlatStyle.Flat;
-            searchbtn.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
-            searchbtn.ForeColor = Color.White;
-            searchbtn.Location = new Point(320, 0);
-            searchbtn.Margin = new Padding(0);
-            searchbtn.Name = "searchbtn";
-            searchbtn.Size = new Size(100, 30);
-            searchbtn.TabIndex = 2;
-            searchbtn.Text = "SEARCH";
-            searchbtn.UseVisualStyleBackColor = false;
-            searchbtn.Click += searchbtn_Click;
-            // 
-            // SortOrderComboBox
-            // 
-            SortOrderComboBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            SortOrderComboBox.FormattingEnabled = true;
-            SortOrderComboBox.Items.AddRange(new object[] { "Low to High", "High to Low" });
-            SortOrderComboBox.Location = new Point(610, 0);
-            SortOrderComboBox.Name = "SortOrderComboBox";
-            SortOrderComboBox.Size = new Size(170, 29);
-            SortOrderComboBox.TabIndex = 5;
-            SortOrderComboBox.SelectedIndexChanged += SortOrderComboBox_SelectedIndexChanged;
-            // 
-            // btnViewTicket
-            // 
-            btnViewTicket.BackColor = Color.LightGray;
-            btnViewTicket.Enabled = false;
-            btnViewTicket.FlatAppearance.BorderSize = 0;
-            btnViewTicket.FlatStyle = FlatStyle.Flat;
-            btnViewTicket.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
-            btnViewTicket.ForeColor = SystemColors.ControlText;
-            btnViewTicket.Location = new Point(0, 620);
-            btnViewTicket.Name = "btnViewTicket";
-            btnViewTicket.Size = new Size(150, 30);
-            btnViewTicket.TabIndex = 7;
-            btnViewTicket.Text = "VIEW TICKET";
-            btnViewTicket.UseVisualStyleBackColor = false;
-            // 
-            // splitterTicketsOverview
-            // 
-            splitterTicketsOverview.BackColor = SystemColors.ControlDark;
-            splitterTicketsOverview.Dock = DockStyle.Top;
-            splitterTicketsOverview.Location = new Point(0, 0);
-            splitterTicketsOverview.Margin = new Padding(5);
-            splitterTicketsOverview.Name = "splitterTicketsOverview";
-            splitterTicketsOverview.Size = new Size(784, 1);
-            splitterTicketsOverview.TabIndex = 0;
-            splitterTicketsOverview.TabStop = false;
-            // 
-            // btnEditTicket
-            // 
-            btnEditTicket.BackColor = Color.LightGray;
-            btnEditTicket.Enabled = false;
-            btnEditTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEditTicket.Location = new Point(450, 722);
-            btnEditTicket.Name = "btnEditTicket";
-            btnEditTicket.Size = new Size(100, 31);
-            btnEditTicket.TabIndex = 7;
-            btnEditTicket.Text = "EDIT TICKET";
-            btnEditTicket.UseVisualStyleBackColor = false;
-            btnEditTicket.Click += btnEditTicket_Click;
-            // 
-            // btnAddTicket
-            // 
-            btnAddTicket.BackColor = Color.Black;
-            btnAddTicket.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAddTicket.ForeColor = SystemColors.HighlightText;
-            btnAddTicket.Location = new Point(341, 722);
-            btnAddTicket.Name = "btnAddTicket";
-            btnAddTicket.Size = new Size(100, 31);
-            btnAddTicket.TabIndex = 6;
-            btnAddTicket.Text = "ADD TICKET";
-            btnAddTicket.UseVisualStyleBackColor = false;
-            btnAddTicket.Click += btnAddTicket_Click;
-            // 
-            // btnEscalate
-            // 
-            btnEscalate.BackColor = Color.LightGray;
-            btnEscalate.Enabled = false;
-            btnEscalate.Font = new Font("Segoe UI Semibold", 9.857143F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEscalate.Location = new Point(561, 722);
-            btnEscalate.Name = "btnEscalate";
-            btnEscalate.Size = new Size(100, 31);
-            btnEscalate.TabIndex = 3;
-            btnEscalate.Text = "ESCALATE";
-            btnEscalate.UseVisualStyleBackColor = false;
-            btnEscalate.Click += btnEscalate_Click;
-            // 
-            // lblTicketsOverview
-            // 
-            lblTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblTicketsOverview.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTicketsOverview.Location = new Point(0, 0);
-            lblTicketsOverview.Name = "lblTicketsOverview";
-            lblTicketsOverview.Padding = new Padding(0, 10, 0, 0);
-            lblTicketsOverview.Size = new Size(784, 46);
-            lblTicketsOverview.TabIndex = 0;
-            lblTicketsOverview.Text = "Tickets overview";
-            lblTicketsOverview.TextAlign = ContentAlignment.TopCenter;
             // 
             // pnlUsers
             // 
@@ -1225,6 +1209,7 @@
             btnEditEmployee.Name = "btnEditEmployee";
             btnEditEmployee.Size = new Size(150, 30);
             btnEditEmployee.TabIndex = 3;
+            btnEditEmployee.TabStop = false;
             btnEditEmployee.Text = "EDIT EMPLOYEE";
             btnEditEmployee.UseVisualStyleBackColor = false;
             btnEditEmployee.Click += btnEditUser_Click;
@@ -1240,6 +1225,7 @@
             btnAddEmployee.Name = "btnAddEmployee";
             btnAddEmployee.Size = new Size(150, 30);
             btnAddEmployee.TabIndex = 2;
+            btnAddEmployee.TabStop = false;
             btnAddEmployee.Text = "ADD EMPLOYEE";
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
@@ -1608,6 +1594,7 @@
             btnCreateEmployee.Name = "btnCreateEmployee";
             btnCreateEmployee.Size = new Size(150, 30);
             btnCreateEmployee.TabIndex = 7;
+            btnCreateEmployee.TabStop = false;
             btnCreateEmployee.Text = "CREATE EMPLOYEE";
             btnCreateEmployee.UseVisualStyleBackColor = false;
             btnCreateEmployee.Visible = false;
@@ -1624,6 +1611,7 @@
             btnDeleteEmployee.Name = "btnDeleteEmployee";
             btnDeleteEmployee.Size = new Size(150, 30);
             btnDeleteEmployee.TabIndex = 8;
+            btnDeleteEmployee.TabStop = false;
             btnDeleteEmployee.Text = "DELETE EMPLOYEE";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
             btnDeleteEmployee.Click += btnDeleteEmployee_Click;
@@ -1639,6 +1627,7 @@
             btnUpdateEmployee.Name = "btnUpdateEmployee";
             btnUpdateEmployee.Size = new Size(150, 30);
             btnUpdateEmployee.TabIndex = 7;
+            btnUpdateEmployee.TabStop = false;
             btnUpdateEmployee.Text = "UPDATE EMPLOYEE";
             btnUpdateEmployee.UseVisualStyleBackColor = false;
             btnUpdateEmployee.Click += btnUpdateEmployee_Click;
@@ -1778,242 +1767,365 @@
             // 
             // pnlViewTicket
             // 
+            pnlViewTicket.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlViewTicket.BackColor = Color.White;
-            pnlViewTicket.Controls.Add(lblVTDeadlineValue);
-            pnlViewTicket.Controls.Add(lblVTDeadline);
-            pnlViewTicket.Controls.Add(lblVTEscalatedValue);
-            pnlViewTicket.Controls.Add(lblVTEscalated);
-            pnlViewTicket.Controls.Add(lblVTReportingUserValue);
-            pnlViewTicket.Controls.Add(lblVTReportingUser);
-            pnlViewTicket.Controls.Add(lblVTDescriptionValue);
-            pnlViewTicket.Controls.Add(lblVTCreationDateValue);
-            pnlViewTicket.Controls.Add(lblVTResolvedValue);
-            pnlViewTicket.Controls.Add(lblVTPriorityValue);
-            pnlViewTicket.Controls.Add(lblVTStatusValue);
-            pnlViewTicket.Controls.Add(lblVTIncidentValue);
-            pnlViewTicket.Controls.Add(lblVTTitleValue);
-            pnlViewTicket.Controls.Add(lblVTServiceDeskValue);
-            pnlViewTicket.Controls.Add(lblVTDescription);
-            pnlViewTicket.Controls.Add(lblVTCreationDate);
-            pnlViewTicket.Controls.Add(lblVTResolved);
-            pnlViewTicket.Controls.Add(lblVTPriority);
-            pnlViewTicket.Controls.Add(lblVTStatus);
-            pnlViewTicket.Controls.Add(lblVTIncident);
-            pnlViewTicket.Controls.Add(lblVTTitle);
-            pnlViewTicket.Controls.Add(lblVTServiceDesk);
+            pnlViewTicket.Controls.Add(panelViewTicketHolder);
             pnlViewTicket.Controls.Add(splitterViewTicket);
             pnlViewTicket.Controls.Add(lblViewTicketTitle);
-            pnlViewTicket.Location = new Point(0, 130);
+            pnlViewTicket.Location = new Point(0, 122);
             pnlViewTicket.Name = "pnlViewTicket";
-            pnlViewTicket.Size = new Size(634, 599);
+            pnlViewTicket.Size = new Size(784, 758);
             pnlViewTicket.TabIndex = 0;
             // 
-            // lblVTDeadlineValue
+            // panelViewTicketHolder
             // 
-            lblVTDeadlineValue.AutoSize = true;
-            lblVTDeadlineValue.Location = new Point(160, 361);
-            lblVTDeadlineValue.Name = "lblVTDeadlineValue";
-            lblVTDeadlineValue.Size = new Size(0, 15);
-            lblVTDeadlineValue.TabIndex = 27;
+            panelViewTicketHolder.Controls.Add(cmbBoxServiceDesk);
+            panelViewTicketHolder.Controls.Add(btnCloseViewTicket);
+            panelViewTicketHolder.Controls.Add(btnTransfer);
+            panelViewTicketHolder.Controls.Add(btnEditTicket);
+            panelViewTicketHolder.Controls.Add(btnEscalate);
+            panelViewTicketHolder.Controls.Add(lblVTReportingUser);
+            panelViewTicketHolder.Controls.Add(lblVTServiceDesk);
+            panelViewTicketHolder.Controls.Add(lblVTDeadlineValue);
+            panelViewTicketHolder.Controls.Add(lblVTTitle);
+            panelViewTicketHolder.Controls.Add(lblVTDeadline);
+            panelViewTicketHolder.Controls.Add(lblVTIncident);
+            panelViewTicketHolder.Controls.Add(lblVTEscalatedValue);
+            panelViewTicketHolder.Controls.Add(lblVTStatus);
+            panelViewTicketHolder.Controls.Add(lblVTEscalated);
+            panelViewTicketHolder.Controls.Add(lblVTPriority);
+            panelViewTicketHolder.Controls.Add(lblVTReportingUserValue);
+            panelViewTicketHolder.Controls.Add(lblVTResolved);
+            panelViewTicketHolder.Controls.Add(lblVTCreationDate);
+            panelViewTicketHolder.Controls.Add(lblVTDescriptionValue);
+            panelViewTicketHolder.Controls.Add(lblVTDescription);
+            panelViewTicketHolder.Controls.Add(lblVTCreationDateValue);
+            panelViewTicketHolder.Controls.Add(lblVTServiceDeskValue);
+            panelViewTicketHolder.Controls.Add(lblVTResolvedValue);
+            panelViewTicketHolder.Controls.Add(lblVTTitleValue);
+            panelViewTicketHolder.Controls.Add(lblVTPriorityValue);
+            panelViewTicketHolder.Controls.Add(lblVTIncidentValue);
+            panelViewTicketHolder.Controls.Add(lblVTStatusValue);
+            panelViewTicketHolder.Location = new Point(0, 70);
+            panelViewTicketHolder.Name = "panelViewTicketHolder";
+            panelViewTicketHolder.Size = new Size(580, 550);
+            panelViewTicketHolder.TabIndex = 0;
             // 
-            // lblVTDeadline
+            // cmbBoxServiceDesk
             // 
-            lblVTDeadline.AutoSize = true;
-            lblVTDeadline.Location = new Point(45, 361);
-            lblVTDeadline.Name = "lblVTDeadline";
-            lblVTDeadline.Size = new Size(56, 15);
-            lblVTDeadline.TabIndex = 26;
-            lblVTDeadline.Text = "Deadline:";
+            cmbBoxServiceDesk.DropDownHeight = 300;
+            cmbBoxServiceDesk.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            cmbBoxServiceDesk.FormattingEnabled = true;
+            cmbBoxServiceDesk.IntegralHeight = false;
+            cmbBoxServiceDesk.Location = new Point(165, 31);
+            cmbBoxServiceDesk.MaxDropDownItems = 7;
+            cmbBoxServiceDesk.Name = "cmbBoxServiceDesk";
+            cmbBoxServiceDesk.Size = new Size(200, 29);
+            cmbBoxServiceDesk.TabIndex = 1;
+            cmbBoxServiceDesk.TabStop = false;
+            cmbBoxServiceDesk.Visible = false;
             // 
-            // lblVTEscalatedValue
+            // btnCloseViewTicket
             // 
-            lblVTEscalatedValue.AutoSize = true;
-            lblVTEscalatedValue.Location = new Point(160, 294);
-            lblVTEscalatedValue.Name = "lblVTEscalatedValue";
-            lblVTEscalatedValue.Size = new Size(0, 15);
-            lblVTEscalatedValue.TabIndex = 25;
+            btnCloseViewTicket.BackColor = Color.LightGray;
+            btnCloseViewTicket.FlatAppearance.BorderSize = 0;
+            btnCloseViewTicket.FlatStyle = FlatStyle.Flat;
+            btnCloseViewTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCloseViewTicket.Location = new Point(160, 520);
+            btnCloseViewTicket.Name = "btnCloseViewTicket";
+            btnCloseViewTicket.Size = new Size(150, 30);
+            btnCloseViewTicket.TabIndex = 5;
+            btnCloseViewTicket.TabStop = false;
+            btnCloseViewTicket.Text = "CLOSE VIEW";
+            btnCloseViewTicket.UseVisualStyleBackColor = false;
+            btnCloseViewTicket.Click += OnCloseViewButtonClick;
             // 
-            // lblVTEscalated
+            // btnTransfer
             // 
-            lblVTEscalated.AutoSize = true;
-            lblVTEscalated.Location = new Point(45, 294);
-            lblVTEscalated.Name = "lblVTEscalated";
-            lblVTEscalated.Size = new Size(59, 15);
-            lblVTEscalated.TabIndex = 24;
-            lblVTEscalated.Text = "Escalated:";
+            btnTransfer.BackColor = Color.Peru;
+            btnTransfer.FlatAppearance.BorderSize = 0;
+            btnTransfer.FlatStyle = FlatStyle.Flat;
+            btnTransfer.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnTransfer.ForeColor = Color.White;
+            btnTransfer.Location = new Point(430, 31);
+            btnTransfer.Name = "btnTransfer";
+            btnTransfer.Size = new Size(150, 30);
+            btnTransfer.TabIndex = 2;
+            btnTransfer.TabStop = false;
+            btnTransfer.Text = "TRANSFER TICKET";
+            btnTransfer.UseVisualStyleBackColor = false;
+            btnTransfer.Click += OnTransferTicketButtonClick;
             // 
-            // lblVTReportingUserValue
+            // btnEditTicket
             // 
-            lblVTReportingUserValue.AutoSize = true;
-            lblVTReportingUserValue.Location = new Point(160, 61);
-            lblVTReportingUserValue.Name = "lblVTReportingUserValue";
-            lblVTReportingUserValue.Size = new Size(0, 15);
-            lblVTReportingUserValue.TabIndex = 23;
+            btnEditTicket.BackColor = Color.OliveDrab;
+            btnEditTicket.FlatAppearance.BorderSize = 0;
+            btnEditTicket.FlatStyle = FlatStyle.Flat;
+            btnEditTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEditTicket.ForeColor = Color.White;
+            btnEditTicket.Location = new Point(0, 520);
+            btnEditTicket.Name = "btnEditTicket";
+            btnEditTicket.Size = new Size(150, 30);
+            btnEditTicket.TabIndex = 4;
+            btnEditTicket.TabStop = false;
+            btnEditTicket.Text = "EDIT TICKET";
+            btnEditTicket.UseVisualStyleBackColor = false;
+            btnEditTicket.Click += editTicketBtn_Click;
+            // 
+            // btnEscalate
+            // 
+            btnEscalate.BackColor = Color.LightGray;
+            btnEscalate.Enabled = false;
+            btnEscalate.FlatAppearance.BorderSize = 0;
+            btnEscalate.FlatStyle = FlatStyle.Flat;
+            btnEscalate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnEscalate.Location = new Point(430, 241);
+            btnEscalate.Name = "btnEscalate";
+            btnEscalate.Size = new Size(150, 30);
+            btnEscalate.TabIndex = 3;
+            btnEscalate.TabStop = false;
+            btnEscalate.Text = "ESCALATE";
+            btnEscalate.UseVisualStyleBackColor = false;
             // 
             // lblVTReportingUser
             // 
             lblVTReportingUser.AutoSize = true;
-            lblVTReportingUser.Location = new Point(45, 61);
+            lblVTReportingUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTReportingUser.Location = new Point(0, 0);
             lblVTReportingUser.Name = "lblVTReportingUser";
-            lblVTReportingUser.Size = new Size(87, 15);
-            lblVTReportingUser.TabIndex = 22;
+            lblVTReportingUser.Size = new Size(116, 21);
+            lblVTReportingUser.TabIndex = 0;
             lblVTReportingUser.Text = "Reporting user:";
-            // 
-            // lblVTDescriptionValue
-            // 
-            lblVTDescriptionValue.AutoSize = true;
-            lblVTDescriptionValue.Location = new Point(160, 380);
-            lblVTDescriptionValue.Name = "lblVTDescriptionValue";
-            lblVTDescriptionValue.Size = new Size(0, 15);
-            lblVTDescriptionValue.TabIndex = 21;
-            // 
-            // lblVTCreationDateValue
-            // 
-            lblVTCreationDateValue.AutoSize = true;
-            lblVTCreationDateValue.Location = new Point(160, 330);
-            lblVTCreationDateValue.Name = "lblVTCreationDateValue";
-            lblVTCreationDateValue.Size = new Size(0, 15);
-            lblVTCreationDateValue.TabIndex = 20;
-            // 
-            // lblVTResolvedValue
-            // 
-            lblVTResolvedValue.AutoSize = true;
-            lblVTResolvedValue.Location = new Point(160, 265);
-            lblVTResolvedValue.Name = "lblVTResolvedValue";
-            lblVTResolvedValue.Size = new Size(0, 15);
-            lblVTResolvedValue.TabIndex = 19;
-            // 
-            // lblVTPriorityValue
-            // 
-            lblVTPriorityValue.AutoSize = true;
-            lblVTPriorityValue.Location = new Point(160, 230);
-            lblVTPriorityValue.Name = "lblVTPriorityValue";
-            lblVTPriorityValue.Size = new Size(0, 15);
-            lblVTPriorityValue.TabIndex = 18;
-            // 
-            // lblVTStatusValue
-            // 
-            lblVTStatusValue.AutoSize = true;
-            lblVTStatusValue.Location = new Point(160, 193);
-            lblVTStatusValue.Name = "lblVTStatusValue";
-            lblVTStatusValue.Size = new Size(0, 15);
-            lblVTStatusValue.TabIndex = 17;
-            // 
-            // lblVTIncidentValue
-            // 
-            lblVTIncidentValue.AutoSize = true;
-            lblVTIncidentValue.Location = new Point(160, 156);
-            lblVTIncidentValue.Name = "lblVTIncidentValue";
-            lblVTIncidentValue.Size = new Size(0, 15);
-            lblVTIncidentValue.TabIndex = 16;
-            // 
-            // lblVTTitleValue
-            // 
-            lblVTTitleValue.AutoSize = true;
-            lblVTTitleValue.Location = new Point(160, 121);
-            lblVTTitleValue.Name = "lblVTTitleValue";
-            lblVTTitleValue.Size = new Size(0, 15);
-            lblVTTitleValue.TabIndex = 15;
-            // 
-            // lblVTServiceDeskValue
-            // 
-            lblVTServiceDeskValue.AutoSize = true;
-            lblVTServiceDeskValue.Location = new Point(160, 91);
-            lblVTServiceDeskValue.Name = "lblVTServiceDeskValue";
-            lblVTServiceDeskValue.Size = new Size(0, 15);
-            lblVTServiceDeskValue.TabIndex = 14;
-            // 
-            // lblVTDescription
-            // 
-            lblVTDescription.AutoSize = true;
-            lblVTDescription.Location = new Point(45, 380);
-            lblVTDescription.Name = "lblVTDescription";
-            lblVTDescription.Size = new Size(70, 15);
-            lblVTDescription.TabIndex = 13;
-            lblVTDescription.Text = "Description:";
-            // 
-            // lblVTCreationDate
-            // 
-            lblVTCreationDate.AutoSize = true;
-            lblVTCreationDate.Location = new Point(45, 330);
-            lblVTCreationDate.Name = "lblVTCreationDate";
-            lblVTCreationDate.Size = new Size(81, 15);
-            lblVTCreationDate.TabIndex = 12;
-            lblVTCreationDate.Text = "Creation date:";
-            // 
-            // lblVTResolved
-            // 
-            lblVTResolved.AutoSize = true;
-            lblVTResolved.Location = new Point(45, 265);
-            lblVTResolved.Name = "lblVTResolved";
-            lblVTResolved.Size = new Size(57, 15);
-            lblVTResolved.TabIndex = 11;
-            lblVTResolved.Text = "Resolved:";
-            // 
-            // lblVTPriority
-            // 
-            lblVTPriority.AutoSize = true;
-            lblVTPriority.Location = new Point(45, 230);
-            lblVTPriority.Name = "lblVTPriority";
-            lblVTPriority.Size = new Size(48, 15);
-            lblVTPriority.TabIndex = 10;
-            lblVTPriority.Text = "Priority:";
-            // 
-            // lblVTStatus
-            // 
-            lblVTStatus.AutoSize = true;
-            lblVTStatus.Location = new Point(45, 193);
-            lblVTStatus.Name = "lblVTStatus";
-            lblVTStatus.Size = new Size(42, 15);
-            lblVTStatus.TabIndex = 9;
-            lblVTStatus.Text = "Status:";
-            // 
-            // lblVTIncident
-            // 
-            lblVTIncident.AutoSize = true;
-            lblVTIncident.Location = new Point(45, 156);
-            lblVTIncident.Name = "lblVTIncident";
-            lblVTIncident.Size = new Size(94, 15);
-            lblVTIncident.TabIndex = 8;
-            lblVTIncident.Text = "Type of incident:";
-            // 
-            // lblVTTitle
-            // 
-            lblVTTitle.AutoSize = true;
-            lblVTTitle.Location = new Point(45, 121);
-            lblVTTitle.Name = "lblVTTitle";
-            lblVTTitle.Size = new Size(32, 15);
-            lblVTTitle.TabIndex = 7;
-            lblVTTitle.Text = "Title:";
             // 
             // lblVTServiceDesk
             // 
             lblVTServiceDesk.AutoSize = true;
-            lblVTServiceDesk.Location = new Point(45, 91);
+            lblVTServiceDesk.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTServiceDesk.Location = new Point(0, 35);
             lblVTServiceDesk.Name = "lblVTServiceDesk";
-            lblVTServiceDesk.Size = new Size(99, 15);
-            lblVTServiceDesk.TabIndex = 6;
+            lblVTServiceDesk.Size = new Size(133, 21);
+            lblVTServiceDesk.TabIndex = 0;
             lblVTServiceDesk.Text = "Service desk user:";
+            // 
+            // lblVTDeadlineValue
+            // 
+            lblVTDeadlineValue.AutoSize = true;
+            lblVTDeadlineValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTDeadlineValue.Location = new Point(165, 315);
+            lblVTDeadlineValue.Name = "lblVTDeadlineValue";
+            lblVTDeadlineValue.Size = new Size(69, 21);
+            lblVTDeadlineValue.TabIndex = 0;
+            lblVTDeadlineValue.Text = "deadline";
+            // 
+            // lblVTTitle
+            // 
+            lblVTTitle.AutoSize = true;
+            lblVTTitle.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTTitle.Location = new Point(0, 70);
+            lblVTTitle.Name = "lblVTTitle";
+            lblVTTitle.Size = new Size(42, 21);
+            lblVTTitle.TabIndex = 0;
+            lblVTTitle.Text = "Title:";
+            // 
+            // lblVTDeadline
+            // 
+            lblVTDeadline.AutoSize = true;
+            lblVTDeadline.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTDeadline.Location = new Point(0, 315);
+            lblVTDeadline.Name = "lblVTDeadline";
+            lblVTDeadline.Size = new Size(74, 21);
+            lblVTDeadline.TabIndex = 0;
+            lblVTDeadline.Text = "Deadline:";
+            // 
+            // lblVTIncident
+            // 
+            lblVTIncident.AutoSize = true;
+            lblVTIncident.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTIncident.Location = new Point(0, 105);
+            lblVTIncident.Name = "lblVTIncident";
+            lblVTIncident.Size = new Size(122, 21);
+            lblVTIncident.TabIndex = 0;
+            lblVTIncident.Text = "Type of incident:";
+            // 
+            // lblVTEscalatedValue
+            // 
+            lblVTEscalatedValue.AutoSize = true;
+            lblVTEscalatedValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTEscalatedValue.Location = new Point(165, 245);
+            lblVTEscalatedValue.Name = "lblVTEscalatedValue";
+            lblVTEscalatedValue.Size = new Size(74, 21);
+            lblVTEscalatedValue.TabIndex = 0;
+            lblVTEscalatedValue.Text = "escalated";
+            // 
+            // lblVTStatus
+            // 
+            lblVTStatus.AutoSize = true;
+            lblVTStatus.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTStatus.Location = new Point(0, 140);
+            lblVTStatus.Name = "lblVTStatus";
+            lblVTStatus.Size = new Size(55, 21);
+            lblVTStatus.TabIndex = 0;
+            lblVTStatus.Text = "Status:";
+            // 
+            // lblVTEscalated
+            // 
+            lblVTEscalated.AutoSize = true;
+            lblVTEscalated.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTEscalated.Location = new Point(0, 245);
+            lblVTEscalated.Name = "lblVTEscalated";
+            lblVTEscalated.Size = new Size(77, 21);
+            lblVTEscalated.TabIndex = 0;
+            lblVTEscalated.Text = "Escalated:";
+            // 
+            // lblVTPriority
+            // 
+            lblVTPriority.AutoSize = true;
+            lblVTPriority.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTPriority.Location = new Point(0, 175);
+            lblVTPriority.Name = "lblVTPriority";
+            lblVTPriority.Size = new Size(64, 21);
+            lblVTPriority.TabIndex = 0;
+            lblVTPriority.Text = "Priority:";
+            // 
+            // lblVTReportingUserValue
+            // 
+            lblVTReportingUserValue.AutoSize = true;
+            lblVTReportingUserValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTReportingUserValue.Location = new Point(165, 0);
+            lblVTReportingUserValue.Name = "lblVTReportingUserValue";
+            lblVTReportingUserValue.Size = new Size(109, 21);
+            lblVTReportingUserValue.TabIndex = 0;
+            lblVTReportingUserValue.Text = "reporting user";
+            // 
+            // lblVTResolved
+            // 
+            lblVTResolved.AutoSize = true;
+            lblVTResolved.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTResolved.Location = new Point(0, 210);
+            lblVTResolved.Name = "lblVTResolved";
+            lblVTResolved.Size = new Size(76, 21);
+            lblVTResolved.TabIndex = 0;
+            lblVTResolved.Text = "Resolved:";
+            // 
+            // lblVTCreationDate
+            // 
+            lblVTCreationDate.AutoSize = true;
+            lblVTCreationDate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTCreationDate.Location = new Point(0, 280);
+            lblVTCreationDate.Name = "lblVTCreationDate";
+            lblVTCreationDate.Size = new Size(106, 21);
+            lblVTCreationDate.TabIndex = 0;
+            lblVTCreationDate.Text = "Creation date:";
+            // 
+            // lblVTDescriptionValue
+            // 
+            lblVTDescriptionValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTDescriptionValue.Location = new Point(165, 350);
+            lblVTDescriptionValue.Name = "lblVTDescriptionValue";
+            lblVTDescriptionValue.Size = new Size(250, 150);
+            lblVTDescriptionValue.TabIndex = 0;
+            lblVTDescriptionValue.Text = "description";
+            // 
+            // lblVTDescription
+            // 
+            lblVTDescription.AutoSize = true;
+            lblVTDescription.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTDescription.Location = new Point(0, 350);
+            lblVTDescription.Name = "lblVTDescription";
+            lblVTDescription.Size = new Size(92, 21);
+            lblVTDescription.TabIndex = 0;
+            lblVTDescription.Text = "Description:";
+            // 
+            // lblVTCreationDateValue
+            // 
+            lblVTCreationDateValue.AutoSize = true;
+            lblVTCreationDateValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTCreationDateValue.Location = new Point(165, 280);
+            lblVTCreationDateValue.Name = "lblVTCreationDateValue";
+            lblVTCreationDateValue.Size = new Size(61, 21);
+            lblVTCreationDateValue.TabIndex = 0;
+            lblVTCreationDateValue.Text = "created";
+            // 
+            // lblVTServiceDeskValue
+            // 
+            lblVTServiceDeskValue.AutoSize = true;
+            lblVTServiceDeskValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTServiceDeskValue.Location = new Point(165, 35);
+            lblVTServiceDeskValue.Name = "lblVTServiceDeskValue";
+            lblVTServiceDeskValue.Size = new Size(128, 21);
+            lblVTServiceDeskValue.TabIndex = 0;
+            lblVTServiceDeskValue.Text = "service desk user";
+            // 
+            // lblVTResolvedValue
+            // 
+            lblVTResolvedValue.AutoSize = true;
+            lblVTResolvedValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTResolvedValue.Location = new Point(165, 210);
+            lblVTResolvedValue.Name = "lblVTResolvedValue";
+            lblVTResolvedValue.Size = new Size(69, 21);
+            lblVTResolvedValue.TabIndex = 0;
+            lblVTResolvedValue.Text = "resolved";
+            // 
+            // lblVTTitleValue
+            // 
+            lblVTTitleValue.AutoSize = true;
+            lblVTTitleValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTTitleValue.Location = new Point(165, 70);
+            lblVTTitleValue.Name = "lblVTTitleValue";
+            lblVTTitleValue.Size = new Size(36, 21);
+            lblVTTitleValue.TabIndex = 0;
+            lblVTTitleValue.Text = "title";
+            // 
+            // lblVTPriorityValue
+            // 
+            lblVTPriorityValue.AutoSize = true;
+            lblVTPriorityValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTPriorityValue.Location = new Point(165, 175);
+            lblVTPriorityValue.Name = "lblVTPriorityValue";
+            lblVTPriorityValue.Size = new Size(61, 21);
+            lblVTPriorityValue.TabIndex = 0;
+            lblVTPriorityValue.Text = "priority";
+            // 
+            // lblVTIncidentValue
+            // 
+            lblVTIncidentValue.AutoSize = true;
+            lblVTIncidentValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTIncidentValue.Location = new Point(165, 105);
+            lblVTIncidentValue.Name = "lblVTIncidentValue";
+            lblVTIncidentValue.Size = new Size(99, 21);
+            lblVTIncidentValue.TabIndex = 0;
+            lblVTIncidentValue.Text = "incident type";
+            // 
+            // lblVTStatusValue
+            // 
+            lblVTStatusValue.AutoSize = true;
+            lblVTStatusValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblVTStatusValue.Location = new Point(165, 140);
+            lblVTStatusValue.Name = "lblVTStatusValue";
+            lblVTStatusValue.Size = new Size(51, 21);
+            lblVTStatusValue.TabIndex = 0;
+            lblVTStatusValue.Text = "status";
             // 
             // splitterViewTicket
             // 
-            splitterViewTicket.BackColor = Color.Black;
+            splitterViewTicket.BackColor = SystemColors.ControlDark;
             splitterViewTicket.Dock = DockStyle.Top;
             splitterViewTicket.Location = new Point(0, 0);
             splitterViewTicket.Margin = new Padding(5);
             splitterViewTicket.Name = "splitterViewTicket";
-            splitterViewTicket.Size = new Size(634, 1);
+            splitterViewTicket.Size = new Size(784, 1);
             splitterViewTicket.TabIndex = 0;
             splitterViewTicket.TabStop = false;
             // 
             // lblViewTicketTitle
             // 
-            lblViewTicketTitle.AutoSize = true;
-            lblViewTicketTitle.Font = new Font("Segoe UI", 13.875F, FontStyle.Bold, GraphicsUnit.Point);
-            lblViewTicketTitle.Location = new Point(19, 13);
+            lblViewTicketTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblViewTicketTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblViewTicketTitle.Location = new Point(0, 0);
             lblViewTicketTitle.Name = "lblViewTicketTitle";
-            lblViewTicketTitle.Size = new Size(129, 25);
-            lblViewTicketTitle.TabIndex = 1;
+            lblViewTicketTitle.Padding = new Padding(0, 10, 0, 0);
+            lblViewTicketTitle.Size = new Size(784, 46);
+            lblViewTicketTitle.TabIndex = 0;
             lblViewTicketTitle.Text = "Ticket Details";
             // 
             // pnlDbError
@@ -2034,6 +2146,7 @@
             databaseErrorMessageLbl.Size = new Size(326, 95);
             databaseErrorMessageLbl.TabIndex = 0;
             databaseErrorMessageLbl.Text = "The application couldn't establish a connection to the database. Please check your internet connection or contact the help desk.";
+            lblViewTicketTitle.TextAlign = ContentAlignment.TopCenter;
             // 
             // GardenDeskForm
             // 
@@ -2042,10 +2155,10 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 881);
-            Controls.Add(pnlTicketsOverview);
+            Controls.Add(pnlViewTicket);
+            Controls.Add(pnlUsers);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlUsers);
             Controls.Add(pnlLogin);
             Controls.Add(menuStrip);
             Controls.Add(pnlViewTicket);
@@ -2058,6 +2171,7 @@
             Controls.Add(lblGardenDesk);
             Controls.Add(logo);
             Controls.Add(pnlAddEditUser);
+            Controls.Add(pnlTicketsOverview);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
@@ -2088,6 +2202,8 @@
             pnlViewTicket.ResumeLayout(false);
             pnlViewTicket.PerformLayout();
             pnlDbError.ResumeLayout(false);
+            panelViewTicketHolder.ResumeLayout(false);
+            panelViewTicketHolder.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2147,7 +2263,6 @@
         private ComboBox comboBoxTypeUser;
         private Button btnCancelChangesEmployee;
         private Button btnUpdateEmployee;
-        private Button btnEscalate;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartOpen;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartResolved;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartClosed;
@@ -2240,5 +2355,11 @@
         private Button btnFilter;
         private Panel panelAddEditTicketHolder;
         private Button editTicketBtn;
+        private Panel panelViewTicketHolder;
+        private Button btnTransfer;
+        private Button btnEditTicket;
+        private Button btnEscalate;
+        private Button btnCloseViewTicket;
+        private ComboBox cmbBoxServiceDesk;
     }
 }

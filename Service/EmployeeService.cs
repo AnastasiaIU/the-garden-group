@@ -90,6 +90,16 @@ namespace Service
             return dao.IsDatabaseInitiated;
         }
 
+        public async Task<Employee> GetEmployeeById(string employeeId)
+        {
+            return await employeeDao.GetEmployeeById(employeeId);
+        }
+
+        public async Task<List<Employee>> GetAllServiceDeskEmployeesSorted()
+        {
+            return await employeeDao.GetAllServiceDeskEmployeesSorted();
+        }
+
         #endregion
 
         #region Tina
