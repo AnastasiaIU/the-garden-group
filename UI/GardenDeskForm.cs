@@ -518,7 +518,7 @@ namespace UI
             {
                 Ticket newTicket = CreateTicketObject(DateTime.Now);
                 await ticketService.AddTicketAsync(newTicket);
-
+                ChangeButtonState(btnEditTicket, Color.LightGray, false);
                 ShowTicketsView();
             }
             catch (Exception ex)
@@ -529,19 +529,22 @@ namespace UI
 
         private Ticket CreateTicketObject(DateTime time, string? ticketId = null)
         {
-            string reportingUser = loggedInEmployee.EmployeeId;
-            string serviceDeskUser = GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required.");
-            string title = IsInputBoxEmpty(titleTxtBox.Text, "Title is required.");
-            string description = IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required.");
-            Status status = ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required."));
-            Priority priority = ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required."));
-            bool isResolved = ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required."));
-            bool isEscalated = false;
-            DateTime deadline = CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time);
-            IncidentType incidentType = ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required."));
-            DateTime creationDate = time;
+            var ticket = new Ticket(
+                reportingUser: loggedInEmployee.EmployeeId,
+                serviceDeskUser: GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required."),
+                title: IsInputBoxEmpty(titleTxtBox.Text, "Title is required."),
+                description: IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required."),
+                status: ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required.")),
+                priority: ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.")),
+                isResolved: ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required.")),
+                isEscalated: false,
+                deadline: CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time),
+                incidentType: ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.")),
+                creationDate: time,
+                ticketId: ticketId
+            );
 
-            return new Ticket(reportingUser,serviceDeskUser, title, description, status, priority, isResolved, isEscalated, deadline, incidentType, creationDate);
+            return ticket;
         }
 
         private string GetServiceDeskUserId(ComboBox comboBox, string errorMessage)
