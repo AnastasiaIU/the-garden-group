@@ -7,7 +7,7 @@ namespace DAL
     /// <summary>
     /// Data Access Object (DAO) for managing Employee-related operations in the MongoDB database.
     /// </summary>
-    public class EmployeeDao : BaseDao
+    public class EmployeeDao : BaseDao<Employee>
     {
         // Constants for referencing fields not included in the model
         private const string UsernameField = "username";
@@ -34,7 +34,7 @@ namespace DAL
         {
             updatedEmployee.EmployeeId = id;
             var filter = Builders<Employee>.Filter.Eq("_id", new ObjectId(id));
-            var result = await employeeCollection.ReplaceOneAsync(filter, updatedEmployee);
+            await employeeCollection.ReplaceOneAsync(filter, updatedEmployee);
         }
 
         /// <summary>

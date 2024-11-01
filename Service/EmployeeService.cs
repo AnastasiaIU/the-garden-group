@@ -8,10 +8,8 @@ namespace Service
     /// <summary>
     /// Service layer for managing employee-related operations. Provides business logic and interacts with the data access layer (EmployeeDao).
     /// </summary>
-    public class EmployeeService
+    public class EmployeeService : BaseService<Employee, EmployeeDao>
     {
-        private readonly EmployeeDao employeeDao = new();
-
         #region Orest
 
         /// <summary>
@@ -21,7 +19,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of all <see cref="Employee"/> objects.</returns>
         public async Task<List<Employee>> GetAllEmployeesAPI()
         {
-            return await employeeDao.GetAllEmployeesAPI();
+            return await dao.GetAllEmployeesAPI();
         }
 
         /// <summary>
@@ -30,7 +28,7 @@ namespace Service
         /// </summary>
         public async Task UpdateEmployeeAPI(string id, Employee updatedEmployee)
         {
-            await employeeDao.UpdateEmployeeAPI(id, updatedEmployee);
+            await dao.UpdateEmployeeAPI(id, updatedEmployee);
         }
 
         /// <summary>
@@ -39,7 +37,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects with ticket counts.</returns>
         public async Task<List<Employee>> GetAllEmployeesWithCountedTickets()
         {
-            return await employeeDao.GetAllEmployeesWithCountedTickets();
+            return await dao.GetAllEmployeesWithCountedTickets();
         }
 
         #endregion
@@ -55,7 +53,7 @@ namespace Service
         public async Task<Employee?> GetEmployeeByUsernameAndPassword(string username, string password)
         {
             string hashedPassword = HashPassword(password);
-            return await employeeDao.GetEmployeeByUsernameAndPassword(username, hashedPassword);
+            return await dao.GetEmployeeByUsernameAndPassword(username, hashedPassword);
         }
 
         /// <summary>
@@ -89,7 +87,7 @@ namespace Service
         /// </remarks>
         public bool IsDatabaseInitiated()
         {
-            return employeeDao.IsDatabaseInitiated;
+            return dao.IsDatabaseInitiated;
         }
 
         #endregion
@@ -103,7 +101,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task DeleteEmployeeByID(string employeeId)
         {
-            await employeeDao.DeleteEmployeeByID(employeeId);
+            await dao.DeleteEmployeeByID(employeeId);
         }
 
         /// <summary>
@@ -113,7 +111,7 @@ namespace Service
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            await employeeDao.UpdateEmployeeAsync(employee);
+            await dao.UpdateEmployeeAsync(employee);
         }
 
         /// <summary>
@@ -125,7 +123,7 @@ namespace Service
         {
             string username = $"{employee.FirstName.ToLower()}.{employee.LastName.ToLower()}";
             string password = HashPassword(username);
-            await employeeDao.CreateEmployeeAsync(employee, username, password);
+            await dao.CreateEmployeeAsync(employee, username, password);
         }
 
         #endregion
