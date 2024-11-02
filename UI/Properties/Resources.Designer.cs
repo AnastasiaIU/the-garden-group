@@ -79,15 +79,6 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The application couldn&apos;t establish a connection to the database. Please check your internet connection or contact the help desk..
-        /// </summary>
-        internal static string DatabaseError {
-            get {
-                return ResourceManager.GetString("DatabaseError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The branch cannot be empty.
         /// </summary>
         internal static string EmployeeBranchError {
@@ -161,11 +152,47 @@ namespace UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to pnl.
         /// </summary>
         internal static string PanelPrefix {
             get {
                 return ResourceManager.GetString("PanelPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRANSFER TICKET.
+        /// </summary>
+        internal static string TransferTicket {
+            get {
+                return ResourceManager.GetString("TransferTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

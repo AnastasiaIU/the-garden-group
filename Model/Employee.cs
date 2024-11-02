@@ -61,5 +61,10 @@ namespace Model
             OpenTickets = openTickets;
             EmployeeId = employeeId;
         }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

@@ -355,5 +355,37 @@ namespace DAL
         }
 
         #endregion
+
+        #region Sia
+
+        /// <summary>
+        /// Updates the assigned service desk employee for a specific ticket in the database asynchronously.
+        /// </summary>
+        /// <param name="ticket">The <see cref="Ticket"/> object containing the ticket ID and the new service desk employee information to update.</param>
+        /// <returns>A task representing the asynchronous update operation.</returns>
+        /// <remarks>
+        /// This method checks that the <see cref="ticketCollection"/> and the ticket's <see cref="Ticket.TicketId"/> are not null
+        /// before attempting to update. It modifies only the <see cref="Ticket.ServiceDeskUser"/> field in the specified ticket.
+        /// </remarks>
+        public async Task UpdateServiceDeskEmployee(Ticket ticket)
+        {
+            if (ticketCollection is not null && ticket.TicketId is not null)
+            {
+                var update = Builders<Ticket>.Update.Set(t => t.ServiceDeskUser, ticket.ServiceDeskUser);
+                await ticketCollection.UpdateOneAsync(GetFilterById(ticket.TicketId), update);
+            }
+        }
+
+        /// <summary>
+        /// Generates a filter to find a ticket by its unique ID.
+        /// </summary>
+        /// <param name="ticketId">The unique ID of the ticket.</param>
+        /// <returns>A filter definition used for MongoDB queries.</returns>
+        private FilterDefinition<Ticket> GetFilterById(string ticketId)
+        {
+            return Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
+        }
+
+        #endregion
     }
 }

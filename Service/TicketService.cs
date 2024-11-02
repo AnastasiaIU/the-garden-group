@@ -195,5 +195,19 @@ namespace Service
         }
 
         #endregion
+
+        #region Sia
+
+        /// <summary>
+        /// Updates the assigned service desk employee for the specified ticket asynchronously.
+        /// </summary>
+        /// <param name="ticket">The <see cref="Ticket"/> object containing updated information on the assigned service desk employee.</param>
+        /// <returns>A task representing the asynchronous update operation.</returns>
+        public async Task UpdateServiceDeskEmployee(Ticket ticket)
+        {
+            await dao.UpdateServiceDeskEmployee(ticket);
+        }
+
+        #endregion
     }
 }

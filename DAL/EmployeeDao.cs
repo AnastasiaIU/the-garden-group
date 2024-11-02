@@ -116,6 +116,34 @@ namespace DAL
             return await employeeCollection.Find(filter).FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Retrieves an employee document from the database by their unique identifier asynchronously.
+        /// </summary>
+        /// <param name="employeeId">The unique identifier of the employee to retrieve.</param>
+        /// <returns>A task representing the asynchronous operation, containing the <see cref="Employee"/> with the specified ID.</returns>
+        public async Task<Employee> GetEmployeeById(string employeeId)
+        {
+            return await employeeCollection.Find(GetFilterById(employeeId)).FirstAsync();
+        }
+
+        /// <summary>
+        /// Retrieves a sorted list of all employees with the role of Service Desk Employee asynchronously.
+        /// The list is sorted by last name, then by first name.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation, containing a list of <see cref="Employee"/> objects
+        /// with the role of Service Desk Employee, sorted by last and first names.</returns>
+        public async Task<List<Employee>> GetAllServiceDeskEmployeesSorted()
+        {
+            var filter = Builders<Employee>.Filter.Eq(e => e.Role, EmployeeRole.ServiceDeskEmployee);
+
+            var aggregate = employeeCollection.Aggregate()
+                    .Match(filter)
+                    .SortBy(e => e.LastName)
+                    .ThenBy(e => e.FirstName);
+
+            return await aggregate.ToListAsync();
+        }
+
         #endregion
 
         #region Tina

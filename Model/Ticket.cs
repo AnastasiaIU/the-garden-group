@@ -21,7 +21,7 @@ namespace Model
 
         [BsonElement("service_desk_user")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string ServiceDeskUser { get; private set; }
+        public string ServiceDeskUser { get; set; }
 
         [BsonElement("title")]
         public string Title { get; private set; }
