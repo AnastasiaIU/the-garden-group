@@ -115,13 +115,13 @@ namespace Service
         #region Tina
 
         /// <summary>
-        /// Asynchronously deletes an employee from the database by their unique ID.
+        /// Asynchronously sets the "is_deleted" field to true for an employee from the MongoDB collection by their unique ID.
         /// </summary>
-        /// <param name="employeeId">The unique ID of the employee to delete.</param>
+        /// <param name="deletedEmployee">the employee to be deleted.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task DeleteEmployeeByID(string employeeId)
+        public async Task DeleteEmployeeByID(Employee deletedEmployee)
         {
-            await dao.DeleteEmployeeByID(employeeId);
+            await dao.DeleteEmployeeByID(deletedEmployee);
         }
 
         /// <summary>

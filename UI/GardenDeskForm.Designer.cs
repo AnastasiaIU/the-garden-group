@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea19 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend19 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea20 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend20 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea21 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend21 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             menuStrip = new ToolStrip();
             menuItemDashboard = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
@@ -131,6 +132,7 @@
             pnlAddEditUser = new Panel();
             splitterAddEditUser = new Splitter();
             panelAddEditUserHolder = new Panel();
+            lblAddEditUserError = new Label();
             lblFirstNameEdit = new Label();
             btnCreateEmployee = new Button();
             btnDeleteEmployee = new Button();
@@ -181,6 +183,7 @@
             lblViewTicketTitle = new Label();
             pnlDbError = new Panel();
             databaseErrorMessageLbl = new Label();
+            toolTipEscalated = new ToolTip(components);
             menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)logo).BeginInit();
             pnlLogin.SuspendLayout();
@@ -287,7 +290,7 @@
             // lblLicense
             // 
             lblLicense.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblLicense.Location = new Point(546, 49);
+            lblLicense.Location = new Point(549, 42);
             lblLicense.Margin = new Padding(2, 0, 2, 0);
             lblLicense.Name = "lblLicense";
             lblLicense.Padding = new Padding(0, 0, 10, 0);
@@ -304,6 +307,7 @@
             pnlLogin.Controls.Add(panelLoginHolder);
             pnlLogin.Controls.Add(lblLoginPrompt);
             pnlLogin.Controls.Add(lblLoginGardenDesk);
+            pnlLogin.Controls.Add(lblLicense);
             pnlLogin.Location = new Point(0, 80);
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(793, 803);
@@ -485,18 +489,18 @@
             // 
             // chartOpen
             // 
-            chartArea19.Name = "ChartArea1";
-            chartOpen.ChartAreas.Add(chartArea19);
-            legend19.Name = "Legend1";
-            chartOpen.Legends.Add(legend19);
+            chartArea1.Name = "ChartArea1";
+            chartOpen.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chartOpen.Legends.Add(legend1);
             chartOpen.Location = new Point(25, 108);
             chartOpen.Name = "chartOpen";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series19.IsVisibleInLegend = false;
-            series19.Legend = "Legend1";
-            series19.Name = "Series1";
-            chartOpen.Series.Add(series19);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chartOpen.Series.Add(series1);
             chartOpen.Size = new Size(150, 180);
             chartOpen.TabIndex = 2;
             chartOpen.TabStop = false;
@@ -504,18 +508,18 @@
             // 
             // chartClosed
             // 
-            chartArea20.Name = "ChartArea1";
-            chartClosed.ChartAreas.Add(chartArea20);
-            legend20.Name = "Legend1";
-            chartClosed.Legends.Add(legend20);
+            chartArea2.Name = "ChartArea1";
+            chartClosed.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chartClosed.Legends.Add(legend2);
             chartClosed.Location = new Point(275, 108);
             chartClosed.Name = "chartClosed";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series20.IsVisibleInLegend = false;
-            series20.Legend = "Legend1";
-            series20.Name = "Series1";
-            chartClosed.Series.Add(series20);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chartClosed.Series.Add(series2);
             chartClosed.Size = new Size(150, 180);
             chartClosed.TabIndex = 0;
             chartClosed.TabStop = false;
@@ -534,18 +538,18 @@
             // 
             // chartResolved
             // 
-            chartArea21.Name = "ChartArea1";
-            chartResolved.ChartAreas.Add(chartArea21);
-            legend21.Name = "Legend1";
-            chartResolved.Legends.Add(legend21);
+            chartArea3.Name = "ChartArea1";
+            chartResolved.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chartResolved.Legends.Add(legend3);
             chartResolved.Location = new Point(525, 108);
             chartResolved.Name = "chartResolved";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series21.IsVisibleInLegend = false;
-            series21.Legend = "Legend1";
-            series21.Name = "Series1";
-            chartResolved.Series.Add(series21);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.IsVisibleInLegend = false;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chartResolved.Series.Add(series3);
             chartResolved.Size = new Size(150, 180);
             chartResolved.TabIndex = 0;
             chartResolved.TabStop = false;
@@ -638,6 +642,7 @@
             // pnlTicketsOverview
             // 
             pnlTicketsOverview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlTicketsOverview.AutoScroll = true;
             pnlTicketsOverview.BackColor = Color.White;
             pnlTicketsOverview.Controls.Add(splitterTicketsOverview);
             pnlTicketsOverview.Controls.Add(lblTicketsOverview);
@@ -728,9 +733,9 @@
             btnAddTicket.FlatStyle = FlatStyle.Flat;
             btnAddTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnAddTicket.ForeColor = Color.White;
-            btnAddTicket.Location = new Point(160, 620);
+            btnAddTicket.Location = new Point(638, 50);
             btnAddTicket.Name = "btnAddTicket";
-            btnAddTicket.Size = new Size(150, 30);
+            btnAddTicket.Size = new Size(142, 30);
             btnAddTicket.TabIndex = 7;
             btnAddTicket.Text = "ADD TICKET";
             btnAddTicket.UseVisualStyleBackColor = false;
@@ -781,9 +786,9 @@
             btnViewTicket.FlatStyle = FlatStyle.Flat;
             btnViewTicket.Font = new Font("Segoe UI", 10.125F, FontStyle.Bold, GraphicsUnit.Point);
             btnViewTicket.ForeColor = SystemColors.ControlText;
-            btnViewTicket.Location = new Point(0, 620);
+            btnViewTicket.Location = new Point(478, 50);
             btnViewTicket.Name = "btnViewTicket";
-            btnViewTicket.Size = new Size(150, 30);
+            btnViewTicket.Size = new Size(142, 30);
             btnViewTicket.TabIndex = 6;
             btnViewTicket.Text = "VIEW TICKET";
             btnViewTicket.UseVisualStyleBackColor = false;
@@ -802,11 +807,12 @@
             ticketsListView.Margin = new Padding(2);
             ticketsListView.MultiSelect = false;
             ticketsListView.Name = "ticketsListView";
-            ticketsListView.Size = new Size(780, 500);
+            ticketsListView.Size = new Size(780, 450);
             ticketsListView.TabIndex = 5;
             ticketsListView.UseCompatibleStateImageBehavior = false;
             ticketsListView.View = View.Details;
             ticketsListView.SelectedIndexChanged += ticketsListView_SelectedIndexChanged;
+            ticketsListView.MouseMove += ticketsListView_MouseMove;
             // 
             // ticketTitle
             // 
@@ -1271,6 +1277,7 @@
             // 
             // panelAddEditUserHolder
             // 
+            panelAddEditUserHolder.Controls.Add(lblAddEditUserError);
             panelAddEditUserHolder.Controls.Add(lblFirstNameEdit);
             panelAddEditUserHolder.Controls.Add(btnCreateEmployee);
             panelAddEditUserHolder.Controls.Add(btnDeleteEmployee);
@@ -1287,10 +1294,20 @@
             panelAddEditUserHolder.Controls.Add(textBoxEmailAddress);
             panelAddEditUserHolder.Controls.Add(textBoxLastName);
             panelAddEditUserHolder.Controls.Add(btnCancelChangesEmployee);
-            panelAddEditUserHolder.Location = new Point(0, 70);
+            panelAddEditUserHolder.Location = new Point(478, 80);
             panelAddEditUserHolder.Name = "panelAddEditUserHolder";
-            panelAddEditUserHolder.Size = new Size(470, 300);
+            panelAddEditUserHolder.Size = new Size(483, 332);
             panelAddEditUserHolder.TabIndex = 0;
+            // 
+            // lblAddEditUserError
+            // 
+            lblAddEditUserError.AutoSize = true;
+            lblAddEditUserError.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAddEditUserError.ForeColor = Color.Red;
+            lblAddEditUserError.Location = new Point(0, 243);
+            lblAddEditUserError.Name = "lblAddEditUserError";
+            lblAddEditUserError.Size = new Size(0, 21);
+            lblAddEditUserError.TabIndex = 9;
             // 
             // lblFirstNameEdit
             // 
@@ -1309,7 +1326,7 @@
             btnCreateEmployee.FlatStyle = FlatStyle.Flat;
             btnCreateEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnCreateEmployee.ForeColor = Color.White;
-            btnCreateEmployee.Location = new Point(0, 260);
+            btnCreateEmployee.Location = new Point(0, 292);
             btnCreateEmployee.Name = "btnCreateEmployee";
             btnCreateEmployee.Size = new Size(150, 30);
             btnCreateEmployee.TabIndex = 6;
@@ -1325,7 +1342,7 @@
             btnDeleteEmployee.FlatStyle = FlatStyle.Flat;
             btnDeleteEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnDeleteEmployee.ForeColor = Color.White;
-            btnDeleteEmployee.Location = new Point(320, 260);
+            btnDeleteEmployee.Location = new Point(320, 292);
             btnDeleteEmployee.Name = "btnDeleteEmployee";
             btnDeleteEmployee.Size = new Size(150, 30);
             btnDeleteEmployee.TabIndex = 8;
@@ -1340,7 +1357,7 @@
             btnUpdateEmployee.FlatStyle = FlatStyle.Flat;
             btnUpdateEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdateEmployee.ForeColor = Color.White;
-            btnUpdateEmployee.Location = new Point(0, 260);
+            btnUpdateEmployee.Location = new Point(0, 292);
             btnUpdateEmployee.Name = "btnUpdateEmployee";
             btnUpdateEmployee.Size = new Size(150, 30);
             btnUpdateEmployee.TabIndex = 6;
@@ -1380,6 +1397,7 @@
             // 
             // comboBoxTypeUser
             // 
+            comboBoxTypeUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxTypeUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxTypeUser.FormattingEnabled = true;
             comboBoxTypeUser.Items.AddRange(new object[] { "RegularEmployee", "ServiceDeskEmployee" });
@@ -1455,12 +1473,12 @@
             // 
             // btnCancelChangesEmployee
             // 
-            btnCancelChangesEmployee.BackColor = Color.DarkGray;
+            btnCancelChangesEmployee.BackColor = Color.DimGray;
             btnCancelChangesEmployee.FlatAppearance.BorderSize = 0;
             btnCancelChangesEmployee.FlatStyle = FlatStyle.Flat;
             btnCancelChangesEmployee.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btnCancelChangesEmployee.ForeColor = Color.White;
-            btnCancelChangesEmployee.Location = new Point(160, 260);
+            btnCancelChangesEmployee.Location = new Point(160, 292);
             btnCancelChangesEmployee.Name = "btnCancelChangesEmployee";
             btnCancelChangesEmployee.Size = new Size(150, 30);
             btnCancelChangesEmployee.TabIndex = 7;
@@ -1869,19 +1887,18 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
-            ClientSize = new Size(784, 881);
-            Controls.Add(pnlViewTicket);
-            Controls.Add(pnlAddEditTicket);
-            Controls.Add(pnlAddEditUser);
+            ClientSize = new Size(784, 804);
+            Controls.Add(menuStrip);
+            Controls.Add(lblGardenDesk);
+            Controls.Add(logo);
             Controls.Add(pnlUsers);
             Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDbError);
-            Controls.Add(menuStrip);
-            Controls.Add(lblLicense);
-            Controls.Add(lblGardenDesk);
-            Controls.Add(logo);
+            Controls.Add(pnlViewTicket);
+            Controls.Add(pnlAddEditTicket);
+            Controls.Add(pnlAddEditUser);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
@@ -1993,8 +2010,8 @@
         private Label label4;
         private Label label1;
         private Label label2;
-        private Label label6;
-        private Label label5;
+        private Label lblEmailError;
+        private Label lblLastNameError;
         private Button searchbtn;
         private TextBox searchtextbox;
         private ColumnHeader ticketCreationDate;
@@ -2025,7 +2042,6 @@
         private Panel pnlDbError;
         private Label databaseErrorMessageLbl;
         private ColumnHeader ticketDescription;
-        private Button btnViewTicket;
         private Panel pnlViewTicket;
         private Label lblVTDescriptionValue;
         private Label lblVTCreationDateValue;
@@ -2067,5 +2083,11 @@
         private Button btnCloseViewTicket;
         private ComboBox cmbBoxServiceDesk;
         private Label lblLoginLoading;
+        private Button btnViewTicket;
+        private Label lblAddEditUserError;
+        private Label lblBranchError;
+        private Label lblPhoneNumberError;
+        private Label lblTypeUserError;
+        private ToolTip toolTipEscalated;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Model;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Net.Sockets;
 
 namespace DAL
 {
@@ -118,7 +119,8 @@ namespace DAL
             )
             {
                 ReportingEmployeeFirstName = ticketDoc["reporting_employee"]["first_name"].AsString,
-                ReportingEmployeeLastName = ticketDoc["reporting_employee"]["last_name"].AsString
+                ReportingEmployeeLastName = ticketDoc["reporting_employee"]["last_name"].AsString,
+                ReportingEmployeeDeleted = ticketDoc["reporting_employee"]["is_deleted"].AsBoolean
             }).ToList();
 
             return ticketList;
@@ -187,13 +189,15 @@ namespace DAL
         /// <summary>
         /// Asynchronously sets the <c>isEscalated</c> field of a ticket to true in the MongoDB collection.
         /// </summary>
-        /// <param name="ticketId">The unique ID of the ticket to escalate.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task EscalateTicket(string ticketId)
+        public async Task EscalateTicket(Ticket ticket)
         {
-            var filter = Builders<Ticket>.Filter.Eq("_id", new ObjectId(ticketId));
-            var update = Builders<Ticket>.Update.Set("is_escalated", true);
-            await ticketCollection.UpdateOneAsync(filter, update);
+            if (ticketCollection is not null && ticket.TicketId is not null)
+            {
+                var update = Builders<Ticket>.Update.Set("is_escalated", true);
+
+                await ticketCollection.UpdateOneAsync(GetFilterById(ticket.TicketId), update);
+            }
         }
 
         #endregion

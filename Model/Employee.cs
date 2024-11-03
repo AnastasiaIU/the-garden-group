@@ -35,6 +35,9 @@ namespace Model
         [BsonElement("branch")]
         public string Branch { get; private set; }
 
+        [BsonElement("is_deleted")]
+        public bool IsDeleted { get; private set; }
+
         [BsonIgnore]
         [JsonIgnore]
         public int? OpenTickets { get; set; }
@@ -50,7 +53,7 @@ namespace Model
         /// <param name="branch">The branch where the employee is assigned.</param>
         /// <param name="openTickets">The number of open tickets associated with the employee (optional).</param>
         /// <param name="employeeId">The unique identifier of the employee (optional).</param>
-        public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch, int? openTickets = null, string? employeeId = null)
+        public Employee(string firstName, string lastName, string email, string phoneNumber, EmployeeRole role, string branch, bool isDeleted, int? openTickets = null, string? employeeId = null)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -58,6 +61,7 @@ namespace Model
             PhoneNumber = phoneNumber;
             Role = role;
             Branch = branch;
+            IsDeleted = isDeleted;
             OpenTickets = openTickets;
             EmployeeId = employeeId;
         }

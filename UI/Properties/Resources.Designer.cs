@@ -61,15 +61,6 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you wish to delete this employee?.
-        /// </summary>
-        internal static string ConfirmDeleteMessageText {
-            get {
-                return ResourceManager.GetString("ConfirmDeleteMessageText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Confirm Employee Deletion.
         /// </summary>
         internal static string ConfirmDeleteMessageTop {
@@ -79,7 +70,7 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The branch cannot be empty.
+        ///   Looks up a localized string similar to Please provide a valid branch name..
         /// </summary>
         internal static string EmployeeBranchError {
             get {
@@ -88,7 +79,7 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The e-mail address cannot be empty.
+        ///   Looks up a localized string similar to Please provide a valid email address..
         /// </summary>
         internal static string EmployeeEmailError {
             get {
@@ -97,7 +88,7 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The first name cannot be empty.
+        ///   Looks up a localized string similar to Please provide a valid first name..
         /// </summary>
         internal static string EmployeeFirstNameError {
             get {
@@ -106,7 +97,7 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The last name cannot be empty.
+        ///   Looks up a localized string similar to Please provide a valid last name..
         /// </summary>
         internal static string EmployeeLastNameError {
             get {
@@ -115,7 +106,7 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The phone number cannot be empty.
+        ///   Looks up a localized string similar to Please provide a valid phone number..
         /// </summary>
         internal static string EmployeePhoneError {
             get {
@@ -124,11 +115,20 @@ namespace UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The employee role cannot be empty.
+        ///   Looks up a localized string similar to Please select a type of user..
         /// </summary>
         internal static string EmployeeRoleError {
             get {
                 return ResourceManager.GetString("EmployeeRoleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This ticket has been escalated.
+        /// </summary>
+        internal static string EscalatedTicketToolTip {
+            get {
+                return ResourceManager.GetString("EscalatedTicketToolTip", resourceCulture);
             }
         }
         
