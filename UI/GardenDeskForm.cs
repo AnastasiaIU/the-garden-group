@@ -690,7 +690,7 @@ namespace UI
             {
                 // the selectedTicket is guaranteed not to be null here
 #nullable disable
-
+              
                 await ticketService.EscalateTicket(selectedTicket);
 
                 // Disable escalate button after the operation
@@ -820,7 +820,7 @@ namespace UI
 
                 PopulateTicketsListView(tickets);
             }
-            catch ()
+            catch
             {
                 ShowDatabaseError();
                 await TryToReconnect(pnlTicketsOverview);
@@ -861,6 +861,7 @@ namespace UI
         {
             ShowPanel(pnlTicketsOverview);
             searchtextbox.Clear();
+            noTicketsFoundlbl.Visible = false;
             SetIndentForHolderPanel(panelTicketsHolder);
             SetTicketsListViewColumns();
             await DisplayTicketsAsync(loggedInEmployee);
@@ -871,6 +872,7 @@ namespace UI
         {
             try
             {
+                noTicketsFoundlbl.Visible = false;
                 string keywordString = searchtextbox.Text;
                 if (string.IsNullOrWhiteSpace(keywordString))
                 {
@@ -879,7 +881,18 @@ namespace UI
                 }
                 List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(loggedInEmployee, keywordString);
 
-                PopulateTicketsListView(tickets);
+                if (tickets.Count == 0)
+                {
+                    ticketsListView.Items.Clear();
+                    noTicketsFoundlbl.Visible = true;
+                    noTicketsFoundlbl.BringToFront();
+                    noTicketsFoundlbl.Location = new Point( ticketsListView.Left + (ticketsListView.Width - noTicketsFoundlbl.Width) /2,
+                        ticketsListView.Top + (ticketsListView.Height - noTicketsFoundlbl.Height) / 2);
+                }
+                else
+                {
+                    PopulateTicketsListView(tickets);
+                }
             }
             catch
             {
@@ -906,6 +919,7 @@ namespace UI
 
         private async void ShowTicketsView()
         {
+            noTicketsFoundlbl.Visible = false;
             await DisplayTicketsAsync(loggedInEmployee);
             ShowPanel(pnlTicketsOverview);
             CleanSortOrderComboBox();
@@ -1114,6 +1128,7 @@ namespace UI
 
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
+            noTicketsFoundlbl.Visible = false;
             List<Ticket> tickets = await GetTicketsAsync();
             bool isAscendingOrder = SortOrderComboBox.SelectedItem != null && SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);
