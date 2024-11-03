@@ -47,7 +47,7 @@ namespace Model
         public DateTime Deadline { get; private set; }
 
         [BsonElement("type_of_incident")]
-        [BsonRepresentation(BsonType.String)] // making sure that the role is in text in db and not just the numerical value of enum
+        [BsonRepresentation(BsonType.String)]
         public IncidentType IncidentType { get; private set; }
 
         [BsonElement("creation_date")]
@@ -60,6 +60,10 @@ namespace Model
         [BsonIgnore]
         [JsonIgnore]
         public string? ReportingEmployeeLastName { get; set; }
+
+        [BsonIgnore]
+        [JsonIgnore]
+        public bool ReportingEmployeeDeleted { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Ticket"/> class with the specified details.

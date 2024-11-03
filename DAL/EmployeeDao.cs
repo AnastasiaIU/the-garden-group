@@ -46,6 +46,7 @@ namespace DAL
         public async Task<List<Employee>> GetAllEmployeesWithCountedTickets()
         {
             var employeeDocument = await employeeCollection.Aggregate()
+                .Match(new BsonDocument("is_deleted", false)) // Tina - Only include employees that are not deleted
                 .Lookup<Ticket, BsonDocument>(
                     "Ticket", //Join Employee with Ticket collection
                     "_id",
@@ -61,6 +62,7 @@ namespace DAL
                     { "PhoneNumber", "$phone_number" },
                     { "Role", "$role" },
                     { "Branch", "$branch" },
+                    {"IsDeleted", "$is_deleted" },
                     { "OpenTickets", new BsonDocument("$size", new BsonDocument(
                         "$filter", new BsonDocument
                         {
@@ -91,6 +93,7 @@ namespace DAL
                 doc["PhoneNumber"].AsString,
                 (EmployeeRole)Enum.Parse(typeof(EmployeeRole), doc["Role"].AsString),
                 doc["Branch"].AsString,
+                doc["IsDeleted"].AsBoolean,
                 doc.Contains("OpenTickets") ? doc["OpenTickets"].ToInt32() : 0,
                 doc["EmployeeId"].AsObjectId.ToString())
             ).ToList();
@@ -149,13 +152,19 @@ namespace DAL
         #region Tina
 
         /// <summary>
-        /// Asynchronously deletes an employee from the MongoDB collection by their unique ID.
+        /// Asynchronously sets the "is_deleted" field to true for an employee from the MongoDB collection by their unique ID.
         /// </summary>
-        /// <param name="employeeId">The unique ID of the employee to delete.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task DeleteEmployeeByID(string employeeId)
+        public async Task DeleteEmployeeByID(Employee deletedEmployee)
         {
-            await employeeCollection.DeleteOneAsync(GetFilterById(employeeId));
+            if (employeeCollection is not null && deletedEmployee.EmployeeId is not null)
+            {
+                // Defining the field that needs to be updated
+                var update = Builders<Employee>.Update.Set("is_deleted", true);
+
+                // Update the employee document
+                await employeeCollection.UpdateOneAsync(GetFilterById(deletedEmployee.EmployeeId), update);
+            }
         }
 
         /// <summary>
@@ -167,8 +176,10 @@ namespace DAL
         /// <returns>A <see cref="Task"/> that represents the asynchronous operation of updating the employee's record.</returns>
         public async Task UpdateEmployeeAsync(Employee updatedEmployee)
         {
-            // Defining only the fields that need to be updated to preserve sensitive fields like username and password
-            var update = Builders<Employee>.Update
+            if (employeeCollection is not null && updatedEmployee.EmployeeId is not null)
+            {
+                // Defining only the fields that need to be updated to preserve sensitive fields like username and password
+                var update = Builders<Employee>.Update
                 .Set("first_name", updatedEmployee.FirstName)
                 .Set("last_name", updatedEmployee.LastName)
                 .Set("email", updatedEmployee.Email)
@@ -176,8 +187,9 @@ namespace DAL
                 .Set("role", updatedEmployee.Role.ToString())
                 .Set("branch", updatedEmployee.Branch);
 
-            // Apply the update to the document, preserving username and password fields
-            await employeeCollection.UpdateOneAsync(GetFilterById(updatedEmployee.EmployeeId), update);
+                // Apply the update to the document, preserving username and password fields
+                await employeeCollection.UpdateOneAsync(GetFilterById(updatedEmployee.EmployeeId), update);
+            }
         }
 
         /// <summary>
@@ -189,19 +201,25 @@ namespace DAL
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
         public async Task CreateEmployeeAsync(Employee newEmployee, string username, string password)
         {
-            // Insert the employee object into the collection
-            await employeeCollection.InsertOneAsync(newEmployee);
+            if (employeeCollection is not null)
+            {
+                // Insert the employee object into the collection
+                await employeeCollection.InsertOneAsync(newEmployee);
 
-            // Update the document with login credentials
-            var update = Builders<Employee>.Update
-                .Set("username", username)
-                .Set("password", password);
+                // Update the document with login credentials
+                var update = Builders<Employee>.Update
+                    .Set("username", username)
+                    .Set("password", password);
 
-            await employeeCollection.UpdateOneAsync(GetFilterById(newEmployee.EmployeeId), update);
+                if (newEmployee.EmployeeId is not null)
+                    await employeeCollection.UpdateOneAsync(GetFilterById(newEmployee.EmployeeId), update);
+            }
         }
 
         /// <summary>
         /// Generates a filter to find an employee by their unique ID.
+        /// Accepts employeeId as a string instead of an employee object, as the ticket model contains the employeeId. 
+        /// This allows the method to retrieve an employee for a ticket while still supporting contexts that use the full employee object.
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A filter definition used for MongoDB queries.</returns>

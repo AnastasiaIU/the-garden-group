@@ -75,9 +75,9 @@ namespace Service
         /// </summary>
         /// <param name="ticketId">The unique ID of the ticket to escalate.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public async Task EscalateTicket(string ticketId)
+        public async Task EscalateTicket(Ticket ticket)
         {
-            await dao.EscalateTicket(ticketId);
+            await dao.EscalateTicket(ticket);
         }
 
         #endregion

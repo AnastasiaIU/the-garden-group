@@ -1,5 +1,7 @@
 using Model;
+using MongoDB.Driver;
 using Service;
+using System.Text.RegularExpressions;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace UI
@@ -17,9 +19,12 @@ namespace UI
         // Currently logged-in employee
         private Employee? loggedInEmployee = null;
 
-        // Tina
+        // Selected ticket in the tickets listview
         private Ticket? selectedTicket;
+
+        // Selected employee in the employees listview
         private Employee? selectedEmployee;
+
         //Vlad
         private int numberOfOpenTickets;
         private int numberOfClosedTickets;
@@ -40,8 +45,8 @@ namespace UI
             menuStrip.Width = Screen.FromHandle(Handle).Bounds.Width;
 
             // Show the login panel
-            ShowPanel(pnlLogin);
             SetIndentForHolderPanel(panelLoginHolder);
+            ShowPanel(pnlLogin);
 
             // Display a message if there is a database connection issue
             if (!employeeService.IsDatabaseInitiated())
@@ -169,10 +174,10 @@ namespace UI
                     SetUserRoleAccess();
 
                     // Initiate and show Dashboard panel
+                    SetIndentForHolderPanel(panelChartHolder);
                     ShowPanel(pnlDashboard);
                     await GetTicketsForCurrentEmployee();
                     LoadCharts();
-                    SetIndentForHolderPanel(panelChartHolder);
                 }
             }
             catch
@@ -193,12 +198,12 @@ namespace UI
 
             // Set the column widths based on the table width
             ticketsListView.Columns[0].Width = (int)(tableWidth * 0.18);
-            ticketsListView.Columns[1].Width = (int)(tableWidth * 0.18);
-            ticketsListView.Columns[2].Width = (int)(tableWidth * 0.11);
-            ticketsListView.Columns[3].Width = (int)(tableWidth * 0.15);
-            ticketsListView.Columns[4].Width = (int)(tableWidth * 0.15);
-            ticketsListView.Columns[5].Width = (int)(tableWidth * 0.1);
-            ticketsListView.Columns[6].Width = (int)(tableWidth * 0.11);
+            ticketsListView.Columns[1].Width = (int)(tableWidth * 0.20);
+            ticketsListView.Columns[2].Width = (int)(tableWidth * 0.16);
+            ticketsListView.Columns[3].Width = (int)(tableWidth * 0.14);
+            ticketsListView.Columns[4].Width = (int)(tableWidth * 0.14);
+            ticketsListView.Columns[5].Width = (int)(tableWidth * 0.07);
+            ticketsListView.Columns[6].Width = (int)(tableWidth * 0.09);
         }
 
         /// <summary>
@@ -348,31 +353,13 @@ namespace UI
 
         #endregion
 
-        #region User Management Logic
-
-        // Tina 
-        // Set access to user and ticket management based on current employee's role
-        private void SetUserRoleAccess()
-        {
-            if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
-            {
-                // Regular employee is not authorised for escalating and transfering a ticket
-                btnEscalate.Visible = false;
-                btnTransfer.Visible = false;
-            }
-        }
-
-        private async void menuItemUsers_Click(object sender, EventArgs e)
-        {
-            await ShowUsersView();
-        }
-
-        #endregion
-
         #region Tina Create/Update/Delete User Logic
 
         #region Create Employee
 
+        /// <summary>
+        /// Initializes the Add/Edit panel for creating a new employee
+        /// </summary>
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             // Set up the Add/Edit panel for adding a new employee
@@ -381,12 +368,15 @@ namespace UI
             btnDeleteEmployee.Visible = false;
             btnUpdateEmployee.Visible = false;
 
-            ClearEdittedInputs(); // in the case of a previous edit operation
+            ClearAddEditPnlInputs(); // in the case of a previous operation in this panel
 
             ShowPanel(pnlAddEditUser);
             SetIndentForHolderPanel(panelAddEditUserHolder);
         }
 
+        /// <summary>
+        /// Creates a new employee upon click and refreshes view
+        /// </summary>
         private async void btnCreateEmployee_Click(object sender, EventArgs e)
         {
             try
@@ -401,36 +391,56 @@ namespace UI
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                // Display message for all non-database exceptions
+                if (exception is not MongoException)
+                {
+                    lblAddEditUserError.Text = exception.Message;
+                }
+
+                // Handle MongoDB-related exceptions
+                else
+                {
+                    ShowDatabaseError();
+                    await TryToReconnect(pnlUsers);
+                }
             }
         }
 
-        // Creates an employee object based on the user inputs
+        /// <summary>
+        /// Validates input fields and constructs a new Employee object with the provided data and optional employeeId.
+        /// </summary>
         private Employee CreateEmployeeObject(string? employeeId = null)
         {
-            // Check if each input field is empty
-            string firstName = IsInputBoxEmpty(textBoxFirstName.Text, Properties.Resources.EmployeeFirstNameError);
-            string lastName = IsInputBoxEmpty(textBoxLastName.Text, Properties.Resources.EmployeeLastNameError);
-            string email = IsInputBoxEmpty(textBoxEmailAddress.Text, Properties.Resources.EmployeeEmailError);
-            string phoneNumber = IsInputBoxEmpty(textBoxPhoneNumber.Text, Properties.Resources.EmployeePhoneError);
-            string employeeRoleInput = IsInputBoxEmpty(comboBoxTypeUser.Text, Properties.Resources.EmployeeRoleError);
+            string firstName = ValidateInput(textBoxFirstName.Text, "^[a-zA-Z ]*$", Properties.Resources.EmployeeFirstNameError); // first name should not contain any numbers
+            string lastName = ValidateInput(textBoxLastName.Text, "^[a-zA-Z ]*$", Properties.Resources.EmployeeLastNameError); // last name should not contain any numbers
+            string email = ValidateInput(textBoxEmailAddress.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", Properties.Resources.EmployeeEmailError); // email should contain @ in a proper email format
+            string phoneNumber = ValidateInput(textBoxPhoneNumber.Text, @"^\+?[0-9]{1,16}$", Properties.Resources.EmployeePhoneError); // phoneNumber should not exceeed 16 digits & only contain numbers and the plus sign
+            string employeeRoleInput = ValidateInput(comboBoxTypeUser.Text, "^.+$", Properties.Resources.EmployeeRoleError); // a combobox item should be selected
             EmployeeRole employeeRole = (EmployeeRole)Enum.Parse(typeof(EmployeeRole), employeeRoleInput);
-            string branch = IsInputBoxEmpty(textBoxBranch.Text, Properties.Resources.EmployeeBranchError);
+            string branch = ValidateInput(textBoxBranch.Text, "^[a-zA-Z ]*$", Properties.Resources.EmployeeBranchError); // branch name should not contain any numbers
 
-            return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch, null, employeeId);
+            return new Employee(firstName, lastName, email, phoneNumber, employeeRole, branch, false, null, employeeId);
         }
 
-        // Checks if an input box is empty
-        private string IsInputBoxEmpty(string inputBoxString, string errorMessage)
+        /// <summary>
+        /// Validates the input text against a specified regular expression condition and throws an exception with an error message if validation fails.
+        /// </summary>
+        /// <param name="text">The input field's text</param>
+        /// <param name="condition">The regular expression condition</param>
+        /// <param name="errorMessage">The error message to be displayed when an exception is thrown</param>
+        private string ValidateInput(string text, string? condition, string errorMessage)
         {
-            if (inputBoxString == string.Empty || inputBoxString == null)
+            if (string.IsNullOrWhiteSpace(text) || (condition != null && !Regex.IsMatch(text, condition)))
+            {
                 throw new Exception(errorMessage);
-
-            return inputBoxString;
+            }
+            return text;
         }
 
-        // Clear all input fields in the Add/Edit panel
-        private void ClearEdittedInputs()
+        /// <summary>
+        /// Resets all input fields and the error label in the Add/Edit panel to their default (empty) state.
+        /// </summary>
+        private void ClearAddEditPnlInputs()
         {
             textBoxFirstName.Text = "";
             textBoxLastName.Text = "";
@@ -438,15 +448,19 @@ namespace UI
             textBoxEmailAddress.Text = "";
             textBoxPhoneNumber.Text = "";
             textBoxBranch.Text = "";
+            lblAddEditUserError.Text = "";
         }
 
         #endregion
 
         #region Edit Employee
 
+        /// <summary>
+        /// Sets up the Add/Edit panel for editing the selected employee's information
+        /// </summary>
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            // Get the selected employee from the list view's selected item
+            // Retrieves the selected employee object from the list view's selected item.
             selectedEmployee = (Employee)usersList.SelectedItems[0].Tag;
 
             // Set up the Add/Edit panel for editing the employee's info
@@ -462,17 +476,45 @@ namespace UI
             SetIndentForHolderPanel(panelAddEditUserHolder);
         }
 
+        /// <summary>
+        /// Asynchronously updates the selected employee's information upon click and refreshes view
+        /// </summary>
         private async void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            await employeeService.UpdateEmployeeAsync(CreateEmployeeObject(selectedEmployee.EmployeeId));
+            try
+            {
+                // the selectedEmployee is guaranteed not to be null here
+#nullable disable
 
-            // Show confirmation message
-            MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+                await employeeService.UpdateEmployeeAsync(CreateEmployeeObject(selectedEmployee.EmployeeId));
 
-            await ShowUsersView();
+                // Show confirmation message
+                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName}'s information has been updated.");
+
+                await ShowUsersView();
+
+#nullable enable
+            }
+            catch (Exception exception)
+            {
+                // Display message for all non-database exceptions
+                if (exception is not MongoException)
+                {
+                    lblAddEditUserError.Text = exception.Message;
+                }
+
+                // Handle MongoDB-related exceptions
+                else
+                {
+                    ShowDatabaseError();
+                    await TryToReconnect(pnlUsers);
+                }
+            }
         }
 
-        // Prefill the inputs with the selected employee's existing data to edit
+        /// <summary>
+        /// Prefills the input fields in the Add/Edit panel with the selected employee's existing data to facilitate editing.
+        /// </summary>
         private void PrefillEditInputs()
         {
             textBoxFirstName.Text = selectedEmployee.FirstName;
@@ -481,35 +523,55 @@ namespace UI
             textBoxEmailAddress.Text = selectedEmployee.Email;
             textBoxPhoneNumber.Text = selectedEmployee.PhoneNumber;
             textBoxBranch.Text = selectedEmployee.Branch;
+            lblAddEditUserError.Text = "";
         }
 
         #endregion
 
         #region Delete Employee/Cancel Changes
 
+        /// <summary>
+        /// Deletes the selected employee after user confirmation upon click and updates view
+        /// </summary>
         private async void btnDeleteEmployee_Click(object sender, EventArgs e)
         {
-            if (ConfirmDelete())
+            try
             {
-                await employeeService.DeleteEmployeeByID(selectedEmployee.EmployeeId);
+                // the selectedEmployee is guaranteed not to be null here
+#nullable disable
 
-                // Show confirmation message
-                MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
+                if (ConfirmDelete(selectedEmployee))
+                {
+                    await employeeService.DeleteEmployeeByID(selectedEmployee);
 
-                await ShowUsersView();
+                    // Show confirmation message
+                    MessageBox.Show($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has been deleted.");
+
+                    await ShowUsersView();
+                }
+#nullable enable
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlUsers);
             }
         }
 
-        // Prompts user to confirm if they want to delete the employee
-        private bool ConfirmDelete()
+        /// <summary>
+        /// Prompts the user to confirm the deletion of the selected employee 
+        /// </summary>
+        private bool ConfirmDelete(Employee employee)
         {
             string messageTop = Properties.Resources.ConfirmDeleteMessageTop;
-            string messageText = Properties.Resources.ConfirmDeleteMessageText;
+            string messageText = $"Are you sure you want to delete this employee? \nRemember to transfer their {employee.OpenTickets} open tickets.";
             bool answer = MessageBox.Show(messageText, messageTop, MessageBoxButtons.YesNo) == DialogResult.Yes ? true : false;
             return answer;
         }
 
-        // Cancels any changes and return to the user list view without saving
+        /// <summary>
+        /// Cancels any changes made to the employee information and returns to the user view.
+        /// </summary>
         private async void btnCancelChangesEmployee_Click(object sender, EventArgs e)
         {
             await ShowUsersView();
@@ -519,17 +581,57 @@ namespace UI
 
         #region Users view control
 
-        // Set up the Users panel
-        private async Task ShowUsersView()
+        /// <summary>
+        /// Configures user interface access based on the logged-in employee's role, 
+        /// hiding escalation and transfer buttons for regular employees.
+        /// </summary>
+        private void SetUserRoleAccess()
         {
-            ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
-            await DisplayEmployeesAsync();
-            ShowPanel(pnlUsers);
-            SetIndentForHolderPanel(panelUsersHandler);
-            SetUsersListViewColumns();
+            // the selectedTicket is guaranteed not to be null here
+#nullable disable
+
+            if (loggedInEmployee.Role == EmployeeRole.RegularEmployee)
+            {
+                btnEscalate.Visible = false;
+                btnTransfer.Visible = false;
+            }
+
+#nullable enable
         }
 
-        // Enable the edit button once an employee is selected
+        /// <summary>
+        /// Displays the users view asynchronously when the users menu item is clicked.
+        /// </summary>
+        private async void menuItemUsers_Click(object sender, EventArgs e)
+        {
+            await ShowUsersView();
+        }
+
+        /// <summary>
+        /// Configures and displays the Users panel by changing button states, 
+        /// displaying employee data asynchronously, and setting up the list view columns.
+        /// </summary>
+        private async Task ShowUsersView()
+        {
+            try
+            {
+                ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
+                await DisplayEmployeesAsync();
+                ShowPanel(pnlUsers);
+                SetIndentForHolderPanel(panelUsersHandler);
+                SetUsersListViewColumns();
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlUsers);
+            }
+        }
+
+        /// <summary>
+        /// Updates the edit employee button state based on the selection in the users list; 
+        /// enables the button if an item is selected, otherwise disables it.
+        /// </summary>
         private void usersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (usersList.SelectedItems.Count > 0)
@@ -538,7 +640,13 @@ namespace UI
                 ChangeButtonState(btnEditEmployee, Color.LightGray, SystemColors.ControlText, false);
         }
 
-        // Changes the enablement and color of a button
+        /// <summary>
+        /// Configures the state of a button by setting its enabled status, background color, and text color.
+        /// </summary>
+        /// <param name="button">The button to be configured</param>
+        /// <param name="background">The new background color of the button</param>
+        /// <param name="textColor">The new text color of the button</param>
+        /// <param name="enablement">The state of being enabled or disabled</param>
         private void ChangeButtonState(Button button, Color background, Color textColor, bool enablement)
         {
             button.Enabled = enablement;
@@ -552,7 +660,10 @@ namespace UI
 
         #region Tina Escalate Ticket
 
-        // Enable the escalate button if a non-closed and non-escalated ticket is selected
+        /// <summary>
+        /// Enables the escalate button if a selected ticket is not escalated and not closed, 
+        /// and always enables the view ticket button when a ticket is selected
+        /// </summary>
         private void ticketsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ticketsListView.SelectedItems.Count > 0)
@@ -570,17 +681,56 @@ namespace UI
             }
         }
 
+        /// <summary>
+        /// Escalates the selected ticket asynchronously upon click
+        /// </summary>
         private async void btnEscalate_Click(object sender, EventArgs e)
         {
-            await ticketService.EscalateTicket(selectedTicket.TicketId);
+            try
+            {
+                // the selectedTicket is guaranteed not to be null here
+#nullable disable
 
-            // Show confirmation message
-            MessageBox.Show($"'{selectedTicket.Title}' has been escalated.");
+                await ticketService.EscalateTicket(selectedTicket);
 
-            // Disable escalate button after the operation
-            ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false);
+                // Disable escalate button after the operation
+                ChangeButtonState(btnEscalate, Color.LightGray, SystemColors.ControlText, false);
 
-            await DisplayTicketsAsync(loggedInEmployee);
+                // Update the escalate label to the ticket's current state
+                lblVTEscalatedValue.Text = selectedTicket.IsEscalated ? Properties.Resources.Yes : Properties.Resources.No;
+
+#nullable enable
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlViewTicket);
+            }
+        }
+
+        /// <summary>
+        /// Highlights the escalated list view item by changing its background color to MistyRose.
+        /// </summary>
+        private void HighlightEscalatedTicket(ListViewItem item)
+        {
+            item.BackColor = Color.MistyRose;
+        }
+
+        /// <summary>
+        /// Displays a tooltip for escalated tickets when the mouse hovers over them, 
+        /// and hides the tooltip when not hovering over a relevant item.
+        /// </summary>
+        private void ticketsListView_MouseMove(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = ticketsListView.GetItemAt(e.X, e.Y);
+
+            // Clear previous tooltip
+            toolTipEscalated.Hide(ticketsListView);
+
+            if (item != null && item.BackColor == Color.MistyRose) // the background of the escalated tickets is misty rose
+            {
+                toolTipEscalated.Show(Properties.Resources.EscalatedTicketToolTip, ticketsListView, e.Location);
+            }
         }
 
         #endregion
@@ -677,10 +827,20 @@ namespace UI
             {
                 ListViewItem item = new ListViewItem(ticket.Title);
                 item.SubItems.Add(ticket.Description);
-                item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+
+                // Tina - Mark the reporting employee as deleted if so
+                if (!ticket.ReportingEmployeeDeleted)
+                    item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName}");
+                else
+                    item.SubItems.Add($"{ticket.ReportingEmployeeFirstName} {ticket.ReportingEmployeeLastName} (deleted)");
+
                 item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Status.ToString());
+
+                // Tina - Highlight the ticket in the list if it is escalated 
+                if (ticket.IsEscalated)
+                    HighlightEscalatedTicket(item);
 
                 item.Tag = ticket;
 
@@ -753,14 +913,14 @@ namespace UI
             var ticket = new Ticket(
                 reportingUser: loggedInEmployee.EmployeeId,
                 serviceDeskUser: GetServiceDeskUserId(serviceDeskUserCmbBox, "Service Desk User is required."),
-                title: IsInputBoxEmpty(titleTxtBox.Text, "Title is required."),
-                description: IsInputBoxEmpty(descriptionTxtBox.Text, "Description is required."),
-                status: ParseEnum<Status>(IsInputBoxEmpty(statusCmbBox.Text, "Status is required.")),
-                priority: ParseEnum<Priority>(IsInputBoxEmpty(priorityCmbBox.Text, "Priority is required.")),
-                isResolved: ParseBoolean(IsInputBoxEmpty(isResolvedCmbBox.Text, "Resolution status is required.")),
+                title: ValidateInput(titleTxtBox.Text, null, "Title is required."),
+                description: ValidateInput(descriptionTxtBox.Text, null, "Description is required."),
+                status: ParseEnum<Status>(ValidateInput(statusCmbBox.Text, null, "Status is required.")),
+                priority: ParseEnum<Priority>(ValidateInput(priorityCmbBox.Text, null, "Priority is required.")),
+                isResolved: ParseBoolean(ValidateInput(isResolvedCmbBox.Text, null, "Resolution status is required.")),
                 isEscalated: false,
-                deadline: CalculateDeadline(IsInputBoxEmpty(deadlineCmbBox.Text, "Deadline is required."), time),
-                incidentType: ParseEnum<IncidentType>(IsInputBoxEmpty(typeOfAccidentCmbBox.Text, "Incident Type is required.")),
+                deadline: CalculateDeadline(ValidateInput(deadlineCmbBox.Text, null, "Deadline is required."), time),
+                incidentType: ParseEnum<IncidentType>(ValidateInput(typeOfAccidentCmbBox.Text, null, "Incident Type is required.")),
                 creationDate: time,
                 ticketId: ticketId
             );
@@ -1023,5 +1183,6 @@ namespace UI
         }
 
         #endregion
+
     }
 }
