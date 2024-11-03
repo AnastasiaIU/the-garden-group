@@ -1,7 +1,6 @@
 using Model;
 using MongoDB.Driver;
 using Service;
-using System;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -1184,6 +1183,5 @@ namespace UI
         }
 
         #endregion
-
     }
 }

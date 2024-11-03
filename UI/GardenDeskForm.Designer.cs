@@ -307,7 +307,6 @@
             pnlLogin.Controls.Add(panelLoginHolder);
             pnlLogin.Controls.Add(lblLoginPrompt);
             pnlLogin.Controls.Add(lblLoginGardenDesk);
-            pnlLogin.Controls.Add(lblLicense);
             pnlLogin.Location = new Point(0, 80);
             pnlLogin.Name = "pnlLogin";
             pnlLogin.Size = new Size(793, 803);
@@ -1180,7 +1179,7 @@
             // 
             // cancelTicketBtn
             // 
-            cancelTicketBtn.BackColor = Color.DarkGray;
+            cancelTicketBtn.BackColor = Color.DimGray;
             cancelTicketBtn.FlatAppearance.BorderSize = 0;
             cancelTicketBtn.FlatStyle = FlatStyle.Flat;
             cancelTicketBtn.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
@@ -1294,7 +1293,7 @@
             panelAddEditUserHolder.Controls.Add(textBoxEmailAddress);
             panelAddEditUserHolder.Controls.Add(textBoxLastName);
             panelAddEditUserHolder.Controls.Add(btnCancelChangesEmployee);
-            panelAddEditUserHolder.Location = new Point(478, 80);
+            panelAddEditUserHolder.Location = new Point(0, 70);
             panelAddEditUserHolder.Name = "panelAddEditUserHolder";
             panelAddEditUserHolder.Size = new Size(483, 332);
             panelAddEditUserHolder.TabIndex = 0;
@@ -1560,7 +1559,8 @@
             // 
             // btnCloseViewTicket
             // 
-            btnCloseViewTicket.BackColor = Color.LightGray;
+            btnCloseViewTicket.BackColor = Color.DimGray;
+            btnCloseViewTicket.ForeColor = Color.White;
             btnCloseViewTicket.FlatAppearance.BorderSize = 0;
             btnCloseViewTicket.FlatStyle = FlatStyle.Flat;
             btnCloseViewTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
@@ -1888,8 +1888,8 @@
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
             ClientSize = new Size(784, 804);
-            Controls.Add(menuStrip);
             Controls.Add(lblGardenDesk);
+            Controls.Add(lblLicense);
             Controls.Add(logo);
             Controls.Add(pnlUsers);
             Controls.Add(pnlTicketsOverview);
@@ -1899,6 +1899,7 @@
             Controls.Add(pnlViewTicket);
             Controls.Add(pnlAddEditTicket);
             Controls.Add(pnlAddEditUser);
+            Controls.Add(menuStrip);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Margin = new Padding(2, 1, 2, 1);
             Name = "GardenDeskForm";
