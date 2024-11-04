@@ -38,6 +38,16 @@ namespace DAL
         }
 
         /// <summary>
+        /// Asyncroniously soft deletes an employee from the MongoDB collection by their unique ID by updating employee's status to "is_deleted".<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task DeleteEmployeeByIdAPI(string employeeId)
+        {
+            var update = Builders<Employee>.Update.Set("is_deleted", true);
+            await employeeCollection.UpdateOneAsync(GetFilterById(employeeId), update);
+        }
+
+        /// <summary>
         /// Asynchronously retrieves a list of all employees with the number of open or in-progress tickets they have.
         /// Tickets that are closed are excluded from the count.
         /// </summary>

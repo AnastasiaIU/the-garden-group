@@ -38,7 +38,7 @@ namespace GardenGroupAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            await _employeeService.DeleteEmployeeByID(id);
+            await _employeeService.DeleteEmployeeByIdAPI(id);
             return NoContent();
         }
     }
