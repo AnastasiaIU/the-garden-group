@@ -727,6 +727,7 @@
             btnFilter.TabIndex = 3;
             btnFilter.Text = "FILTER";
             btnFilter.UseVisualStyleBackColor = false;
+            btnFilter.Click += btnFilter_Click;
             // 
             // searchtextbox
             // 
