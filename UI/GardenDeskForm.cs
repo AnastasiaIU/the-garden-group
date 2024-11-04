@@ -690,7 +690,7 @@ namespace UI
             {
                 // the selectedTicket is guaranteed not to be null here
 #nullable disable
-
+              
                 await ticketService.EscalateTicket(selectedTicket);
 
                 // Disable escalate button after the operation
@@ -804,19 +804,27 @@ namespace UI
 
         private async Task DisplayTicketsAsync(Employee employee)
         {
-            List<Ticket> tickets;
-
-            // Check the role of the employee to determine which tickets to get
-            if (employee.Role == EmployeeRole.RegularEmployee)
+            try
             {
-                tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee);
-            }
-            else
-            {
-                tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
-            }
+                List<Ticket> tickets;
 
-            PopulateTicketsListView(tickets);
+                // Check the role of the employee to determine which tickets to get
+                if (employee.Role == EmployeeRole.RegularEmployee)
+                {
+                    tickets = await ticketService.GetTicketsForRegularEmployeeAsync(employee);
+                }
+                else
+                {
+                    tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
+                }
+
+                PopulateTicketsListView(tickets);
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlTicketsOverview);
+            }
         }
 
         private void PopulateTicketsListView(List<Ticket> tickets)
@@ -837,6 +845,7 @@ namespace UI
                 item.SubItems.Add(ticket.CreationDate.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Deadline.ToString("MM/dd/yyyy HH:mm"));
                 item.SubItems.Add(ticket.Status.ToString());
+                item.SubItems.Add(ticket.Priority.ToString());
 
                 // Tina - Highlight the ticket in the list if it is escalated 
                 if (ticket.IsEscalated)
@@ -851,6 +860,8 @@ namespace UI
         private async void menuItemIncidents_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlTicketsOverview);
+            searchtextbox.Clear();
+            noTicketsFoundlbl.Visible = false;
             SetIndentForHolderPanel(panelTicketsHolder);
             SetTicketsListViewColumns();
             await DisplayTicketsAsync(loggedInEmployee);
@@ -859,15 +870,35 @@ namespace UI
 
         private async void searchbtn_Click(object sender, EventArgs e)
         {
-            string keywordString = searchtextbox.Text;
-            if (string.IsNullOrWhiteSpace(keywordString))
+            try
             {
-                await DisplayTicketsAsync(loggedInEmployee);
-                return;
-            }
-            List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(loggedInEmployee, keywordString);
+                noTicketsFoundlbl.Visible = false;
+                string keywordString = searchtextbox.Text;
+                if (string.IsNullOrWhiteSpace(keywordString))
+                {
+                    await DisplayTicketsAsync(loggedInEmployee); // if the search box is ampty, show all tickets
+                    return;
+                }
+                List<Ticket> tickets = await ticketService.SearchTicketsByKeywordsAsync(loggedInEmployee, keywordString);
 
-            PopulateTicketsListView(tickets);
+                if (tickets.Count == 0)
+                {
+                    ticketsListView.Items.Clear();
+                    noTicketsFoundlbl.Visible = true;
+                    noTicketsFoundlbl.BringToFront();
+                    noTicketsFoundlbl.Location = new Point( ticketsListView.Left + (ticketsListView.Width - noTicketsFoundlbl.Width) /2,
+                        ticketsListView.Top + (ticketsListView.Height - noTicketsFoundlbl.Height) / 2);
+                }
+                else
+                {
+                    PopulateTicketsListView(tickets);
+                }
+            }
+            catch
+            {
+                ShowDatabaseError();
+                await TryToReconnect(pnlTicketsOverview);
+            }
         }
 
         #endregion
@@ -888,6 +919,7 @@ namespace UI
 
         private async void ShowTicketsView()
         {
+            noTicketsFoundlbl.Visible = false;
             await DisplayTicketsAsync(loggedInEmployee);
             ShowPanel(pnlTicketsOverview);
             CleanSortOrderComboBox();
@@ -1096,6 +1128,7 @@ namespace UI
 
         private async Task SortAndDisplayTicketsByPriorityAsync()
         {
+            noTicketsFoundlbl.Visible = false;
             List<Ticket> tickets = await GetTicketsAsync();
             bool isAscendingOrder = SortOrderComboBox.SelectedItem != null && SortOrderComboBox.SelectedItem.ToString() == "Low to High";
             tickets = SortTicketsByPriority(tickets, isAscendingOrder);

@@ -78,6 +78,7 @@
             splitterTicketsOverview = new Splitter();
             lblTicketsOverview = new Label();
             panelTicketsHolder = new Panel();
+            noTicketsFoundlbl = new Label();
             txtBoxFilter = new TextBox();
             btnFilter = new Button();
             searchtextbox = new TextBox();
@@ -676,6 +677,7 @@
             // 
             // panelTicketsHolder
             // 
+            panelTicketsHolder.Controls.Add(noTicketsFoundlbl);
             panelTicketsHolder.Controls.Add(txtBoxFilter);
             panelTicketsHolder.Controls.Add(btnFilter);
             panelTicketsHolder.Controls.Add(searchtextbox);
@@ -689,6 +691,17 @@
             panelTicketsHolder.Name = "panelTicketsHolder";
             panelTicketsHolder.Size = new Size(780, 660);
             panelTicketsHolder.TabIndex = 8;
+            // 
+            // noTicketsFoundlbl
+            // 
+            noTicketsFoundlbl.AutoSize = true;
+            noTicketsFoundlbl.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            noTicketsFoundlbl.Location = new Point(326, 276);
+            noTicketsFoundlbl.Name = "noTicketsFoundlbl";
+            noTicketsFoundlbl.Size = new Size(251, 15);
+            noTicketsFoundlbl.TabIndex = 8;
+            noTicketsFoundlbl.Text = "No tickets matching the search were found.";
+            noTicketsFoundlbl.Visible = false;
             // 
             // txtBoxFilter
             // 
@@ -1560,10 +1573,10 @@
             // btnCloseViewTicket
             // 
             btnCloseViewTicket.BackColor = Color.DimGray;
-            btnCloseViewTicket.ForeColor = Color.White;
             btnCloseViewTicket.FlatAppearance.BorderSize = 0;
             btnCloseViewTicket.FlatStyle = FlatStyle.Flat;
             btnCloseViewTicket.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCloseViewTicket.ForeColor = Color.White;
             btnCloseViewTicket.Location = new Point(160, 520);
             btnCloseViewTicket.Name = "btnCloseViewTicket";
             btnCloseViewTicket.Size = new Size(150, 30);
@@ -1887,12 +1900,12 @@
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoScroll = true;
             BackColor = Color.FromArgb(226, 227, 211);
-            ClientSize = new Size(784, 804);
+            ClientSize = new Size(784, 701);
+            Controls.Add(pnlTicketsOverview);
             Controls.Add(lblGardenDesk);
             Controls.Add(lblLicense);
             Controls.Add(logo);
             Controls.Add(pnlUsers);
-            Controls.Add(pnlTicketsOverview);
             Controls.Add(pnlDashboard);
             Controls.Add(pnlLogin);
             Controls.Add(pnlDbError);
@@ -2090,5 +2103,6 @@
         private Label lblPhoneNumberError;
         private Label lblTypeUserError;
         private ToolTip toolTipEscalated;
+        private Label noTicketsFoundlbl;
     }
 }
