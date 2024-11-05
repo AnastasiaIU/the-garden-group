@@ -89,18 +89,18 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
-        public async Task<int> GetAmountOfAllTicketsForReportingUserAsync(Employee employee)
+        public async Task<int> GetAmountOfAllTicketsForReportingUser(Employee employee)
         {
-            return await dao.GetAmountOfAllTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllTicketsForReportingUser(employee);
         }
 
         /// <summary>
         /// Asynchronously retrieves the total number of all tickets in the database.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of tickets.</returns>
-        public async Task<int> GetAmountOfAllTicketsAsync()
+        public async Task<int> GetAmountOfAllTickets()
         {
-            return await dao.GetAmountOfAllTicketsAsync();
+            return await dao.GetAmountOfAllTickets();
         }
 
         /// <summary>
@@ -108,18 +108,18 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
-        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUserAsync(Employee employee)
+        public async Task<int> GetAmountOfAllResolvedTicketsForReportingUser(Employee employee)
         {
-            return await dao.GetAmountOfAllResolvedTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllResolvedTicketsForReportingUser(employee);
         }
 
         /// <summary>
         /// Asynchronously retrieves the total number of all resolved tickets in the database.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of resolved tickets.</returns>
-        public async Task<int> GetAmountOfAllResolvedTicketsAsync()
+        public async Task<int> GetAmountOfAllResolvedTickets()
         {
-            return await dao.GetAmountOfAllResolvedTicketsAsync();
+            return await dao.GetAmountOfAllResolvedTickets();
         }
 
         /// <summary>
@@ -127,18 +127,18 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
-        public async Task<int> GetAmountOfAllOpenTicketsForReportingUserAsync(Employee employee)
+        public async Task<int> GetAmountOfAllOpenTicketsForReportingUser(Employee employee)
         {
-            return await dao.GetAmountOfAllOpenTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllOpenTicketsForReportingUser(employee);
         }
 
         /// <summary>
         /// Asynchronously retrieves the total number of all open tickets in the database.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of open tickets.</returns>
-        public async Task<int> GetAmountOfAllOpenTicketsAsync()
+        public async Task<int> GetAmountOfAllOpenTickets()
         {
-            return await dao.GetAmountOfAllOpenTicketsAsync();
+            return await dao.GetAmountOfAllOpenTickets();
         }
 
         /// <summary>
@@ -146,18 +146,18 @@ namespace Service
         /// </summary>
         /// <param name="employeeId">The unique ID of the employee.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
-        public async Task<int> GetAmountOfAllClosedTicketsForReportingUserAsync(Employee employee)
+        public async Task<int> GetAmountOfAllClosedTicketsForReportingUser(Employee employee)
         {
-            return await dao.GetAmountOfAllClosedTicketsForReportingUserAsync(employee);
+            return await dao.GetAmountOfAllClosedTicketsForReportingUser(employee);
         }
 
         /// <summary>
         /// Asynchronously retrieves the total number of all closed tickets in the database.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the total number of closed tickets.</returns>
-        public async Task<int> GetAmountOfAllClosedTicketsAsync()
+        public async Task<int> GetAmountOfAllClosedTickets()
         {
-            return await dao.GetAmountOfAllClosedTicketsAsync();
+            return await dao.GetAmountOfAllClosedTickets();
         }
 
         /// <summary>
@@ -171,7 +171,9 @@ namespace Service
 
             foreach (string keyword in commonKeywords)
             {
-                filteredTickets = filteredTickets.Where(ticket => ticket.Title.ToLower().Contains(keyword.ToLower()));
+                filteredTickets = filteredTickets.Where(ticket =>
+                ticket.Title.ToLower().Contains(keyword.ToLower()) ||
+                ticket.Description.ToLower().Contains(keyword.ToLower()));
             }
 
             return filteredTickets.ToList();
