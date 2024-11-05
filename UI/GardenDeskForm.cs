@@ -843,7 +843,9 @@ namespace UI
 
         private async void btnFilter_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(btnFilter.Text))
+            noTicketsFoundlbl.Visible = false;
+
+            if (string.IsNullOrEmpty(btnFilter.Text))
             {
                 PopulateTicketsListView(preloadedListOfTickets);
             }
