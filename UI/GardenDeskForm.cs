@@ -30,9 +30,9 @@ namespace UI
         private int numberOfClosedTickets;
         private int numberOfResolvedTickets;
         private int numberOfAllTickets;
-        private List<Ticket> preloadedListOfTickets;
+        private List<Ticket> preloadedListOfTickets = new List<Ticket>();
 
-        #region Sia Login panel and Transfer ticket
+        #region Sia Login panel, Ticket Details, and Transfer ticket
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GardenDeskForm"/> class,
@@ -200,7 +200,7 @@ namespace UI
             // Set the column widths based on the table width
             ticketsListView.Columns[0].Width = (int)(tableWidth * 0.18);
             ticketsListView.Columns[1].Width = (int)(tableWidth * 0.20);
-            ticketsListView.Columns[2].Width = (int)(tableWidth * 0.16);
+            ticketsListView.Columns[2].Width = (int)(tableWidth * 0.15);
             ticketsListView.Columns[3].Width = (int)(tableWidth * 0.14);
             ticketsListView.Columns[4].Width = (int)(tableWidth * 0.14);
             ticketsListView.Columns[5].Width = (int)(tableWidth * 0.07);
@@ -230,9 +230,22 @@ namespace UI
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OnViewTicketButtonClick(object sender, EventArgs e)
         {
+            // the selectedTicket is guaranteed not to be null here
+#nullable disable
             SetIndentForHolderPanel(panelViewTicketHolder);
             FillViewTicketFields();
+
+            if (selectedTicket.Status.Equals(Status.Open))
+            {
+                ChangeButtonState(btnTransfer, Color.Peru, Color.White, true);
+            }
+            else
+            {
+                ChangeButtonState(btnTransfer, Color.LightGray, SystemColors.ControlText, false);
+            }
+
             ShowPanel(pnlViewTicket);
+#nullable enable
         }
 
         /// <summary>

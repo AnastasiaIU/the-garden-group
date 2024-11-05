@@ -1,7 +1,5 @@
 ﻿using DAL;
 using Model;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Service
 {
@@ -171,7 +169,7 @@ namespace Service
             string[] commonKeywords = commonKeywordsInput.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
             var filteredTickets = tickets.AsQueryable();
 
-            foreach(string keyword in commonKeywords)
+            foreach (string keyword in commonKeywords)
             {
                 filteredTickets = filteredTickets.Where(ticket => ticket.Title.ToLower().Contains(keyword.ToLower()));
             }
