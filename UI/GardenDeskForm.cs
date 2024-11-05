@@ -1163,19 +1163,20 @@ namespace UI
 
         private async Task DisplayEmployeesAsync()
         {
-            bool isInternetAvailable = await employeeService.IsDatabaseConnctionAvailable();
-
-            if (!isInternetAvailable)
+            try
+            {
+                usersList.Items.Clear();
+                List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
+                List<ListViewItem> items = new();
+                FillListView(employees, items);
+                usersList.Items.AddRange(items.ToArray());
+            }
+            catch
             {
                 ShowDatabaseError();
                 await TryToReconnect(pnlUsers);
+                await DisplayEmployeesAsync();
             }
-
-            usersList.Items.Clear();
-            List<Employee> employees = await employeeService.GetAllEmployeesWithCountedTickets();
-            List<ListViewItem> items = new();
-            FillListView(employees, items);
-            usersList.Items.AddRange(items.ToArray());
         }
 
         private void FillListView(List<Employee> employees, List<ListViewItem> items)

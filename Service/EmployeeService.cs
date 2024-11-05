@@ -32,6 +32,15 @@ namespace Service
         }
 
         /// <summary>
+        /// Asyncroniously soft deletes an employee from the MongoDB collection by their unique ID by updating employee's status to "is_deleted".<para />
+        /// Used in the API feature.
+        /// </summary>
+        public async Task DeleteEmployeeByIdAPI(string employeeId)
+        {
+            await dao.DeleteEmployeeByIdAPI(employeeId);
+        }
+
+        /// <summary>
         /// Asynchronously retrieves all employees along with the count of their open tickets.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing a list of <see cref="Employee"/> objects with ticket counts.</returns>
