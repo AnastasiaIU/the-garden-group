@@ -30,6 +30,7 @@ namespace UI
         private int numberOfClosedTickets;
         private int numberOfResolvedTickets;
         private int numberOfAllTickets;
+        private List<Ticket> preloadedListOfTickets;
 
         #region Sia Login panel and Transfer ticket
 
@@ -690,7 +691,7 @@ namespace UI
             {
                 // the selectedTicket is guaranteed not to be null here
 #nullable disable
-              
+
                 await ticketService.EscalateTicket(selectedTicket);
 
                 // Disable escalate button after the operation
@@ -737,48 +738,73 @@ namespace UI
 
         #region Vladyslav Dashboard panel
 
+        //Get number of tickets based on employee role
         private async Task GetTicketsForCurrentEmployee()
         {
             if (loggedInEmployee.Role == EmployeeRole.ServiceDeskEmployee)
             {
-                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsAsync();
-                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsAsync();
-                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsAsync();
-                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsAsync();
+                await GetAmountOfTicketsForServiceDeskEmployee();
             }
             else
             {
-                numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(loggedInEmployee);
-                numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(loggedInEmployee);
-                numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(loggedInEmployee);
-                numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(loggedInEmployee);
+                await GetAmountOfTicketsForRegularEmployee();
             }
         }
 
-        private void LoadCharts()
+        //Get number of tickets for service desk employee
+        private async Task GetAmountOfTicketsForServiceDeskEmployee()
         {
-            SetUpCharts();
-
-            chartOpen.Series["s1"].Points.AddXY("", numberOfOpenTickets);
-            chartOpen.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfOpenTickets);
-            lblOpenNumber.Text = $"{numberOfOpenTickets}/{numberOfAllTickets}";
-            chartOpen.Series["s1"].Points[0].Color = Color.Red;
-            chartOpen.Series["s1"].Points[1].Color = Color.Gray;
-
-            chartClosed.Series["s1"].Points.AddXY("", numberOfClosedTickets);
-            chartClosed.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfClosedTickets);
-            lblClosedNumber.Text = $"{numberOfClosedTickets}/{numberOfAllTickets}";
-            chartClosed.Series["s1"].Points[0].Color = Color.Orange;
-            chartClosed.Series["s1"].Points[1].Color = Color.Gray;
-
-            chartResolved.Series["s1"].Points.AddXY("", numberOfResolvedTickets);
-            chartResolved.Series["s1"].Points.AddXY("", numberOfAllTickets - numberOfResolvedTickets);
-            lblResolvedNumber.Text = $"{numberOfResolvedTickets}/{numberOfAllTickets}";
-            chartResolved.Series["s1"].Points[0].Color = Color.Green;
-            chartResolved.Series["s1"].Points[1].Color = Color.Gray;
+            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsAsync();
+            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsAsync();
+            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsAsync();
+            numberOfAllTickets = await ticketService.GetAmountOfAllTicketsAsync();
         }
 
-        private void SetUpCharts()
+        //Get number of tickets for regular employee
+        private async Task GetAmountOfTicketsForRegularEmployee()
+        {
+            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(loggedInEmployee);
+            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(loggedInEmployee);
+            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(loggedInEmployee);
+            numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(loggedInEmployee);
+        }
+
+
+        private void LoadCharts()
+        {
+            SetUpAllCharts();
+
+            AddDataToChart(chartOpen, lblOpenNumber, numberOfOpenTickets, Color.Red);
+            AddDataToChart(chartClosed, lblClosedNumber, numberOfClosedTickets, Color.Orange);
+            AddDataToChart(chartResolved, lblResolvedNumber, numberOfResolvedTickets, Color.Green);
+
+            if (numberOfAllTickets == 0)
+            {
+                SetUpEmtyCharts();
+            }
+        }
+
+        
+        private void AddDataToChart(Chart chart, Label label, int tickets, Color color)
+        {
+            chart.Series["s1"].Points.AddXY("", tickets);                       //set number of open, closed or resolved tickets depending on the chart
+            chart.Series["s1"].Points.AddXY("", numberOfAllTickets - tickets);  //set number of difference between number of certain tickets and all ones to color it grey
+
+            chart.Series["s1"].Points[0].Color = color;
+            chart.Series["s1"].Points[1].Color = Color.Gray;
+
+            label.Text = $"{tickets}/{numberOfAllTickets}";
+        }
+
+        //Coloring the whole charts in grey if the current employee has no tickets
+        private void SetUpEmtyCharts()
+        {
+            chartOpen.Series["s1"].Points[1].SetValueXY("", 1);
+            chartClosed.Series["s1"].Points[1].SetValueXY("", 1);
+            chartResolved.Series["s1"].Points[1].SetValueXY("", 1);
+        }
+
+        private void SetUpAllCharts()
         {
             foreach (Control control in panelChartHolder.Controls)
             {
@@ -786,8 +812,8 @@ namespace UI
                 {
                     Chart chart = (Chart)control;
                     chart.Series.Clear();
-                    chart.Legends.Clear();
-                    chart.Series.Add("s1");
+                    chart.Legends.Clear();                                  
+                    chart.Series.Add("s1");                                 //adding series name to a chart is necessary for adding data
                     chart.Series[0].ChartType = SeriesChartType.Doughnut;
                 }
             }
@@ -796,6 +822,39 @@ namespace UI
         private void menuItemDashboard_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlDashboard);
+        }
+
+        #endregion
+
+        #region Vladyslav Filtering
+
+        private async void btnFilter_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(btnFilter.Text))
+            {
+                PopulateTicketsListView(preloadedListOfTickets);
+            }
+            else
+            {
+                //List<Ticket> tickets = GetViewedTickets();
+                string commonKeywordsInput = txtBoxFilter.Text;
+                List<Ticket> filteredTickets = await ticketService.GetFilteredTickets(preloadedListOfTickets, commonKeywordsInput);
+                PopulateTicketsListView(filteredTickets);
+            }
+            
+        }
+
+        //Get tickets from the current list
+        private List<Ticket> GetViewedTickets()
+        {
+            List<Ticket> tickets = new();
+
+            foreach (ListViewItem item in ticketsListView.Items)
+            {
+                tickets.Add((Ticket)item.Tag);
+            }
+
+            return tickets;
         }
 
         #endregion
@@ -817,6 +876,9 @@ namespace UI
                 {
                     tickets = await ticketService.GetAllTicketsWithReportingUserNameAsync();
                 }
+
+                //Vlad
+                preloadedListOfTickets = tickets;
 
                 PopulateTicketsListView(tickets);
             }
@@ -886,7 +948,7 @@ namespace UI
                     ticketsListView.Items.Clear();
                     noTicketsFoundlbl.Visible = true;
                     noTicketsFoundlbl.BringToFront();
-                    noTicketsFoundlbl.Location = new Point( ticketsListView.Left + (ticketsListView.Width - noTicketsFoundlbl.Width) /2,
+                    noTicketsFoundlbl.Location = new Point(ticketsListView.Left + (ticketsListView.Width - noTicketsFoundlbl.Width) / 2,
                         ticketsListView.Top + (ticketsListView.Height - noTicketsFoundlbl.Height) / 2);
                 }
                 else
@@ -1217,6 +1279,5 @@ namespace UI
         }
 
         #endregion
-
     }
 }

@@ -1,5 +1,7 @@
 ﻿using DAL;
 using Model;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Service
 {
@@ -159,6 +161,25 @@ namespace Service
         {
             return await dao.GetAmountOfAllClosedTicketsAsync();
         }
+
+        /// <summary>
+        /// Asynchronously returns the list of filtered tickets based on the loaded list and common keywords.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation, containing the list of tickets.</returns>
+        public async Task<List<Ticket>> GetFilteredTickets(List<Ticket> tickets, string commonKeywordsInput)
+        {
+            string[] commonKeywords = commonKeywordsInput.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var filteredTickets = tickets.AsQueryable();
+
+            foreach(string keyword in commonKeywords)
+            {
+                filteredTickets = filteredTickets.Where(ticket => ticket.Title.ToLower().Contains(keyword.ToLower()));
+            }
+
+            return filteredTickets.ToList();
+        }
+
+
 
         #endregion
 
