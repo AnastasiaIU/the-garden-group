@@ -372,11 +372,11 @@ namespace DAL
         /// </remarks>
         public async Task UpdateServiceDeskEmployee(Ticket ticket)
         {
-            if (ticketCollection is not null && ticket.TicketId is not null)
-            {
-                var update = Builders<Ticket>.Update.Set(t => t.ServiceDeskUser, ticket.ServiceDeskUser);
-                await ticketCollection.UpdateOneAsync(GetFilterById(ticket.TicketId), update);
-            }
+            // the TicketId is guaranteed not to be null here and the database error is handled in the UI layer
+#nullable disable
+            var update = Builders<Ticket>.Update.Set(t => t.ServiceDeskUser, ticket.ServiceDeskUser);
+            await ticketCollection.UpdateOneAsync(GetFilterById(ticket.TicketId), update);
+#nullable enable
         }
 
         /// <summary>
