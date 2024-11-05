@@ -767,19 +767,19 @@ namespace UI
         //Get number of tickets for service desk employee
         private async Task GetAmountOfTicketsForServiceDeskEmployee()
         {
-            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsAsync();
-            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsAsync();
-            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsAsync();
-            numberOfAllTickets = await ticketService.GetAmountOfAllTicketsAsync();
+            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTickets();
+            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTickets();
+            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTickets();
+            numberOfAllTickets = await ticketService.GetAmountOfAllTickets();
         }
 
         //Get number of tickets for regular employee
         private async Task GetAmountOfTicketsForRegularEmployee()
         {
-            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUserAsync(loggedInEmployee);
-            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUserAsync(loggedInEmployee);
-            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUserAsync(loggedInEmployee);
-            numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUserAsync(loggedInEmployee);
+            numberOfOpenTickets = await ticketService.GetAmountOfAllOpenTicketsForReportingUser(loggedInEmployee);
+            numberOfClosedTickets = await ticketService.GetAmountOfAllClosedTicketsForReportingUser(loggedInEmployee);
+            numberOfResolvedTickets = await ticketService.GetAmountOfAllResolvedTicketsForReportingUser(loggedInEmployee);
+            numberOfAllTickets = await ticketService.GetAmountOfAllTicketsForReportingUser(loggedInEmployee);
         }
 
 
